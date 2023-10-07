@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
+
 find_package(PXUT-330N)
 
 project("PXUT-330N" LANGUAGES C ASM CXX)
@@ -31,4 +32,14 @@ add_custom_command(
     COMMAND ${CMAKE_OBJCOPY} -O binary ${PROJECT_NAME}.elf ${PROJECT_NAME}.bin
 )
 
-add_custom_target(flash COMMAND "${CMAKE_SOURCE_DIR}/tools/M10BurnUser" "${CMAKE_BINARY_DIR}/${PROJECT_NAME}.bin" DEPENDS ${PROJECT_NAME})
+add_custom_target(
+    size ALL
+    COMMAND ${CMAKE_SIZE} "${CMAKE_BINARY_DIR}/${PROJECT_NAME}.elf"
+    DEPENDS ${PROJECT_NAME}
+)
+
+add_custom_target(
+    flash 
+    COMMAND "${CMAKE_SOURCE_DIR}/tools/M10BurnUser" "${CMAKE_BINARY_DIR}/${PROJECT_NAME}.bin" 
+    DEPENDS ${PROJECT_NAME}
+)
