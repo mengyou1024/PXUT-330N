@@ -19,7 +19,7 @@ const char _us[C_LANGUAGE][1][4] =
 };
 //---------仪器性能测试---------
 
-const u_char _Power_prompt[C_LANGUAGE][8][40] =
+const uint8_t _Power_prompt[C_LANGUAGE][8][40] =
 {
     {
         "水平线性                               ",
@@ -43,13 +43,13 @@ const u_char _Power_prompt[C_LANGUAGE][8][40] =
     }
 };
 
-const u_short _Power_prompt3[] =
+const uint16_t _Power_prompt3[] =
 {
     '1',' ',
     '#',' ',
     ENTER,' ',
 };
-const u_short _Power_prompt2[] =
+const uint16_t _Power_prompt2[] =
 {
     '1',	CH(2082),CH(5101),
     '#',	CH(5456),CH(1866),
@@ -85,12 +85,12 @@ const char _Menu_Power[C_LANGUAGE][5][90] =
 
     }
 };
-const u_char _Menu_Power1E[] = {"\
+const uint8_t _Menu_Power1E[] = {"\
 Put the normal probe on the \
 25mm thick test block and   \
 keep it stable,press Enter  "
 };
-const u_short _Menu_Power1[] =
+const uint16_t _Menu_Power1[] =
 {
     CH(2911),CH(5417),CH(4429),CH(4523),CH(2337),CH(5258),'2','5' ,'m','m' ,CH(2681),CH(4252),CH(3173),
     CH(4147),',', ' ',CH(2756),CH(1808),CH(4640),CH(2208),CH(2683),ENTER, CH(4023),CH(4047),CH( 100)
@@ -100,11 +100,11 @@ const u_short _Menu_Power1[] =
 上，回波稳定后EN确认
 */
 
-const u_short _Menu_Power2[] = {CH(1620),ENTER,CH(2892),CH(4023),CH(4047)};
+const uint16_t _Menu_Power2[] = {CH(1620),ENTER,CH(2892),CH(4023),CH(4047)};
 /* 按确认键确认*/
 
 
-const u_short _Menu_Power3[] =
+const uint16_t _Menu_Power3[] =
 {
     CH(3975),CH(2911),CH(4429),CH(4523),CH(5435),CH(5158),CH(4252),CH(3173),CH(4147),
     CH(2117),CH(4178),'8','5', CH(2645),'9','1', CH(3329),CH(2756),CH(1808),CH(2140),CH(2463),CH(3950),
@@ -116,14 +116,14 @@ const u_short _Menu_Power3[] =
 稳定时()确认并稳住探头
 */
 
-const u_short _Menu_Power4[] =
+const uint16_t _Menu_Power4[] =
 {
     CH(5258),'C','S', '-','1' ,'-','5', CH(4252),CH(3173),CH(4147),CH(5038),CH(2215),CH(4429),CH(4523),
     CH(2117),'2','0', '0','m', 'm',' ', CH(2006),136,'2' ,CH(3829),CH(2155),CH(3155),CH(2756),CH(1808),
     CH(5578),CH(2463),CH(4217),ENTER, CH(4023),CH(4047),CH(1802),CH(4640),CH(5501),CH(4429),CH(4523)
 };
 
-const u_short _Menu_Power5[] =
+const uint16_t _Menu_Power5[] =
 {	CH(3975),CH(1993),CH(4005),CH(4429),CH(4523),CH(2683),ENTER, CH(4023),CH(4047)};
 /*垂直线性
 在CS-1-5试块上移动探头
@@ -136,7 +136,7 @@ const u_short _Menu_Power5[] =
 
 
 
-const u_char _Menu_Power3E[] = {"\
+const uint8_t _Menu_Power3E[] = {"\
 The heights of 85 and 91mm\
 depth echoes are all 50%, \
 Press Enter               "
@@ -146,12 +146,12 @@ Press Enter               "
 当深85和91两回波等高且
 稳定时()确认并稳住探头
 */
-const u_char _Menu_Power4E[] = {"\
+const uint8_t _Menu_Power4E[] = {"\
 The highest echo of 200mm \
 deep, 2 flat-bottomed     \
 hole is 50%, press Enter  "
                                };
-const u_char _Menu_Power5E[] = {"Remove the probe, press Enter    "};
+const uint8_t _Menu_Power5E[] = {"Remove the probe, press Enter    "};
 
 /*垂直线性
 在CS-1-5试块上移动探头
@@ -210,7 +210,7 @@ const char _ParaName[C_LANGUAGE][21][16] =
 };
 
 //记录设置
-const u_short _Report_Info1[] =
+const uint16_t _Report_Info1[] =
 {
     CH(217),CH(4017),CH(4761),CH(1904),CH(2240),CH( 326),
     CH(218),CH(4017),CH(4761),CH(2463),CH(2240),CH( 326),
@@ -225,7 +225,7 @@ const u_short _Report_Info1[] =
 	5.委托单位:
 */
 
-const u_short _Report_Info2[] =
+const uint16_t _Report_Info2[] =
 {
     CH(217),CH(3153),CH(1655),
     CH(218),CH(4268),CH(4075),
@@ -237,7 +237,7 @@ const u_short _Report_Info2[] =
 	3.测量
 */
 
-const u_short _Report_Info3[] =
+const uint16_t _Report_Info3[] =
 {
     CH(217),CH(4620),CH(4268),CH(4075),
     CH(218),CH(5049),CH(4268),CH(4075)
@@ -246,13 +246,13 @@ const u_short _Report_Info3[] =
 1.未输入
 2.已输入
 */
-const u_short _Report_Info32[] =
+const uint16_t _Report_Info32[] =
 {
     CH(217),CH(1827),CH(4268),CH(4075),
     CH(218),CH(4268),CH(4075),CH( 100)
 };
 
-const u_short _Report_Info31[] =
+const uint16_t _Report_Info31[] =
 {
     CH(217),CH(2504),CH(2894),CH(3591),CH(1938),CH( 326),
     CH(218),CH(2504),CH(2894),CH(1764),CH(2637),CH( 326),
@@ -268,7 +268,7 @@ const u_short _Report_Info31[] =
 */
 
 /*
-const u_short _Report_Info4[] = {
+const uint16_t _Report_Info4[] = {
 CH(217),CH(2876),CH(4973),CH(1831),CH(4627),CH( 326),
 CH(218),CH(2876),CH(4973),CH(1740),CH(3293),CH( 326),
 CH(219),CH(2876),CH(4973),CH(4217),CH(2790),CH( 326),
@@ -322,7 +322,7 @@ const char _TestMenu_A1[C_LANGUAGE][8][13] =
     },
 };
 
-const u_char _Menu_Choice[C_LANGUAGE][10][22] =
+const uint8_t _Menu_Choice[C_LANGUAGE][10][22] =
 {
     {
 		"０数据通讯  ",
@@ -373,9 +373,9 @@ const char _TestMenu_Menu[C_LANGUAGE][2][13] =
         "2.Manual  ",
     },
 };
-const u_char _TestMenu_Enter[] = {ENTER};
+const uint8_t _TestMenu_Enter[] = {ENTER};
 
-const u_char _TestMenu_AB1[C_LANGUAGE][4][17] =
+const uint8_t _TestMenu_AB1[C_LANGUAGE][4][17] =
 {
     {
         "⒈预置工件声速： ",
@@ -396,7 +396,7 @@ const u_char _TestMenu_AB1[C_LANGUAGE][4][17] =
 3.二次回波声程：
 按 'z'+ 15 开始测试
 */
-const u_char _TestMenu_AB3[C_LANGUAGE][4][85] =
+const uint8_t _TestMenu_AB3[C_LANGUAGE][4][85] =
 {
     {
         "移动探头使      反射体最高回波  在门内, ぁ确定  ",
@@ -412,7 +412,7 @@ const u_char _TestMenu_AB3[C_LANGUAGE][4][85] =
     }
 };
 
-const u_char _TestForging[C_LANGUAGE][9][95] =
+const uint8_t _TestForging[C_LANGUAGE][9][95] =
 {
     {
         "寻找无缺陷时底波最高波BG,自动增益至       ,ぁ确定 ",
@@ -439,7 +439,7 @@ const u_char _TestForging[C_LANGUAGE][9][95] =
 };
 
 
-const u_char _TestMenu_AC1[C_LANGUAGE][4][18] =
+const uint8_t _TestMenu_AC1[C_LANGUAGE][4][18] =
 {
     {
         "⒈目标反射体直径：",
@@ -454,7 +454,7 @@ const u_char _TestMenu_AC1[C_LANGUAGE][4][18] =
         "ぁto start test   ",
     },//英文
 };
-const u_char _TestMenu_DAC[C_LANGUAGE][5][17] =
+const uint8_t _TestMenu_DAC[C_LANGUAGE][5][17] =
 {
     {
         "⒈  最大深度：   ",
@@ -480,7 +480,7 @@ const u_char _TestMenu_DAC[C_LANGUAGE][5][17] =
     },//英文
 };
 
-const u_char _TestMenu_AVG[C_LANGUAGE][5][17] =
+const uint8_t _TestMenu_AVG[C_LANGUAGE][5][17] =
 {
     {
         "⒈  最大深度：   ",
@@ -539,24 +539,24 @@ const char _Menu_FJ[C_LANGUAGE][12][40] =
     },
 };
 
-const u_char _TestMenu_set[C_LANGUAGE][3][28] =
+const uint8_t _TestMenu_set[C_LANGUAGE][3][28] =
 {
     {"⒈表面补偿：","⒉工件厚度：","＃返回ぁ完成",},//中文
     {"1.Compensation: ","2.Thickness   : ","＃ReturnぁFinish",},//英文
 };
 
-const u_char _Forging_A1[C_LANGUAGE][2][34] =
+const uint8_t _Forging_A1[C_LANGUAGE][2][34] =
 {
     {"测量缺陷横坐标X值：        mm","测量缺陷纵坐标Y值：        mm",},//中文
     {"X of  abscissa:        mm","Y of  ordinate:        mm",},//英文
 };
-const u_char _Forging_A2[C_LANGUAGE][2][38] =
+const uint8_t _Forging_A2[C_LANGUAGE][2][38] =
 {
     {"若未发现缺陷,返回键退出",},//中文
     {"If no defect is found, the back exits.",},//英文
 };
 
-const u_char _TestMenu_AD2[C_LANGUAGE][4][34] =
+const uint8_t _TestMenu_AD2[C_LANGUAGE][4][34] =
 {
     {
 #if C_DEVTYPE == 14
@@ -586,7 +586,7 @@ const u_char _TestMenu_AD2[C_LANGUAGE][4][34] =
     },//英文
 };
 
-const u_short _TestMenu_AF1[] =
+const uint16_t _TestMenu_AF1[] =
 {
     CH(217),CH(2320),CH(4168),CH(4469),CH(4178),CH(2240),CH(326),
     CH(218),CH(2789),CH(5528),CH(1808),CH(2463),CH(2240),CH(326),
@@ -598,13 +598,13 @@ const u_short _TestMenu_AF1[] =
 按'z'+ 15 开始校验
 
   */
-const u_char _TestMenu_AG1[C_LANGUAGE][1][16] =
+const uint8_t _TestMenu_AG1[C_LANGUAGE][1][16] =
 {
     {"测缺陷高度      ",},
     {"Flaw height test",}
 };
 
-const u_char _TestMenu_AG2[C_LANGUAGE][3][73] =
+const uint8_t _TestMenu_AG2[C_LANGUAGE][3][73] =
 {
     {
         "移探头调参量使缺陷下端 最高波出现在门内",
@@ -641,14 +641,14 @@ const char EpDots[] =
     0xE0,0xE0,0xC0,0x80,0x00,0x00,0x00,0x00
 };
 
-const u_short company[] = {CH(5149),CH(3310)};//友联
+const uint16_t company[] = {CH(5149),CH(3310)};//友联
 
-const u_short company2[] = {CH(3647),CH(4508),CH(5149),CH(3310),CH(4293),
+const uint16_t company2[] = {CH(3647),CH(4508),CH(5149),CH(3310),CH(4293),
                             CH(3475),CH(2828),CH(4285),CH(3110),CH(2302),CH(5148),CH(4762),CH(2511),CH(4330)
                            };
 //南通友联数码技术开发有限公司
 
-const u_short product[] = {CH(348),CH(356),CH(353),CH(352),CH(313),CH(345),CH(317)};
+const uint16_t product[] = {CH(348),CH(356),CH(353),CH(352),CH(313),CH(345),CH(317)};
 
 const char 	Probe[] =
 {
@@ -672,13 +672,13 @@ const char 	Probe[] =
     0x00,0x00,0xe0,0x20,0x20,0xf8,0x80,0x80,
     0x80,0xf8,0x20,0x20,0xe0,0x00,0x00,0x00
 };
-const u_char _ParaMenu_H1[C_LANGUAGE][1][40] =
+const uint8_t _ParaMenu_H1[C_LANGUAGE][1][40] =
 {
     {"          第  页  共  页     "},
     {"Current page   Total page    "}
 };
 
-const u_char _ChannelMenu_A1[C_LANGUAGE][9][22] =
+const uint8_t _ChannelMenu_A1[C_LANGUAGE][9][22] =
 {
     {
 		"⒈通道标准：",
@@ -703,7 +703,7 @@ const u_char _ChannelMenu_A1[C_LANGUAGE][9][22] =
         "9.Echo Rectify        ",
     },//英文
 };
-const u_char _ChannelMenu_A2[C_LANGUAGE][6][22] =
+const uint8_t _ChannelMenu_A2[C_LANGUAGE][6][22] =
 {
     {
         "⒈探头阻尼：",
@@ -723,7 +723,7 @@ const u_char _ChannelMenu_A2[C_LANGUAGE][6][22] =
     },//英文
 };
 		
-const u_char _ChannelMenu_A1S[C_LANGUAGE][9][30] =
+const uint8_t _ChannelMenu_A1S[C_LANGUAGE][9][30] =
 {
 	{
 		"⒈默认标准：",
@@ -749,7 +749,7 @@ const u_char _ChannelMenu_A1S[C_LANGUAGE][9][30] =
 	},//英文
 };
 
-const u_char _ChannelMenu_A2S[C_LANGUAGE][8][50] =
+const uint8_t _ChannelMenu_A2S[C_LANGUAGE][8][50] =
 {
 	{
 		"⒈调试零点、角度时，波峰记忆自动开启：",
@@ -774,7 +774,7 @@ const u_char _ChannelMenu_A2S[C_LANGUAGE][8][50] =
 
 };
 
-const u_char _ChannelMenu_A3S[C_LANGUAGE][7][50] =
+const uint8_t _ChannelMenu_A3S[C_LANGUAGE][7][50] =
 {
 	{
 		"⒈测角度默认反射体直径：",
@@ -797,7 +797,7 @@ const u_char _ChannelMenu_A3S[C_LANGUAGE][7][50] =
 
 };
 
-const u_char _ChannelMenu_A4S[C_LANGUAGE][9][50] =
+const uint8_t _ChannelMenu_A4S[C_LANGUAGE][9][50] =
 {
 	{
 		"⒈斜探头制作DAC曲线默认最大深度：",
@@ -823,7 +823,7 @@ const u_char _ChannelMenu_A4S[C_LANGUAGE][9][50] =
 	},//英文
 };
 
-const u_char _ChannelMenu_B1[] =
+const uint8_t _ChannelMenu_B1[] =
 {
     ' ',' ',' ',
 	' ',' ',' ',
@@ -836,7 +836,7 @@ const u_char _ChannelMenu_B1[] =
     ' ',' ',' ',
     ' ',' ',' '
 };
-const u_char _ChannelMenu_B2[] =
+const uint8_t _ChannelMenu_B2[] =
 {
     ' ',' ',' ',
     ' ',' ',' ',
@@ -849,7 +849,7 @@ const u_char _ChannelMenu_B2[] =
     ' ',' ',' '
 };
 
-const u_char _ParaMenu_B1[] =
+const uint8_t _ParaMenu_B1[] =
 {
     ' ',' ',' ',
     'M','H','z',
@@ -862,18 +862,18 @@ const u_char _ParaMenu_B1[] =
     ' ',' ',' '
 };
 
-const u_char _ParaMenu_AB1[C_LANGUAGE][3][10] =
+const uint8_t _ParaMenu_AB1[C_LANGUAGE][3][10] =
 {
     {"⒈垂直    ","⒉水平    ","⒊距离    ",},//中文
     {"1.V-Range ","2.H-Range ","3.D-Range ",},//英文
 };
-const u_char _ParaMenu_AB2[C_LANGUAGE][5][14] =
+const uint8_t _ParaMenu_AB2[C_LANGUAGE][5][14] =
 {
     {"⒈直探头  ","⒉斜探头  ","⒊双晶纵波直  ","⒋穿透  ","⒌双晶纵波斜  ",},//中文
     {"1.Normal  ","2.Angle   ","3.Dual direct  ","4.Through ","5.Dual oblique ",},//英文
 };
 
-const u_char _ParaMenu_AB3[] = {"\
+const uint8_t _ParaMenu_AB3[] = {"\
                \
 1.Epson LQ300K \
 2.HP 6L        \
@@ -881,7 +881,7 @@ const u_char _ParaMenu_AB3[] = {"\
 4.TP UP-NH32P  "
                                };
 
-const u_char _ParaMenu_A2[C_LANGUAGE][9][22] =
+const uint8_t _ParaMenu_A2[C_LANGUAGE][9][22] =
 {
     {
         "⒈声程标度：",
@@ -907,7 +907,7 @@ const u_char _ParaMenu_A2[C_LANGUAGE][9][22] =
     },//英文
 };
 
-const u_char _ParaMenu_A22[C_LANGUAGE][9][22] =
+const uint8_t _ParaMenu_A22[C_LANGUAGE][9][22] =
 {
     {
         "⒈声程标度：",
@@ -933,7 +933,7 @@ const u_char _ParaMenu_A22[C_LANGUAGE][9][22] =
     },//英文
 };
 
-const u_char _ParaMenu_B2[] =
+const uint8_t _ParaMenu_B2[] =
 {
     ' ',' ',' ',
     'd','B',' ',
@@ -946,7 +946,7 @@ const u_char _ParaMenu_B2[] =
     'd','B',' '
 };
 
-const u_char _ParaMenu_B2A1[] =
+const uint8_t _ParaMenu_B2A1[] =
 {
     ' ',' ',' ',
     'd','B',' ',
@@ -959,17 +959,17 @@ const u_char _ParaMenu_B2A1[] =
     'm','m',' '
 };
 
-const u_char _ParaMenu_AC1[C_LANGUAGE][2][8] =
+const uint8_t _ParaMenu_AC1[C_LANGUAGE][2][8] =
 {
     {"⒈单幅  ","⒉连续  ",},//中文
     {"1.Single","2.Cont. ",},//英文
 };
-const u_char _ParaMenu_AC7[C_LANGUAGE][2][10] =
+const uint8_t _ParaMenu_AC7[C_LANGUAGE][2][10] =
 {
     {"⒈本机    ","⒉SD卡    ",},//中文
     {"1.Detector","2.SD      ",},//英文
 };
-const u_char _ParaMenu_AC2[C_LANGUAGE][7][10] =
+const uint8_t _ParaMenu_AC2[C_LANGUAGE][7][10] =
 {
     {
         "⒈母线    ",
@@ -991,7 +991,7 @@ const u_char _ParaMenu_AC2[C_LANGUAGE][7][10] =
     },//英文
 };
 
-const u_char _infinity[C_LANGUAGE][1][7] =
+const uint8_t _infinity[C_LANGUAGE][1][7] =
 {
     {
         "∞     ",
@@ -1000,38 +1000,38 @@ const u_char _infinity[C_LANGUAGE][1][7] =
         "∞     ",
     },//英文
 };
-const u_char _ParaMenu_AC3A[C_LANGUAGE][2][8] =
+const uint8_t _ParaMenu_AC3A[C_LANGUAGE][2][8] =
 {
     {"⒈ＡＶＧ","⒉当量  ",},//中文
     {"1.AVG   ","2.Equiv.",},//英文
 };
-const u_char _ParaMenu_AC3[C_LANGUAGE][2][8] =
+const uint8_t _ParaMenu_AC3[C_LANGUAGE][2][8] =
 {
     {"ＤＢ值　","孔径  ",},//中文
     {" DB     ","      ",},//英文
 };
-const u_char _ParaMenu_AC4[C_LANGUAGE][5][10] =
+const uint8_t _ParaMenu_AC4[C_LANGUAGE][5][10] =
 {
     {"⒈低亮    ","⒉中亮    ","⒊标准    ","⒋高亮    ","⒉高亮    ",},//中文
     {"1.Low     ","2.Middle  ","3.Standard","4.High    ","2.High    ",},//英文
 };
-const u_char _ParaMenu_AC5[C_LANGUAGE][2][10] =
+const uint8_t _ParaMenu_AC5[C_LANGUAGE][2][10] =
 {
     {"⒈失波门  ","⒉进波门  ",},//中文
     {"1.Negative","2.Positive",},//英文
 };
-const u_char _ParaMenu_AC6[C_LANGUAGE][2][8] =
+const uint8_t _ParaMenu_AC6[C_LANGUAGE][2][8] =
 {
     {"⒈峰值  ","⒉前沿  ",},//中文
     {"1.Peak  ","2.Front ",},//英文
 };
-const u_char _MainMenu_C1A11[C_LANGUAGE][2][16] =
+const uint8_t _MainMenu_C1A11[C_LANGUAGE][2][16] =
 {
     {"⒈中文  ","⒉English ",},//中文
     {"⒈中文  ","⒉English ",},//英文
 };
 
-const u_char _ParaMenu_A3[C_LANGUAGE][9][22] =
+const uint8_t _ParaMenu_A3[C_LANGUAGE][9][22] =
 {
     {
 //#if C_UDISK == 1
@@ -1062,14 +1062,14 @@ const u_char _ParaMenu_A3[C_LANGUAGE][9][22] =
     },//英文
 };
 
-const u_char _ParaMenu_A5[C_LANGUAGE][2][28] =
+const uint8_t _ParaMenu_A5[C_LANGUAGE][2][28] =
 {
     {"⒈工件厚度：","⒉工件外径：",},//中文
     {"1.Thickness   : ","2.Outer radius:  ",},//英文
 };
 
 
-const u_char _ParaMenu_A6[C_LANGUAGE][8][22] =
+const uint8_t _ParaMenu_A6[C_LANGUAGE][8][22] =
 {
     {
         "⒈声程标度：",
@@ -1092,7 +1092,7 @@ const u_char _ParaMenu_A6[C_LANGUAGE][8][22] =
         "8.Evalution           ",
     },//英文
 };
-const u_char _ParaMenu_A6A1[C_LANGUAGE][8][22] =
+const uint8_t _ParaMenu_A6A1[C_LANGUAGE][8][22] =
 {
     {
         "⒈声程标度：",
@@ -1116,7 +1116,7 @@ const u_char _ParaMenu_A6A1[C_LANGUAGE][8][22] =
     },//英文
 };
 
-const u_char _ParaMenu_B6[] =
+const uint8_t _ParaMenu_B6[] =
 {
     ' ',' ',' ',
     'd','B',' ',
@@ -1128,7 +1128,7 @@ const u_char _ParaMenu_B6[] =
     'd','B',' '
 };
 
-const u_char _ParaMenu_B6A1[] =
+const uint8_t _ParaMenu_B6A1[] =
 {
     ' ',' ',' ',
     'd','B',' ',
@@ -1140,7 +1140,7 @@ const u_char _ParaMenu_B6A1[] =
     'm','m',' '
 };
 
-const u_char _ParaMenu_B3[] =
+const uint8_t _ParaMenu_B3[] =
 {
     ' ',' ',' ',//'m','m',' ',
     ' ',' ',' ',//'m','m',' ',
@@ -1153,22 +1153,22 @@ const u_char _ParaMenu_B3[] =
     ' ',' ',' ',
 };
 #if C_DEVLIB != 3
-const u_char _ParaMenu_AD2[C_LANGUAGE][4][18] =
+const uint8_t _ParaMenu_AD2[C_LANGUAGE][4][18] =
 {
     {"⒈全波 ","⒉正半波","⒊负半波","⒋射频 ",},//中文
     {"1.FULL ","2.HALF +","3.HALF -","4.RF   ",},//英文
 };
 #else
-const u_char _ParaMenu_AD2[C_LANGUAGE][2][18] =
+const uint8_t _ParaMenu_AD2[C_LANGUAGE][2][18] =
 {
     {"⒈全波 ","⒉射频 ",},//中文
     {"1.FULL ","2.RF   ",},//英文
 };
 #endif
 
-const u_char _ParaMenu_AD3_1[] = {"1. LOW   2. MIDDLE3. HIGH  4. WIDE  "};	/*每行9*/
+const uint8_t _ParaMenu_AD3_1[] = {"1. LOW   2. MIDDLE3. HIGH  4. WIDE  "};	/*每行9*/
 
-const u_char _ParaMenu_AD3[C_LANGUAGE][4][10] =
+const uint8_t _ParaMenu_AD3[C_LANGUAGE][4][10] =
 {
     {
         "⒈低频 LOW",
@@ -1183,28 +1183,28 @@ const u_char _ParaMenu_AD3[C_LANGUAGE][4][10] =
         "4.Wide   ",
     },//英文
 };
-//const u_char _ParaMenu_AD3[] = {"1. 2.5MHz2. 5.0MHz3. wide  "};	/*每行9*/
+//const uint8_t _ParaMenu_AD3[] = {"1. 2.5MHz2. 5.0MHz3. wide  "};	/*每行9*/
 
-const u_char _ParaMenu_AD4[] = {"1. LD/50  2. HD/400  "};		/*每行10*/
+const uint8_t _ParaMenu_AD4[] = {"1. LD/50  2. HD/400  "};		/*每行10*/
 
 #if C_DEVLIB == 23 ||  C_DEVLIB == 24
-const u_char _ParaMenu_AD5[C_LANGUAGE][4][18] =
+const uint8_t _ParaMenu_AD5[C_LANGUAGE][4][18] =
 {
     {"⒈低压","⒉中压","⒊标准","⒋高压",},//中文
     {"1.Low ","2.Middle","3.STD","4.High",},//英文
 };
-//const u_char _ParaMenu_AD5[] = {"1. LV/100V2. ML/200V3. MH/400V4. HV/800V"};		/*每行10*/
+//const uint8_t _ParaMenu_AD5[] = {"1. LV/100V2. ML/200V3. MH/400V4. HV/800V"};		/*每行10*/
 #else
-const u_char _ParaMenu_AD5[] = {"1. LV/200V2. HV/400V"};		/*每行10*/
+const uint8_t _ParaMenu_AD5[] = {"1. LV/200V2. HV/400V"};		/*每行10*/
 #endif
 
-const u_char _ParaMenu_AD7[C_LANGUAGE][4][18] =
+const uint8_t _ParaMenu_AD7[C_LANGUAGE][4][18] =
 {
     {"⒈南通","⒉北京","⒊上海","⒋广州",},//中文
     {"1.Nantong","2.Beijing","3.Shanghai","4.Guangzhou",},//英文
 };
 
-const u_char _ParaMenu_AD8[C_LANGUAGE][2][6] =
+const uint8_t _ParaMenu_AD8[C_LANGUAGE][2][6] =
 {
     {
         "⒈开  ",
@@ -1215,7 +1215,7 @@ const u_char _ParaMenu_AD8[C_LANGUAGE][2][6] =
         "2.Off ",
     },//英文
 };
-const u_char _ParaMenu_AD9[C_LANGUAGE][2][5] =
+const uint8_t _ParaMenu_AD9[C_LANGUAGE][2][5] =
 {
     {
         "⒈否 ",
@@ -1226,7 +1226,7 @@ const u_char _ParaMenu_AD9[C_LANGUAGE][2][5] =
         "2.Yes",
     },//英文
 };
-const u_char _ParaMenu_C1[C_LANGUAGE][3][22] =
+const uint8_t _ParaMenu_C1[C_LANGUAGE][3][22] =
 {
     {
         "⒈存储频谱：",
@@ -1240,7 +1240,7 @@ const u_char _ParaMenu_C1[C_LANGUAGE][3][22] =
     },//英文
 };
 
-const u_char _ParaMenu_D1[] =
+const uint8_t _ParaMenu_D1[] =
 {
     ' ',' ',' ',
     ' ',' ',' ',
@@ -1248,38 +1248,38 @@ const u_char _ParaMenu_D1[] =
     ' ',' ',' ',
     ' ',' ',' ',
 };
-const u_char _ParaMenu_CA1[] = "1.mm  2.inch";
+const uint8_t _ParaMenu_CA1[] = "1.mm  2.inch";
 
-const u_char _ParaMenu_CC1[] = "0. 0  1. 1  2. 2  3. 3  4. 4  ";
-const u_char _ParaMenu_CD1[] = "1. 100  2. 200  3. 300  4. 400  5. 500  6. 600  7. 700  8. 800  9. 900  0. 1000  ";
+const uint8_t _ParaMenu_CC1[] = "0. 0  1. 1  2. 2  3. 3  4. 4  ";
+const uint8_t _ParaMenu_CD1[] = "1. 100  2. 200  3. 300  4. 400  5. 500  6. 600  7. 700  8. 800  9. 900  0. 1000  ";
 
-const u_char _MainMenu_C1A1[C_LANGUAGE][4][16] =
+const uint8_t _MainMenu_C1A1[C_LANGUAGE][4][16] =
 {
     {"垂直","水平","距离","刻度",},//中文
     {"V-Range","H-Range","D-Range","Scale  ",},//英文
 };
-const u_char _MainMenu_C1A3[C_LANGUAGE][2][16] =
+const uint8_t _MainMenu_C1A3[C_LANGUAGE][2][16] =
 {
     {"窄","宽",},//中文
     {"Narrow ","Wide ",},//英文
 };
 
-const u_char _MainMenu_C1A4[C_LANGUAGE][4][16] =
+const uint8_t _MainMenu_C1A4[C_LANGUAGE][4][16] =
 {
     {"直探头","斜探头","双晶 ","穿透 ",},//中文
     {"Normal","Angle ","Dual  ","Through ",},//英文
 };
-const u_char _Weld_A1[C_LANGUAGE][1][40] =
+const uint8_t _Weld_A1[C_LANGUAGE][1][40] =
 {
     {"焊缝图示  第  页  共  页     "},
     {"Current page   Total page    "}
 };
-const u_char _Weld_A2[C_LANGUAGE][1][40] =
+const uint8_t _Weld_A2[C_LANGUAGE][1][40] =
 {
     {"探头前端到焊缝边的距离： "},
     {"The dis. from probe to seam:"}
 };
-const u_char _Weld_B1[C_LANGUAGE][9][22] =
+const uint8_t _Weld_B1[C_LANGUAGE][9][22] =
 {
     {
         "⒈焊缝类型：          ",
@@ -1304,7 +1304,7 @@ const u_char _Weld_B1[C_LANGUAGE][9][22] =
         "9.Groove Angle A      ",
     }
 };
-const u_char _Weld_B12[C_LANGUAGE][4][22] =
+const uint8_t _Weld_B12[C_LANGUAGE][4][22] =
 {
     {
         "⒈Ｂ坡口角：          ",
@@ -1320,7 +1320,7 @@ const u_char _Weld_B12[C_LANGUAGE][4][22] =
     }
 };
 
-const u_char _Weld_B2[C_LANGUAGE][9][22] =
+const uint8_t _Weld_B2[C_LANGUAGE][9][22] =
 {
     {
         "⒈焊缝类型：          ",
@@ -1345,7 +1345,7 @@ const u_char _Weld_B2[C_LANGUAGE][9][22] =
         "9.Groove Angle        ",
     }
 };
-const u_char _Weld_B22[C_LANGUAGE][7][22] =
+const uint8_t _Weld_B22[C_LANGUAGE][7][22] =
 {
     {
         "⒈坡口面角：          ",
@@ -1367,19 +1367,19 @@ const u_char _Weld_B22[C_LANGUAGE][7][22] =
     }
 };
 
-const u_char _Weld_C1[C_LANGUAGE][4][10] =
+const uint8_t _Weld_C1[C_LANGUAGE][4][10] =
 {
     {"⒈无      ","⒉单面    ","⒊双面    ","⒋Ｔ型    ",},
     {"1.Null    ","2.Single  ","3.Double  ","4.T-type  ",}
 };
 
-const u_char _Weld_D1[C_LANGUAGE][3][13] =
+const uint8_t _Weld_D1[C_LANGUAGE][3][13] =
 {
     {"⒈Ａ面       ","⒉Ｂ面       ","⒊Ｃ面       ",},
     {"1.Surface A  ","2.Surface B  ","3.Surface C  ",}
 };
 
-const u_short _OptionMenu_B1[] =
+const uint16_t _OptionMenu_B1[] =
 {
     CH(217),CH(4189),CH(1944),CH(1774),CH(2240),CH(326),
     CH(218),CH(1777),CH(3570),CH(1825),CH(1905),CH(326),
@@ -1402,7 +1402,7 @@ const u_short _OptionMenu_B1[] =
 8．	探头阻尼：50Q\400Q
 9．	发射电压：200V\400V
 */
-const u_char _OptionMenu_C1[] =
+const uint8_t _OptionMenu_C1[] =
 {
     ' ',' ',' ',
     'd','B',' ',
@@ -1415,7 +1415,7 @@ const u_char _OptionMenu_C1[] =
     ' ',' ',' ',
 };
 
-const u_char _ParaProtect1[C_LANGUAGE][6][24] =
+const uint8_t _ParaProtect1[C_LANGUAGE][6][24] =
 {
     {
         "  参量保护              ",
@@ -1434,17 +1434,17 @@ const u_char _ParaProtect1[C_LANGUAGE][6][24] =
 		"4.Frequency     :       ",
     }
 };
-const u_char _ParaProtect2[C_LANGUAGE][2][8] =
+const uint8_t _ParaProtect2[C_LANGUAGE][2][8] =
 {
     {"无　    ","保护    ",},
     {"Null    ","Protect ",}
 };
-const u_char _ParaMenu_AD6[C_LANGUAGE][5][4] =
+const uint8_t _ParaMenu_AD6[C_LANGUAGE][5][4] =
 {
     {"无  ","部分","部分","部分","全部",},//中文
     {"Null","Part","Part","Part","All ",},//英文
 };
-const u_char _DataMenu_A1[C_LANGUAGE][2][20] =
+const uint8_t _DataMenu_A1[C_LANGUAGE][2][20] =
 {
     {
         "⒈数据通讯",
@@ -1462,17 +1462,17 @@ const char _DataMenu_A2[C_LANGUAGE][10][10] =
 };
 
 #if C_DEVTYPE == 14
-const u_short _DataMenu_C1[] =
+const uint16_t _DataMenu_C1[] =
 {
     CH(3312),CH(4888),CH(2839),CH(3428),CH(3110),CH(4228),',',CH(1620),CH(1703),CH(2070),CH(2892),CH(2965),CH(4288)
 };//连续记录开始,按保存键结束  1703 2070
 #else
-const u_short _DataMenu_C1[] =
+const uint16_t _DataMenu_C1[] =
 {
     CH(3312),CH(4888),CH(2839),CH(3428),CH(3110),CH(4228),',',CH(1620),CH(2839),CH(3428),CH(2892),CH(2965),CH(4288)
 };//连续记录开始,按记录键结束
 #endif
-const u_short _DataMenu_C2[] =
+const uint16_t _DataMenu_C2[] =
 {
     CH(1805),CH(2337),CH(3312),CH(4888),CH(2839),CH(3428),CH(1808),CH(4846)
 };//播放连续记录波形
@@ -1564,7 +1564,7 @@ const char _Message_A1[C_LANGUAGE][31][22] =
 };
 
 
-const u_char _Message_B1[C_LANGUAGE][15][24] =
+const uint8_t _Message_B1[C_LANGUAGE][15][24] =
 {
     {
         "清除存储数据？Ｙ／Ｎ",
@@ -1602,7 +1602,7 @@ const u_char _Message_B1[C_LANGUAGE][15][24] =
     },
 };
 
-const u_char _SaveMenu[C_LANGUAGE][4][12] =
+const uint8_t _SaveMenu[C_LANGUAGE][4][12] =
 {
     {
         "⒈新加标签 ",
@@ -1617,7 +1617,7 @@ const u_char _SaveMenu[C_LANGUAGE][4][12] =
         "4.SD info   ",
     }
 };
-const u_char _UDiskMenu[C_LANGUAGE][6][30] =
+const uint8_t _UDiskMenu[C_LANGUAGE][6][30] =
 {
     {
         "当前文件           字节       ",
@@ -1637,7 +1637,7 @@ const u_char _UDiskMenu[C_LANGUAGE][6][30] =
     }
 };
 
-const u_char _PushMenu[C_LANGUAGE][4][12] =
+const uint8_t _PushMenu[C_LANGUAGE][4][12] =
 {
     {
         "⒈继续存储 ",
@@ -1650,12 +1650,12 @@ const u_char _PushMenu[C_LANGUAGE][4][12] =
 };
 
 
-const u_short _Message_B2[] =
+const uint16_t _Message_B2[] =
 {
     CH(331),CH(389),CH(315),CH(378)
 };
 //?y/n
-const u_char _FuncHotKey_A[C_LANGUAGE][5][22] =
+const uint8_t _FuncHotKey_A[C_LANGUAGE][5][22] =
 {
     {
         "０默认设置  ",
@@ -1672,7 +1672,7 @@ const u_char _FuncHotKey_A[C_LANGUAGE][5][22] =
         "4.Hot key 4",
     },//英文
 };
-const u_char _FuncHotKey_B[C_LANGUAGE][11][22] =
+const uint8_t _FuncHotKey_B[C_LANGUAGE][11][22] =
 {
     {
         "⒈初始化  ",
@@ -1697,7 +1697,7 @@ const u_char _FuncHotKey_B[C_LANGUAGE][11][22] =
         "9.Freeze         ",
     },
 };
-const u_char _FuncMenu_A1[C_LANGUAGE][11][22] =
+const uint8_t _FuncMenu_A1[C_LANGUAGE][11][22] =
 {
     {
         "确定键生效",
@@ -1732,13 +1732,13 @@ const char _FuncMenu_A2[C_LANGUAGE][20][21] =
     {"Initialization","1.Channel","2.All Channel","3.Flaw Record","4.Detector","5.Time setup","6.Format SD",}
 };
 
-const u_short _FuncMenu_B1[] =
+const uint16_t _FuncMenu_B1[] =
 {
     CH(2504),CH(2894),CH(2681),CH(2240),CH(326),CH(100),CH(100),CH(100),'m','m'
 };
 /*工件厚度：   mm	/9
 */
-const u_short _FuncMenu_B2[] =
+const uint16_t _FuncMenu_B2[] =
 {
     CH(5038),CH(4429),CH(4523),CH(2187),CH(1846),CH(3331),CH(4225),CH(4017),CH(4761),CH(4147),CH(2243),
     CH(5578),CH(2463),CH(1808),CH(2006),CH(5258),CH(3537),CH(3658),'E','N', CH(4023),CH(4047),CH( 100),
@@ -1751,7 +1751,7 @@ const u_short _FuncMenu_B2[] =
   最高波处在门内  EN确认
 */
 
-const u_short _FuncMenu_B3[] =
+const uint16_t _FuncMenu_B3[] =
 {
     CH(4017),CH(4761),CH(2463),CH(2240),CH( 326),CH( 100),CH( 100),CH( 100),'m','m',
     CH(2070),CH(4017),CH(4761),CH(1808),CH( 331),CH( 389),CH( 315),CH( 378),CH( 100)
@@ -1760,32 +1760,32 @@ const u_short _FuncMenu_B3[] =
   存缺陷波?Y/N
 */
 
-const u_short _FuncMenu_C1[] =
+const uint16_t _FuncMenu_C1[] =
 {
     CH(1825),CH(1905),CH(5421),CH(326),CH(100),CH(100),'d','B',
 };//补偿值
 
-const u_char _MenuPrompt_B1[C_LANGUAGE][1][20] =
+const uint8_t _MenuPrompt_B1[C_LANGUAGE][1][20] =
 {
     {"ぁ确定生效＃返回放弃"},
     {"ぁ  Enter ＃  Return"},
 };
-const u_char _MenuPrompt_P1[C_LANGUAGE][1][20] =
+const uint8_t _MenuPrompt_P1[C_LANGUAGE][1][20] =
 {
     {"ぁ下一步 "},
     {"ぁ  Next "},
 };
-const u_char _MenuPrompt_P2[C_LANGUAGE][1][30] =
+const uint8_t _MenuPrompt_P2[C_LANGUAGE][1][30] =
 {
     {"ぁ检测下一缺陷  ＃退出当前测试 "},
     {"ぁnext defect  ＃Exit"},
 };
-const u_char _MenuPrompt_P3[C_LANGUAGE][1][30] =
+const uint8_t _MenuPrompt_P3[C_LANGUAGE][1][30] =
 {
     {"<-记录键退格   "},
     {"<-Record backspace  "},
 };
-const u_char _MenuPrompt_P4[C_LANGUAGE][1][30] =
+const uint8_t _MenuPrompt_P4[C_LANGUAGE][1][30] =
 {
     {"#返回键重新输入 "},
     {"＃Back key to re-enter"},
@@ -1937,28 +1937,28 @@ const char _STDMenu_A5[C_LANGUAGE][11][21] =
     }
 };
 
-const u_short _KEYLOCK_A1[] =
+const uint16_t _KEYLOCK_A1[] =
 {
     CH(1620),CH( 104),CH(2892),CH(4388),CH(2892),CH(3744)
 };//按点键锁键盘
-const u_short _KEYLOCK_A2[] =
+const uint16_t _KEYLOCK_A2[] =
 {
     CH(1620),CH( 104),CH(2892),CH(2966),CH(4388),CH( 100)
 };//按点键解锁
-const u_short _KEYLOCK_A3[] =
+const uint16_t _KEYLOCK_A3[] =
 {
     CH(3975),CH(4740),CH(2966),CH(2892),CH(3744),CH(4388)
 };
-const u_char _KEYLOCK_A1_E[] =
+const uint8_t _KEYLOCK_A1_E[] =
 {
     "Now press . !"
 };//按点键锁键盘
-const u_char _KEYLOCK_A2_E[] =
+const uint8_t _KEYLOCK_A2_E[] =
 {
     "Now press . !"
 };//按点键解锁
 
-const u_char _KEYLOCK_A3_E[] =
+const uint8_t _KEYLOCK_A3_E[] =
 {
     "Keys are locked!"
 };
@@ -1971,7 +1971,7 @@ const u_char _KEYLOCK_A3_E[] =
 #define C_STD_POS_LINENUM 1
 #define C_STD_POS_THICK	2
 
-const u_char _STDMenu_AB1[] = {"\
+const uint8_t _STDMenu_AB1[] = {"\
 1.Custom              \
 2.GB/T11345-89        \
 3.JB/T4730-2005       \
@@ -1989,7 +1989,7 @@ const u_char _STDMenu_AB1[] = {"\
 6.JB/T10559-2006      \
 7.AWS D1.1/2020       "       };
 
-const u_char ZSTDMenu_AB1[] = {"\
+const uint8_t ZSTDMenu_AB1[] = {"\
 1.Custom              \
 2.GB/T11345-2013 T1LV2\
 3.GB/T11345-2013 T1LV3\
@@ -2007,7 +2007,7 @@ const u_char ZSTDMenu_AB1[] = {"\
 6.JB/T10559-2006      \
 7.AWS D1.1/2020       "       };
 
-const u_char _STDMenu_B1[][C_BLOCK_LEN * C_BLOCK_MAX+1] =
+const uint8_t _STDMenu_B1[][C_BLOCK_LEN * C_BLOCK_MAX+1] =
 {
     {
         "1\
@@ -2405,12 +2405,12 @@ const short c_DACLine[][C_BLOCK_MAX][C_STD_POS_THICK+7*C_BLOCK_MAX] =
     },//AWS2020
 };
 
-const u_short _COMM_B1[] =
+const uint16_t _COMM_B1[] =
 {
     CH(4293),CH(3061),CH(5393),CH(5258),CH(2011),CH(4268),CH( 312),CH(3975),CH(2140),CH(2093),'.','.','.',' '
 };//数据正在传输，请等待
 
-const u_char _Bright_A1[C_LANGUAGE][2][18] =
+const uint8_t _Bright_A1[C_LANGUAGE][2][18] =
 {
     {
 #if C_DEVTYPE==14
@@ -2427,7 +2427,7 @@ const u_char _Bright_A1[C_LANGUAGE][2][18] =
 #endif
     }
 };
-const u_char _Bscan[C_LANGUAGE][4][32] =
+const uint8_t _Bscan[C_LANGUAGE][4][32] =
 {
     {
         "扫查结束按任意键退出            ",
@@ -2522,7 +2522,7 @@ const short cos_tab[] =
 
 
 
-const u_short PARA_BB1[] =
+const uint16_t PARA_BB1[] =
 {
     //为方便处理，长度应固定
     CH(217),CH(2211),CH(2329),CH(2676),'5',' ',' ',CH(16),

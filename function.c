@@ -2,13 +2,13 @@
 
 
 int GateParaMax,GateParaValue;
-int SearchPeak(u_char * sampbuff,u_int curr_pos,u_int direction)	//·µ»Ø×î¸ß²¨ËùÔÚË®Æ½µãÊı£¬ÈçÎª¸ºÊıÔòÎªÎŞ×î¸ß²¨
+int SearchPeak(uint8_t * sampbuff,uint32_t curr_pos,uint32_t direction)	//·µ»Ø×î¸ß²¨ËùÔÚË®Æ½µãÊı£¬ÈçÎª¸ºÊıÔòÎªÎŞ×î¸ß²¨
 {
     //Ñ°ÕÒsampbuffÖ¸Ïò²¨ĞÎ´æ´¢ÇøµÄ×î¸ß²¨£¬curr_posÎªµ±Ç°Î»ÖÃ,directionÎª·½Ïò:C_KEYCOD_LEFT×óC_KEYCOD_RIGHTÓÒ
-    u_char preamp = *(sampbuff+curr_pos);	//Ç°Ò»²¨·åÖµ
-    u_char amp = *(sampbuff+curr_pos);	//µ±Ç°²¨·åÖµ
+    uint8_t preamp = *(sampbuff+curr_pos);	//Ç°Ò»²¨·åÖµ
+    uint8_t amp = *(sampbuff+curr_pos);	//µ±Ç°²¨·åÖµ
 
-    u_short search_time = 0;	//Ñ°ÕÒ´ÎÊı£¬²»³¬¹ı1
+    uint16_t search_time = 0;	//Ñ°ÕÒ´ÎÊı£¬²»³¬¹ı1
     short retvalue = 0;
 
     if(curr_pos <= 5 )
@@ -122,15 +122,15 @@ int SearchPeak(u_char * sampbuff,u_int curr_pos,u_int direction)	//·µ»Ø×î¸ß²¨ËùÔ
 
 int g_iMaxAmp;
 int g_iPos;
-u_char sampbuffs[C_LEN_SAMP+1];
-u_int PeakMemory(void)		//·åÖµ¼ÇÒä
+uint8_t sampbuffs[C_LEN_SAMP+1];
+uint32_t PeakMemory(void)		//·åÖµ¼ÇÒä
 {
-    u_int gatetype = 0 ;
-    u_int retvalue ;
-    u_char sampbuff[C_LEN_SAMP+1] ;
-    u_char *samp ;
-    u_int  offset = C_OFF_SAMP ;
-//	u_int left = 0,right= 0 ;
+    uint32_t gatetype = 0 ;
+    uint32_t retvalue ;
+    uint8_t sampbuff[C_LEN_SAMP+1] ;
+    uint8_t *samp ;
+    uint32_t  offset = C_OFF_SAMP ;
+//	uint32_t left = 0,right= 0 ;
     int i;
 
     if(MGetFunctionMode(C_ECHO_ENVELOPE) || MGetFunctionMode(C_ECHOMAX_MEMORY))
@@ -239,10 +239,10 @@ int DepthCompensate(void)		//Éî¶È²¹³¥
 
 int EchoEnvelope(void)	//»Ø²¨°üÂç12:02
 {
-    u_int gatetype = 0 ;
-    u_int retvalue ;
-    u_char sampbuff[C_LEN_SAMP+1] ;
-    //u_char *samp ;
+    uint32_t gatetype = 0 ;
+    uint32_t retvalue ;
+    uint8_t sampbuff[C_LEN_SAMP+1] ;
+    //uint8_t *samp ;
     int  offset;
     int high;
     int pos;	//°üÂçµã
@@ -250,8 +250,8 @@ int EchoEnvelope(void)	//»Ø²¨°üÂç12:02
     int dot;	//¸ü¸ÄµãÊı
     int k;	//Ğ±ÂÊ
     int i,j;
-    //u_char preamp;
-    u_char amp;
+    //uint8_t preamp;
+    uint8_t amp;
 
     if(MGetFunctionMode(C_ECHO_ENVELOPE) || MGetFunctionMode(C_ECHOMAX_MEMORY))
     {
@@ -309,7 +309,7 @@ int EchoEnvelope(void)	//»Ø²¨°üÂç12:02
 
             for( i = 1; dot + i < pos; i++)
             {
-                sampbuff[dot + i] = (u_char)( high + ( i * k + 0)/1000 );
+                sampbuff[dot + i] = (uint8_t)( high + ( i * k + 0)/1000 );
             }
         }
 
@@ -334,7 +334,7 @@ int EchoEnvelope(void)	//»Ø²¨°üÂç12:02
 
             for( i = 1; pos + i < dot; i++)
             {
-                sampbuff[pos + i] = (u_char) ( amp + ( i * k + 0)/1000 );
+                sampbuff[pos + i] = (uint8_t) ( amp + ( i * k + 0)/1000 );
             }
         }
 
@@ -354,7 +354,7 @@ int EchoEnvelope(void)	//»Ø²¨°üÂç12:02
 void ClearEnvelope(void)		//Çå°üÂç»òÇå·åÖµ
 {
     int offset = C_OFF_SAMP;
-    u_char sampbuff[C_LEN_SAMP+1];
+    uint8_t sampbuff[C_LEN_SAMP+1];
     int i,start;
 
 
@@ -451,9 +451,9 @@ int MSetCurveAmend(CURVE_AMEND *stCurveAmend)//²ÎÊıÕıÈ·¿É¼ÆËã·µ»Ø1£¬·ñÔò·µ»Ø0£»
         }
         half_len_arc = beta * R ;//betaÊÇ»¡¶È£¬£½2*Pi*R*(angle/360)=2*Pi*R*(beta/2*Pi);
     }
-    stCurveAmend->Beta = (u_short)( beta*10000+0.5);//°ëÏÒ³¤¶ÔÓ¦µÄ½Ç¶È
-    stCurveAmend->Half_Len_Bow = ( u_short)(half_len_bow*10+0.5);//°ëÏÒ³¤
-    stCurveAmend->Half_len_Arc = ( u_short)(half_len_arc*10+0.5);//°ëÏÒ³¤¶ÔÓ¦µÄ»¡³¤
+    stCurveAmend->Beta = (uint16_t)( beta*10000+0.5);//°ëÏÒ³¤¶ÔÓ¦µÄ½Ç¶È
+    stCurveAmend->Half_Len_Bow = ( uint16_t)(half_len_bow*10+0.5);//°ëÏÒ³¤
+    stCurveAmend->Half_len_Arc = ( uint16_t)(half_len_arc*10+0.5);//°ëÏÒ³¤¶ÔÓ¦µÄ»¡³¤
     /*
     Write_Number(20,40,beta*10000,5,4,0);
     Write_Number(100,40,half_len_bow*10,5,1,0);

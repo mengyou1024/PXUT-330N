@@ -9,9 +9,9 @@ int g_ypos =10;
 int g_xpos =10;
 
 
-void delay(u_int interval)
+void delay(uint32_t interval)
 {
-    u_int start_time;
+    uint32_t start_time;
 
     start_time = GetElapsedTime();
     while(GetElapsedTime() < start_time + interval);
@@ -19,9 +19,9 @@ void delay(u_int interval)
     return;
 }
 
-u_int drawpixel(u_int x,u_int y,u_int color)
+uint32_t drawpixel(uint32_t x,uint32_t y,uint32_t color)
 {
-    u_short *pSrcBuf,oldvalue;
+    uint16_t *pSrcBuf,oldvalue;
     pSrcBuf = GetDisplayBufferBase();
     oldvalue = *(pSrcBuf + SCREEN_WIDTH*y + x);
     *(pSrcBuf + SCREEN_WIDTH*y + x) = (((0xff&color)>>3)<<11)
@@ -48,14 +48,14 @@ u_int drawpixel(u_int x,u_int y,u_int color)
 void RDC16TextOutBase(int x , int y ,char *cCHStr)
 {
 	int k,iLen;
-    u_short iTemp,iCode[60];
+    uint16_t iTemp,iCode[60];
 	char *cStr;
-	u_char ss,*cc;
+	uint8_t ss,*cc;
 
 	cStr = cCHStr;
 	iLen = strlen(cStr);
 
-	cc = (u_char *) iCode;
+	cc = (uint8_t *) iCode;
 	memcpy(iCode, cStr, iLen);
 	for (k=0; k < iLen; k++)
 			cc[k] -= 0xa0;
@@ -98,9 +98,9 @@ void   _trace(int x, int y,char   *prompt,   ...)
 }
 
 
-u_int WaitForKeyStroke()
+uint32_t WaitForKeyStroke()
 {
-	u_int keycode ;
+	uint32_t keycode ;
 	TRACE(g_xpos,g_ypos+=10,"-I- Press 'Return' key to continue...  ");
 
 	while(MAnyKeyReturn()!=C_KEYCOD_RETURN);

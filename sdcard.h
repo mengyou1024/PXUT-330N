@@ -23,28 +23,28 @@
 
 typedef struct _UDISK_INFO
 {
-    u_int IsAttached;           // U盘是否连接
-    u_int filelen;				// 文件大小
-    u_int operatormode;			// 1 -- Write ; 2 --Read
-    u_int writemode;			// 0 ,1, 2
-    u_int sample_num;
-    u_int transfer_surplus;
-    u_int FreeSpaceLowPart;     // U盘自由空间低四字节
-    u_int FreeSpaceHighPart;    // U盘自由空间高四字节
-    u_int TotalSpaceLowPart;    // U盘总空间低四字节
-    u_int TotalSpaceHighPart;   // U盘总空间高四字节
-    u_int DiskIsFull;			// U盘满标志
-    u_int DataHeaderMark;		//0,参数不变；1,写参数
-    u_int last_tick_count;
-    u_int TotalWriteTimes;
-    u_int LastFileLength;	//最后一次存的长度
+    uint32_t IsAttached;           // U盘是否连接
+    uint32_t filelen;				// 文件大小
+    uint32_t operatormode;			// 1 -- Write ; 2 --Read
+    uint32_t writemode;			// 0 ,1, 2
+    uint32_t sample_num;
+    uint32_t transfer_surplus;
+    uint32_t FreeSpaceLowPart;     // U盘自由空间低四字节
+    uint32_t FreeSpaceHighPart;    // U盘自由空间高四字节
+    uint32_t TotalSpaceLowPart;    // U盘总空间低四字节
+    uint32_t TotalSpaceHighPart;   // U盘总空间高四字节
+    uint32_t DiskIsFull;			// U盘满标志
+    uint32_t DataHeaderMark;		//0,参数不变；1,写参数
+    uint32_t last_tick_count;
+    uint32_t TotalWriteTimes;
+    uint32_t LastFileLength;	//最后一次存的长度
     char  filename[8];
     TIME_CLOCK system_time;
     char *pEchoDataBuffer;
     char *pEchoWriteBuffer;
 
-    u_char DataBuffer[2][BUFFER_LENGTH*16]; // 采集数据BUFFER [8]
-    u_char UDiskBuffer[BUFFER_LENGTH*8]; // U盘交换BUFFER [3]
+    uint8_t DataBuffer[2][BUFFER_LENGTH*16]; // 采集数据BUFFER [8]
+    uint8_t UDiskBuffer[BUFFER_LENGTH*8]; // U盘交换BUFFER [3]
 } UDISK_INFO;
 
 #define  ShowProblemLine()  {\

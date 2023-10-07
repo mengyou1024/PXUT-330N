@@ -102,7 +102,7 @@ int main()
     //memset(buf,0,100);
     //sprintf(buf,"afasdfa %d",a);
     //char ch;
-    u_int keyvalue;
+    uint32_t keyvalue;
     printf("\r\nKey code test programme.\r\n");
     while(1)
     {

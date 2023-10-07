@@ -22,13 +22,13 @@ CACHE	cache;
 FAT					fat;
 CURVE_AMEND __attribute__((weak)) stCurveAmend;
 
-u_char			bCOM2PC;
+uint8_t			bCOM2PC;
 
 WELD_PARA		stWeldPara;
 ADJUST_TIME		AdjustTime;
 DAC				Dac;
-///u_short			DACDB[C_COORWIDTH/2];
-u_char			*dactable;
+///uint16_t			DACDB[C_COORWIDTH/2];
+uint8_t			*dactable;
 int				HoriOffsetScreen ;		//所有写在屏幕上的内容，水平方向开始点
 int				VertOffsetScreen ;		//所有写在屏幕上的内容，水平方向开始点
 double			dac_coe;	//系数，与80%的差距
@@ -61,10 +61,10 @@ extern const unsigned char MadeDate[] ;
 extern const unsigned char _version[] ;//版本号
 extern const unsigned char PowerTable[];
 extern const unsigned short _SYSMENU_B1[];
-extern const u_int c_crPara[];
-extern const u_int Echo_crPara[];
+extern const uint32_t c_crPara[];
+extern const uint32_t Echo_crPara[];
 
-extern u_char crPara[];
+extern uint8_t crPara[];
 
 extern int g_nDenoise;
 extern int g_nAutoDenoise;
@@ -82,13 +82,13 @@ short *pRFBaseLine = (short *)(C_KEYTABLEADDR + 1000);
 unsigned short c_FWBaseLine ;	//全波基线  070810/08/07/06 =4,070809 = 18
 unsigned short c_RFBaseLine ;	//射频基线   875
 
-const u_short _ParaMenu_CE2[] =
+const uint16_t _ParaMenu_CE2[] =
 {
     C_PULSE_MIN,C_PULSE_MED,C_PULSE_MAX,
 };
 
 
-u_int 	GetBatteryStatus(void)
+uint32_t 	GetBatteryStatus(void)
 {
     int rev;
     char a;
@@ -103,7 +103,7 @@ Write_Number(10,140,GetPowerStatus(),6,0,0);
 */    return  rev;
 }
 
-u_int g_iTickCount;
+uint32_t g_iTickCount;
 
 int __errno ()
 {
@@ -184,12 +184,12 @@ int main()
 
     DisplayBMP(background,ColorsBG, 0, 100,281,640);
     MSetDisplayColor(COLOR_GREEN);
-    TextOut(120, 10,  1, 23,32, (u_char*)_MainInfo[MGetLanguage()][2], 4); //MGetLanguage()
-    TextOut(120+24*7, 10,  1, 23,32, (u_char*)_MainInfo[MGetLanguage()][3], 4); //MGetLanguage()
+    TextOut(120, 10,  1, 23,32, (uint8_t*)_MainInfo[MGetLanguage()][2], 4); //MGetLanguage()
+    TextOut(120+24*7, 10,  1, 23,32, (uint8_t*)_MainInfo[MGetLanguage()][3], 4); //MGetLanguage()
     MSetDisplayColor(COLOR_RED);
-    TextOut(120+64+32-46*MGetLanguage(), 40,  1, 23,32, (u_char*)_MainInfo[MGetLanguage()][1], 4); //MGetLanguage()
+    TextOut(120+64+32-46*MGetLanguage(), 40,  1, 23,32, (uint8_t*)_MainInfo[MGetLanguage()][1], 4); //MGetLanguage()
     MSetDisplayColor(COLOR_YELLOW);
-    TextOut(120+32, 340+24*2,  1, 23,32, (u_char*)_MainInfo[MGetLanguage()][0], 4); //MGetLanguage()
+    TextOut(120+32, 340+24*2,  1, 23,32, (uint8_t*)_MainInfo[MGetLanguage()][0], 4); //MGetLanguage()
    // MAnyKeyReturn();
   //  MKeyRlx();
     offset = C_OFF_INIT ;
@@ -261,7 +261,7 @@ int main()
     }
         MAnyKeyReturn();*/
 //Write_Number(0,0,3,4,0,0);
-  // TextOut(120, 200,  1, 23,32, (u_char*)_MainInfo[1][0], 4); //MGetLanguage()
+  // TextOut(120, 200,  1, 23,32, (uint8_t*)_MainInfo[1][0], 4); //MGetLanguage()
     if( true )
     {
         int i;
@@ -299,7 +299,7 @@ int main()
         PowerAlarm = PowerTable[9];
     }
 #if C_DEVLIB == 23 || C_DEVLIB == 24
-//u_short CompanyName1[] = {CH(5149),CH(3310),CH(4293),CH(3475),CH(2722),CH(5113),CH(3690)} ;
+//uint16_t CompanyName1[] = {CH(5149),CH(3310),CH(4293),CH(3475),CH(2722),CH(5113),CH(3690)} ;
     /*
     //*/
     push_top_init = 0;
@@ -357,7 +357,7 @@ int main()
 
 //Write_Number(0,0,2,4,0,0);
 /*    ExpendTime(10);
-    bCOM2PC=EthernetTransmit((u_char*) crPara, 8) ;
+    bCOM2PC=EthernetTransmit((uint8_t*) crPara, 8) ;
 Write_Number(0,0,bCOM2PC,4,0,0);
 MAnyKeyReturn();
     if(bCOM2PC == 8)
@@ -404,7 +404,7 @@ Write_Number(30,30,3,4,0,0);*/
     {
         int i;
         int offset = C_OFF_SAMP;
-        u_char sampbuff[C_LEN_SAMP+1];
+        uint8_t sampbuff[C_LEN_SAMP+1];
 
         for( i = 0 ; i <= C_LEN_SAMP; i++)sampbuff[i] = 0;
         MCopyProtectedMemory( (void*)offset, sampbuff, C_LEN_SAMP, PM_COPY_WRITE);
@@ -510,7 +510,7 @@ extern char MEMORY_STORAGE[];
 
         char *strTestPoint = "This is the 2nd test point.";
         ETextOut(10,310, strTestPoint,strlen(strTestPoint));
-        u_int duration = GetElapsedTime() - g_iTickCount;
+        uint32_t duration = GetElapsedTime() - g_iTickCount;
         char buf[30];
         memset(buf,0,30);
         sprintf(buf, "%d", duration);
@@ -546,7 +546,7 @@ void MainInitialize(void)
 
     char *strTestPoint = "This is the 3rd test point.";
     ETextOut(10,320, strTestPoint,strlen(strTestPoint));
-    u_int duration = GetElapsedTime() - g_iTickCount;
+    uint32_t duration = GetElapsedTime() - g_iTickCount;
     char buf[30];
     memset(buf,0,30);
     sprintf(buf, "%d", duration);
@@ -573,7 +573,7 @@ void MainInitialize(void)
 
     char *strTestPoint = "This is the 4th test point.";
     ETextOut(10,330, strTestPoint,strlen(strTestPoint));
-        u_int duration = GetElapsedTime() - g_iTickCount;
+        uint32_t duration = GetElapsedTime() - g_iTickCount;
     char buf[30];
     memset(buf,0,30);
     sprintf(buf, "%d", duration);
@@ -618,7 +618,7 @@ void SystemClear(void)
     	Scrsave_Picture();
     	MFclearScreen();
 
-    	u_short InputChar[20];
+    	uint16_t InputChar[20];
 
     	if(MInputChar(0,0,1,InputChar,40,20) )
     		CEMenuOut(0,30,InputChar+1,InputChar[0],1,24);
@@ -663,16 +663,16 @@ void TestGainTable()
     METextOut(0,0,"FixGain:",8);
     if(Input_Number(9*C_ECHAR_HDOT,0,&FixGain,3,&deci_len,0) < 1)return ;
 
-    u_short* pzText;
-    const u_short chb1[] = ////调节外部衰减使回波高80％
+    uint16_t* pzText;
+    const uint16_t chb1[] = ////调节外部衰减使回波高80％
     {
         CH(2187),CH(2958),CH(4566),CH(1831),CH(4305),CH(2885),CH(4225),CH(2756),CH(1808),CH(2463),'8','0','%',CH(100),CH(100),CH(100)
     };
-    const u_short chb2[] = //增加衰减1dB使回波降低
+    const uint16_t chb2[] = //增加衰减1dB使回波降低
     {
         CH(5286),CH(2851),CH(4305),CH(2885),'1','d','B',CH(4225),CH(2756),CH(1808),CH(2921),CH(2145),CH(16),CH(100),CH(100),CH(100)
     };
-    pzText = (u_short*)chb1;
+    pzText = (uint16_t*)chb1;
     CEMenuOut(0,0,pzText,13,1,24);	/*在指定位置根据每行字符数、行数、行高写菜单*/
 
     gain = number*10;
@@ -708,7 +708,7 @@ void TestGainTable()
     }
 
     MKeyRlx();
-    pzText = (u_short*)chb2;
+    pzText = (uint16_t*)chb2;
     CEMenuOut(0,0,pzText,13,1,24);	/*在指定位置根据每行字符数、行数、行高写菜单*/
 
 //	int k,l = 0;

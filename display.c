@@ -1,6 +1,6 @@
 // display.c
 /*
-int DrawPower(u_char powerlevel,int mode)	//画电量指示,mode = 0立即1每分钟更新一次
+int DrawPower(uint8_t powerlevel,int mode)	//画电量指示,mode = 0立即1每分钟更新一次
 void SysParaDisp(void)		//显示通道号、探头类型、频带等
 */
 #include "Globe.h"
@@ -188,7 +188,7 @@ unsigned char PowerAlarm;
 extern unsigned char ChannelMax;
 ;
 CURVE_AMEND stCurveAmend;
-extern u_short dac_line[];
+extern uint16_t dac_line[];
 extern WELD_PARA stWeldPara;
 
 extern ADJUST_TIME			AdjustTime;
@@ -203,12 +203,12 @@ extern int extend ;
 //色彩
 extern CHANNEL_PARAMETER	ChannelPara;		/*15*2*/
 
-extern u_char _infinity[C_LANGUAGE][1][6];
+extern uint8_t _infinity[C_LANGUAGE][1][6];
 extern int curr_cr;
 
 extern int GateParaMax,GateParaValue;
-u_char crPara[C_CR_MAX+12];
-const u_int Echo_crPara[] =
+uint8_t crPara[C_CR_MAX+12];
+const uint32_t Echo_crPara[] =
 {
 
     0x007,//红
@@ -221,7 +221,7 @@ const u_int Echo_crPara[] =
     0x0ff,//白
     0x000,//黑
 };
-const u_int c_crPara[] =
+const uint32_t c_crPara[] =
 {
     /*
         0x007,//红
@@ -260,29 +260,29 @@ const u_int c_crPara[] =
 //*/
 
 
-//extern const u_int KEY_DIGITAB[];
-//extern const u_char MadeDate[21];//制造日前
-//extern const u_char _version[30];//版本号
+//extern const uint32_t KEY_DIGITAB[];
+//extern const uint8_t MadeDate[21];//制造日前
+//extern const uint8_t _version[30];//版本号
 
-//extern const u_char AmpMaxCom_Table[] ;
-extern const u_char PowerTable[] ;
-extern const u_int _RANGEVALUE[];
+//extern const uint8_t AmpMaxCom_Table[] ;
+extern const uint8_t PowerTable[] ;
+extern const uint32_t _RANGEVALUE[];
 
 extern char _ParaName[C_LANGUAGE][21][16];
-u_char tempvalue;
-void DisplayBMP(const u_char * picture,const u_long * Palette, int xpos, int ypos,int length,int width)
+uint8_t tempvalue;
+void DisplayBMP(const uint8_t * picture,const uint32_t * Palette, int xpos, int ypos,int length,int width)
 //480*640图片
 {
     int i,j;
     int x=xpos,y=ypos;
     // GrColor Color[480*640];
-    u_long tempcolor,Color;
+    uint32_t tempcolor,Color;
 
     for(i=0; i<length; i++)
     {
         for(j=0; j<width; j++)
         {
-            tempcolor= Palette[*((u_char *)picture+(i*width+j))];
+            tempcolor= Palette[*((uint8_t *)picture+(i*width+j))];
             Color=( ((tempcolor&0x0000ff)<<16)&0xff0000)+(tempcolor&0x00ff00)+(((tempcolor&0xff0000)>>16)&0x0000ff);
             Color=((((Color&0x0000f8)>>3)+((Color&0x00fc00)>>5)+((Color&0xf80000)>>8))&0xffff)^ c_crPara[crPara[ C_CR_BACK] ];
             MSetDisplayColor(Color);
@@ -293,9 +293,9 @@ void DisplayBMP(const u_char * picture,const u_long * Palette, int xpos, int ypo
 
 }
 
-int DrawPower(u_char powerlevel,int mode)	//画电量指示,mode = 0立即1每分钟更新一次
+int DrawPower(uint8_t powerlevel,int mode)	//画电量指示,mode = 0立即1每分钟更新一次
 {
-    u_int xpos,ypos;
+    uint32_t xpos,ypos;
     int startchargetime;
     int offset;
     int elapsedtime = GetElapsedTime() / 1000;	//当前时间，单位s
@@ -317,7 +317,7 @@ int DrawPower(u_char powerlevel,int mode)	//画电量指示,mode = 0立即1每分钟更新一
     }
 ///Write_Number(10,30,GetBatteryStatus()%256,4,0,0);
 ///Write_Number(10,40,GetBatteryStatus()/256,4,0,0);
-    u_char powerstatus = (GetBatteryStatus() / 256)%4;	//得到电池状态，d1-d0
+    uint8_t powerstatus = (GetBatteryStatus() / 256)%4;	//得到电池状态，d1-d0
     int i,j;
     offset =  C_OFF_BATTERY + 40;		//开始充电时间
     MCopyProtectedMemory( &startchargetime, (void*)offset, C_SIZE_INT, PM_COPY_READ);
@@ -448,17 +448,17 @@ int DrawPower(u_char powerlevel,int mode)	//画电量指示,mode = 0立即1每分钟更新一
     return 1;
 }
 
-void IcoDotDis(int xpos,int ypos, u_char *epText)    //24*24
+void IcoDotDis(int xpos,int ypos, uint8_t *epText)    //24*24
 {
-    MUserDotsOut(xpos,ypos,(u_char*)(epText),8);
-    MUserDotsOut(xpos,ypos+8,(u_char*)(epText+8),8);
-    MUserDotsOut(xpos,ypos+8*2,(u_char*)(epText+8*2),8);
-    MUserDotsOut(xpos+8,ypos,(u_char*)(epText+8*3),8);
-    MUserDotsOut(xpos+8,ypos+8,(u_char*)(epText+8*4),8);
-    MUserDotsOut(xpos+8,ypos+8*2,(u_char*)(epText+8*5),8);
-    MUserDotsOut(xpos+8*2,ypos,(u_char*)(epText+8*6),8);
-    MUserDotsOut(xpos+8*2,ypos+8,(u_char*)(epText+8*7),8);
-    MUserDotsOut(xpos+8*2,ypos+8*2,(u_char*)(epText+8*8),8);
+    MUserDotsOut(xpos,ypos,(uint8_t*)(epText),8);
+    MUserDotsOut(xpos,ypos+8,(uint8_t*)(epText+8),8);
+    MUserDotsOut(xpos,ypos+8*2,(uint8_t*)(epText+8*2),8);
+    MUserDotsOut(xpos+8,ypos,(uint8_t*)(epText+8*3),8);
+    MUserDotsOut(xpos+8,ypos+8,(uint8_t*)(epText+8*4),8);
+    MUserDotsOut(xpos+8,ypos+8*2,(uint8_t*)(epText+8*5),8);
+    MUserDotsOut(xpos+8*2,ypos,(uint8_t*)(epText+8*6),8);
+    MUserDotsOut(xpos+8*2,ypos+8,(uint8_t*)(epText+8*7),8);
+    MUserDotsOut(xpos+8*2,ypos+8*2,(uint8_t*)(epText+8*8),8);
     /*    return;
       int i,j;
        short xtemp=x,ytemp=y;
@@ -480,9 +480,9 @@ void IcoDotDis(int xpos,int ypos, u_char *epText)    //24*24
     */
 
 }
-extern const u_char _ParaMenu_AD3[C_LANGUAGE][4][10] ;
+extern const uint8_t _ParaMenu_AD3[C_LANGUAGE][4][10] ;
 //输入8* X的字符
-void MUserDotsOut(short x,short y, u_char *pDots, u_int ydots)
+void MUserDotsOut(short x,short y, uint8_t *pDots, uint32_t ydots)
 {
     MEraseWindow(x,y,x+8,y+ydots);
     {
@@ -497,10 +497,10 @@ void MUserDotsOut(short x,short y, u_char *pDots, u_int ydots)
         }
     }
 }
-void PageDisp(int xpos,int ypos,u_char* mainpage)		//显示16*16图形
+void PageDisp(int xpos,int ypos,uint8_t* mainpage)		//显示16*16图形
 {
-    u_char *epText;
-    epText = (u_char *)mainpage;
+    uint8_t *epText;
+    epText = (uint8_t *)mainpage;
 
 #if C_DEVLIB != 23
     UserECharOut(xpos + HoriOffsetScreen, ypos , (char*)(epText)) ;
@@ -508,10 +508,10 @@ void PageDisp(int xpos,int ypos,u_char* mainpage)		//显示16*16图形
     UserECharOut(xpos + HoriOffsetScreen+8, ypos , (char*)(epText+16)) ;
     UserECharOut(xpos + HoriOffsetScreen+8, ypos +8, (char*)(epText+24)) ;
 #else
-    MUserDotsOut(xpos,ypos,(u_char*)(epText),8);
-    MUserDotsOut(xpos,ypos+8,(u_char*)(epText+8),8);
-    MUserDotsOut(xpos+8,ypos,(u_char*)(epText+16),8);
-    MUserDotsOut(xpos+8,ypos+8,(u_char*)(epText+24),8);
+    MUserDotsOut(xpos,ypos,(uint8_t*)(epText),8);
+    MUserDotsOut(xpos,ypos+8,(uint8_t*)(epText+8),8);
+    MUserDotsOut(xpos+8,ypos,(uint8_t*)(epText+16),8);
+    MUserDotsOut(xpos+8,ypos+8,(uint8_t*)(epText+24),8);
 #endif
     //显示回车键
 }
@@ -547,13 +547,13 @@ void SysParaDisp(void)		//显示通道号、探头类型、频带等
     int C_Menu_HPOSI=C_BASEGAIN_HPOSI-10;
     int rect_xpos,rect_ypos;	//框所再位置
     int xpos,ypos;
-    u_short pzChn[] = {CH(4508),CH(2132)};	//通道
-    u_short *cpText;
-    u_char *epText;
+    uint16_t pzChn[] = {CH(4508),CH(2132)};	//通道
+    uint16_t *cpText;
+    uint8_t *epText;
     int i;
 
     int char_len,char_row,char_height;
-    u_short Channel = MGetChannel();
+    uint16_t Channel = MGetChannel();
 
     //if( MGetSystemMode() == 1 )return;	//测试状态不显示相关信息
 
@@ -565,19 +565,19 @@ void SysParaDisp(void)		//显示通道号、探头类型、频带等
     rect_ypos = C_COORVPOSI ;
 
     MSetColor(C_CR_MENU);
-    TextOut(C_Menu_HPOSI,rect_ypos+C_MenuHigh*0+3,1,5,C_CCHAR_VDOT,(u_char*)_Message_Dis[MGetLanguage()][0],4);   //通道1
-    TextOut(C_Menu_HPOSI,rect_ypos+C_MenuHigh*1+3,1,5,C_CCHAR_VDOT,(u_char*)_Message_Dis[MGetLanguage()][1],4);   //增益4
-    TextOut(C_Menu_HPOSI,rect_ypos+C_MenuHigh*5+3,1,5,C_CCHAR_VDOT,(u_char*)_Message_Dis[MGetLanguage()][2],4);   //声程2
-    TextOut(C_Menu_HPOSI,rect_ypos+C_MenuHigh*7+3,1,5,C_CCHAR_VDOT,(u_char*)_Message_Dis[MGetLanguage()][3],4);   //K 值1
-    TextOut(C_Menu_HPOSI,rect_ypos+C_MenuHigh*8+3,1,5,C_CCHAR_VDOT,(u_char*)_Message_Dis[MGetLanguage()][4],4);   //探头1
-    TextOut(C_Menu_HPOSI,rect_ypos+C_MenuHigh*9+3,1,5,C_CCHAR_VDOT,(u_char*)_Message_Dis[MGetLanguage()][5],4);   //频带1
-    TextOut(C_Menu_HPOSI,rect_ypos+C_MenuHigh*10+3,1,5,C_CCHAR_VDOT,(u_char*)_Message_Dis[MGetLanguage()][6],4);   //抑制1
+    TextOut(C_Menu_HPOSI,rect_ypos+C_MenuHigh*0+3,1,5,C_CCHAR_VDOT,(uint8_t*)_Message_Dis[MGetLanguage()][0],4);   //通道1
+    TextOut(C_Menu_HPOSI,rect_ypos+C_MenuHigh*1+3,1,5,C_CCHAR_VDOT,(uint8_t*)_Message_Dis[MGetLanguage()][1],4);   //增益4
+    TextOut(C_Menu_HPOSI,rect_ypos+C_MenuHigh*5+3,1,5,C_CCHAR_VDOT,(uint8_t*)_Message_Dis[MGetLanguage()][2],4);   //声程2
+    TextOut(C_Menu_HPOSI,rect_ypos+C_MenuHigh*7+3,1,5,C_CCHAR_VDOT,(uint8_t*)_Message_Dis[MGetLanguage()][3],4);   //K 值1
+    TextOut(C_Menu_HPOSI,rect_ypos+C_MenuHigh*8+3,1,5,C_CCHAR_VDOT,(uint8_t*)_Message_Dis[MGetLanguage()][4],4);   //探头1
+    TextOut(C_Menu_HPOSI,rect_ypos+C_MenuHigh*9+3,1,5,C_CCHAR_VDOT,(uint8_t*)_Message_Dis[MGetLanguage()][5],4);   //频带1
+    TextOut(C_Menu_HPOSI,rect_ypos+C_MenuHigh*10+3,1,5,C_CCHAR_VDOT,(uint8_t*)_Message_Dis[MGetLanguage()][6],4);   //抑制1
 
     /*
         xpos = 378;
         ypos = 8;
-        epText = (u_char *)_KeyLock+MGetKeyLock()*32;
-        cpText = (u_short *)(_KeyLock+MGetKeyLock()*32);
+        epText = (uint8_t *)_KeyLock+MGetKeyLock()*32;
+        cpText = (uint16_t *)(_KeyLock+MGetKeyLock()*32);
         for (i = 0; i < 1; i++)
         {
     #if C_DEVLIB != 23
@@ -586,10 +586,10 @@ void SysParaDisp(void)		//显示通道号、探头类型、频带等
             UserECharOut(xpos + HoriOffsetScreen+8, ypos , (char*)(epText+1*16)) ;
             UserECharOut(xpos + HoriOffsetScreen+8, ypos +8, (char*)(epText+8+1*16)) ;
     #else
-            MUserDotsOut(xpos,ypos,(u_char*)(epText+i*8),8);
-            MUserDotsOut(xpos,ypos+8,(u_char*)(epText+i*8+8),8);
-            MUserDotsOut(xpos+8,ypos,(u_char*)(epText+i*16+16),8);
-            MUserDotsOut(xpos+8,ypos+8,(u_char*)(epText+i*16+24),8);
+            MUserDotsOut(xpos,ypos,(uint8_t*)(epText+i*8),8);
+            MUserDotsOut(xpos,ypos+8,(uint8_t*)(epText+i*8+8),8);
+            MUserDotsOut(xpos+8,ypos,(uint8_t*)(epText+i*16+16),8);
+            MUserDotsOut(xpos+8,ypos+8,(uint8_t*)(epText+i*16+24),8);
     #endif
             xpos += 8;
         }//显示键盘锁
@@ -601,34 +601,34 @@ void SysParaDisp(void)		//显示通道号、探头类型、频带等
         switch (Function.funcMenu[i])
         {
         case C_FUNC_INIT:             //初始化
-            epText=(u_char *)_init;
+            epText=(uint8_t *)_init;
             break;
         case C_FUNC_ENVELOPE:	          //回波包络
-            epText=(u_char *)_envelope;
+            epText=(uint8_t *)_envelope;
             break;
         case C_FUNC_ECHOMAX:	          //峰值记忆
-            epText=(u_char *)_echomax;
+            epText=(uint8_t *)_echomax;
             break;
         case C_FUNC_DACGATE:	          //DAC门
-            epText=(u_char *)_DAC;
+            epText=(uint8_t *)_DAC;
             break;
         case C_FUNC_DACADJUST:            //深度补偿
-            epText=(u_char *)_TCG;
+            epText=(uint8_t *)_TCG;
             break;
         case C_FUNC_GATEEXPEND:           //门内展宽
-            epText=(u_char *)_expend;
+            epText=(uint8_t *)_expend;
             break;
         case C_FUNC_GATEALARM:            //门内报警
-            epText=(u_char *)_alarm;
+            epText=(uint8_t *)_alarm;
             break;
         case C_FUNC_DATA:		          //数据处理
-            epText=(u_char *)_Data;
+            epText=(uint8_t *)_Data;
             break;
         case C_FUNC_FREEZ:	              //波形冻结
-            epText=(u_char *)_Freeze;
+            epText=(uint8_t *)_Freeze;
             break;
         case C_FUNC_FILL:	              //实心波
-            epText=(u_char *)_Fill;
+            epText=(uint8_t *)_Fill;
             break;
         default:
             break;
@@ -765,7 +765,7 @@ void SysParaDisp(void)		//显示通道号、探头类型、频带等
 
     MSetColor(C_CR_MENU);
     ypos = C_CHANNEL_VPOSI+C_MenuHigh*9;
-//   epText = (u_char*)_ParaMenu_AD3_1 + ( (MGetBandMode()-0)*9+3 );
+//   epText = (uint8_t*)_ParaMenu_AD3_1 + ( (MGetBandMode()-0)*9+3 );
     MSetColor(C_CR_PARA);
 //   EMenuOut(xpos,ypos,epText,3,1,C_CCHAR_VDOT);	//	频带宽度：2.5\5.0\10\wide
     MEraseWindow(xpos, ypos, xpos+C_CCHAR_HDOT*3, ypos+24) ;
@@ -795,10 +795,10 @@ void WriteProbe(int type, int xpos, int ypos)
 {
     int i,v,h;
 //	int x,y;
-    u_char *probe;
+    uint8_t *probe;
 
 
-    probe = (u_char *)_ProbeFace + type * 32;
+    probe = (uint8_t *)_ProbeFace + type * 32;
 
     v = xpos;//+HoriOffsetScreen;
     h = ypos + VertOffsetScreen;
@@ -810,7 +810,7 @@ void WriteProbe(int type, int xpos, int ypos)
         UserECharOut(v+HoriOffsetScreen, h, (char*)(probe+i*16)) ;
         UserECharOut(v+HoriOffsetScreen, h+8, (char*)(probe+8+i*16)) ;
 #else
-        MUserDotsOut(v,h,(u_char*)(probe+i*16),16);
+        MUserDotsOut(v,h,(uint8_t*)(probe+i*16),16);
 #endif
 
         v+= 8;
@@ -818,10 +818,10 @@ void WriteProbe(int type, int xpos, int ypos)
 }
 
 //各种参量调节函数
-int MAdjustGain(u_int type,u_int mode,short low,short high)
+int MAdjustGain(uint32_t type,uint32_t mode,short low,short high)
 /*调节增益,type=0系统增益=1补偿；mode=0立即此值越大自动调节所需时间越长,high高度*/
 {
-    u_int gatetype = 0;
+    uint32_t gatetype = 0;
     int gain ;
     int retvalue = C_FALSE;
     int step = 1;
@@ -941,16 +941,16 @@ int MAdjustGain(u_int type,u_int mode,short low,short high)
     return retvalue;
 }
 
-void WriteParaName(u_int ParaIndex) /*根据参量索引号写参量名*/
+void WriteParaName(uint32_t ParaIndex) /*根据参量索引号写参量名*/
 {
-    u_short* pzText;
+    uint16_t* pzText;
     MEraseWindow(0, 0, 18*C_ECHAR_HDOT, 24) ;
     DisplayPrompt(15);
     MSetColor(C_CR_MENU);
-    TextOut(0,0, 1, 16,16, (u_char*)_ParaName[MGetLanguage()][ParaIndex], 0);
+    TextOut(0,0, 1, 16,16, (uint8_t*)_ParaName[MGetLanguage()][ParaIndex], 0);
     // if (MGetLanguage())
     {
-        //     TextOut(0,9, 1, 8,8, (u_char*)_ParaName[MGetLanguage()][ParaIndex]+8, 0);
+        //     TextOut(0,9, 1, 8,8, (uint8_t*)_ParaName[MGetLanguage()][ParaIndex]+8, 0);
     }
 //	CMenuOut(0,0,pzText,4,1,24);	/*在指定位置根据每行字符数、行数、行高写菜单*/
 }
@@ -979,7 +979,7 @@ int ChannelChange(void)
     int xpos,ypos;
     int keycode,rotary;
     int number,deci_len;
-    u_short Channel,cmax;
+    uint16_t Channel,cmax;
     int elapsedtime=GetElapsedTime();
 
     xpos = C_CHANNEL_HPOSI;
@@ -1250,7 +1250,7 @@ int GainChange(void)
     //int type = MGetParaSort(C_BASEGAIN);	//代改参数0系统，1补偿
     int type ;
     //int inv_xpos,inv_ypos;
-    u_int time = 20;
+    uint32_t time = 20;
     int elapsedtime= GetElapsedTime();
 
     if( MGetEquivalentDays(1) > 0 )type = 0;
@@ -1519,7 +1519,7 @@ int RejectChange(void)
     int retvalue = C_TRUE;
     int keycode,rotary;
     int step = 1;
-    u_int time = C_KEYDELAY;
+    uint32_t time = C_KEYDELAY;
     ClearEnvelope();	//清包络或峰值
 
     WriteParaName(C_REJECT);
@@ -1658,7 +1658,7 @@ int RejectChange(void)
 
 int RejectPlus(int step)
 {
-    u_int reject = MGetReject();
+    uint32_t reject = MGetReject();
 
     if (reject >= C_MAX_REJECT)
     {
@@ -1673,7 +1673,7 @@ int RejectPlus(int step)
 
 int RejectMinus(int step)
 {
-    u_int reject = MGetReject();
+    uint32_t reject = MGetReject();
 
     if (reject == 0)
     {
@@ -1696,12 +1696,12 @@ int OffsetChange(void)
     int retvalue = C_TRUE;
     int keycode,rotary;
     int step = 1;
-    u_int time = C_KEYDELAY;
+    uint32_t time = C_KEYDELAY;
     ClearEnvelope();	//清包络或峰值
 
     WriteParaName(C_OFFSET);
     //EMenuOut(C_CCHAR_HDOT * 8, 0,"us",2,1,12);
-    TextOut(C_CCHAR_HDOT * (8+MGetLanguage()*4), 5,1,4,16,(u_char*)_us[0][0],0);
+    TextOut(C_CCHAR_HDOT * (8+MGetLanguage()*4), 5,1,4,16,(uint8_t*)_us[0][0],0);
     EMenuOut(C_CCHAR_HDOT * (8+MGetLanguage()*4)+C_ECHAR_HDOT+4, 0,"s",1,1,12);
     //ExpendTime(10);
     do
@@ -1855,7 +1855,7 @@ int OffsetChange(void)
 
 int OffsetPlus(int step)
 {
-    u_int offset = MGetOffset();
+    uint32_t offset = MGetOffset();
 
     if (offset >= C_MAX_OFFSET)
     {
@@ -1871,7 +1871,7 @@ int OffsetPlus(int step)
 
 int OffsetMinus(int step)
 {
-    u_int offset = MGetOffset();
+    uint32_t offset = MGetOffset();
 
     if (offset <= step)
     {
@@ -1897,7 +1897,7 @@ int SpeedChange(void)
 
     int retvalue = C_TRUE;
     int keycode,rotary;
-    u_int time = C_KEYDELAY;
+    uint32_t time = C_KEYDELAY;
     int step = MGetParaStep(C_SPEED);
 
     ClearEnvelope();	//清包络或峰值
@@ -2067,7 +2067,7 @@ int SpeedChange(void)
 
 int SpeedPlus(int step)
 {
-    u_int speed = MGetSpeed();
+    uint32_t speed = MGetSpeed();
 
     speed += step;
     if (speed >= C_MAX_SPEED)
@@ -2082,7 +2082,7 @@ int SpeedPlus(int step)
 }
 int SpeedMinus(int step)
 {
-    u_int speed = MGetSpeed();
+    uint32_t speed = MGetSpeed();
 
     if (speed < C_MIN_SPEED)
     {
@@ -2237,7 +2237,7 @@ int RangeChange(void)
                     //if( MGetAngle(0) == 0)MSetScaleMode(0,0);
                     //else MSetScaleMode(MGetScaleMode()+0,0);
                     MSetScaleMode(MGetScaleMode()+1,0);
-                    u_char ch;
+                    uint8_t ch;
                     switch (MGetScaleMode() )
                     {
                     case 0:
@@ -2295,8 +2295,8 @@ int RangeChange(void)
 
 int RangePlus(int step)		/*根据步长增加*/
 {
-    u_int range = MGetRange(1);
-    u_int tempmaxrange,tempmaxrfrange,tempspeed;
+    uint32_t range = MGetRange(1);
+    uint32_t tempmaxrange,tempmaxrfrange,tempspeed;
     if (MGetUnitType() == 1)
     {
         tempmaxrange = 214000;
@@ -2320,11 +2320,11 @@ int RangePlus(int step)		/*根据步长增加*/
         else
         {
             step = 1;
-            while ( range + 5 > (u_int)_RANGEVALUE[step])
+            while ( range + 5 > (uint32_t)_RANGEVALUE[step])
             {
                 step++;
             }
-            range = (u_int)_RANGEVALUE[step];
+            range = (uint32_t)_RANGEVALUE[step];
         }
     }
     else if( range <= 30000)
@@ -2373,8 +2373,8 @@ int RangePlus(int step)		/*根据步长增加*/
 
 int RangeMinus(int step)		/*根据步长*/
 {
-    u_int range = MGetRange(0);
-    u_int tempminrange,tempmintimerange;
+    uint32_t range = MGetRange(0);
+    uint32_t tempminrange,tempmintimerange;
     int Min_range=MGetSpeed()*2.5/1000+1;
     Min_range=Min_range*10;
 
@@ -2417,11 +2417,11 @@ int RangeMinus(int step)		/*根据步长*/
         else
         {
             step = 1;	//暂用step作指针
-            while ( range > (u_int)_RANGEVALUE[step])
+            while ( range > (uint32_t)_RANGEVALUE[step])
             {
                 step++;
             }
-            range = (u_int)_RANGEVALUE[step -1];
+            range = (uint32_t)_RANGEVALUE[step -1];
             if (range <= tempmintimerange)
             {
                 range= tempmintimerange;
@@ -2450,7 +2450,7 @@ int DelayChange(void)
     int retvalue = C_TRUE;
     int keycode,rotary;
     int step = MGetParaStep(C_DELAY);
-    u_int time = 20;
+    uint32_t time = 20;
 
     ClearEnvelope();	//清包络或峰值
 
@@ -2614,7 +2614,7 @@ int DelayChange(void)
 
 int DelayPlus(int step)		/*根据步长增加*/
 {
-    u_int delay = MGetDelay(1);	//得到当前标度下的延时距离
+    uint32_t delay = MGetDelay(1);	//得到当前标度下的延时距离
     if (step == 2 )
     {
         step = 0;
@@ -2693,8 +2693,8 @@ int AngleChange(void)
     int retvalue = C_TRUE;
     int keycode,rotary;
     int step = 1;
-//	u_int angle = MGetAngle(0);
-    u_int time = C_KEYDELAY;
+//	uint32_t angle = MGetAngle(0);
+    uint32_t time = C_KEYDELAY;
 
     ClearEnvelope();	//清包络或峰值
     WriteParaName(C_ANGLE);
@@ -2890,7 +2890,7 @@ int AngleChange(void)
 
 int AnglePlus(int step)
 {
-    u_int angle = MGetAngle(0);
+    uint32_t angle = MGetAngle(0);
 
     if (angle >= C_MAX_ANGLE)
     {
@@ -2906,7 +2906,7 @@ int AnglePlus(int step)
 
 int AngleMinus(int step)
 {
-    u_int angle = MGetAngle(0);
+    uint32_t angle = MGetAngle(0);
 
     if (angle < step)
     {
@@ -2926,17 +2926,17 @@ int AngleMinus(int step)
 void MDACGateChange(int keycode, int type)	/* 门改变*/
 {
     int offset;
-    //u_short dac_line[C_LEN_DACDB];
-    //u_short	 VPosi = C_COORVPOSI + 200;
+    //uint16_t dac_line[C_LEN_DACDB];
+    //uint16_t	 VPosi = C_COORVPOSI + 200;
     int rotary;
     int deci_len;
-    u_short time = 0;
-    u_short  HPosi ;
-    u_short  Height ;
-    u_short  Width ;
+    uint16_t time = 0;
+    uint16_t  HPosi ;
+    uint16_t  Height ;
+    uint16_t  Width ;
 
-    u_short xpos = C_CCHAR_HDOT * (3+MGetLanguage()*5) ;
-    u_short ypos = 0 ;
+    uint16_t xpos = C_CCHAR_HDOT * (3+MGetLanguage()*5) ;
+    uint16_t ypos = 0 ;
 
     offset = C_OFF_DACGATE;
     MCopyProtectedMemory( dac_line, (void*)offset, C_LEN_DACDB, PM_COPY_READ);
@@ -3140,14 +3140,14 @@ void MDACGateChange(int keycode, int type)	/* 门改变*/
     int keycode ;
     int rotary  =0;
     int deci_len;
-    u_short  HPosi ;
-    u_short  Height ;
-    u_short  Width ;
+    uint16_t  HPosi ;
+    uint16_t  Height ;
+    uint16_t  Width ;
 
-    u_short xpos,ypos;
-    u_short char_len,row_number,row_height;	//字符数和字符行数
+    uint16_t xpos,ypos;
+    uint16_t char_len,row_number,row_height;	//字符数和字符行数
 
-    u_char  mode = MGetParaSort(C_AGATEPOSI) ;
+    uint8_t  mode = MGetParaSort(C_AGATEPOSI) ;
     char gatetype;
 
     xpos = 0;
@@ -3175,7 +3175,7 @@ void MDACGateChange(int keycode, int type)	/* 门改变*/
 
         WriteParaName(C_AGATEPOSI + mode);
 
-        u_short  posmax;
+        uint16_t  posmax;
         if( MGetTestStatus(C_TEST_DAC) == 0 && MGetTestStatus(C_TEST_AVG) == 0 ) posmax = C_GATEPOSIMAX;
         else posmax = C_COORWIDTH;
         switch (mode)
@@ -3387,16 +3387,16 @@ int GateChange(void)	  /*改变门*/
     int keycode ;
     int rotary  =0;
     int deci_len;
-    u_short  HPosi ;
-    u_short  Height ;
-    u_short  Width ;
+    uint16_t  HPosi ;
+    uint16_t  Height ;
+    uint16_t  Width ;
     int SameKeyTime;
     int number;
     int number1;
-    u_short xpos,ypos;
-    u_short char_len,row_number,row_height;	/*字符数和字符行数*/
+    uint16_t xpos,ypos;
+    uint16_t char_len,row_number,row_height;	/*字符数和字符行数*/
 
-    u_char  mode = MGetParaSort(C_AGATEPOSI) ;
+    uint8_t  mode = MGetParaSort(C_AGATEPOSI) ;
     char gatetype;
 
     xpos = 0;
@@ -3424,7 +3424,7 @@ int GateChange(void)	  /*改变门*/
 
         WriteParaName(C_AGATEPOSI + mode);
 
-        u_short  posmax;
+        uint16_t  posmax;
         if( MGetTestStatus(C_TEST_DAC) == 0 && MGetTestStatus(C_TEST_AVG) == 0 ) posmax = C_GATEPOSIMAX;
         else posmax = C_COORWIDTH;
         switch (mode)
@@ -3837,26 +3837,26 @@ int GateChange(void)	  /*改变门*/
 void MGatePosi(int keycode, int gatetype,int step) /* 门位改变*/
 {
 
-//    u_short	 VPosi = C_COORVPOSI + 200;
-    u_short  HPosi ;
-    u_short  Height ;
-    u_short  Width ;
-//	u_short  HPosi1 ;
-//	u_short  Height1 ;
-//	u_short  Width1 ;
+//    uint16_t	 VPosi = C_COORVPOSI + 200;
+    uint16_t  HPosi ;
+    uint16_t  Height ;
+    uint16_t  Width ;
+//	uint16_t  HPosi1 ;
+//	uint16_t  Height1 ;
+//	uint16_t  Width1 ;
     int deci_len;
     int rotary;
     int i;
     rotary = 0;
-    u_int xpos = C_CCHAR_HDOT * (3+MGetLanguage()*5);
-    u_int ypos = 0;
+    uint32_t xpos = C_CCHAR_HDOT * (3+MGetLanguage()*5);
+    uint32_t ypos = 0;
     i = 0;
     step = 4;
     HPosi = MGetGatePara(gatetype, 0); /* 水平位置 */
     Width = MGetGatePara(gatetype, 1);
     Height = MGetGatePara(gatetype, 2) ;
     int temp=0;
-    u_short  posmax;
+    uint16_t  posmax;
     if( MGetUnitType() > 0)deci_len = 3;
     else deci_len = 1;//都带1小数
     if( MGetTestStatus(C_TEST_DAC) == 0 && MGetTestStatus(C_TEST_AVG) == 0 ) posmax = C_GATEPOSIMAX;
@@ -3992,23 +3992,23 @@ void MGatePosi(int keycode, int gatetype,int step) /* 门位改变*/
 
 void MGateWide(int keycode, int gatetype,int step)	/*门宽改变*/
 {
-//    u_short	 VPosi = C_COORVPOSI + 200;
-    u_short  HPosi ;
-    u_short  Height ;
-    u_short  Width ;
-//	u_short  HPosi1 = 0;
-//	u_short  Height1 = 0;
-//	u_short  Width1 = 0;
-    u_int deci_len;
+//    uint16_t	 VPosi = C_COORVPOSI + 200;
+    uint16_t  HPosi ;
+    uint16_t  Height ;
+    uint16_t  Width ;
+//	uint16_t  HPosi1 = 0;
+//	uint16_t  Height1 = 0;
+//	uint16_t  Width1 = 0;
+    uint32_t deci_len;
 
-    u_int xpos = C_CCHAR_HDOT * (3+MGetLanguage()*5) ;
-    u_int ypos = 0 ;
+    uint32_t xpos = C_CCHAR_HDOT * (3+MGetLanguage()*5) ;
+    uint32_t ypos = 0 ;
     int rotary;
     int i;
     rotary = 0;
     step = 4;
     i = 0;
-    u_short  posmax;
+    uint16_t  posmax;
     int temp=0;
     if( MGetTestStatus(C_TEST_DAC) == 0 && MGetTestStatus(C_TEST_AVG) == 0 ) posmax = C_GATEPOSIMAX;
     else posmax = C_WAVEWIDTH;
@@ -4160,15 +4160,15 @@ void MGateWide(int keycode, int gatetype,int step)	/*门宽改变*/
 
 void MGateHigh(int keycode, int gatetype,int step)	/* 门高改变*/
 {
-//	u_short	 VPosi = C_COORVPOSI + 200;
-    u_short  HPosi ;
-    u_short  Height ;
-    u_short  Width ;
-    u_int time = 10;
+//	uint16_t	 VPosi = C_COORVPOSI + 200;
+    uint16_t  HPosi ;
+    uint16_t  Height ;
+    uint16_t  Width ;
+    uint32_t time = 10;
     int rotary;
 
-    u_int xpos = C_CCHAR_HDOT * (3+MGetLanguage()*5) ;
-    u_int ypos = 0 ;
+    uint32_t xpos = C_CCHAR_HDOT * (3+MGetLanguage()*5) ;
+    uint32_t ypos = 0 ;
     int temp=0;
     rotary = 0;
     step = 1;
@@ -4286,19 +4286,19 @@ void MGateHigh(int keycode, int gatetype,int step)	/* 门高改变*/
 
 
 /*显示各参数值*/
-void WriteBaseGain(u_int xpos,u_int ypos)	//基本增益
+void WriteBaseGain(uint32_t xpos,uint32_t ypos)	//基本增益
 {
     Write_Number(xpos,ypos,MGetBaseGain(),4,1,0);
 }
-void WriteCompGain(u_int xpos,u_int ypos)	//补偿增益
+void WriteCompGain(uint32_t xpos,uint32_t ypos)	//补偿增益
 {
     Write_Number(xpos,ypos,MGetCompGain(),5,1,1);
 }
-void WriteSurfGain(u_int xpos,u_int ypos)	//表面补偿
+void WriteSurfGain(uint32_t xpos,uint32_t ypos)	//表面补偿
 {
     Write_Number(xpos,ypos,MGetSurfGain(),5,1,1);
 }
-void WriteRange(u_int xpos,u_int ypos)	//声程范围
+void WriteRange(uint32_t xpos,uint32_t ypos)	//声程范围
 {
     if( MGetUnitType() > 0)
     {
@@ -4310,7 +4310,7 @@ void WriteRange(u_int xpos,u_int ypos)	//声程范围
         Write_Number(xpos,ypos,MGetRange(1),5,1,0);
     }
 }
-void WriteSpeed(u_int xpos,u_int ypos)	//声速
+void WriteSpeed(uint32_t xpos,uint32_t ypos)	//声速
 {
     if( MGetUnitType() > 0)
     {
@@ -4324,15 +4324,15 @@ void WriteSpeed(u_int xpos,u_int ypos)	//声速
         EMenuOut(xpos + 5 * C_ECHAR_HDOT,ypos,"m/s",3,1,8);
     }
 }
-void WriteOffset(u_int xpos,u_int ypos)//零点
+void WriteOffset(uint32_t xpos,uint32_t ypos)//零点
 {
     Write_Number(xpos,ypos,MGetOffset()*10/16,5,2,0);
 }
-void WriteReject(u_int xpos,u_int ypos)//抑制
+void WriteReject(uint32_t xpos,uint32_t ypos)//抑制
 {
     Write_Number(xpos,ypos,MGetReject()*5,4,1,0);
 }
-void WriteDelay(u_int xpos,u_int ypos)	//延时
+void WriteDelay(uint32_t xpos,uint32_t ypos)	//延时
 {
     if( MGetUnitType() > 0)
     {
@@ -4344,7 +4344,7 @@ void WriteDelay(u_int xpos,u_int ypos)	//延时
         Write_Number(xpos,ypos,MGetDelay(1),5,1,0);
     }
 }
-void WriteAngle(u_int xpos,u_int ypos)	//角度
+void WriteAngle(uint32_t xpos,uint32_t ypos)	//角度
 {
     Write_Number(xpos,ypos,MGetAngle(0),4,1,0);
 }
@@ -4364,9 +4364,9 @@ void WriteScale(void)	//标度 +快捷键
         CH(4293),CH(3061),CH(2006),CH(3277),
     };
 
-    u_int xpos = 0,ypos = C_COORVPOSI+C_COORHEIGHT+2;
-    u_int i;
-    u_int number = MGetDelay(1);	//得到当前标度下的延时距离
+    uint32_t xpos = 0,ypos = C_COORVPOSI+C_COORHEIGHT+2;
+    uint32_t i;
+    uint32_t number = MGetDelay(1);	//得到当前标度下的延时距离
     int range;
 
     range = MGetRange(1)/5;	//得到当前标度下的探测范围
@@ -4400,7 +4400,7 @@ void WriteScale(void)	//标度 +快捷键
         InvertBytes(128*3+8,ypos+C_ECHAR_VDOT-2,7);
         CETextOut2(128*4+8,ypos+C_ECHAR_VDOT-2,_shortcut+12,4,1,16,1,0);*/
 }
-void WriteLongness(u_short xpos, u_short ypos,int number,u_char total_len/*总长*/,u_char mode/*是否写单位*/)
+void WriteLongness(uint16_t xpos, uint16_t ypos,int number,uint8_t total_len/*总长*/,uint8_t mode/*是否写单位*/)
 {
     if( MGetUnitType() > 0)
     {
@@ -4585,8 +4585,8 @@ int GetDispEchoPara(void)/*得到指定门（0=A or 1=B)内回波的位置大小并写在屏幕上*/
     para1 = MGetAmpMax(2);
     short amp1 = para1/256;
     short amp2 = para1%256;
-    u_int time1 = MGetAmpTime(0);
-    u_int time2 = MGetAmpTime(1);
+    uint32_t time1 = MGetAmpTime(0);
+    uint32_t time2 = MGetAmpTime(1);
     pos1 = MGetAmpPos(0);
     pos2 = MGetAmpPos(1);
     //if(gateamp > MGetGatePara(0,2) || MGetAmpMax(1) < MGetGatePara(1,2)) alarm_enable = 1;
@@ -4973,8 +4973,8 @@ int GetDispEchoPara(void)/*得到指定门（0=A or 1=B)内回波的位置大小并写在屏幕上*/
         {
             //有DAC门
 
-            u_char *	sampbuff = GetSampleBuffer();
-            u_short amp;
+            uint8_t *	sampbuff = GetSampleBuffer();
+            uint16_t amp;
             mode2 = MGetAcquisitionEnable();
             para1 = para2 = MGetGatePara(0, 0);
             para3 = para1 + MGetGatePara(0, 1);
@@ -5017,16 +5017,16 @@ int GetDispEchoPara(void)/*得到指定门（0=A or 1=B)内回波的位置大小并写在屏幕上*/
 
 void WritePeakPrompt(int mode1,int mode2)//mode1=0B门失波1进波，mode2=0波高1dB数
 {
-    u_int testrange[3];		//待测声程值
+    uint32_t testrange[3];		//待测声程值
     int offset;
     int number;
 
-    u_char pzText[] = "   x          ";
+    uint8_t pzText[] = "   x          ";
 
 
 
     pzText[0] = PHI;
-    u_char ch;
+    uint8_t ch;
 
     offset = C_OFF_TEMP + 30;
     MCopyProtectedMemory( testrange, (void*)offset, 12, PM_COPY_READ);
@@ -5337,7 +5337,7 @@ void WritePeakInfo(int mode1,int mode2,int para1,int para2,int para3,int para4)
     }
 }
 
-void MParaRenovate(u_int mode)	/*参数区刷新,0立即*/
+void MParaRenovate(uint32_t mode)	/*参数区刷新,0立即*/
 {
     if(mode == 0)	AdjustTime.ParaDisplayTime = (C_RENOVATE_TIME  + C_RENOVATE_TIME );
     else
@@ -5366,7 +5366,7 @@ void MParaRenovate(u_int mode)	/*参数区刷新,0立即*/
 
 
 /* 画坐标 参数为左上和高度、宽度*/
-int MCoorDraw(u_int CoorHPosi , u_int CoorVPosi , u_int CoorHeight , u_int CoorWidth )
+int MCoorDraw(uint32_t CoorHPosi , uint32_t CoorVPosi , uint32_t CoorHeight , uint32_t CoorWidth )
 {
     int i = 0;
     int j = 0;
@@ -5447,7 +5447,7 @@ int MCoorDraw(u_int CoorHPosi , u_int CoorVPosi , u_int CoorHeight , u_int CoorW
 void DrawDacGate(void)
 {
     int offset;
-    u_short dac_line[C_COORWIDTH];
+    uint16_t dac_line[C_COORWIDTH];
 
     offset = C_OFF_DACGATE;
     MCopyProtectedMemory( dac_line, (void*)offset,C_COORWIDTH * C_SIZE_SHORT, PM_COPY_READ);
@@ -5465,10 +5465,10 @@ void MGateDraw(void)   /*画门*/
 void MDrawGate( int/*-1两门都画0A门1B门*/ gatetype, int/*-1向下1向上*/ mode,
                 int paratype/*-1全门0门位1门宽2门高*/ ,int clear/*0新画1清除*/)
 {
-    u_short	 v = C_COORVPOSI + C_COORHEIGHT;  /* 垂直位置 */
-    u_short  p ;
-    u_short  h ;
-    u_short  w ;
+    uint16_t	 v = C_COORVPOSI + C_COORHEIGHT;  /* 垂直位置 */
+    uint16_t  p ;
+    uint16_t  h ;
+    uint16_t  w ;
     int gatenum;
     int s = 4;
     int m;
@@ -5547,9 +5547,9 @@ void MDrawGate( int/*-1两门都画0A门1B门*/ gatetype, int/*-1向下1向上*/ mode,
 }
 void Scrsave_Picture(void)
 {
-    u_int xpos = 0,ypos = 0;
-    u_int angle = 900+1, len = 10;
-    u_int edge;
+    uint32_t xpos = 0,ypos = 0;
+    uint32_t angle = 900+1, len = 10;
+    uint32_t edge;
     //int xstep,ystep,
     int lstep;
     //int type;
@@ -5617,7 +5617,7 @@ void MSetColor(int item)
 
     if( item == C_CR_UNDO || item == C_CR_DEFAULT)
     {
-        u_int cr = MLoadColor( C_CR_CURRENT );
+        uint32_t cr = MLoadColor( C_CR_CURRENT );
         /*set color for screen operation, (b0-b2): red ; (b3-b5): green ; (b6-b7): blue */
         if( item == C_CR_DEFAULT )
         {
@@ -5693,7 +5693,7 @@ void MSetColor(int item)
 #endif
 }
 
-void MSaveColor(int item,u_int cr)
+void MSaveColor(int item,uint32_t cr)
 {
 #if( C_COLOR == 1 || C_DEVLIB == 23)
 
@@ -5713,7 +5713,7 @@ void MSaveColor(int item,u_int cr)
     }
 #endif
 }
-u_int MLoadColor(int item)
+uint32_t MLoadColor(int item)
 {
 #if( C_COLOR == 1 || C_DEVLIB == 23)
 

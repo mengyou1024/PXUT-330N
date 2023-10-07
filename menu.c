@@ -15,17 +15,17 @@ extern int signFlag ;
 
 extern int g_iMaxAmp;
 extern int g_iPos;
-extern u_char sampbuffs[C_LEN_SAMP+1];
+extern uint8_t sampbuffs[C_LEN_SAMP+1];
 
 int NumHigh;
 int KeyManage(int keycode,int mode)		//按键管理,mode=1renovate
 {
 
 
-    u_int SameKeyTime = 0;
+    uint32_t SameKeyTime = 0;
     int mode1;			//mode1 =1长按键0短按
     int xpos,ypos;
-    u_char* sampbuffer ;
+    uint8_t* sampbuffer ;
     char funcNumber=10;
     int prestatus=0;
     /*
@@ -113,7 +113,7 @@ int KeyManage(int keycode,int mode)		//按键管理,mode=1renovate
         	int xpos,ypos;
 			int keycode,rotary;
 			int number,deci_len;
-        	u_short Channel, cmax;
+        	uint16_t Channel, cmax;
 			
 			xpos = C_CHANNEL_HPOSI;
 			ypos = C_CHANNEL_VPOSI;
@@ -837,7 +837,7 @@ int KeyManage(int keycode,int mode)		//按键管理,mode=1renovate
         {
         	int nflag=0;
 			
-            u_char szPingji[2][4][19]=
+            uint8_t szPingji[2][4][19]=
             {
                 {
                     "不可验收           ",
@@ -957,7 +957,7 @@ int KeyManage(int keycode,int mode)		//按键管理,mode=1renovate
                 int iPos=0;
                 if(MGetFunctionMode(C_ECHOMAX_MEMORY))
                 {
-                    u_char sampbuff[C_LEN_SAMP+1]={0};
+                    uint8_t sampbuff[C_LEN_SAMP+1]={0};
                     int iOffset = C_OFF_SAMP;
                     iPos=0;
                     iMaxAmp=0;
@@ -988,7 +988,7 @@ int KeyManage(int keycode,int mode)		//按键管理,mode=1renovate
                             TextOut(xpos+6*24,ypos+4+24,1,19,24,szPingji[MGetLanguage()][0],0);
                         else if(para4>=-80&&para4<-40)
                         {
-                            if(number<=MGetThick())  TextOut(xpos+6*24,ypos+4+24,1,19,24,(u_char*)szPingji[MGetLanguage()][2],0);//TextOut(xpos+6*24,ypos+4+24,1,10,24,"超记录等级",0);
+                            if(number<=MGetThick())  TextOut(xpos+6*24,ypos+4+24,1,19,24,(uint8_t*)szPingji[MGetLanguage()][2],0);//TextOut(xpos+6*24,ypos+4+24,1,10,24,"超记录等级",0);
                             else if(number>MGetThick()) TextOut(xpos+6*24,ypos+4+24,1,19,24,szPingji[MGetLanguage()][0],0);//TextOut(xpos+6*24,ypos+4+24,1,10,24,"不可验收",0);
                         }
                         else if(para4>=-100&&para4<-80)
@@ -1192,7 +1192,7 @@ int KeyManage(int keycode,int mode)		//按键管理,mode=1renovate
         }
         else//短按
         {
-            /*u_char szPingji[2][4][19]=
+            /*uint8_t szPingji[2][4][19]=
             {
                 {
                     "不可验收           ",
@@ -1298,7 +1298,7 @@ int KeyManage(int keycode,int mode)		//按键管理,mode=1renovate
                 int iPos=0;
                 if(MGetFunctionMode(C_ECHOMAX_MEMORY))
                 {
-                    u_char sampbuff[C_LEN_SAMP+1]={0};
+                    uint8_t sampbuff[C_LEN_SAMP+1]={0};
                     int iOffset = C_OFF_SAMP;
                     iPos=0;
                     iMaxAmp=0;
@@ -1329,7 +1329,7 @@ int KeyManage(int keycode,int mode)		//按键管理,mode=1renovate
                             TextOut(xpos+6*24,ypos+4+24,1,19,24,szPingji[MGetLanguage()][0],0);
                         else if(para4>=-80&&para4<-40)
                         {
-                            if(number<=MGetThick())  TextOut(xpos+6*24,ypos+4+24,1,19,24,(u_char*)szPingji[MGetLanguage()][2],0);//TextOut(xpos+6*24,ypos+4+24,1,10,24,"超记录等级",0);
+                            if(number<=MGetThick())  TextOut(xpos+6*24,ypos+4+24,1,19,24,(uint8_t*)szPingji[MGetLanguage()][2],0);//TextOut(xpos+6*24,ypos+4+24,1,10,24,"超记录等级",0);
                             else if(number>MGetThick()) TextOut(xpos+6*24,ypos+4+24,1,19,24,szPingji[MGetLanguage()][0],0);//TextOut(xpos+6*24,ypos+4+24,1,10,24,"不可验收",0);
                         }
                         else if(para4>=-100&&para4<-80)
@@ -1641,7 +1641,7 @@ int KeyManage(int keycode,int mode)		//按键管理,mode=1renovate
 #if C_DEVLIB == 1  || C_DEVLIB == 3|| C_DEVLIB == 24 || C_DEVLIB == 23
             int bright;
             //	CEMenuOut(0,0,_Bright_A1,7,1,16);
-            TextOut(0,0,1,18,16,(u_char*)_Bright_A1[MGetLanguage()][0],4);
+            TextOut(0,0,1,18,16,(uint8_t*)_Bright_A1[MGetLanguage()][0],4);
 
             MKeyRlx();
             bright = 0;
@@ -1670,7 +1670,7 @@ int KeyManage(int keycode,int mode)		//按键管理,mode=1renovate
 #else  // C_DEVLIB == 23
             int bright;
             //	CEMenuOut(0,0,_Bright_A1,7,1,16);
-            TextOut(0,0,1,18,16,(u_char*)_Bright_A1[MGetLanguage()][0],4);
+            TextOut(0,0,1,18,16,(uint8_t*)_Bright_A1[MGetLanguage()][0],4);
             MKeyRlx();
             bright = 0;
             while( true)
@@ -2106,7 +2106,7 @@ int KeyManage(int keycode,int mode)		//按键管理,mode=1renovate
 }
 int ParaMenu1(int page)//出现第几页的参数菜单
 {
-    u_int char_len = 6,row_number = 8,crow_height = 48,erow_height =16;
+    uint32_t char_len = 6,row_number = 8,crow_height = 48,erow_height =16;
     int number,deci_len,sign;
     int xpos,ypos;
     //int menu_xpos = 0,menu_ypos = 0;
@@ -2116,11 +2116,11 @@ int ParaMenu1(int page)//出现第几页的参数菜单
     int page_max = 2;
     int row;
 //	int offset;
-    u_short* cpText = 0;
-    u_char* epText = 0;
-    u_char* epText1 = 0;
+    uint16_t* cpText = 0;
+    uint8_t* epText = 0;
+    uint8_t* epText1 = 0;
     int i;
-    u_int elapsedtime1 = GetElapsedTime() ;//,elapsedtime2;
+    uint32_t elapsedtime1 = GetElapsedTime() ;//,elapsedtime2;
 
     MSetColor(C_CR_MENU);
 
@@ -2146,19 +2146,19 @@ int ParaMenu1(int page)//出现第几页的参数菜单
             case 1:
                 if( MGetTestStatus(C_TEST_AVG) != 1)
                 {
-                    epText1 =  (u_char *)_ParaMenu_A6[MGetLanguage()][i];
-                    epText =  (u_char*)_ParaMenu_B6;
+                    epText1 =  (uint8_t *)_ParaMenu_A6[MGetLanguage()][i];
+                    epText =  (uint8_t*)_ParaMenu_B6;
                 }
                 else
                 {
-                    epText1 =  (u_char *)_ParaMenu_A6A1[MGetLanguage()][i];
-                    epText =  (u_char*)_ParaMenu_B6A1;
+                    epText1 =  (uint8_t *)_ParaMenu_A6A1[MGetLanguage()][i];
+                    epText =  (uint8_t*)_ParaMenu_B6A1;
                 }
                 row_number = 8;
                 break;
             case 2:
-                epText1 =(u_char *)_ParaMenu_A3[MGetLanguage()][i];
-                epText =  (u_char*)_ParaMenu_B3;
+                epText1 =(uint8_t *)_ParaMenu_A3[MGetLanguage()][i];
+                epText =  (uint8_t*)_ParaMenu_B3;
                 row_number = 2;
                 break;
 
@@ -2169,7 +2169,7 @@ int ParaMenu1(int page)//出现第几页的参数菜单
                 TextOut(C_ECHAR_HDOT,para_ypos+10+crow_height*i,1,11,crow_height,epText1+11,2);
             }
         }
-        TextOut(C_ECHAR_HDOT,4,1,25,16,(u_char*)_ParaMenu_H1[MGetLanguage()][0],4);
+        TextOut(C_ECHAR_HDOT,4,1,25,16,(uint8_t*)_ParaMenu_H1[MGetLanguage()][0],4);
         Write_Number(C_ECHAR_HDOT + 12 * C_ECHAR_HDOT+4, 4+3*MGetLanguage(),page,1,0,0);
         if (MGetLanguage())
         {
@@ -2185,8 +2185,8 @@ int ParaMenu1(int page)//出现第几页的参数菜单
 
         EraseDrawRectangle(26*C_ECHAR_HDOT, 380, 26*C_ECHAR_HDOT + (5+1)*C_CCHAR_HDOT, 380 + 2 * (C_CCHAR_VDOT+12)) ;
         //	CMenuOut(27*C_ECHAR_HDOT,190+4,_MenuPrompt_B1,5,2,24);	/*在指定位置根据每行字符数、行数、行高写菜单*/
-        TextOut(27*C_ECHAR_HDOT,380+4,1,10,24,(u_char*)_MenuPrompt_B1[MGetLanguage()][0],4);
-        TextOut(27*C_ECHAR_HDOT,380+4+36,1,10,24,(u_char*)_MenuPrompt_B1[MGetLanguage()][0]+10,4);
+        TextOut(27*C_ECHAR_HDOT,380+4,1,10,24,(uint8_t*)_MenuPrompt_B1[MGetLanguage()][0],4);
+        TextOut(27*C_ECHAR_HDOT,380+4+36,1,10,24,(uint8_t*)_MenuPrompt_B1[MGetLanguage()][0]+10,4);
 //        EMenuOut(27*C_ECHAR_HDOT,380+4,_TestMenu_Enter,1,1,C_ECHAR_VDOT);
 
         MSetColor(C_CR_PARA);
@@ -2199,9 +2199,9 @@ int ParaMenu1(int page)//出现第几页的参数菜单
             row = 0;
             xpos = para_xpos;
             ypos = para_ypos + crow_height *row;
-            //	cpText = (u_short*)_ParaMenu_AB1 + (MGetScaleMode()-0) * 3 + 1;
+            //	cpText = (uint16_t*)_ParaMenu_AB1 + (MGetScaleMode()-0) * 3 + 1;
             //	CEMenuOut(xpos,ypos , cpText ,2,1,crow_height);	/*在指定位置根据每行字符数、行数、行高写菜单*/
-            TextOut(xpos,ypos ,1,7,crow_height,(u_char*)_ParaMenu_AB1[MGetLanguage()][MGetScaleMode()]+2,4);
+            TextOut(xpos,ypos ,1,7,crow_height,(uint8_t*)_ParaMenu_AB1[MGetLanguage()][MGetScaleMode()]+2,4);
 
             //表面补偿
             row = 1;
@@ -2215,14 +2215,14 @@ int ParaMenu1(int page)//出现第几页的参数菜单
 
             row = 3;//打印机
             ypos = para_ypos + crow_height *row + C_ECHAR_HDOT;
-            epText = (u_char*)_ParaMenu_AB3 + ( (MGetPrinterMode()-0)*15+2 );
+            epText = (uint8_t*)_ParaMenu_AB3 + ( (MGetPrinterMode()-0)*15+2 );
             EMenuOut(xpos,ypos , epText ,13,1,erow_height);	/*在指定位置根据每行字符数、行数、行高写菜单*/
 
             //3．	当量标准：母线\判废\定量\评定
             row = 4;
             xpos = para_xpos;
             ypos = para_ypos + crow_height *row + C_ECHAR_HDOT * 0;
-            TextOut(xpos,ypos ,1,8,crow_height,(u_char*)_ParaMenu_AC2[MGetLanguage()][MGetDacMode()]+2,4);
+            TextOut(xpos,ypos ,1,8,crow_height,(uint8_t*)_ParaMenu_AC2[MGetLanguage()][MGetDacMode()]+2,4);
 
             //7．	判废线RL：DAC+0.0dB
             row = 5;
@@ -2264,9 +2264,9 @@ int ParaMenu1(int page)//出现第几页的参数菜单
             {
                 xpos = para_xpos;
                 ypos = para_ypos + crow_height *row + C_ECHAR_HDOT * 0;
-                //	cpText = (u_short*)_ParaMenu_AC1 + MGetSaveMode() * 3 + 1;
+                //	cpText = (uint16_t*)_ParaMenu_AC1 + MGetSaveMode() * 3 + 1;
                 //	CEMenuOut(xpos,ypos , cpText ,2,1,crow_height);	/*在指定位置根据每行字符数、行数、行高写菜单*/
-                TextOut(xpos,ypos ,1,6,crow_height,(u_char*)_ParaMenu_AC1[MGetLanguage()][MGetSaveMode()]+2,4);
+                TextOut(xpos,ypos ,1,6,crow_height,(uint8_t*)_ParaMenu_AC1[MGetLanguage()][MGetSaveMode()]+2,4);
             }
             //2．	记录间隔：10sec-120sec	;如为单幅则此参量为0，选连续时自动设为30sec
             row = 1;
@@ -2274,7 +2274,7 @@ int ParaMenu1(int page)//出现第几页的参数菜单
             {
                 xpos = para_xpos;
                 ypos = para_ypos + crow_height *row + C_ECHAR_HDOT * 0;
-                TextOut(xpos,ypos ,1,8,crow_height,(u_char*)_ParaMenu_AC7[MGetLanguage()][MGetSavePosition()]+2,4);
+                TextOut(xpos,ypos ,1,8,crow_height,(uint8_t*)_ParaMenu_AC7[MGetLanguage()][MGetSavePosition()]+2,4);
 
                 //Write_Number(xpos,ypos,MGetSaveTime(),4,1,0);
             }
@@ -2348,11 +2348,11 @@ int ParaMenu1(int page)//出现第几页的参数菜单
             switch (keycode)
             {
             case 1:		//标度
-                //	cpText = (u_short*)_ParaMenu_AB1 ;
+                //	cpText = (uint16_t*)_ParaMenu_AB1 ;
                 MPushWindow(xpos, ypos, xpos + (6)*C_CCHAR_HDOT, ypos + crow_height * 3) ;
                 EraseDrawRectangle(xpos, ypos, xpos + (6)*C_CCHAR_HDOT, ypos + crow_height * 3) ;
                 //	CEMenuOut(xpos+4,ypos+4 , cpText ,3,3,crow_height);	/*在指定位置根据每行字符数、行数、行高写菜单*/
-                TextOut(xpos+4,ypos+4 ,3,10,crow_height,(u_char*)_ParaMenu_AB1[MGetLanguage()][0],4);
+                TextOut(xpos+4,ypos+4 ,3,10,crow_height,(uint8_t*)_ParaMenu_AB1[MGetLanguage()][0],4);
                 while(1)
                 {
                     keycode = MAnyKeyReturn();
@@ -2425,7 +2425,7 @@ int ParaMenu1(int page)//出现第几页的参数菜单
                 }
                 break;
             case 4:	//打印机
-                epText = (u_char*)_ParaMenu_AB3;
+                epText = (uint8_t*)_ParaMenu_AB3;
                 //ypos -= erow_height * 4 ;
                 MPushWindow(xpos, ypos, xpos + 8*C_CCHAR_HDOT, ypos + erow_height * 5) ;
                 EraseDrawRectangle(xpos, ypos, xpos + 8*C_CCHAR_HDOT, ypos + erow_height * 5) ;
@@ -2448,12 +2448,12 @@ int ParaMenu1(int page)//出现第几页的参数菜单
 #if C_DEVTYPE==20
                 break;
 #else
-                //	cpText = (u_short*)_ParaMenu_AC2 ;
+                //	cpText = (uint16_t*)_ParaMenu_AC2 ;
                 if( MGetCurveNumber() > 3)ypos -= crow_height * ( MGetCurveNumber()-3 );
                 MPushWindow(xpos, ypos, xpos + 6*C_CCHAR_HDOT, ypos + crow_height * ( MGetCurveNumber()+1 ) ) ;
                 EraseDrawRectangle(xpos, ypos, xpos + (6)*C_CCHAR_HDOT, ypos + crow_height * ( MGetCurveNumber()+1 )) ;
                 //	CEMenuOut(xpos+4,ypos+4 , cpText, 4,MGetCurveNumber()+1,crow_height);	/*在指定位置根据每行字符数、行数、行高写菜单*/
-                TextOut(xpos+4,ypos+4 ,MGetCurveNumber()+1,10,crow_height,(u_char*)_ParaMenu_AC2[MGetLanguage()][0],4);
+                TextOut(xpos+4,ypos+4 ,MGetCurveNumber()+1,10,crow_height,(uint8_t*)_ParaMenu_AC2[MGetLanguage()][0],4);
                 while(1)
                 {
                     keycode = MAnyKeyReturn();
@@ -2563,7 +2563,7 @@ int ParaMenu1(int page)//出现第几页的参数菜单
                 }
                 MPushWindow(xpos, ypos, xpos + 5*C_CCHAR_HDOT+1, ypos + crow_height * 2) ;
                 EraseDrawRectangle(xpos, ypos, xpos + (5)*C_CCHAR_HDOT, ypos + crow_height * 2) ;
-                TextOut(xpos+4,ypos+4 ,2,8,crow_height,(u_char*)_ParaMenu_AC1[MGetLanguage()][0],4);
+                TextOut(xpos+4,ypos+4 ,2,8,crow_height,(uint8_t*)_ParaMenu_AC1[MGetLanguage()][0],4);
                 while(1)
                 {
                     keycode = MAnyKeyReturn();
@@ -2604,7 +2604,7 @@ int ParaMenu1(int page)//出现第几页的参数菜单
                 ypos -= crow_height * 1;
                 MPushWindow(xpos, ypos, xpos + 5*C_CCHAR_HDOT+1, ypos + crow_height * 2) ;
                 EraseDrawRectangle(xpos, ypos, xpos + (5)*C_CCHAR_HDOT, ypos + crow_height * 2) ;
-                TextOut(xpos+4,ypos+4 ,2,10,crow_height,(u_char*)_ParaMenu_AC7[MGetLanguage()][0],4);
+                TextOut(xpos+4,ypos+4 ,2,10,crow_height,(uint8_t*)_ParaMenu_AC7[MGetLanguage()][0],4);
                 while(1)
                 {
                     keycode = MAnyKeyReturn();
@@ -2639,7 +2639,7 @@ int ParaMenu1(int page)//出现第几页的参数菜单
 
 int ParaMenu(int page)//出现第几页的参数菜单
 {
-    u_int char_len = 6,row_number = 9,crow_height = 48,erow_height = 30;
+    uint32_t char_len = 6,row_number = 9,crow_height = 48,erow_height = 30;
     int number,deci_len,sign;
     int xpos,ypos;
     //int menu_xpos = 0,menu_ypos = 0;
@@ -2649,11 +2649,11 @@ int ParaMenu(int page)//出现第几页的参数菜单
     int page_max = 2;
     int row;
     int stdswitch=0;
-    u_short* cpText = 0;
-    u_char* epText = 0;
-    u_char* epText1 = 0;
+    uint16_t* cpText = 0;
+    uint8_t* epText = 0;
+    uint8_t* epText1 = 0;
     int i;
-    u_int elapsedtime1 = GetElapsedTime() ;//,elapsedtime2;
+    uint32_t elapsedtime1 = GetElapsedTime() ;//,elapsedtime2;
     int old_unit = MGetUnitType();
     int old_unit1 = MGetUnitType();
 
@@ -2682,7 +2682,7 @@ int ParaMenu(int page)//出现第几页的参数菜单
         MFclearScreen();
         MSetColor(C_CR_MENU);
 
-        TextOut(C_ECHAR_HDOT,4,1,25,16,(u_char*)_ParaMenu_H1[MGetLanguage()][0],4);
+        TextOut(C_ECHAR_HDOT,4,1,25,16,(uint8_t*)_ParaMenu_H1[MGetLanguage()][0],4);
         Write_Number(C_ECHAR_HDOT + 12 * C_ECHAR_HDOT+4, 4+3*MGetLanguage(),page,1,0,0);
         if (MGetLanguage())
         {
@@ -2701,12 +2701,12 @@ int ParaMenu(int page)//出现第几页的参数菜单
                 if( MGetTestStatus(C_TEST_AVG) == 1)
                 {
                     epText1 =(char *)_ParaMenu_A22[MGetLanguage()][i];
-                    epText =  (u_char*)_ParaMenu_B2A1;
+                    epText =  (uint8_t*)_ParaMenu_B2A1;
                 }
                 else
                 {
                     epText1 = (char *)_ParaMenu_A2[MGetLanguage()][i];
-                    epText =  (u_char*)_ParaMenu_B2;
+                    epText =  (uint8_t*)_ParaMenu_B2;
                 }
                 if((MGetStdMode()==10||MGetStdMode()==11||MGetStdMode()==14)&& (page == 1)&&MGetTestStatus(C_TEST_DAC))
                 {
@@ -2723,7 +2723,7 @@ int ParaMenu(int page)//出现第几页的参数菜单
                 break;
             case 2:
                 epText1 =(char *)_ParaMenu_A3[MGetLanguage()][i];
-                epText =  (u_char*)_ParaMenu_B3;
+                epText =  (uint8_t*)_ParaMenu_B3;
 #if C_DEVTYPE == 1
                 row_number = 9;
 #else
@@ -2733,7 +2733,7 @@ int ParaMenu(int page)//出现第几页的参数菜单
                 break;
             case 3:
                 epText1 =	(char *)_ParaMenu_C1[MGetLanguage()][i];
-                epText =  (u_char*)_ParaMenu_D1;
+                epText =  (uint8_t*)_ParaMenu_D1;
 #if C_DEVTYPE == 1
                 row_number = 2;
 #else
@@ -2754,8 +2754,8 @@ int ParaMenu(int page)//出现第几页的参数菜单
         EraseDrawRectangle(26*C_ECHAR_HDOT, 380, 26*C_ECHAR_HDOT + (6+1*MGetLanguage())*C_CCHAR_HDOT, 380 + 2 * (C_CCHAR_VDOT+12)) ;
         //	CMenuOut(27*C_ECHAR_HDOT,190+4,_MenuPrompt_B1,5,2,24);	/*在指定位置根据每行字符数、行数、行高写菜单*/
 
-        TextOut(27*C_ECHAR_HDOT,380+4,1,10,24,(u_char*)_MenuPrompt_B1[MGetLanguage()][0],4);
-        TextOut(27*C_ECHAR_HDOT,380+4+36,1,10,24,(u_char*)_MenuPrompt_B1[MGetLanguage()][0]+10,4);
+        TextOut(27*C_ECHAR_HDOT,380+4,1,10,24,(uint8_t*)_MenuPrompt_B1[MGetLanguage()][0],4);
+        TextOut(27*C_ECHAR_HDOT,380+4+36,1,10,24,(uint8_t*)_MenuPrompt_B1[MGetLanguage()][0]+10,4);
 //        EMenuOut(27*C_ECHAR_HDOT,380+4,_TestMenu_Enter,1,1,C_ECHAR_VDOT);
         MSetColor(C_CR_PARA);
         xpos = para_xpos;
@@ -2770,9 +2770,9 @@ int ParaMenu(int page)//出现第几页的参数菜单
             //声程标度
             row = 0;
             ypos = para_ypos + crow_height *row;
-            //	cpText = (u_short*)_ParaMenu_AB1 + (MGetScaleMode()-0) * 3 + 1;
+            //	cpText = (uint16_t*)_ParaMenu_AB1 + (MGetScaleMode()-0) * 3 + 1;
             //	CEMenuOut(xpos,ypos , cpText ,2,1,crow_height);	/*在指定位置根据每行字符数、行数、行高写菜单*/
-            TextOut(xpos,ypos ,1,7,crow_height,(u_char*)_ParaMenu_AB1[MGetLanguage()][MGetScaleMode()]+2,4);
+            TextOut(xpos,ypos ,1,7,crow_height,(uint8_t*)_ParaMenu_AB1[MGetLanguage()][MGetScaleMode()]+2,4);
 
             //表面补偿
             row = 1;
@@ -2796,11 +2796,11 @@ int ParaMenu(int page)//出现第几页的参数菜单
             ypos = para_ypos + crow_height *row;
 			if(MGetStdMode()==14)
 			{
-				TextOut(xpos,ypos ,1,8,crow_height,(u_char*)_ParaMenu_AC2[MGetLanguage()][2]+2,4);
+				TextOut(xpos,ypos ,1,8,crow_height,(uint8_t*)_ParaMenu_AC2[MGetLanguage()][2]+2,4);
 			}
 			else 
 			{
-				TextOut(xpos,ypos ,1,8,crow_height,(u_char*)_ParaMenu_AC2[MGetLanguage()][MGetDacMode()]+2,4);
+				TextOut(xpos,ypos ,1,8,crow_height,(uint8_t*)_ParaMenu_AC2[MGetLanguage()][MGetDacMode()]+2,4);
 			}
 
             //4．	当量显示：dB值\孔径
@@ -2810,11 +2810,11 @@ int ParaMenu(int page)//出现第几页的参数菜单
 
 			// if( MGetTestStatus(C_TEST_AVG) == 1)
             {
-                TextOut(xpos,ypos ,1,6,crow_height,(u_char*)_ParaMenu_AC3A[MGetLanguage()][MGetAvgMode()]+2,4);
+                TextOut(xpos,ypos ,1,6,crow_height,(uint8_t*)_ParaMenu_AC3A[MGetLanguage()][MGetAvgMode()]+2,4);
             }
 			// else
             {
-				// cpText = (u_short*)_ParaMenu_AC3 + (MGetAvgMode()-0) * 4 + 1;		//由于DB算为两个字
+				// cpText = (uint16_t*)_ParaMenu_AC3 + (MGetAvgMode()-0) * 4 + 1;		//由于DB算为两个字
 				// CEMenuOut(xpos,ypos , cpText ,2,1,crow_height);
             }
 			if((MGetStdMode()==10||MGetStdMode()==11||MGetStdMode()==14)&&MGetTestStatus(C_TEST_DAC)==1)  break;///11345退出
@@ -2884,9 +2884,9 @@ int ParaMenu(int page)//出现第几页的参数菜单
             {
                 xpos = para_xpos;
                 ypos = para_ypos + crow_height *row ;
-                //	cpText = (u_short*)_ParaMenu_AC1 + MGetSaveMode() * 3 + 1;
+                //	cpText = (uint16_t*)_ParaMenu_AC1 + MGetSaveMode() * 3 + 1;
                 //	CEMenuOut(xpos,ypos , cpText ,2,1,crow_height);
-                TextOut(xpos,ypos ,1,6,crow_height,(u_char*)_ParaMenu_AC1[MGetLanguage()][MGetSaveMode()]+2,4);
+                TextOut(xpos,ypos ,1,6,crow_height,(uint8_t*)_ParaMenu_AC1[MGetLanguage()][MGetSaveMode()]+2,4);
             }
             //2．	记录间隔：10sec-120sec	;如为单幅则此参量为0，选连续时自动设为30sec
             row = 1;
@@ -2894,7 +2894,7 @@ int ParaMenu(int page)//出现第几页的参数菜单
             {
                 xpos = para_xpos;
                 ypos = para_ypos + crow_height *row ;
-                TextOut(xpos,ypos ,1,8,crow_height,(u_char*)_ParaMenu_AC7[MGetLanguage()][MGetSavePosition()]+2,4);
+                TextOut(xpos,ypos ,1,8,crow_height,(uint8_t*)_ParaMenu_AC7[MGetLanguage()][MGetSavePosition()]+2,4);
 
                 //Write_Number(xpos,ypos,MGetSaveTime(),4,1,0);
             }
@@ -2902,41 +2902,41 @@ int ParaMenu(int page)//出现第几页的参数菜单
             			row = 0;//计量单位
             			if( row >= row_number)break;
             			ypos = para_ypos + crow_height *row + C_ECHAR_HDOT * 1;
-            			epText = (u_char*)_ParaMenu_CA1 + MGetUnitType() * 6 + 2;
+            			epText = (uint8_t*)_ParaMenu_CA1 + MGetUnitType() * 6 + 2;
             			EMenuOut(xpos,ypos , epText ,4,1,crow_height);
 
             			row = 1;//语言
             			if( row >= row_number)break;
             			ypos = para_ypos + crow_height *row + C_ECHAR_HDOT * 0;
-            			epText = (u_char *)_MainMenu_C1A11[MGetLanguage()][MGetLanguage()];
+            			epText = (uint8_t *)_MainMenu_C1A11[MGetLanguage()][MGetLanguage()];
             			TextOut(xpos,ypos,1,8,crow_height,epText+2,8);
             #endif*/
 
             //位置方式,前沿峰值
             row = 2;
             ypos = para_ypos + crow_height *row ;
-            TextOut(xpos,ypos ,1,6,crow_height,(u_char*)_ParaMenu_AC6[MGetLanguage()][MGetReadForeland()]+2,4);
+            TextOut(xpos,ypos ,1,6,crow_height,(uint8_t*)_ParaMenu_AC6[MGetLanguage()][MGetReadForeland()]+2,4);
 
             xpos = para_xpos;
 
             row = 3;//语言
             if( row >= row_number)break;
             ypos = para_ypos + crow_height *row;
-            epText = (u_char *)_MainMenu_C1A11[MGetLanguage()][MGetLanguage()];
+            epText = (uint8_t *)_MainMenu_C1A11[MGetLanguage()][MGetLanguage()];
             TextOut(xpos,ypos,1,8,crow_height,epText+2,8);
 
 
             //6．	B门用途：失波\进波
             row = 4;
             ypos = para_ypos + crow_height *row;
-            TextOut(xpos,ypos,1,6+2*MGetLanguage(),crow_height,(u_char*)_ParaMenu_AC5[MGetLanguage()][MGetBGateMode()]+2,4);
+            TextOut(xpos,ypos,1,6+2*MGetLanguage(),crow_height,(uint8_t*)_ParaMenu_AC5[MGetLanguage()][MGetBGateMode()]+2,4);
 
             row = 5;//按键声音开关
             xpos = para_xpos;
             ypos = para_ypos + crow_height *row ;
-            //	cpText = (u_short*)_ParaMenu_AD8 + MGetSoundAlarm(0) * 2 + 1;
+            //	cpText = (uint16_t*)_ParaMenu_AD8 + MGetSoundAlarm(0) * 2 + 1;
             //	CEMenuOut(xpos,ypos , cpText ,1,1,crow_height);	 /*在指定位置根据每行字符数、行数、行高写菜单*/
-            TextOut(xpos,ypos,1,4,crow_height,(u_char*)_ParaMenu_AD8[MGetLanguage()][MGetSoundAlarm(0)]+2,4);
+            TextOut(xpos,ypos,1,4,crow_height,(uint8_t*)_ParaMenu_AD8[MGetLanguage()][MGetSoundAlarm(0)]+2,4);
 
             //5．	屏幕亮度：低亮\一般\中亮\高亮
 #if C_LIGHT == 1
@@ -2945,7 +2945,7 @@ int ParaMenu(int page)//出现第几页的参数菜单
             if( row >= row_number)break;
             xpos = para_xpos;
             ypos = para_ypos + crow_height *row ;
-            TextOut(xpos,ypos ,1,8,crow_height,(u_char*)_ParaMenu_AC4[MGetLanguage()][MGetScreenBrightness()]+2,4);
+            TextOut(xpos,ypos ,1,8,crow_height,(uint8_t*)_ParaMenu_AC4[MGetLanguage()][MGetScreenBrightness()]+2,4);
 #endif
 #endif
             //7．
@@ -2961,9 +2961,9 @@ int ParaMenu(int page)//出现第几页的参数菜单
             {
                 xpos = para_xpos;
                 ypos = para_ypos + crow_height *row;
-                //	cpText = (u_short*)_Weld_C1 + stWeldPara.type  * 3 + 1;
+                //	cpText = (uint16_t*)_Weld_C1 + stWeldPara.type  * 3 + 1;
                 //	CEMenuOut(xpos,ypos , cpText ,2,1,crow_height);	/*在指定位置根据每行字符数、行数、行高写菜单*/
-                TextOut(xpos,ypos,1,8,16,(u_char*)_Weld_C1[MGetLanguage()][stWeldPara.type]+2,4);
+                TextOut(xpos,ypos,1,8,16,(uint8_t*)_Weld_C1[MGetLanguage()][stWeldPara.type]+2,4);
             }
 
             //8．	屏保延时：  min		；无屏保时为0，设为有时自动设为5min
@@ -2977,29 +2977,29 @@ int ParaMenu(int page)//出现第几页的参数菜单
             row = 0;//打印机
             if( row >= row_number)break;
             ypos = para_ypos + crow_height *row;
-            TextOut(xpos,ypos,1,3,crow_height,(u_char*)_ParaMenu_AD9[MGetLanguage()][MGetSaveFrequency()]+2,4);
+            TextOut(xpos,ypos,1,3,crow_height,(uint8_t*)_ParaMenu_AD9[MGetLanguage()][MGetSaveFrequency()]+2,4);
             // row = 1;//存储频谱
             // if( row >= row_number)break;
             // ypos = para_ypos + crow_height *row ;
-            // TextOut(xpos,ypos,1,3,crow_height,(u_char*)_ParaMenu_AD9[MGetLanguage()][MGetSaveFrequency()]+2,4);
+            // TextOut(xpos,ypos,1,3,crow_height,(uint8_t*)_ParaMenu_AD9[MGetLanguage()][MGetSaveFrequency()]+2,4);
             //6．	参量保护：全部\部分
             row = 1;
             if( row >= row_number)break;
             xpos = para_xpos;
             ypos = para_ypos + crow_height *row ;
-            u_short paratemp=0;
+            uint16_t paratemp=0;
             int j;
             for(j = 0; j < C_LOCK_ALL; j++)
             {
                 if(MGetParaLock(0,j) == 1)paratemp++;
             }
-            epText = (u_char *)_ParaMenu_AD6[MGetLanguage()][paratemp];
+            epText = (uint8_t *)_ParaMenu_AD6[MGetLanguage()][paratemp];
             TextOut(xpos,ypos,1,4,crow_height,epText,4);
 
             row = 3;//计量单位
             if( row >= row_number)break;
             ypos = para_ypos + crow_height *row;
-            epText = (u_char*)_ParaMenu_CA1 + MGetUnitType() * 6 + 2;
+            epText = (uint8_t*)_ParaMenu_CA1 + MGetUnitType() * 6 + 2;
             EMenuOut(xpos,ypos , epText ,4,1,crow_height);	 /*在指定位置根据每行字符数、行数、行高写菜单*/
 
             break;
@@ -3051,8 +3051,8 @@ int ParaMenu(int page)//出现第几页的参数菜单
                 if( old_unit1 == 0)
                 {
                     //新单位inch
-                    MSetThick( (u_int)(MGetThick()/0.254+0.5) );
-                    MSetDiameter( (u_int)(MGetDiameter()/0.254+0.5) );
+                    MSetThick( (uint32_t)(MGetThick()/0.254+0.5) );
+                    MSetDiameter( (uint32_t)(MGetDiameter()/0.254+0.5) );
 
                     stWeldPara.face = stWeldPara.face/0.254+0.5;
                     stWeldPara.thick1 = stWeldPara.thick1/0.254+0.5;
@@ -3068,8 +3068,8 @@ int ParaMenu(int page)//出现第几页的参数菜单
                 }
                 else
                 {
-                    MSetThick( (u_int)(MGetThick()*25.4/100+0.5) );
-                    MSetDiameter( (u_int)(MGetDiameter()*25.4/100+0.5) );
+                    MSetThick( (uint32_t)(MGetThick()*25.4/100+0.5) );
+                    MSetDiameter( (uint32_t)(MGetDiameter()*25.4/100+0.5) );
 
                     stWeldPara.face = stWeldPara.face*0.254+0.5;
                     stWeldPara.thick1 = stWeldPara.thick1*0.254+0.5;
@@ -3096,37 +3096,37 @@ int ParaMenu(int page)//出现第几页的参数菜单
                     //新单位inch
                     keycodetemp = C_OFF_TEMP + 0;
                     MCopyProtectedMemory( &number, (void*)keycodetemp, 4, PM_COPY_READ);
-                    number = (u_int)(number * 100/25.4+0.5);
+                    number = (uint32_t)(number * 100/25.4+0.5);
                     MCopyProtectedMemory( (void*)keycodetemp, &number, 4, PM_COPY_WRITE);
                     keycodetemp += 4;
                     MCopyProtectedMemory( &number, (void*)keycodetemp, 4, PM_COPY_READ);
-                    number = (u_int)(number * 100/25.4+0.5);
+                    number = (uint32_t)(number * 100/25.4+0.5);
                     MCopyProtectedMemory( (void*)keycodetemp, &number, 4, PM_COPY_WRITE);
                     keycodetemp += 4;
                     MCopyProtectedMemory( &number, (void*)keycodetemp, 4, PM_COPY_READ);
-                    number = (u_int)(number * 100/25.4+0.5);
+                    number = (uint32_t)(number * 100/25.4+0.5);
                     MCopyProtectedMemory( (void*)keycodetemp, &number, 4, PM_COPY_WRITE);
                     //以上为测零点的三个值
                     keycodetemp = C_OFF_TEMP + 20;
                     MCopyProtectedMemory( &number, (void*)keycodetemp, 4, PM_COPY_READ);
-                    number = (u_int)(number * 100/25.4+0.5);
+                    number = (uint32_t)(number * 100/25.4+0.5);
                     MCopyProtectedMemory( (void*)keycodetemp, &number, 4, PM_COPY_WRITE);
                     keycodetemp += 4;
                     MCopyProtectedMemory( &number, (void*)keycodetemp, 4, PM_COPY_READ);
-                    number = (u_int)(number * 100/25.4+0.5);
+                    number = (uint32_t)(number * 100/25.4+0.5);
                     MCopyProtectedMemory( (void*)keycodetemp, &number, 4, PM_COPY_WRITE);
                     //以上为测K值的三个值
                     keycodetemp = C_OFF_TEMP + 30;
                     MCopyProtectedMemory( &number, (void*)keycodetemp, 4, PM_COPY_READ);
-                    number = (u_int)(number * 100/25.4+0.5);
+                    number = (uint32_t)(number * 100/25.4+0.5);
                     MCopyProtectedMemory( (void*)keycodetemp, &number, 4, PM_COPY_WRITE);
                     keycodetemp += 4;
                     MCopyProtectedMemory( &number, (void*)keycodetemp, 4, PM_COPY_READ);
-                    number = (u_int)(number * 100/25.4+0.5);
+                    number = (uint32_t)(number * 100/25.4+0.5);
                     MCopyProtectedMemory( (void*)keycodetemp, &number, 4, PM_COPY_WRITE);
                     keycodetemp += 4;
                     MCopyProtectedMemory( &number, (void*)keycodetemp, 4, PM_COPY_READ);
-                    number = (u_int)(number * 100/25.4+0.5);
+                    number = (uint32_t)(number * 100/25.4+0.5);
                     MCopyProtectedMemory( (void*)keycodetemp, &number, 4, PM_COPY_WRITE);
                     //以上为测DAC的三个值
                 }
@@ -3134,37 +3134,37 @@ int ParaMenu(int page)//出现第几页的参数菜单
                 {
                     keycodetemp = C_OFF_TEMP + 0;
                     MCopyProtectedMemory( &number, (void*)keycodetemp, 4, PM_COPY_READ);
-                    number = (u_int)(number*25.4/100+0.5);
+                    number = (uint32_t)(number*25.4/100+0.5);
                     MCopyProtectedMemory( (void*)keycodetemp, &number, 4, PM_COPY_WRITE);
                     keycodetemp += 4;
                     MCopyProtectedMemory( &number, (void*)keycodetemp, 4, PM_COPY_READ);
-                    number = (u_int)(number*25.4/100+0.5);
+                    number = (uint32_t)(number*25.4/100+0.5);
                     MCopyProtectedMemory( (void*)keycodetemp, &number, 4, PM_COPY_WRITE);
                     keycodetemp += 4;
                     MCopyProtectedMemory( &number, (void*)keycodetemp, 4, PM_COPY_READ);
-                    number = (u_int)(number*25.4/100+0.5);
+                    number = (uint32_t)(number*25.4/100+0.5);
                     MCopyProtectedMemory( (void*)keycodetemp, &number, 4, PM_COPY_WRITE);
                     //以上为测零点的三个值
                     keycodetemp = C_OFF_TEMP + 20;
                     MCopyProtectedMemory( &number, (void*)keycodetemp, 4, PM_COPY_READ);
-                    number = (u_int)(number*25.4/100+0.5);
+                    number = (uint32_t)(number*25.4/100+0.5);
                     MCopyProtectedMemory( (void*)keycodetemp, &number, 4, PM_COPY_WRITE);
                     keycodetemp += 4;
                     MCopyProtectedMemory( &number, (void*)keycodetemp, 4, PM_COPY_READ);
-                    number = (u_int)(number*25.4/100+0.5);
+                    number = (uint32_t)(number*25.4/100+0.5);
                     MCopyProtectedMemory( (void*)keycodetemp, &number, 4, PM_COPY_WRITE);
                     //以上为测K值的三个值
                     keycodetemp = C_OFF_TEMP + 30;
                     MCopyProtectedMemory( &number, (void*)keycodetemp, 4, PM_COPY_READ);
-                    number = (u_int)(number*25.4/100+0.5);
+                    number = (uint32_t)(number*25.4/100+0.5);
                     MCopyProtectedMemory( (void*)keycodetemp, &number, 4, PM_COPY_WRITE);
                     keycodetemp += 4;
                     MCopyProtectedMemory( &number, (void*)keycodetemp, 4, PM_COPY_READ);
-                    number = (u_int)(number*25.4/100+0.5);
+                    number = (uint32_t)(number*25.4/100+0.5);
                     MCopyProtectedMemory( (void*)keycodetemp, &number, 4, PM_COPY_WRITE);
                     keycodetemp += 4;
                     MCopyProtectedMemory( &number, (void*)keycodetemp, 4, PM_COPY_READ);
-                    number = (u_int)(number*25.4/100+0.5);
+                    number = (uint32_t)(number*25.4/100+0.5);
                     MCopyProtectedMemory( (void*)keycodetemp, &number, 4, PM_COPY_WRITE);
                     //以上为测DAC的三个值
                 }
@@ -3177,13 +3177,13 @@ int ParaMenu(int page)//出现第几页的参数菜单
                     if( old_unit == 0)
                     {
                         //新单位inch
-                        MSetSpeed( (u_int)(ChannelPara.Speed/0.254+0.5) ,C_SETMODE_SAVE);
-                        MSetThick( (u_int)(MGetThick()/0.254+0.5) );
-                        MSetDiameter( (u_int)(MGetDiameter()/0.254+0.5) );
+                        MSetSpeed( (uint32_t)(ChannelPara.Speed/0.254+0.5) ,C_SETMODE_SAVE);
+                        MSetThick( (uint32_t)(MGetThick()/0.254+0.5) );
+                        MSetDiameter( (uint32_t)(MGetDiameter()/0.254+0.5) );
                         MSetCrystal_l(ChannelPara.Crystal_l/25.4+0.5,C_SETMODE_SETSAVE);
                         MSetCrystal_w(ChannelPara.Crystal_w/25.4+0.5,C_SETMODE_SETSAVE);
-                        MSetForward((u_int)( MGetForward()/0.254+0.5),C_SETMODE_SAVE);
-                        MSetRange( (u_int)( MGetRange(1)/0.254+0.5 ),C_SETMODE_SAVE);
+                        MSetForward((uint32_t)( MGetForward()/0.254+0.5),C_SETMODE_SAVE);
+                        MSetRange( (uint32_t)( MGetRange(1)/0.254+0.5 ),C_SETMODE_SAVE);
 
                         stWeldPara.face = stWeldPara.face/0.254+0.5;
                         stWeldPara.thick1 = stWeldPara.thick1/0.254+0.5;
@@ -3200,16 +3200,16 @@ int ParaMenu(int page)//出现第几页的参数菜单
                     }
                     else
                     {
-                        MSetSpeed( (u_int)(ChannelPara.Speed*0.254+0.5) ,C_SETMODE_SAVE);
-                        MSetThick( (u_int)(MGetThick()*25.4/100+0.5) );
-                        MSetDiameter( (u_int)(MGetDiameter()*25.4/100+0.5) );
+                        MSetSpeed( (uint32_t)(ChannelPara.Speed*0.254+0.5) ,C_SETMODE_SAVE);
+                        MSetThick( (uint32_t)(MGetThick()*25.4/100+0.5) );
+                        MSetDiameter( (uint32_t)(MGetDiameter()*25.4/100+0.5) );
                         MSetCrystal_l((ChannelPara.Crystal_l)*25.4+0.5,C_SETMODE_SETSAVE);
                         if (ChannelPara.Crystal_w>0)
                         {
                             MSetCrystal_w((ChannelPara.Crystal_w)*25.4+0.5,C_SETMODE_SETSAVE);
                         }
-                        MSetForward((u_int)( MGetForward()*25.4/100+0.5),C_SETMODE_SAVE);
-                        MSetRange( (u_int)( MGetRange(1)*0.254+0.5 ),C_SETMODE_SAVE);						//////
+                        MSetForward((uint32_t)( MGetForward()*25.4/100+0.5),C_SETMODE_SAVE);
+                        MSetRange( (uint32_t)( MGetRange(1)*0.254+0.5 ),C_SETMODE_SAVE);						//////
 
                         stWeldPara.face = stWeldPara.face*0.254+0.5;
                         stWeldPara.thick1 = stWeldPara.thick1*0.254+0.5;
@@ -3269,11 +3269,11 @@ int ParaMenu(int page)//出现第几页的参数菜单
             switch (keycode)
             {
             case 1:		//标度
-                //	cpText = (u_short*)_ParaMenu_AB1 ;
+                //	cpText = (uint16_t*)_ParaMenu_AB1 ;
                 MPushWindow(xpos, ypos, xpos + (6+MGetLanguage())*C_CCHAR_HDOT+1, ypos + crow_height * 3+1) ;
                 EraseDrawRectangle(xpos, ypos, xpos + (6+MGetLanguage())*C_CCHAR_HDOT, ypos + crow_height * 3) ;
                 //	CEMenuOut(xpos+4,ypos+4 , cpText ,3,3,crow_height);	/*在指定位置根据每行字符数、行数、行高写菜单*/
-                TextOut(xpos+4,ypos+4 ,3,10,crow_height,(u_char*)_ParaMenu_AB1[MGetLanguage()][0],4);
+                TextOut(xpos+4,ypos+4 ,3,10,crow_height,(uint8_t*)_ParaMenu_AB1[MGetLanguage()][0],4);
                 while(1)
                 {
                     keycode = MAnyKeyReturn();
@@ -3415,12 +3415,12 @@ int ParaMenu(int page)//出现第几页的参数菜单
 					MSetDacMode(3,C_SETMODE_SAVE);//10559标准第三根线定量线B为0线
 					break;
 				}
-                //cpText = (u_short*)_ParaMenu_AC2 ;
+                //cpText = (uint16_t*)_ParaMenu_AC2 ;
                 if( MGetCurveNumber() > 3)ypos -= crow_height * ( MGetCurveNumber()-3 );
                 MPushWindow(xpos, ypos, xpos + (6+MGetLanguage())*C_CCHAR_HDOT+1, ypos + crow_height * ( MGetCurveNumber()+1 )+1 ) ;
                 EraseDrawRectangle(xpos, ypos, xpos + (6+MGetLanguage())*C_CCHAR_HDOT, ypos + crow_height * ( MGetCurveNumber()+1 )) ;
                 //CEMenuOut(xpos+4,ypos+4 , cpText, 4,MGetCurveNumber()+1,crow_height);	/*在指定位置根据每行字符数、行数、行高写菜单*/
-                TextOut(xpos+4,ypos+4 ,MGetCurveNumber()+1,10,crow_height,(u_char*)_ParaMenu_AC2[MGetLanguage()][0],4);
+                TextOut(xpos+4,ypos+4 ,MGetCurveNumber()+1,10,crow_height,(uint8_t*)_ParaMenu_AC2[MGetLanguage()][0],4);
                 while(1)
                 {
                     keycode = MAnyKeyReturn();
@@ -3436,12 +3436,12 @@ int ParaMenu(int page)//出现第几页的参数菜单
                 break;
             case 6:	//当量显示
                 //	if( MGetTestStatus(C_TEST_AVG) == 1)
-                //		cpText = (u_short*)_ParaMenu_AC3A ;
-                //	else cpText = (u_short*)_ParaMenu_AC3 ;
+                //		cpText = (uint16_t*)_ParaMenu_AC3A ;
+                //	else cpText = (uint16_t*)_ParaMenu_AC3 ;
                 MPushWindow(xpos, ypos, xpos + (5+MGetLanguage())*C_CCHAR_HDOT+1, ypos + crow_height * 2+1) ;
                 EraseDrawRectangle(xpos, ypos, xpos + (5+MGetLanguage())*C_CCHAR_HDOT, ypos + crow_height * 2) ;
                 //	CEMenuOut(xpos+4,ypos+4 , cpText ,3,2,crow_height);	/*在指定位置根据每行字符数、行数、行高写菜单*/
-                TextOut(xpos+4,ypos+4 ,2,8,crow_height,(u_char*)_ParaMenu_AC3A[MGetLanguage()][0],4);
+                TextOut(xpos+4,ypos+4 ,2,8,crow_height,(uint8_t*)_ParaMenu_AC3A[MGetLanguage()][0],4);
                 while(1)
                 {
                     keycode = MAnyKeyReturn();
@@ -3577,7 +3577,7 @@ int ParaMenu(int page)//出现第几页的参数菜单
                 }
                 MPushWindow(xpos, ypos, xpos + (5+MGetLanguage())*C_CCHAR_HDOT+1, ypos + crow_height * 2+1) ;
                 EraseDrawRectangle(xpos, ypos, xpos + (5+MGetLanguage())*C_CCHAR_HDOT, ypos + crow_height * 2) ;
-                TextOut(xpos+4,ypos+4 ,2,8,crow_height,(u_char*)_ParaMenu_AC1[MGetLanguage()][0],4);
+                TextOut(xpos+4,ypos+4 ,2,8,crow_height,(uint8_t*)_ParaMenu_AC1[MGetLanguage()][0],4);
                 while(1)
                 {
                     keycode = MAnyKeyReturn();
@@ -3618,7 +3618,7 @@ int ParaMenu(int page)//出现第几页的参数菜单
                 ypos -= crow_height * 1;
                 MPushWindow(xpos, ypos, xpos + (5+MGetLanguage())*C_CCHAR_HDOT+31, ypos + crow_height * 2+1) ;
                 EraseDrawRectangle(xpos, ypos, xpos + (5+MGetLanguage())*C_CCHAR_HDOT+30, ypos + crow_height * 2) ;
-                TextOut(xpos+4,ypos+4 ,2,10,crow_height,(u_char*)_ParaMenu_AC7[MGetLanguage()][0],4);
+                TextOut(xpos+4,ypos+4 ,2,10,crow_height,(uint8_t*)_ParaMenu_AC7[MGetLanguage()][0],4);
                 while(1)
                 {
                     keycode = MAnyKeyReturn();
@@ -3634,7 +3634,7 @@ int ParaMenu(int page)//出现第几页的参数菜单
                 break;
                 /*#else
                 			case 1://计量单位
-                				epText = (u_char*)_ParaMenu_CA1 ;
+                				epText = (uint8_t*)_ParaMenu_CA1 ;
                 				MPushWindow(xpos, ypos, xpos + 4*C_CCHAR_HDOT, ypos + 12 * 3) ;
                 				EraseDrawRectangle(xpos, ypos, xpos + 4*C_CCHAR_HDOT, ypos + 12 * 3) ;
                 				EMenuOut(xpos+4,ypos+8 , epText ,6,2,12);
@@ -3654,8 +3654,8 @@ int ParaMenu(int page)//出现第几页的参数菜单
                 				{
                 					if( old_unit1 == 0)
                 					{//新单位inch
-                						MSetThick( (u_int)(MGetThick()/0.254+0.5) );
-                						MSetDiameter( (u_int)(MGetDiameter()/0.254+0.5) );
+                						MSetThick( (uint32_t)(MGetThick()/0.254+0.5) );
+                						MSetDiameter( (uint32_t)(MGetDiameter()/0.254+0.5) );
 
                 						stWeldPara.face = stWeldPara.face/0.254+0.5;
                 						stWeldPara.thick1 = stWeldPara.thick1/0.254+0.5;
@@ -3671,8 +3671,8 @@ int ParaMenu(int page)//出现第几页的参数菜单
                 					}
                 					else
                 					{
-                						MSetThick( (u_int)(MGetThick()*25.4/100+0.5) );
-                						MSetDiameter( (u_int)(MGetDiameter()*25.4/100+0.5) );
+                						MSetThick( (uint32_t)(MGetThick()*25.4/100+0.5) );
+                						MSetDiameter( (uint32_t)(MGetDiameter()*25.4/100+0.5) );
 
                 						stWeldPara.face = stWeldPara.face*0.254+0.5;
                 						stWeldPara.thick1 = stWeldPara.thick1*0.254+0.5;
@@ -3713,11 +3713,11 @@ int ParaMenu(int page)//出现第几页的参数菜单
                 				break;*/
 #endif
             case 3:	//位置显示
-                //	cpText = (u_short*)_ParaMenu_AC6 ;
+                //	cpText = (uint16_t*)_ParaMenu_AC6 ;
                 MPushWindow(xpos, ypos, xpos + (5+MGetLanguage())*C_CCHAR_HDOT+1, ypos + crow_height * 2+1) ;
                 EraseDrawRectangle(xpos, ypos, xpos + (5+MGetLanguage())*C_CCHAR_HDOT, ypos + crow_height * 2) ;
                 //	CEMenuOut(xpos+4,ypos+4 , cpText ,3,2,crow_height);	/*在指定位置根据每行字符数、行数、行高写菜单*/
-                TextOut(xpos+4,ypos+4,2,8,crow_height,(u_char*)_ParaMenu_AC6[MGetLanguage()][0],4);
+                TextOut(xpos+4,ypos+4,2,8,crow_height,(uint8_t*)_ParaMenu_AC6[MGetLanguage()][0],4);
                 while(1)
                 {
                     keycode = MAnyKeyReturn();
@@ -3757,8 +3757,8 @@ int ParaMenu(int page)//出现第几页的参数菜单
                 if( MGetFunctionMode(C_CURVER_AMEND ) )break;
                 MPushWindow(xpos, ypos, xpos + (5+MGetLanguage()*3)*C_CCHAR_HDOT+1, ypos + crow_height * 2+1) ;
                 EraseDrawRectangle(xpos, ypos, xpos + (5+2*MGetLanguage())*C_CCHAR_HDOT, ypos + crow_height * 2) ;
-                TextOut(xpos+4,ypos+4,1,8+2*MGetLanguage(),crow_height,(u_char*)_ParaMenu_AC5[MGetLanguage()][0],4);
-                TextOut(xpos+4,ypos+4+crow_height,1,8+2*MGetLanguage(),crow_height,(u_char*)_ParaMenu_AC5[MGetLanguage()][1],4);
+                TextOut(xpos+4,ypos+4,1,8+2*MGetLanguage(),crow_height,(uint8_t*)_ParaMenu_AC5[MGetLanguage()][0],4);
+                TextOut(xpos+4,ypos+4+crow_height,1,8+2*MGetLanguage(),crow_height,(uint8_t*)_ParaMenu_AC5[MGetLanguage()][1],4);
                 while(1)
                 {
                     keycode = MAnyKeyReturn();
@@ -3773,11 +3773,11 @@ int ParaMenu(int page)//出现第几页的参数菜单
                 MPopWindow();
                 break;
             case 6:
-                //	cpText = (u_short*)_ParaMenu_AD8 ;
+                //	cpText = (uint16_t*)_ParaMenu_AD8 ;
                 MPushWindow(xpos, ypos, xpos + (4+MGetLanguage())*C_CCHAR_HDOT+2, ypos + crow_height * 2+2) ;
                 EraseDrawRectangle(xpos, ypos, xpos + (4+MGetLanguage())*C_CCHAR_HDOT, ypos + crow_height * 2) ;
                 //	CEMenuOut(xpos+4,ypos+4 , cpText ,2,2,crow_height);	/*在指定位置根据每行字符数、行数、行高写菜单*/
-                TextOut(xpos+4,ypos+4,2,6,crow_height,(u_char*)_ParaMenu_AD8[MGetLanguage()][0],4);
+                TextOut(xpos+4,ypos+4,2,6,crow_height,(uint8_t*)_ParaMenu_AD8[MGetLanguage()][0],4);
                 while(1)
                 {
                     keycode = MAnyKeyReturn();
@@ -3795,11 +3795,11 @@ int ParaMenu(int page)//出现第几页的参数菜单
 #if C_LIGHT == 1
 #if	C_DEVLIB == 1 || C_DEVLIB == 3 || C_DEVLIB == 24 ||C_DEVLIB == 23
                 ypos-=C_CCHAR_HDOT+30;
-                //	cpText = (u_short*)_ParaMenu_AC4 ;
+                //	cpText = (uint16_t*)_ParaMenu_AC4 ;
                 MPushWindow(xpos, ypos, xpos + (6+MGetLanguage())*C_CCHAR_HDOT+1, ypos + crow_height * 4+1) ;
                 EraseDrawRectangle(xpos, ypos, xpos + (6+MGetLanguage())*C_CCHAR_HDOT, ypos + crow_height * 4) ;
                 //	CEMenuOut(xpos+4,ypos+4 , cpText ,3,4,crow_height);	//在指定位置根据每行字符数、行数、行高写菜单
-                TextOut(xpos+4,ypos+4 ,4,10,crow_height,(u_char*)_ParaMenu_AC4[MGetLanguage()][0],4);
+                TextOut(xpos+4,ypos+4 ,4,10,crow_height,(uint8_t*)_ParaMenu_AC4[MGetLanguage()][0],4);
                 while(1)
                 {
                     keycode = MAnyKeyReturn();
@@ -3813,15 +3813,15 @@ int ParaMenu(int page)//出现第几页的参数菜单
                 }
                 MPopWindow();
 #else		//C_DEVLIB == 23		//两项，低亮，高亮
-                //	cpText = (u_short*)_ParaMenu_AC4 ;
+                //	cpText = (uint16_t*)_ParaMenu_AC4 ;
                 break;
                 MPushWindow(xpos, ypos, xpos + 6*C_CCHAR_HDOT, ypos + crow_height * 2) ;
                 EraseDrawRectangle(xpos, ypos, xpos + (6)*C_CCHAR_HDOT, ypos + crow_height * 2) ;
                 //	CEMenuOut(xpos+4,ypos+4 , cpText ,3,1,crow_height);	//在指定位置根据每行字符数、行数、行高写菜单
                 //	CEMenuOut(xpos+4,ypos+4+crow_height , cpText+3 ,1,1,crow_height);	//在指定位置根据每行字符数、行数、行高写菜单
                 //	CEMenuOut(xpos+4+16,ypos+4+crow_height , cpText+3*3+1 ,2,1,crow_height);	//在指定位置根据每行字符数、行数、行高写菜单
-                TextOut(xpos+4,ypos+4 ,1,10,crow_height,(u_char*)_ParaMenu_AC4[MGetLanguage()][0],4);
-                TextOut(xpos+4,ypos+4+crow_height ,1,10,crow_height,(u_char*)_ParaMenu_AC4[MGetLanguage()][4],4);
+                TextOut(xpos+4,ypos+4 ,1,10,crow_height,(uint8_t*)_ParaMenu_AC4[MGetLanguage()][0],4);
+                TextOut(xpos+4,ypos+4+crow_height ,1,10,crow_height,(uint8_t*)_ParaMenu_AC4[MGetLanguage()][4],4);
                 while(1)
                 {
                     keycode = MAnyKeyReturn();
@@ -3859,14 +3859,14 @@ int ParaMenu(int page)//出现第几页的参数菜单
             case 9:			//焊缝图示
                 if( MGetTestStatus(C_TEST_AVG) == 1)break;
 
-                //	cpText = (u_short*)_Weld_C1 ;
+                //	cpText = (uint16_t*)_Weld_C1 ;
                 ypos -= crow_height * 3+8+24*MGetLanguage();
                 MPushWindow(xpos, ypos, xpos + (5+MGetLanguage())*C_CCHAR_HDOT+11, ypos + crow_height * 4+1) ;
                 EraseDrawRectangle(xpos, ypos, xpos + (5+MGetLanguage())*C_CCHAR_HDOT+10, ypos + crow_height * 4) ;
                 //	CEMenuOut(xpos+4,ypos+4 , cpText ,3,4,crow_height);
                 for(i = 0; i < 4; i ++)
                 {
-                    TextOut(xpos+4,ypos+4+crow_height*i,1,8,16,(u_char*)_Weld_C1[MGetLanguage()][i],4);
+                    TextOut(xpos+4,ypos+4+crow_height*i,1,8,16,(uint8_t*)_Weld_C1[MGetLanguage()][i],4);
                 }
                 while(1)
                 {
@@ -3963,7 +3963,7 @@ int ParaMenu(int page)//出现第几页的参数菜单
                 MPushWindow(xpos, ypos, xpos + 4*C_CCHAR_HDOT+1, ypos + crow_height * 2) ;
                 EraseDrawRectangle(xpos, ypos, xpos + 4*C_CCHAR_HDOT, ypos + crow_height * 2) ;
                 //	CEMenuOut(xpos+4,ypos+4 , cpText ,2,2,crow_height);	/*在指定位置根据每行字符数、行数、行高写菜单*/
-                TextOut(xpos+4,ypos+4,2,5,crow_height,(u_char*)_ParaMenu_AD9[MGetLanguage()][0],4);
+                TextOut(xpos+4,ypos+4,2,5,crow_height,(uint8_t*)_ParaMenu_AD9[MGetLanguage()][0],4);
                 while(1)
                 {
                     keycode = MAnyKeyReturn();
@@ -3985,7 +3985,7 @@ int ParaMenu(int page)//出现第几页的参数菜单
             // case 2://是否存频谱
                 // MPushWindow(xpos, ypos, xpos + 4*C_CCHAR_HDOT+1, ypos + crow_height * 2) ;
                 // EraseDrawRectangle(xpos, ypos, xpos + 4*C_CCHAR_HDOT, ypos + crow_height * 2) ;
-                // TextOut(xpos+4,ypos+4,2,5,crow_height,(u_char*)_ParaMenu_AD9[MGetLanguage()][0],4);
+                // TextOut(xpos+4,ypos+4,2,5,crow_height,(uint8_t*)_ParaMenu_AD9[MGetLanguage()][0],4);
                 // while(1)
                 // {
                     // keycode = MAnyKeyReturn();
@@ -4006,7 +4006,7 @@ int ParaMenu(int page)//出现第几页的参数菜单
                 // break;
             case 2:
                 ypos -= 24;
-                //	cpText = (u_short*)_ParaProtect1 ;//4-6去掉
+                //	cpText = (uint16_t*)_ParaProtect1 ;//4-6去掉
                 MPushWindow(xpos, ypos, xpos+ (12+7*MGetLanguage())*C_CCHAR_HDOT+1, ypos + 6 * crow_height+1) ;
                 EraseDrawRectangle(xpos, ypos, xpos+ (12+7*MGetLanguage())*C_CCHAR_HDOT, ypos + 6 * crow_height) ;
                 //	CMenuOut(xpos + C_ECHAR_HDOT,ypos+4,cpText,6,5,crow_height);
@@ -4014,11 +4014,11 @@ int ParaMenu(int page)//出现第几页的参数菜单
                 int i = 0;
                 for (i=0; i<6; i++)
                 {
-                    TextOut(xpos+ C_ECHAR_HDOT,ypos+4+i*crow_height,1,12+9*MGetLanguage(),crow_height,(u_char*)_ParaProtect1[MGetLanguage()][i],4);
+                    TextOut(xpos+ C_ECHAR_HDOT,ypos+4+i*crow_height,1,12+9*MGetLanguage(),crow_height,(uint8_t*)_ParaProtect1[MGetLanguage()][i],4);
                 }
                 // if (MGetLanguage())
                 // {
-                    // TextOut(xpos+ C_ECHAR_HDOT,ypos+4+4*crow_height-8,1,12,8,(u_char*)_ParaProtect1[MGetLanguage()][3]+12,0);
+                    // TextOut(xpos+ C_ECHAR_HDOT,ypos+4+4*crow_height-8,1,12,8,(uint8_t*)_ParaProtect1[MGetLanguage()][3]+12,0);
                 // }
                 int ypos1;
 
@@ -4027,11 +4027,11 @@ int ParaMenu(int page)//出现第几页的参数菜单
                 for(i = 0; i < C_LOCK_ALL; i ++)
                 {
                     ypos1 = ypos + crow_height * (i +2);
-                    //	cpText = (u_short*)_ParaProtect2 + MGetParaLock(0,i) * 2 ;
+                    //	cpText = (uint16_t*)_ParaProtect2 + MGetParaLock(0,i) * 2 ;
                     //	CMenuOut(xpos + C_ECHAR_HDOT,ypos1,cpText,2,1,crow_height);
 
                     MEraseWindow(xpos+ C_ECHAR_HDOT-1,ypos1, xpos+ C_ECHAR_HDOT+8*C_ECHAR_HDOT,ypos1+C_ECHAR_VDOT) ;
-                    TextOut(xpos+ C_ECHAR_HDOT,ypos1,1,8,crow_height,(u_char*)_ParaProtect2[MGetLanguage()][MGetParaLock(0,i)],0);
+                    TextOut(xpos+ C_ECHAR_HDOT,ypos1,1,8,crow_height,(uint8_t*)_ParaProtect2[MGetLanguage()][MGetParaLock(0,i)],0);
 
                 }
 
@@ -4062,17 +4062,17 @@ int ParaMenu(int page)//出现第几页的参数菜单
                     for(i = 0; i < C_LOCK_ALL; i ++)
                     {
                         ypos1 = ypos + crow_height * (i +2);
-                        //	cpText = (u_short*)_ParaProtect2 + MGetParaLock(0,i) * 2 ;
+                        //	cpText = (uint16_t*)_ParaProtect2 + MGetParaLock(0,i) * 2 ;
                         //	CMenuOut(xpos + C_ECHAR_HDOT,ypos1,cpText,2,1,crow_height);
                         MEraseWindow(xpos+ C_ECHAR_HDOT-1,ypos1, xpos+ C_ECHAR_HDOT+8*C_ECHAR_HDOT,ypos1+C_ECHAR_VDOT) ;
-                        TextOut(xpos+ C_ECHAR_HDOT,ypos1,1,8,crow_height,(u_char*)_ParaProtect2[MGetLanguage()][MGetParaLock(0,i)],0);
+                        TextOut(xpos+ C_ECHAR_HDOT,ypos1,1,8,crow_height,(uint8_t*)_ParaProtect2[MGetLanguage()][MGetParaLock(0,i)],0);
                     }
                 }
                 while(1);
                 MPopWindow();
                 break;
             case 4://计量单位
-                epText = (u_char*)_ParaMenu_CA1 ;
+                epText = (uint8_t*)_ParaMenu_CA1 ;
                 MPushWindow(xpos, ypos, xpos + 4*C_CCHAR_HDOT+8*MGetLanguage(), ypos + erow_height * 3) ;
                 EraseDrawRectangle(xpos, ypos, xpos + 4*C_CCHAR_HDOT+8*MGetLanguage(), ypos + erow_height* 3) ;
                 EMenuOut(xpos+4,ypos+8 , epText ,6,2,erow_height);	/*在指定位置根据每行字符数、行数、行高写菜单*/
@@ -4093,8 +4093,8 @@ int ParaMenu(int page)//出现第几页的参数菜单
                     if( old_unit1 == 0)
                     {
                         //新单位inch
-                        MSetThick( (u_int)(MGetThick()/0.254+0.5) );
-                        MSetDiameter( (u_int)(MGetDiameter()/0.254+0.5) );
+                        MSetThick( (uint32_t)(MGetThick()/0.254+0.5) );
+                        MSetDiameter( (uint32_t)(MGetDiameter()/0.254+0.5) );
 
 //                        stWeldPara.face = stWeldPara.face/0.254+0.5;
                         stWeldPara.thick1 = stWeldPara.thick1/0.254+0.5;
@@ -4110,8 +4110,8 @@ int ParaMenu(int page)//出现第几页的参数菜单
                     }
                     else
                     {
-                        MSetThick( (u_int)(MGetThick()*25.4/100+0.5) );
-                        MSetDiameter( (u_int)(MGetDiameter()*25.4/100+0.5) );
+                        MSetThick( (uint32_t)(MGetThick()*25.4/100+0.5) );
+                        MSetDiameter( (uint32_t)(MGetDiameter()*25.4/100+0.5) );
 
 //                        stWeldPara.face = stWeldPara.face*0.254+0.5;
                         stWeldPara.thick1 = stWeldPara.thick1*0.254+0.5;
@@ -4235,12 +4235,12 @@ int ChannelMenu(void)
 	MCopyProtectedMemory(&UserInfo, (void*)offsets, sizeof(USER_INFO), PM_COPY_READ);
 	
 	float angle;
-	u_short angles;
+	uint16_t angles;
 	short pages = 1, page_maxs = 4, pagemaxs = 0;
 	short row_numbers = 10;
 	int numbers, deci_lens, number1s;
 
-    u_short char_len = 6,row_number = 10,crow_height = 48,erow_height =20;
+    uint16_t char_len = 6,row_number = 10,crow_height = 48,erow_height =20;
     int number,deci_len;//,sign;
     short xpos = 0,ypos = 0;
     //int menu_xpos = 0,menu_ypos = 0;
@@ -4249,14 +4249,14 @@ int ChannelMenu(void)
     int keycode;
     short page_max = 1, page = 1,pagemax=0;
     int row;
-    u_short* cpText = 0;
-    u_char* epText = 0;
-    u_char* epText1 = 0;
+    uint16_t* cpText = 0;
+    uint8_t* epText = 0;
+    uint8_t* epText1 = 0;
     int i,j,k;
     int stdflag=0;
     int testrange[3];
 
-    u_int elapsedtime1 = GetElapsedTime();// ,elapsedtime2;
+    uint32_t elapsedtime1 = GetElapsedTime();// ,elapsedtime2;
     MSetAcquisitionEnable(0,C_SETMODE_SETSAVE);
     MSetHardEchoShow(0,C_SETMODE_SETSAVE);
     ClearEnvelope();
@@ -4318,7 +4318,7 @@ int ChannelMenu(void)
 
         MSetColor(C_CR_MENU);
 
-        TextOut(C_ECHAR_HDOT,4,1,25,24,(u_char*)_ParaMenu_H1[MGetLanguage()][0],4);
+        TextOut(C_ECHAR_HDOT,4,1,25,24,(uint8_t*)_ParaMenu_H1[MGetLanguage()][0],4);
         Write_Number(C_ECHAR_HDOT + 12 * C_ECHAR_HDOT+4, 4+3*MGetLanguage(),page,1,0,0);
         if (MGetLanguage())
         {
@@ -4336,13 +4336,13 @@ int ChannelMenu(void)
             {
             case 1:
                 epText1 = (char *)_ChannelMenu_A1[MGetLanguage()][i];
-                epText =  (u_char*)_ChannelMenu_B1;
+                epText =  (uint8_t*)_ChannelMenu_B1;
                 row_number = row_number_page1;
                 para_ypos =  para_ypos_page1-8*MGetLanguage();
                 break;
             case 2:
                 epText1 =  (char *)_ChannelMenu_A2[MGetLanguage()][i];
-                epText =  (u_char*)_ChannelMenu_B2;
+                epText =  (uint8_t*)_ChannelMenu_B2;
                 row_number = row_number_page2;
                 para_ypos =  para_ypos_page2-8*MGetLanguage();
                 break;
@@ -4362,8 +4362,8 @@ int ChannelMenu(void)
         EraseDrawRectangle(26*C_ECHAR_HDOT, 380, 26*C_ECHAR_HDOT + (6+1*MGetLanguage())*C_CCHAR_HDOT, 380 + 2 * (C_CCHAR_VDOT+12)) ;
         //	CMenuOut(27*C_ECHAR_HDOT,190+4,_MenuPrompt_B1,5,2,24);	/*在指定位置根据每行字符数、行数、行高写菜单*/
 
-        TextOut(27*C_ECHAR_HDOT,380+4,1,10,24,(u_char*)_MenuPrompt_B1[MGetLanguage()][0],4);
-        TextOut(27*C_ECHAR_HDOT,380+4+36,1,10,24,(u_char*)_MenuPrompt_B1[MGetLanguage()][0]+10,4);
+        TextOut(27*C_ECHAR_HDOT,380+4,1,10,24,(uint8_t*)_MenuPrompt_B1[MGetLanguage()][0],4);
+        TextOut(27*C_ECHAR_HDOT,380+4+36,1,10,24,(uint8_t*)_MenuPrompt_B1[MGetLanguage()][0]+10,4);
 //        EMenuOut(27*C_ECHAR_HDOT,380+4,_TestMenu_Enter,1,1,C_ECHAR_VDOT);
         MSetColor(C_CR_PARA);
 
@@ -4376,7 +4376,7 @@ int ChannelMenu(void)
             {
                 xpos = para_xpos;
                 ypos = para_ypos + crow_height *row ;
-                epText = (u_char*)_STDMenu_AB1 + ( MGetStdMode()*C_STD_LEN+2 );
+                epText = (uint8_t*)_STDMenu_AB1 + ( MGetStdMode()*C_STD_LEN+2 );
                 EMenuOut(xpos,ypos , epText ,C_STD_LEN-2,1,crow_height);	/*在指定位置根据每行字符数、行数、行高写菜单*/
             }
 
@@ -4387,7 +4387,7 @@ int ChannelMenu(void)
             ypos = para_ypos + crow_height *row;
             epText = (char *)_ParaMenu_AB2[MGetLanguage()][MGetProbeMode()]+2;
             TextOut(xpos,ypos,1,11,16,epText,4);
-            //	cpText = (u_short*)_ParaMenu_AB2 + ( (MGetProbeMode()-0)*4+1 );
+            //	cpText = (uint16_t*)_ParaMenu_AB2 + ( (MGetProbeMode()-0)*4+1 );
             //	CEMenuOut(xpos,ypos , cpText ,3,1,crow_height);	/*在指定位置根据每行字符数、行数、行高写菜单*/
 
             //探头频率
@@ -4439,7 +4439,7 @@ int ChannelMenu(void)
                 ypos = para_ypos + crow_height *row + C_ECHAR_HDOT * 0;
                 epText = _ParaMenu_AD3[MGetLanguage()][MGetBandMode()]+2;
                 TextOut(xpos,ypos, 1, 4,erow_height, epText, 4);
-                //	epText = (u_char*)_ParaMenu_AD3 + ( MGetBandMode()*9+3 );
+                //	epText = (uint8_t*)_ParaMenu_AD3 + ( MGetBandMode()*9+3 );
                 //	EMenuOut(xpos,ypos+C_ECHAR_VDOT+1,epText,6,1,erow_height);	/*在指定位置根据每行字符数、行数、行高写菜单*/
             }
             //  2．  检波方式：全波\正半波\负半波\射频
@@ -4450,7 +4450,7 @@ int ChannelMenu(void)
                 ypos = para_ypos + crow_height *row + C_ECHAR_HDOT * 0;
                 epText = (char *)_ParaMenu_AD2[MGetLanguage()][MGetEchoMode()]+2;
                 TextOut(xpos,ypos+1,1,8,16,epText,4);
-                //	cpText = (u_short*)_ParaMenu_AD2 + ( MGetEchoMode()*6+1 );
+                //	cpText = (uint16_t*)_ParaMenu_AD2 + ( MGetEchoMode()*6+1 );
                 //	CEMenuOut(xpos,ypos+1,cpText,4,1,crow_height);	/*在指定位置根据每行字符数、行数、行高写菜单*/
             }
 
@@ -4462,7 +4462,7 @@ int ChannelMenu(void)
             {
                 xpos = para_xpos;
                 ypos = para_ypos + crow_height *row;
-                epText = (u_char*)_ParaMenu_AD4 + ( MGetDampMode()*10+3);
+                epText = (uint8_t*)_ParaMenu_AD4 + ( MGetDampMode()*10+3);
                 EMenuOut(xpos,ypos+1,epText,7,1,erow_height);	/*在指定位置根据每行字符数、行数、行高写菜单*/
             }
             //5．	发射电压：200V\400V
@@ -4471,7 +4471,7 @@ int ChannelMenu(void)
             {
                 xpos = para_xpos;
                 ypos = para_ypos + crow_height *row ;
-                //	epText = (u_char*)_ParaMenu_AD5 + ( MGetPulseMode()*10+3 );
+                //	epText = (uint8_t*)_ParaMenu_AD5 + ( MGetPulseMode()*10+3 );
                 //	EMenuOut(xpos,ypos+C_ECHAR_VDOT+1,epText,7,1,erow_height);	/*在指定位置根据每行字符数、行数、行高写菜单*/
                 epText = (char *)_ParaMenu_AD5[MGetLanguage()][MGetPulseMode()]+2;
                 TextOut(xpos,ypos,1,6,16,epText,4);
@@ -4480,14 +4480,14 @@ int ChannelMenu(void)
             row = 2;//重复频率
             if( row >= row_number)break;
             ypos = para_ypos + crow_height *row ;
-            //	epText = (u_char*)_ParaMenu_CD1 + ( (MGetRepeatRate()/100) - 1) * 8 + 2;
+            //	epText = (uint8_t*)_ParaMenu_CD1 + ( (MGetRepeatRate()/100) - 1) * 8 + 2;
             //	EMenuOut(xpos,ypos , epText ,6,1,crow_height);	 /*在指定位置根据每行字符数、行数、行高写菜单*/
             Write_Number(xpos,ypos,MGetRepeatRate(),4,0,0);
 
             row = 3;//降噪
             if( row >= row_number)break;
             ypos = para_ypos + crow_height *row ;
-            epText = (u_char*)_ParaMenu_CC1 + MGetDenoise() * 6 + 2;
+            epText = (uint8_t*)_ParaMenu_CC1 + MGetDenoise() * 6 + 2;
             EMenuOut(xpos,ypos , epText ,4,1,crow_height);	 /*在指定位置根据每行字符数、行数、行高写菜单*/
 
             row = 4;//脉冲宽度
@@ -4502,13 +4502,13 @@ int ChannelMenu(void)
                 epText = (char *)_MainMenu_C1A3[MGetLanguage()][MGetPulseWidth()];
                 TextOut(xpos,ypos,1,8,16,epText,4);
             }
-            //	cpText = (u_short*)_ParaMenu_CE1 +  MGetPulseWidth() * 2 + 1;
+            //	cpText = (uint16_t*)_ParaMenu_CE1 +  MGetPulseWidth() * 2 + 1;
             //	CEMenuOut(xpos,ypos , cpText ,1,1,crow_height);	 /*在指定位置根据每行字符数、行数、行高写菜单*/
 			
 			row = 5;//用户参数
 			if( row >= row_number)break;
 			ypos = para_ypos + crow_height *row ;
-			TextOut(xpos,ypos,1,4,crow_height,(u_char*)_ParaMenu_AD8[MGetLanguage()][UserInfo.pzPurchaser[0]]+2,4);
+			TextOut(xpos,ypos,1,4,crow_height,(uint8_t*)_ParaMenu_AD8[MGetLanguage()][UserInfo.pzPurchaser[0]]+2,4);
             
 			break;
         }////////////
@@ -5400,10 +5400,10 @@ int ChannelMenu(void)
                 EraseDrawRectangle(xpos, ypos, xpos+ 11*C_ECHAR_HDOT, ypos + 4 * crow_height+5) ;
                 //	EMenuOut(xpos + C_ECHAR_HDOT,ypos+4,_ParaMenu_AD3,9,3,15);	/*在指定位置根据每行字符数、行数、行高写菜单*/
 
-                TextOut(xpos + 4,ypos+4, 1, 10,crow_height, (u_char*)_ParaMenu_AD3[MGetLanguage()][0], 4);
-                TextOut(xpos + 4,ypos+4+crow_height, 1, 10,crow_height, (u_char*)_ParaMenu_AD3[MGetLanguage()][1], 4);
-                TextOut(xpos + 4,ypos+4+crow_height*2, 1, 10,crow_height, (u_char*)_ParaMenu_AD3[MGetLanguage()][2], 4);
-                TextOut(xpos + 4,ypos+4+crow_height*3, 1, 10,crow_height, (u_char*)_ParaMenu_AD3[MGetLanguage()][3], 4);
+                TextOut(xpos + 4,ypos+4, 1, 10,crow_height, (uint8_t*)_ParaMenu_AD3[MGetLanguage()][0], 4);
+                TextOut(xpos + 4,ypos+4+crow_height, 1, 10,crow_height, (uint8_t*)_ParaMenu_AD3[MGetLanguage()][1], 4);
+                TextOut(xpos + 4,ypos+4+crow_height*2, 1, 10,crow_height, (uint8_t*)_ParaMenu_AD3[MGetLanguage()][2], 4);
+                TextOut(xpos + 4,ypos+4+crow_height*3, 1, 10,crow_height, (uint8_t*)_ParaMenu_AD3[MGetLanguage()][3], 4);
 
                 while(1)
                 {
@@ -5420,7 +5420,7 @@ int ChannelMenu(void)
                 break;
             case 9:
                 if( MGetParaLock(1,C_LOCK_PROBE) == 1)break;
-                //cpText = (u_short*)_ParaMenu_AD2 ;
+                //cpText = (uint16_t*)_ParaMenu_AD2 ;
                 ypos -= 3 * crow_height;
 #if C_DEVLIB != 3
                 deci_len = 4;
@@ -5538,7 +5538,7 @@ int ChannelMenu(void)
                 break;
             case 4://降噪
                 if( MGetParaLock(1,C_LOCK_PROBE) == 1)break;
-                epText = (u_char*)_ParaMenu_CC1 ;
+                epText = (uint8_t*)_ParaMenu_CC1 ;
                 MPushWindow(xpos, ypos, xpos + 5*C_CCHAR_HDOT, ypos + erow_height * 6) ;
                 EraseDrawRectangle(xpos, ypos, xpos + 5*C_CCHAR_HDOT, ypos + erow_height * 6) ;
                 EMenuOut(xpos+4,ypos+8 , epText ,6,5,erow_height);	/*在指定位置根据每行字符数、行数、行高写菜单*/
@@ -5588,7 +5588,7 @@ int ChannelMenu(void)
 			    TextOut(C_ECHAR_HDOT,para_ypos+crow_height*5,1,22,crow_height, (char *)_ChannelMenu_A2[MGetLanguage()][5],0);
 				MPushWindow(xpos, ypos, xpos + (4+MGetLanguage())*C_CCHAR_HDOT+2, ypos + crow_height * 2+2);
 				EraseDrawRectangle(xpos, ypos, xpos + (4+MGetLanguage())*C_CCHAR_HDOT, ypos + crow_height * 2);
-				TextOut(xpos+4,ypos+4,2,6,crow_height,(u_char*)_ParaMenu_AD8[MGetLanguage()][0],4);
+				TextOut(xpos+4,ypos+4,2,6,crow_height,(uint8_t*)_ParaMenu_AD8[MGetLanguage()][0],4);
                 if(UserInfo.pzPurchaser[0]==0)
                     InvertWords(xpos+4,270,1);
                 else
@@ -5605,7 +5605,7 @@ int ChannelMenu(void)
 							MFclearScreen();
 							MSetColor(C_CR_MENU);
 
-							TextOut(C_ECHAR_HDOT,4,1,25,24,(u_char*)_ParaMenu_H1[MGetLanguage()][0],4);
+							TextOut(C_ECHAR_HDOT,4,1,25,24,(uint8_t*)_ParaMenu_H1[MGetLanguage()][0],4);
 							Write_Number(C_ECHAR_HDOT + 12 * C_ECHAR_HDOT+4, 4+3*MGetLanguage(),pages,1,0,0);
 
 							if (MGetLanguage())
@@ -5648,8 +5648,8 @@ int ChannelMenu(void)
 							if (pages==1)
 							{
 						        EraseDrawRectangle(26*C_ECHAR_HDOT, 380, 26*C_ECHAR_HDOT + (6+1*MGetLanguage())*C_CCHAR_HDOT, 380 + 2 * (C_CCHAR_VDOT+12));
-						        TextOut(27*C_ECHAR_HDOT,380+4,1,10,24,(u_char*)_MenuPrompt_B1[MGetLanguage()][0],4);
-						        TextOut(27*C_ECHAR_HDOT,380+4+36,1,10,24,(u_char*)_MenuPrompt_B1[MGetLanguage()][0]+10,4);
+						        TextOut(27*C_ECHAR_HDOT,380+4,1,10,24,(uint8_t*)_MenuPrompt_B1[MGetLanguage()][0],4);
+						        TextOut(27*C_ECHAR_HDOT,380+4+36,1,10,24,(uint8_t*)_MenuPrompt_B1[MGetLanguage()][0]+10,4);
 							}
 
 							MSetColor(C_CR_PARA);
@@ -5661,7 +5661,7 @@ int ChannelMenu(void)
 					            row = 0;
 								xpos = para_xpos;
 								ypos = para_ypos + crow_height *row;
-								epText = (u_char*)_STDMenu_AB1 + (UserInfo.pzPurchaser[1]*C_STD_LEN+2);
+								epText = (uint8_t*)_STDMenu_AB1 + (UserInfo.pzPurchaser[1]*C_STD_LEN+2);
 								EMenuOut(xpos,ypos , epText ,C_STD_LEN-2,1,crow_height);
 
 								//发射电压
@@ -5716,13 +5716,13 @@ int ChannelMenu(void)
 					            row = 0;
 								xpos = para_xpos;
 								ypos = para_ypos + crow_height *row;
-								TextOut(xpos+300,ypos,1,3,crow_height,(u_char*)_ParaMenu_AD9[MGetLanguage()][UserInfo.pzSerial[0]]+2,4);
+								TextOut(xpos+300,ypos,1,3,crow_height,(uint8_t*)_ParaMenu_AD9[MGetLanguage()][UserInfo.pzSerial[0]]+2,4);
 								
 					            //调试零点、角度时，回波包络自动开启
 					            row = 1;
 								xpos = para_xpos;
 								ypos = para_ypos + crow_height *row;
-								TextOut(xpos+300,ypos,1,3,crow_height,(u_char*)_ParaMenu_AD9[MGetLanguage()][UserInfo.pzSerial[1]]+2,4);
+								TextOut(xpos+300,ypos,1,3,crow_height,(uint8_t*)_ParaMenu_AD9[MGetLanguage()][UserInfo.pzSerial[1]]+2,4);
 								
 								//斜探头测零点一次回波默认
 					            row = 2;
@@ -5814,7 +5814,7 @@ int ChannelMenu(void)
 								row = 6;
 								xpos = para_xpos;
 								ypos = para_ypos + crow_height *row;
-								TextOut(xpos+130,ypos,1,3,crow_height,(u_char*)_ParaMenu_AD9[MGetLanguage()][UserInfo.pzGovernor[0]]+2,4);
+								TextOut(xpos+130,ypos,1,3,crow_height,(uint8_t*)_ParaMenu_AD9[MGetLanguage()][UserInfo.pzGovernor[0]]+2,4);
                                 
                                 break;
 							case 4:
@@ -6128,7 +6128,7 @@ int ChannelMenu(void)
 								{
 									case 1:
 										EraseDrawRectangle(xpos+300, ypos, xpos + 4*C_CCHAR_HDOT+300, ypos + crow_height * 2);
-										TextOut(xpos+304,ypos+4,2,5,crow_height,(u_char*)_ParaMenu_AD9[MGetLanguage()][0],4);
+										TextOut(xpos+304,ypos+4,2,5,crow_height,(uint8_t*)_ParaMenu_AD9[MGetLanguage()][0],4);
 										while(1)
 										{
 											keycode = MAnyKeyReturn();
@@ -6145,7 +6145,7 @@ int ChannelMenu(void)
 										break;
 									case 2:
 										EraseDrawRectangle(xpos+300, ypos, xpos + 4*C_CCHAR_HDOT+300, ypos + crow_height * 2);
-										TextOut(xpos+304,ypos+4,2,5,crow_height,(u_char*)_ParaMenu_AD9[MGetLanguage()][0],4);
+										TextOut(xpos+304,ypos+4,2,5,crow_height,(uint8_t*)_ParaMenu_AD9[MGetLanguage()][0],4);
 										while(1)
 										{
 											keycode = MAnyKeyReturn();
@@ -6317,7 +6317,7 @@ int ChannelMenu(void)
         								break;
                                     case 7:
 										EraseDrawRectangle(xpos+130, ypos, xpos + 4*C_CCHAR_HDOT+130, ypos + crow_height * 2);
-										TextOut(xpos+134,ypos+4,2,5,crow_height,(u_char*)_ParaMenu_AD9[MGetLanguage()][0],4);
+										TextOut(xpos+134,ypos+4,2,5,crow_height,(uint8_t*)_ParaMenu_AD9[MGetLanguage()][0],4);
 										while(1)
 										{
 											keycode = MAnyKeyReturn();
@@ -6563,7 +6563,7 @@ int ChannelMenu(void)
 
 int OptionMenu(int page)//出现第几页的参数菜单
 {
-    u_int char_len = 6,row_number = 9,crow_height = 48,erow_height =30;
+    uint32_t char_len = 6,row_number = 9,crow_height = 48,erow_height =30;
     int number,deci_len;//,sign;
     int xpos,ypos;
     //int menu_xpos = 0,menu_ypos = 0;
@@ -6572,10 +6572,10 @@ int OptionMenu(int page)//出现第几页的参数菜单
     int keycode;
     int page_max = 2;
     int row;
-    u_short* cpText = 0;
-    u_char* epText = 0;
+    uint16_t* cpText = 0;
+    uint8_t* epText = 0;
     int i;
-    u_int elapsedtime1 = GetElapsedTime() ;//,elapsedtime2;
+    uint32_t elapsedtime1 = GetElapsedTime() ;//,elapsedtime2;
 
     if( page < 1)page = 1;
     else if(page > page_max )page = page_max;
@@ -6594,17 +6594,17 @@ int OptionMenu(int page)//出现第几页的参数菜单
         switch(page)
         {
         case 1:
-            cpText =  (u_short*)_OptionMenu_B1;
-            epText =  (u_char*)_OptionMenu_C1;
+            cpText =  (uint16_t*)_OptionMenu_B1;
+            epText =  (uint8_t*)_OptionMenu_C1;
             break;
         case 2:
-            cpText =  (u_short*)_ParaMenu_A3;
-            epText =  (u_char*)_ParaMenu_B3;
+            cpText =  (uint16_t*)_ParaMenu_A3;
+            epText =  (uint8_t*)_ParaMenu_B3;
             break;
         }
 
         MSetColor(C_CR_MENU);
-        TextOut(C_ECHAR_HDOT,4,1,25,16,(u_char*)_ParaMenu_H1[MGetLanguage()][0],4);
+        TextOut(C_ECHAR_HDOT,4,1,25,16,(uint8_t*)_ParaMenu_H1[MGetLanguage()][0],4);
         Write_Number(C_ECHAR_HDOT + 12 * C_ECHAR_HDOT+4,4+3*MGetLanguage(),page,1,0,0);
         if (MGetLanguage())
         {
@@ -6620,8 +6620,8 @@ int OptionMenu(int page)//出现第几页的参数菜单
         EraseDrawRectangle(26*C_ECHAR_HDOT, 380, 26*C_ECHAR_HDOT + (5+1)*C_CCHAR_HDOT, 380 + 2 * (C_CCHAR_VDOT+12)) ;
 //		CMenuOut(27*C_ECHAR_HDOT,190+4,_MenuPrompt_B1,5,2,24);	/*在指定位置根据每行字符数、行数、行高写菜单*/
 
-        TextOut(27*C_ECHAR_HDOT,380+4,1,10,24,(u_char*)_MenuPrompt_B1[MGetLanguage()][0],4);
-        TextOut(27*C_ECHAR_HDOT,380+4+36,1,10,24,(u_char*)_MenuPrompt_B1[MGetLanguage()][0]+10,4);
+        TextOut(27*C_ECHAR_HDOT,380+4,1,10,24,(uint8_t*)_MenuPrompt_B1[MGetLanguage()][0],4);
+        TextOut(27*C_ECHAR_HDOT,380+4+36,1,10,24,(uint8_t*)_MenuPrompt_B1[MGetLanguage()][0]+10,4);
 //        EMenuOut(27*C_ECHAR_HDOT,380+4,_TestMenu_Enter,1,1,C_ECHAR_VDOT);
         MSetColor(C_CR_PARA);
         switch(page)
@@ -6631,9 +6631,9 @@ int OptionMenu(int page)//出现第几页的参数菜单
             row = 0;
             xpos = para_xpos;
             ypos = para_ypos + crow_height *row;
-            //	cpText = (u_short*)_ParaMenu_AB1 + (MGetScaleMode()-0) * 3 + 1;
+            //	cpText = (uint16_t*)_ParaMenu_AB1 + (MGetScaleMode()-0) * 3 + 1;
             //	CEMenuOut(xpos,ypos , cpText ,2,1,crow_height);	/*在指定位置根据每行字符数、行数、行高写菜单*/
-            TextOut(xpos,ypos ,1,10,crow_height,(u_char*)_ParaMenu_AB1[MGetLanguage()][MGetScaleMode()]+2,4);
+            TextOut(xpos,ypos ,1,10,crow_height,(uint8_t*)_ParaMenu_AB1[MGetLanguage()][MGetScaleMode()]+2,4);
 
             //表面补偿
             row = 1;
@@ -6649,19 +6649,19 @@ int OptionMenu(int page)//出现第几页的参数菜单
             row = 2;//屏幕亮度
             xpos = para_xpos;
             ypos = para_ypos + crow_height *row + C_ECHAR_HDOT * 0;
-            TextOut(xpos,ypos ,1,8,crow_height,(u_char*)_ParaMenu_AC4[MGetLanguage()][MGetScreenBrightness()]+2,4);
+            TextOut(xpos,ypos ,1,8,crow_height,(uint8_t*)_ParaMenu_AC4[MGetLanguage()][MGetScreenBrightness()]+2,4);
 #endif
             //6．打印机
             row = 3;
             ypos = para_ypos + crow_height *row + C_ECHAR_HDOT;
-            epText = (u_char*)_ParaMenu_AB3 + ( (MGetPrinterMode()-0)*15+2 );
+            epText = (uint8_t*)_ParaMenu_AB3 + ( (MGetPrinterMode()-0)*15+2 );
             EMenuOut(xpos,ypos , epText ,13,1,erow_height);	/*在指定位置根据每行字符数、行数、行高写菜单*/
 
             //3．	当量标准：母线\判废\定量\评定
             row = 4;
             xpos = para_xpos;
             ypos = para_ypos + crow_height *row + C_ECHAR_HDOT * 0;
-            TextOut(xpos,ypos ,1,8,crow_height,(u_char*)_ParaMenu_AC2[MGetLanguage()][MGetDacMode()]+2,4);
+            TextOut(xpos,ypos ,1,8,crow_height,(uint8_t*)_ParaMenu_AC2[MGetLanguage()][MGetDacMode()]+2,4);
             //4．	当量显示：dB值\孔径
             //2．	检波方式：全波\正半波\负半波\射频
             row = 5;
@@ -6669,14 +6669,14 @@ int OptionMenu(int page)//出现第几页的参数菜单
             ypos = para_ypos + crow_height *row + C_ECHAR_HDOT * 0;
             epText = (char *)_ParaMenu_AD2[MGetLanguage()][MGetEchoMode()]+2;
             TextOut(xpos,ypos+1,1,8,16,epText,4);
-            //	cpText = (u_short*)_ParaMenu_AD2 + ( MGetEchoMode()*6+1 );
+            //	cpText = (uint16_t*)_ParaMenu_AD2 + ( MGetEchoMode()*6+1 );
             //	CEMenuOut(xpos,ypos+1,cpText,4,1,crow_height);	/*在指定位置根据每行字符数、行数、行高写菜单*/
 
             //3．	频带宽度：2.5\5.0\10\wide
             row = 6;
             xpos = para_xpos;
             ypos = para_ypos + crow_height *row + C_ECHAR_HDOT * 0;
-            //	epText = (u_char*)_ParaMenu_AD3 + ( MGetBandMode()*9+3 );
+            //	epText = (uint8_t*)_ParaMenu_AD3 + ( MGetBandMode()*9+3 );
             //	EMenuOut(xpos,ypos+C_ECHAR_VDOT+1,epText,4,1,erow_height);	/*在指定位置根据每行字符数、行数、行高写菜单*/
 
             epText = _ParaMenu_AD3[MGetLanguage()][MGetBandMode()]+2;
@@ -6685,14 +6685,14 @@ int OptionMenu(int page)//出现第几页的参数菜单
             row = 7;
             xpos = para_xpos;
             ypos = para_ypos + crow_height *row + C_ECHAR_HDOT * 0;
-            epText = (u_char*)_ParaMenu_AD4 + ( MGetDampMode()*10+3 );
+            epText = (uint8_t*)_ParaMenu_AD4 + ( MGetDampMode()*10+3 );
             EMenuOut(xpos,ypos+C_ECHAR_VDOT+1,epText,7,1,erow_height);	/*在指定位置根据每行字符数、行数、行高写菜单*/
 
             //5．	发射电压：200V\400V
             row = 8;
             xpos = para_xpos;
             ypos = para_ypos + crow_height *row + C_ECHAR_HDOT * 0;
-            //	epText = (u_char*)_ParaMenu_AD5 + ( MGetPulseMode()*10+3 );
+            //	epText = (uint8_t*)_ParaMenu_AD5 + ( MGetPulseMode()*10+3 );
             //	EMenuOut(xpos,ypos+C_ECHAR_VDOT+1,epText,7,1,erow_height);	/*在指定位置根据每行字符数、行数、行高写菜单*/
             epText = (char *)_ParaMenu_AD5[MGetLanguage()][MGetPulseMode()]+2;
             TextOut(xpos,ypos,1,6,16,epText,4);
@@ -6703,9 +6703,9 @@ int OptionMenu(int page)//出现第几页的参数菜单
             row = 0;
             xpos = para_xpos;
             ypos = para_ypos + crow_height *row + C_ECHAR_HDOT * 0;
-            //	cpText = (u_short*)_ParaMenu_AC1 + MGetSaveMode() * 3 + 1;
+            //	cpText = (uint16_t*)_ParaMenu_AC1 + MGetSaveMode() * 3 + 1;
             //	CEMenuOut(xpos,ypos , cpText ,2,1,crow_height);	/*在指定位置根据每行字符数、行数、行高写菜单*/
-            TextOut(xpos,ypos ,1,6,crow_height,(u_char*)_ParaMenu_AC1[MGetLanguage()][MGetSaveMode()]+2,4);
+            TextOut(xpos,ypos ,1,6,crow_height,(uint8_t*)_ParaMenu_AC1[MGetLanguage()][MGetSaveMode()]+2,4);
 
             //2．	记录间隔：10sec-120sec	;如为单幅则此参量为0，选连续时自动设为30sec
             row = 1;
@@ -6717,26 +6717,26 @@ int OptionMenu(int page)//出现第几页的参数菜单
             row = 2;//	B门用途：失波\进波
             xpos = para_xpos;
             ypos = para_ypos + crow_height *row + C_ECHAR_HDOT * 0;
-            TextOut(xpos,ypos,1,6+2*MGetLanguage(),crow_height,(u_char*)_ParaMenu_AC5[MGetLanguage()][MGetBGateMode()]+2,4);
+            TextOut(xpos,ypos,1,6+2*MGetLanguage(),crow_height,(uint8_t*)_ParaMenu_AC5[MGetLanguage()][MGetBGateMode()]+2,4);
 
             row = 3;//按键声音开关
             xpos = para_xpos;
             ypos = para_ypos + crow_height *row + C_ECHAR_HDOT * 0;
-            //	cpText = (u_short*)_ParaMenu_AD8 + MGetSoundAlarm(0) * 2 + 1;
+            //	cpText = (uint16_t*)_ParaMenu_AD8 + MGetSoundAlarm(0) * 2 + 1;
             //CEMenuOut(xpos,ypos , cpText ,1,1,crow_height);	 /*在指定位置根据每行字符数、行数、行高写菜单*/
-            TextOut(xpos,ypos,1,4,crow_height,(u_char*)_ParaMenu_AD8[MGetLanguage()][MGetSaveFrequency()]+2,4);
+            TextOut(xpos,ypos,1,4,crow_height,(uint8_t*)_ParaMenu_AD8[MGetLanguage()][MGetSaveFrequency()]+2,4);
 
             //6．	参量保护：全部\部分
             row = 4;
             xpos = para_xpos;
             ypos = para_ypos + crow_height *row + C_ECHAR_HDOT * 0;
-            u_short paratemp=0;
+            uint16_t paratemp=0;
             int j;
             for(j = 0; j < C_LOCK_ALL; j++)
             {
                 if(MGetParaLock(0,j) == 1)paratemp++;
             }
-            epText = (u_char *)_ParaMenu_AD6[MGetLanguage()][paratemp];
+            epText = (uint8_t *)_ParaMenu_AD6[MGetLanguage()][paratemp];
             TextOut(xpos,ypos,1,4,crow_height,epText,4);
 
             //7．
@@ -6747,9 +6747,9 @@ int OptionMenu(int page)//出现第几页的参数菜单
 
             row = 6;//存储频谱
             ypos = para_ypos + crow_height *row + C_ECHAR_HDOT * 0;
-            //	cpText = (u_short*)_ParaMenu_AD9 + MGetSaveFrequency() * 2 + 1;
+            //	cpText = (uint16_t*)_ParaMenu_AD9 + MGetSaveFrequency() * 2 + 1;
             //	CEMenuOut(xpos,ypos , cpText ,1,1,crow_height);	 /*在指定位置根据每行字符数、行数、行高写菜单*/
-            TextOut(xpos,ypos,1,4,crow_height,(u_char*)_ParaMenu_AD9[MGetLanguage()][MGetSaveFrequency()]+2,4);
+            TextOut(xpos,ypos,1,4,crow_height,(uint8_t*)_ParaMenu_AD9[MGetLanguage()][MGetSaveFrequency()]+2,4);
 
             row = 7;//工件厚度
             ypos = para_ypos + crow_height *row + C_ECHAR_HDOT * 1;
@@ -6838,11 +6838,11 @@ int OptionMenu(int page)//出现第几页的参数菜单
             switch (keycode)
             {
             case 1:		//标度
-                //	cpText = (u_short*)_ParaMenu_AB1 ;
+                //	cpText = (uint16_t*)_ParaMenu_AB1 ;
                 MPushWindow(xpos, ypos, xpos + (4)*C_CCHAR_HDOT, ypos + crow_height * 3) ;
                 EraseDrawRectangle(xpos, ypos, xpos + (4)*C_CCHAR_HDOT, ypos + crow_height * 3) ;
                 //	CEMenuOut(xpos+4,ypos+4 , cpText ,3,3,crow_height);	/*在指定位置根据每行字符数、行数、行高写菜单*/
-                TextOut(xpos+4,ypos+4 ,3,10,crow_height,(u_char*)_ParaMenu_AB1[MGetLanguage()][0],4);
+                TextOut(xpos+4,ypos+4 ,3,10,crow_height,(uint8_t*)_ParaMenu_AB1[MGetLanguage()][0],4);
                 while(1)
                 {
                     keycode = MAnyKeyReturn();
@@ -6879,7 +6879,7 @@ int OptionMenu(int page)//出现第几页的参数菜单
                 MPushWindow(xpos, ypos, xpos + 6*C_CCHAR_HDOT, ypos + crow_height * 4) ;
                 EraseDrawRectangle(xpos, ypos, xpos + (6)*C_CCHAR_HDOT, ypos + crow_height * 4) ;
                 //	CEMenuOut(xpos+4,ypos+4 , cpText ,3,4,crow_height);	//在指定位置根据每行字符数、行数、行高写菜单
-                TextOut(xpos+4,ypos+4 ,4,10,crow_height,(u_char*)_ParaMenu_AC4[MGetLanguage()][0],4);
+                TextOut(xpos+4,ypos+4 ,4,10,crow_height,(uint8_t*)_ParaMenu_AC4[MGetLanguage()][0],4);
 
                 while(1)
                 {
@@ -6932,7 +6932,7 @@ int OptionMenu(int page)//出现第几页的参数菜单
 #endif
                 break;
             case 4://打印机
-                epText = (u_char*)_ParaMenu_AB3;
+                epText = (uint8_t*)_ParaMenu_AB3;
                 //ypos -= erow_height * 4 ;
                 MPushWindow(xpos, ypos, xpos + 8*C_CCHAR_HDOT, ypos + erow_height * 4) ;
                 EraseDrawRectangle(xpos, ypos, xpos + 8*C_CCHAR_HDOT, ypos + erow_height * 4) ;
@@ -6952,12 +6952,12 @@ int OptionMenu(int page)//出现第几页的参数菜单
 
                 break;
             case 5:	//当量标准
-                //	cpText = (u_short*)_ParaMenu_AC2 ;
+                //	cpText = (uint16_t*)_ParaMenu_AC2 ;
                 if( MGetCurveNumber() > 3)ypos -= crow_height * ( MGetCurveNumber()-3 );
                 MPushWindow(xpos, ypos, xpos + 6*C_CCHAR_HDOT, ypos + crow_height * ( MGetCurveNumber()+1 ) ) ;
                 EraseDrawRectangle(xpos, ypos, xpos + (6)*C_CCHAR_HDOT, ypos + crow_height * ( MGetCurveNumber()+1 )) ;
                 //	CEMenuOut(xpos+4,ypos+4 , cpText, 4,MGetCurveNumber()+1,crow_height);	/*在指定位置根据每行字符数、行数、行高写菜单*/
-                TextOut(xpos+4,ypos+4 ,MGetCurveNumber()+1,10,crow_height,(u_char*)_ParaMenu_AC2[MGetLanguage()][0],4);
+                TextOut(xpos+4,ypos+4 ,MGetCurveNumber()+1,10,crow_height,(uint8_t*)_ParaMenu_AC2[MGetLanguage()][0],4);
                 while(1)
                 {
                     keycode = MAnyKeyReturn();
@@ -6972,7 +6972,7 @@ int OptionMenu(int page)//出现第几页的参数菜单
                 MPopWindow();
                 break;
             case 6:
-                //	cpText = (u_short*)_ParaMenu_AD2 ;
+                //	cpText = (uint16_t*)_ParaMenu_AD2 ;
                 MPushWindow(xpos, ypos, xpos+ 6*C_CCHAR_HDOT, ypos + 4 * crow_height) ;
                 EraseDrawRectangle(xpos, ypos, xpos+ 6*C_CCHAR_HDOT, ypos + 4 * crow_height) ;
                 //	CEMenuOut(xpos + C_ECHAR_HDOT,ypos+4,cpText,5,4,crow_height);	/*在指定位置根据每行字符数、行数、行高写菜单*/
@@ -6999,9 +6999,9 @@ int OptionMenu(int page)//出现第几页的参数菜单
                 EraseDrawRectangle(xpos, ypos, xpos+ 11*C_ECHAR_HDOT, ypos + 3 * crow_height+5) ;
                 //	EMenuOut(xpos + C_ECHAR_HDOT,ypos+4,_ParaMenu_AD3,9,3,15);	/*在指定位置根据每行字符数、行数、行高写菜单*/
 
-                TextOut(xpos + C_ECHAR_HDOT,ypos+4, 1, 10,crow_height, (u_char*)_ParaMenu_AD3[MGetLanguage()][0], 4);
-                TextOut(xpos + C_ECHAR_HDOT,ypos+4+crow_height, 1, 10,crow_height, (u_char*)_ParaMenu_AD3[MGetLanguage()][1], 4);
-                TextOut(xpos + C_ECHAR_HDOT,ypos+4+crow_height*2, 1, 10,crow_height, (u_char*)_ParaMenu_AD3[MGetLanguage()][2], 4);
+                TextOut(xpos + C_ECHAR_HDOT,ypos+4, 1, 10,crow_height, (uint8_t*)_ParaMenu_AD3[MGetLanguage()][0], 4);
+                TextOut(xpos + C_ECHAR_HDOT,ypos+4+crow_height, 1, 10,crow_height, (uint8_t*)_ParaMenu_AD3[MGetLanguage()][1], 4);
+                TextOut(xpos + C_ECHAR_HDOT,ypos+4+crow_height*2, 1, 10,crow_height, (uint8_t*)_ParaMenu_AD3[MGetLanguage()][2], 4);
 
                 while(1)
                 {
@@ -7074,7 +7074,7 @@ int OptionMenu(int page)//出现第几页的参数菜单
                 //*
                 MPushWindow(xpos, ypos, xpos + 5*C_CCHAR_HDOT+1, ypos + crow_height * 2) ;
                 EraseDrawRectangle(xpos, ypos, xpos + (5)*C_CCHAR_HDOT, ypos + crow_height * 2) ;
-                TextOut(xpos+4,ypos+4 ,2,8,crow_height,(u_char*)_ParaMenu_AC1[MGetLanguage()][0],4);
+                TextOut(xpos+4,ypos+4 ,2,8,crow_height,(uint8_t*)_ParaMenu_AC1[MGetLanguage()][0],4);
                 while(1)
                 {
                     keycode = MAnyKeyReturn();
@@ -7112,7 +7112,7 @@ int OptionMenu(int page)//出现第几页的参数菜单
             case 3:	//B门类型
                 MPushWindow(xpos, ypos, xpos + 5*C_CCHAR_HDOT, ypos + crow_height * 2) ;
                 EraseDrawRectangle(xpos, ypos, xpos + (5)*C_CCHAR_HDOT, ypos + crow_height * 2) ;
-                TextOut(xpos+4,ypos+4,2,8+2*MGetLanguage(),crow_height,(u_char*)_ParaMenu_AC5[MGetLanguage()][0],4);
+                TextOut(xpos+4,ypos+4,2,8+2*MGetLanguage(),crow_height,(uint8_t*)_ParaMenu_AC5[MGetLanguage()][0],4);
                 while(1)
                 {
                     keycode = MAnyKeyReturn();
@@ -7127,11 +7127,11 @@ int OptionMenu(int page)//出现第几页的参数菜单
                 MPopWindow();
                 break;
             case 4:
-                //	cpText = (u_short*)_ParaMenu_AD8 ;
+                //	cpText = (uint16_t*)_ParaMenu_AD8 ;
                 MPushWindow(xpos, ypos, xpos + 4*C_CCHAR_HDOT, ypos + crow_height * 2) ;
                 EraseDrawRectangle(xpos, ypos, xpos + 4*C_CCHAR_HDOT, ypos + crow_height * 2) ;
                 //	CEMenuOut(xpos+4,ypos+4 , cpText ,2,2,crow_height);	/*在指定位置根据每行字符数、行数、行高写菜单*/
-                TextOut(xpos+4,ypos+4,2,6,crow_height,(u_char*)_ParaMenu_AD8[MGetLanguage()][0],4);
+                TextOut(xpos+4,ypos+4,2,6,crow_height,(uint8_t*)_ParaMenu_AD8[MGetLanguage()][0],4);
                 while(1)
                 {
                     keycode = MAnyKeyReturn();
@@ -7154,11 +7154,11 @@ int OptionMenu(int page)//出现第几页的参数菜单
                 int ypos1;
                 for (i=0; i<6; i++)
                 {
-                    TextOut(xpos+ C_ECHAR_HDOT,ypos+4+i*crow_height,1,12,crow_height,(u_char*)_ParaProtect1[MGetLanguage()][i],4);
+                    TextOut(xpos+ C_ECHAR_HDOT,ypos+4+i*crow_height,1,12,crow_height,(uint8_t*)_ParaProtect1[MGetLanguage()][i],4);
                 }
                 if (MGetLanguage())
                 {
-                    TextOut(xpos+ C_ECHAR_HDOT,ypos+4+4*crow_height-8,1,12,crow_height,(u_char*)_ParaProtect1[MGetLanguage()][3]+12,4);
+                    TextOut(xpos+ C_ECHAR_HDOT,ypos+4+4*crow_height-8,1,12,crow_height,(uint8_t*)_ParaProtect1[MGetLanguage()][3]+12,4);
                 }
 
                 xpos += 6*C_CCHAR_HDOT;
@@ -7166,9 +7166,9 @@ int OptionMenu(int page)//出现第几页的参数菜单
                 for(i = 0; i < C_LOCK_ALL; i ++)
                 {
                     ypos1 = ypos + crow_height * (i +2)+4;
-                    //	cpText = (u_short*)_ParaProtect2 + MGetParaLock(0,i) * 2 ;
+                    //	cpText = (uint16_t*)_ParaProtect2 + MGetParaLock(0,i) * 2 ;
                     //CMenuOut(xpos + C_ECHAR_HDOT,ypos1,cpText,2,1,crow_height);
-                    TextOut(xpos+ C_ECHAR_HDOT,ypos1,1,8,crow_height,(u_char*)_ParaProtect2[MGetLanguage()][MGetParaLock(0,i)],0);
+                    TextOut(xpos+ C_ECHAR_HDOT,ypos1,1,8,crow_height,(uint8_t*)_ParaProtect2[MGetLanguage()][MGetParaLock(0,i)],0);
                 }
 
                 do
@@ -7189,9 +7189,9 @@ int OptionMenu(int page)//出现第几页的参数菜单
                     for(i = 0; i < C_LOCK_ALL; i ++)
                     {
                         ypos1 = ypos + crow_height * (i +2)+4;
-                        //	cpText = (u_short*)_ParaProtect2 + MGetParaLock(0,i) * 2 ;
+                        //	cpText = (uint16_t*)_ParaProtect2 + MGetParaLock(0,i) * 2 ;
                         //CMenuOut(xpos + C_ECHAR_HDOT,ypos1,cpText,2,1,crow_height);
-                        TextOut(xpos+ C_ECHAR_HDOT,ypos1,1,8,crow_height,(u_char*)_ParaProtect2[MGetLanguage()][MGetParaLock(0,i)],0);
+                        TextOut(xpos+ C_ECHAR_HDOT,ypos1,1,8,crow_height,(uint8_t*)_ParaProtect2[MGetLanguage()][MGetParaLock(0,i)],0);
                     }
                 }
                 while(1);
@@ -7212,11 +7212,11 @@ int OptionMenu(int page)//出现第几页的参数菜单
                 }
                 break;
             case 7:
-                //	cpText = (u_short*)_ParaMenu_AD9 ;
+                //	cpText = (uint16_t*)_ParaMenu_AD9 ;
                 MPushWindow(xpos, ypos, xpos + 4*C_CCHAR_HDOT, ypos + crow_height * 2) ;
                 EraseDrawRectangle(xpos, ypos, xpos + 4*C_CCHAR_HDOT, ypos + crow_height * 2) ;
                 //	CEMenuOut(xpos+4,ypos+4 , cpText ,2,2,crow_height);	/*在指定位置根据每行字符数、行数、行高写菜单*/
-                TextOut(xpos,ypos,2,6,crow_height,(u_char*)_ParaMenu_AD9[MGetLanguage()][0],4);
+                TextOut(xpos,ypos,2,6,crow_height,(uint8_t*)_ParaMenu_AD9[MGetLanguage()][0],4);
                 while(1)
                 {
                     keycode = MAnyKeyReturn();
@@ -7306,14 +7306,14 @@ int OptionMenu(int page)//出现第几页的参数菜单
 extern int nFlag;
 int FuncMenu(void)
 {
-    u_int char_len = 5,row_number = 9,crow_height = 40;
+    uint32_t char_len = 5,row_number = 9,crow_height = 40;
     int xpos,ypos,inv_xpos = 0,inv_ypos = 0;
     int keycode;
-    u_short *cpText;
-    u_char *epText;
+    uint16_t *cpText;
+    uint8_t *epText;
     int i;
     int prestatus=0;
-    u_int elapsedtime1 = GetElapsedTime() ;
+    uint32_t elapsedtime1 = GetElapsedTime() ;
     int deci_len ,number ,row;
     int para_xpos ,para_ypos;
 
@@ -7341,7 +7341,7 @@ int FuncMenu(void)
     inv_ypos = ypos + crow_height + 4;
     for (i=0; i<row_number; i++)
     {
-        epText = (u_char*) _FuncMenu_A1[MGetLanguage()][i];
+        epText = (uint8_t*) _FuncMenu_A1[MGetLanguage()][i];
         TextOut(xpos+4,ypos+3+crow_height*i,1,11+5*MGetLanguage(),crow_height,epText,0);
         // if (MGetLanguage())
         // {
@@ -7538,7 +7538,7 @@ int FuncMenu(void)
             	break;
             }
             //*/
-            cpText = (u_short*)_ParaMenu_A5 ;
+            cpText = (uint16_t*)_ParaMenu_A5 ;
             xpos = inv_xpos - 5* C_CCHAR_HDOT;
             ypos = inv_ypos + (C_CURVER_AMEND + 1) * crow_height;
             para_xpos = xpos + C_CCHAR_HDOT * 6 ;
@@ -7549,15 +7549,15 @@ int FuncMenu(void)
                 //   MPushWindow(xpos + 6*C_CCHAR_HDOT+10, ypos, xpos + 9*C_CCHAR_HDOT+11, ypos + crow_height * 2+8) ;
                 EraseDrawRectangle(xpos-32, ypos, xpos + 13*C_CCHAR_HDOT+10, ypos + crow_height * 2+7) ;
 
-                TextOut(xpos+4-32,ypos+4,1,15,16,(u_char*)_ParaMenu_A5[MGetLanguage()][0],4);
-                TextOut(xpos+4-32,ypos+4+crow_height,1,15,16,(u_char*)_ParaMenu_A5[MGetLanguage()][1],4);
+                TextOut(xpos+4-32,ypos+4,1,15,16,(uint8_t*)_ParaMenu_A5[MGetLanguage()][0],4);
+                TextOut(xpos+4-32,ypos+4+crow_height,1,15,16,(uint8_t*)_ParaMenu_A5[MGetLanguage()][1],4);
             }
             else
             {
                 MPushWindow(xpos, ypos, xpos + 10*C_CCHAR_HDOT+11, ypos + crow_height * 2+8) ;
                 EraseDrawRectangle(xpos, ypos, xpos + 10*C_CCHAR_HDOT+10, ypos + crow_height * 2+7) ;
-                TextOut(xpos+4,ypos+8,1,14,32,(u_char*)_ParaMenu_A5[MGetLanguage()][0],4);
-                TextOut(xpos+4,ypos+8+crow_height,1,14,32,(u_char*)_ParaMenu_A5[MGetLanguage()][1],4);
+                TextOut(xpos+4,ypos+8,1,14,32,(uint8_t*)_ParaMenu_A5[MGetLanguage()][0],4);
+                TextOut(xpos+4,ypos+8+crow_height,1,14,32,(uint8_t*)_ParaMenu_A5[MGetLanguage()][1],4);
             }
             //	MPushWindow(xpos, ypos, xpos + 10*C_CCHAR_HDOT+1, ypos + crow_height * 3) ;
             //	EraseDrawRectangle(xpos, ypos, xpos + 10*C_CCHAR_HDOT, ypos + crow_height * 3) ;
@@ -7686,11 +7686,11 @@ int FuncMenu(void)
     return 1;
 }
 
-extern u_char crPara[];
-extern const u_int c_crPara[] ;
-extern const u_int Echo_crPara[] ;
+extern uint8_t crPara[];
+extern const uint32_t c_crPara[] ;
+extern const uint32_t Echo_crPara[] ;
 
-const u_char _COLOR_Menu[C_LANGUAGE][9][15] =
+const uint8_t _COLOR_Menu[C_LANGUAGE][9][15] =
 {
     {
         "０自定义",
@@ -7715,7 +7715,7 @@ const u_char _COLOR_Menu[C_LANGUAGE][9][15] =
         "8.Black      ",
     }
 };
-const u_char _COLOR_A1[C_LANGUAGE][10][15] =
+const uint8_t _COLOR_A1[C_LANGUAGE][10][15] =
 {
     {
         "０屏幕底色:",
@@ -7742,7 +7742,7 @@ const u_char _COLOR_A1[C_LANGUAGE][10][15] =
         "9.Envelope  :",
     }
 };
-const u_char _COLOR_B1[C_LANGUAGE][9][8] =
+const uint8_t _COLOR_B1[C_LANGUAGE][9][8] =
 {
     {
         "⒈红",
@@ -7786,21 +7786,21 @@ const u_char _COLOR_B1[C_LANGUAGE][9][8] =
 int ColorMenu(void)
 {
 #if C_COLOR == 1 && C_DEVTYPE != 20
-    u_int char_len = 6, crow_height = 48;
+    uint32_t char_len = 6, crow_height = 48;
     int xpos,ypos;
     int para_xpos = C_CCHAR_HDOT * ( char_len + 0) ,para_ypos =  4;
     int retvalue = C_TRUE;
     int keycode;
     int row;
-    u_short* cpText = 0;
+    uint16_t* cpText = 0;
     int i;
     int len;
     int item;
-    u_int elapsedtime1 = GetElapsedTime();
+    uint32_t elapsedtime1 = GetElapsedTime();
     int offset;
     int crnum = 0;
 
-    u_char crTemp[C_CR_MAX+12];
+    uint8_t crTemp[C_CR_MAX+12];
     for( i = 0 ; i < C_CR_MAX+12 ; i++)crTemp[i] = crPara[i]; //保存原设置
     crnum = 9;
     MSetColor(C_CR_MENU);
@@ -7819,11 +7819,11 @@ int ColorMenu(void)
         MSetColor(C_CR_MENU);
         for (i=0; i<crnum; i++)
         {
-            TextOut(C_ECHAR_HDOT,para_ypos+crow_height*i,1,16,24,(u_char*)_COLOR_Menu[MGetLanguage()][i],4);
+            TextOut(C_ECHAR_HDOT,para_ypos+crow_height*i,1,16,24,(uint8_t*)_COLOR_Menu[MGetLanguage()][i],4);
         }
 
-        TextOut(27*C_ECHAR_HDOT,380+4,1,10,24,(u_char*)_MenuPrompt_B1[MGetLanguage()][0],4);
-        TextOut(27*C_ECHAR_HDOT,380+4+36,1,10,24,(u_char*)_MenuPrompt_B1[MGetLanguage()][0]+10,4);
+        TextOut(27*C_ECHAR_HDOT,380+4,1,10,24,(uint8_t*)_MenuPrompt_B1[MGetLanguage()][0],4);
+        TextOut(27*C_ECHAR_HDOT,380+4+36,1,10,24,(uint8_t*)_MenuPrompt_B1[MGetLanguage()][0]+10,4);
 //        EMenuOut(27*C_ECHAR_HDOT,380+4,_TestMenu_Enter,1,1,C_ECHAR_VDOT);
         MSetColor(C_CR_UNDO);
 
@@ -7832,7 +7832,7 @@ int ColorMenu(void)
                 xpos = para_xpos + C_ECHAR_HDOT+8*MGetLanguage();
                 ypos = para_ypos + crow_height *row ;
                 MSetColor( i ) ;
-                TextOut(xpos,ypos,1,6,crow_height,(u_char*)_COLOR_B1[MGetLanguage()][MLoadColor(i)]+2,4);
+                TextOut(xpos,ypos,1,6,crow_height,(uint8_t*)_COLOR_B1[MGetLanguage()][MLoadColor(i)]+2,4);
                 MSetColor(C_CR_UNDO);
             }*/
         MKeyRlx();		/*只有按键已释放才退出*/
@@ -7916,7 +7916,7 @@ int ColorMenu(void)
 int CustomizeColorMenu(void)
 {
 #if C_COLOR == 1 && C_DEVTYPE != 20
-    u_int char_len = 6, crow_height = 48;//,row_number = 10,  erow_height = 12;
+    uint32_t char_len = 6, crow_height = 48;//,row_number = 10,  erow_height = 12;
     //int number,deci_len,sign;
     int xpos,ypos;
     //int menu_xpos = 0,menu_ypos = 0;
@@ -7925,19 +7925,19 @@ int CustomizeColorMenu(void)
     int keycode;
     //int page_no = 1,page_max = 3;
     int row;
-    u_short* cpText = 0;
-    //u_char* epText = 0;
+    uint16_t* cpText = 0;
+    //uint8_t* epText = 0;
     int i;//,j,k;
     int len;//,line;
     int item;
-    u_int elapsedtime1 = GetElapsedTime();// ,elapsedtime2;
+    uint32_t elapsedtime1 = GetElapsedTime();// ,elapsedtime2;
     int offset;
     int crnum = 0;
 
 //#if C_DEVTYPE == 20
 //	return 0;
 //#endif
-    u_char crTemp[C_CR_MAX+12];
+    uint8_t crTemp[C_CR_MAX+12];
     for( i = 0 ; i < C_CR_MAX+12 ; i++)crTemp[i] = crPara[i]; //保存原设置
 
 #if C_DEVTYPE == 1 || C_DEVTYPE == 8  || C_DEVTYPE == 9  || C_DEVTYPE == 10  || C_DEVTYPE == 11 || C_DEVTYPE == 12 || C_DEVTYPE == 13 || C_DEVTYPE == 14 ||C_DEVTYPE == 15
@@ -7957,21 +7957,21 @@ int CustomizeColorMenu(void)
     {
         MFclearScreen();
 
-        //cpText =  (u_short*)_COLOR_A1;
-        //epText =  (u_char*)_STDMenu_B1;
+        //cpText =  (uint16_t*)_COLOR_A1;
+        //epText =  (uint8_t*)_STDMenu_B1;
         MSetColor(C_CR_MENU);
         EraseDrawRectangle(26*C_ECHAR_HDOT, 380, 26*C_ECHAR_HDOT + (6+1*MGetLanguage())*C_CCHAR_HDOT, 380 + 2 * (C_CCHAR_VDOT+12));
         MSetColor(C_CR_MENU);
         for (i=0; i<crnum; i++)
         {
-            TextOut(C_ECHAR_HDOT,para_ypos+crow_height*i,1,16,24,(u_char*)_COLOR_A1[MGetLanguage()][i],4);
+            TextOut(C_ECHAR_HDOT,para_ypos+crow_height*i,1,16,24,(uint8_t*)_COLOR_A1[MGetLanguage()][i],4);
         }
         //CEMenuOut(C_ECHAR_HDOT,para_ypos, cpText ,char_len,crnum,crow_height);	/*在指定位置根据每行字符数、行数、行高写菜单*/
         //EMenuOut(para_xpos+C_ECHAR_HDOT*5,para_ypos + 8, epText ,3,row_number,crow_height);	/*在指定位置根据每行字符数、行数、行高写菜单*/
 
         //CMenuOut(27*C_ECHAR_HDOT,190+4,_MenuPrompt_B1,5,2,24);	/*在指定位置根据每行字符数、行数、行高写菜单*/
-        TextOut(27*C_ECHAR_HDOT,380+4,1,10,24,(u_char*)_MenuPrompt_B1[MGetLanguage()][0],4);
-        TextOut(27*C_ECHAR_HDOT,380+4+36,1,10,24,(u_char*)_MenuPrompt_B1[MGetLanguage()][0]+10,4);
+        TextOut(27*C_ECHAR_HDOT,380+4,1,10,24,(uint8_t*)_MenuPrompt_B1[MGetLanguage()][0],4);
+        TextOut(27*C_ECHAR_HDOT,380+4+36,1,10,24,(uint8_t*)_MenuPrompt_B1[MGetLanguage()][0]+10,4);
 //        EMenuOut(27*C_ECHAR_HDOT,380+4,_TestMenu_Enter,1,1,C_ECHAR_VDOT);
         MSetColor(C_CR_UNDO);
         //MSetColor(C_CR_PARA);
@@ -7982,7 +7982,7 @@ int CustomizeColorMenu(void)
             xpos = para_xpos + C_ECHAR_HDOT+8*MGetLanguage();
             ypos = para_ypos + crow_height *row ;
             MSetColor( i ) ;
-            TextOut(xpos,ypos,1,6,crow_height,(u_char*)_COLOR_B1[MGetLanguage()][MLoadColor(i)]+2,4);
+            TextOut(xpos,ypos,1,6,crow_height,(uint8_t*)_COLOR_B1[MGetLanguage()][MLoadColor(i)]+2,4);
             MSetColor(C_CR_UNDO);
         }
         MKeyRlx();		/*只有按键已释放才退出*/
@@ -8056,7 +8056,7 @@ int CustomizeColorMenu(void)
             if( i == row - 1)SetDisplayColor( RED_B0|GREEN_B0|BLUE_B0 );
             else SetDisplayColor( c_crPara[ i ] );
 #endif
-            TextOut(xpos + C_ECHAR_HDOT,ypos+8+i*crow_height,1,3+5*MGetLanguage(),crow_height,(u_char*)_COLOR_B1[MGetLanguage()][i],4);
+            TextOut(xpos + C_ECHAR_HDOT,ypos+8+i*crow_height,1,3+5*MGetLanguage(),crow_height,(uint8_t*)_COLOR_B1[MGetLanguage()][i],4);
         }
         while(1)
         {
@@ -8114,7 +8114,7 @@ int CustomizeColorMenu(void)
 void InitPara(void)
 {
     int xpos, ypos ;
-    u_short* cpText ;
+    uint16_t* cpText ;
     int keycode ;
     int offset=0,offmax;
     int Zero;
@@ -8146,7 +8146,7 @@ void InitPara(void)
     for (i=0; i<row_number; i++)
 // @todo (union#1#): Now Here
     {
-        TextOut(xpos+4, ypos+4+i*crow_height,  1, 17,24, (u_char*)_FuncMenu_A2[MGetLanguage()][i], 4);
+        TextOut(xpos+4, ypos+4+i*crow_height,  1, 17,24, (uint8_t*)_FuncMenu_A2[MGetLanguage()][i], 4);
     }
     DrawRectangle(xpos, ypos, xpos + 6*C_CCHAR_HDOT+MGetLanguage()*4*C_CCHAR_HDOT, ypos + crow_height * row_number ) ; /* 画矩形 */
 
@@ -8281,8 +8281,8 @@ void InitPara(void)
                 Zero = 0;
                 offmax = C_OFF_FILEMAX;
                 DisplayPrompt(17);//显示数据正在清除
-                u_int time = GetElapsedTime();
-                u_int elapsedtime = 400;
+                uint32_t time = GetElapsedTime();
+                uint32_t elapsedtime = 400;
                 int xpos = (6+4*MGetLanguage())* C_CCHAR_HDOT;
                 MSetColor(C_CR_MENU);
                 for( ; offset < offmax; offset += C_SIZE_INT)
@@ -8384,7 +8384,7 @@ void InitPara(void)
 void InitParaTemp(void)
 {
     int xpos, ypos ;
-    u_short* cpText ;
+    uint16_t* cpText ;
     int keycode ;
     int offset,offmax;
     int Zero;
@@ -8414,7 +8414,7 @@ void InitParaTemp(void)
     for (i=0; i<row_number; i++)
 // @todo (union#1#): Now Here
     {
-        TextOut(xpos+4, ypos+4+i*crow_height,  1, 17,24, (u_char*)_FuncMenu_A2[MGetLanguage()][i], 4);
+        TextOut(xpos+4, ypos+4+i*crow_height,  1, 17,24, (uint8_t*)_FuncMenu_A2[MGetLanguage()][i], 4);
     }
     DrawRectangle(xpos, ypos, xpos + 6*C_CCHAR_HDOT+MGetLanguage()*3*C_CCHAR_HDOT, ypos + crow_height * row_number ) ; /* 画矩形 */
 
@@ -8443,8 +8443,8 @@ void InitParaTemp(void)
     Zero = 0;
     offmax = C_OFF_FILEMAX;
     DisplayPrompt(17);//显示数据正在清除
-    u_int time = GetElapsedTime();
-    u_int elapsedtime = 400;
+    uint32_t time = GetElapsedTime();
+    uint32_t elapsedtime = 400;
     xpos = 6* C_CCHAR_HDOT;
     MSetColor(C_CR_MENU);
     for( ; offset < offmax; offset += C_SIZE_INT)
@@ -8502,7 +8502,7 @@ void InitParaTemp(void)
 
 int STDMenu(void)//标准菜单
 {
-    u_int char_len = 6,crow_height = 48,erow_height = 30;//row_number = 10,
+    uint32_t char_len = 6,crow_height = 48,erow_height = 30;//row_number = 10,
     int number,deci_len,sign;
     int xpos,ypos;
     //int menu_xpos = 0,menu_ypos = 0;
@@ -8511,11 +8511,11 @@ int STDMenu(void)//标准菜单
     int keycode;
     //int page_no = 1,page_max = 3;
     int row;
-    u_short* cpText = 0;
-    u_char* epText = 0;
+    uint16_t* cpText = 0;
+    uint8_t* epText = 0;
     int i,j,k;
     int len,line;
-    u_int elapsedtime1 = GetElapsedTime() ;
+    uint32_t elapsedtime1 = GetElapsedTime() ;
     int basegain1=MGetBaseGain();
     int basegain2;
 #if C_DEVTYPE == 20
@@ -8534,8 +8534,8 @@ int STDMenu(void)//标准菜单
     {
         MFclearScreen();
         para_ypos =  4;
-        //	cpText =  (u_short*)_STDMenu_A1;
-        //epText =  (u_char*)_STDMenu_B1;
+        //	cpText =  (uint16_t*)_STDMenu_A1;
+        //epText =  (uint8_t*)_STDMenu_B1;
 
         MSetColor(C_CR_MENU);
         if(MGetStdMode() == 10||MGetStdMode() == 11)//if(MGetStdMode() >= C_STD_11345_2013_NUM -1)
@@ -8544,7 +8544,7 @@ int STDMenu(void)//标准菜单
             {
                 for (i=0; i<MGetCurveNumber()+4; i++)
                 {
-                    TextOut(C_ECHAR_HDOT,para_ypos+crow_height*i, 1, 13+MGetLanguage()*2,16, (u_char*)_STDMenu_A2[MGetLanguage()][i], 4);
+                    TextOut(C_ECHAR_HDOT,para_ypos+crow_height*i, 1, 13+MGetLanguage()*2,16, (uint8_t*)_STDMenu_A2[MGetLanguage()][i], 4);
                 }
             }
             else if(MGetBlock() == 1)
@@ -8553,14 +8553,14 @@ int STDMenu(void)//标准菜单
                 {
                     for (i=0; i<MGetCurveNumber()+4 - 1; i++)
                     {
-                        TextOut(C_ECHAR_HDOT,para_ypos+crow_height*i, 1, 13+MGetLanguage()*2,16, (u_char*)_STDMenu_A3[MGetLanguage()][i], 4);
+                        TextOut(C_ECHAR_HDOT,para_ypos+crow_height*i, 1, 13+MGetLanguage()*2,16, (uint8_t*)_STDMenu_A3[MGetLanguage()][i], 4);
                     }
                 }
                 else
                 {
                     for (i=0; i<MGetCurveNumber()+4; i++)
                     {
-                        TextOut(C_ECHAR_HDOT,para_ypos+crow_height*i, 1, 13+MGetLanguage()*2,16, (u_char*)_STDMenu_A4[MGetLanguage()][i], 4);
+                        TextOut(C_ECHAR_HDOT,para_ypos+crow_height*i, 1, 13+MGetLanguage()*2,16, (uint8_t*)_STDMenu_A4[MGetLanguage()][i], 4);
                     }
                 }
             }
@@ -8568,7 +8568,7 @@ int STDMenu(void)//标准菜单
             {
                 for (i=0; i<MGetCurveNumber()+4; i++)
                 {
-                    TextOut(C_ECHAR_HDOT,para_ypos+crow_height*i, 1, 13+MGetLanguage()*2,16, (u_char*)_STDMenu_A5[MGetLanguage()][i], 4);
+                    TextOut(C_ECHAR_HDOT,para_ypos+crow_height*i, 1, 13+MGetLanguage()*2,16, (uint8_t*)_STDMenu_A5[MGetLanguage()][i], 4);
                 }
             }
         }
@@ -8576,26 +8576,26 @@ int STDMenu(void)//标准菜单
         {
             for (i=0; i<MGetCurveNumber()+4; i++)
             {
-                TextOut(C_ECHAR_HDOT,para_ypos+crow_height*i, 1, 13+MGetLanguage()*2,16, (u_char*)_STDMenu_A1[MGetLanguage()][i], 4);
+                TextOut(C_ECHAR_HDOT,para_ypos+crow_height*i, 1, 13+MGetLanguage()*2,16, (uint8_t*)_STDMenu_A1[MGetLanguage()][i], 4);
             }
         }
         if(MGetStdMode()==1 || MGetStdMode()==3 || MGetStdMode()==8 || MGetStdMode()==9 || MGetStdMode()==13 || MGetStdMode()==14 )
         {
             MEraseWindow(C_ECHAR_HDOT,para_ypos+crow_height*2,C_ECHAR_HDOT+C_CCHAR_HDOT*6,para_ypos+crow_height*2+C_CCHAR_VDOT);
-            TextOut(C_ECHAR_HDOT,para_ypos+crow_height*2, 1, 13+MGetLanguage()*2,16, (u_char*)_STDMenu_A1[MGetLanguage()][10], 4);
+            TextOut(C_ECHAR_HDOT,para_ypos+crow_height*2, 1, 13+MGetLanguage()*2,16, (uint8_t*)_STDMenu_A1[MGetLanguage()][10], 4);
         }
         //  if(MGetLanguage())
         {
-            //      TextOut(C_ECHAR_HDOT,para_ypos+11, 1, 8,10, (u_char*)_STDMenu_A1[MGetLanguage()][0]+13, 4);
-            //      TextOut(C_ECHAR_HDOT,para_ypos+crow_height+11, 1, 8,10, (u_char*)_STDMenu_A1[MGetLanguage()][1]+13, 4);
+            //      TextOut(C_ECHAR_HDOT,para_ypos+11, 1, 8,10, (uint8_t*)_STDMenu_A1[MGetLanguage()][0]+13, 4);
+            //      TextOut(C_ECHAR_HDOT,para_ypos+crow_height+11, 1, 8,10, (uint8_t*)_STDMenu_A1[MGetLanguage()][1]+13, 4);
         }
         //	CEMenuOut(C_ECHAR_HDOT,para_ypos, cpText ,char_len,MGetCurveNumber()+4,crow_height);	/*在指定位置根据每行字符数、行数、行高写菜单*/
         //EMenuOut(para_xpos+C_ECHAR_HDOT*5,para_ypos + 8, epText ,3,row_number,crow_height);	/*在指定位置根据每行字符数、行数、行高写菜单*/
 
         EraseDrawRectangle(26*C_ECHAR_HDOT, 380, 26*C_ECHAR_HDOT + (5+1+1*MGetLanguage())*C_CCHAR_HDOT, 380 + 2 * (C_CCHAR_VDOT+12)) ;
         //	CMenuOut(27*C_ECHAR_HDOT,190+4,_MenuPrompt_B1,5,2,24);	/*在指定位置根据每行字符数、行数、行高写菜单*/
-        TextOut(27*C_ECHAR_HDOT,380+4,1,10,24,(u_char*)_MenuPrompt_B1[MGetLanguage()][0],4);
-        TextOut(27*C_ECHAR_HDOT,380+4+36,1,10,24,(u_char*)_MenuPrompt_B1[MGetLanguage()][0]+10,4);
+        TextOut(27*C_ECHAR_HDOT,380+4,1,10,24,(uint8_t*)_MenuPrompt_B1[MGetLanguage()][0],4);
+        TextOut(27*C_ECHAR_HDOT,380+4+36,1,10,24,(uint8_t*)_MenuPrompt_B1[MGetLanguage()][0]+10,4);
 //        EMenuOut(27*C_ECHAR_HDOT,380+4,_TestMenu_Enter,1,1,C_ECHAR_VDOT);
         if(MGetLanguage())
         {
@@ -8607,7 +8607,7 @@ int STDMenu(void)//标准菜单
         row = 0;
         xpos = para_xpos;
         ypos = para_ypos + crow_height *row ;
-        epText = (u_char*)_STDMenu_AB1 + ( MGetStdMode()*C_STD_LEN+2 );
+        epText = (uint8_t*)_STDMenu_AB1 + ( MGetStdMode()*C_STD_LEN+2 );
         EMenuOut(xpos,ypos , epText ,C_STD_LEN-2,1,crow_height);	/*在指定位置根据每行字符数、行数、行高写菜单*/
 
         //曲线数
@@ -8623,7 +8623,7 @@ int STDMenu(void)//标准菜单
         //试块类型
         row = 2;
         ypos = para_ypos + crow_height *row ;
-        epText = (u_char*)_STDMenu_B1[MGetStdMode()]+1 + ( MGetBlock()*C_BLOCK_LEN+2 ) ;
+        epText = (uint8_t*)_STDMenu_B1[MGetStdMode()]+1 + ( MGetBlock()*C_BLOCK_LEN+2 ) ;
         EMenuOut(xpos, ypos, epText ,C_BLOCK_LEN-2, 1, erow_height);	/*在指定位置根据每行字符数、行数、行高写菜单*/
 
         //工件厚度
@@ -8902,7 +8902,7 @@ int STDMenu(void)//标准菜单
 
 
             len = C_BLOCK_LEN;
-            epText = (u_char*)( _STDMenu_B1[MGetStdMode()]+1 );
+            epText = (uint8_t*)( _STDMenu_B1[MGetStdMode()]+1 );
             MPushWindow(xpos, ypos, xpos+ 11*C_ECHAR_HDOT, ypos + (row+1) * erow_height) ;
             EraseDrawRectangle(xpos, ypos, xpos+ (len+2)*C_ECHAR_HDOT, ypos + (row+1) * erow_height) ;
             EMenuOut(xpos + C_ECHAR_HDOT, ypos+4, epText ,len, row, erow_height);	/*在指定位置根据每行字符数、行数、行高写菜单*/
@@ -9234,13 +9234,13 @@ int DataCall(int file_no,int SaveMode)	//调用已存储的数据并覆盖到当前通道
 int TestFlawHigh(void)		//测高
 {
 
-    u_short xpos,ypos,menu_xpos,menu_ypos;
+    uint16_t xpos,ypos,menu_xpos,menu_ypos;
     short keycode;
     int high = 0, high1=0,high2=0,i;
     char num, dac_num = Dac.num;
-    u_char len;//,row;
-    u_char *samp;
-    u_char sampbuff[C_LEN_SAMP+1] ;
+    uint8_t len;//,row;
+    uint8_t *samp;
+    uint8_t sampbuff[C_LEN_SAMP+1] ;
 
 
     AllParaStore();
@@ -9503,14 +9503,14 @@ int TestForging(void)
     GateMax.Amp = 0;	//最高波置初值为0
 
     int gain = 400,range = 1000,offset = 0, offset0 = 0, delay = 0,speed = MGetSpeed();
-    u_int echotime = 0;
+    uint32_t echotime = 0;
     short gateamp;
     int i;
-    u_int char_len,row_number,crow_height;
+    uint32_t char_len,row_number,crow_height;
     int number,deci_len,number1,deci_len1;
     int xpos,ypos,menu_xpos,menu_ypos;
     int confirm_num = 0;
-    u_int preElapsedtime;
+    uint32_t preElapsedtime;
     int retvalue = C_TRUE;
     int keycode;
     int gatetype = 0;
@@ -9540,7 +9540,7 @@ int TestForging(void)
     ypos = 0;
     // EraseDrawRectangle(xpos, ypos, 590, 24) ;
     MSetColor(C_CR_MENU);
-    TextOut(xpos, ypos,1,40+MGetLanguage()*12,20,(u_char*)_Menu_FJ[MGetLanguage()][0],0);
+    TextOut(xpos, ypos,1,40+MGetLanguage()*12,20,(uint8_t*)_Menu_FJ[MGetLanguage()][0],0);
     number = 10000;
     deci_len = 2;
 	while(1)
@@ -9581,7 +9581,7 @@ int TestForging(void)
 				menu_ypos = C_COORVPOSI + 1;
 				MSetColor(C_CR_MENU);
 				EraseDrawRectangle(menu_xpos-30-15*MGetLanguage(), menu_ypos, C_COORHORIUNIT * 10+17+MGetLanguage()*5, menu_ypos + crow_height *(row_number+MGetLanguage())) ;
-				TextOut(menu_xpos + C_ECHAR_HDOT-40-15*MGetLanguage(),menu_ypos+4, row_number+2*MGetLanguage(), 17+MGetLanguage()*2,crow_height-12*MGetLanguage(), (u_char*)_TestForging[MGetLanguage()][0], 4);
+				TextOut(menu_xpos + C_ECHAR_HDOT-40-15*MGetLanguage(),menu_ypos+4, row_number+2*MGetLanguage(), 17+MGetLanguage()*2,crow_height-12*MGetLanguage(), (uint8_t*)_TestForging[MGetLanguage()][0], 4);
 				WriteLongness(menu_xpos -25+ 1 * C_ECHAR_HDOT+170*MGetLanguage(), menu_ypos  + 3-30*MGetLanguage()+100 ,800,2/*总长*/,0/*是否写单位*/);
 				EMenuOut(menu_xpos+25 + 1 * C_ECHAR_HDOT+170*MGetLanguage(), menu_ypos  + 20-30*MGetLanguage()+80,"%",2,1,8);
 				MSetColor(C_CR_UNDO);
@@ -9595,7 +9595,7 @@ int TestForging(void)
 				MSetGateParaInit();	//门内最高波设初值
 				// DisplayPrompt(15);
 				MSetColor(C_CR_MENU);
-				TextOut(0,0,1,100,24,(u_char*)_TestMenu_A1[MGetLanguage()][7]+2,4);
+				TextOut(0,0,1,100,24,(uint8_t*)_TestMenu_A1[MGetLanguage()][7]+2,4);
 				while (1)
 				{
 					{
@@ -9639,12 +9639,12 @@ int TestForging(void)
 						MFclearScreen();
 						// D3 =MGetCrystal_l()/1000;
 
-						TextOut(5, 150,1,40+MGetLanguage()*12,20,(u_char*)_Menu_FJ[MGetLanguage()][1],0);
-						TextOut(5, 180,1,40+MGetLanguage()*12,20,(u_char*)_Menu_FJ[MGetLanguage()][2],0);
-						TextOut(5, 210,1,40+MGetLanguage()*12,20,(u_char*)_Menu_FJ[MGetLanguage()][3],0);
-						TextOut(5, 240,1,40+MGetLanguage()*12,20,(u_char*)_Menu_FJ[MGetLanguage()][4],0);
+						TextOut(5, 150,1,40+MGetLanguage()*12,20,(uint8_t*)_Menu_FJ[MGetLanguage()][1],0);
+						TextOut(5, 180,1,40+MGetLanguage()*12,20,(uint8_t*)_Menu_FJ[MGetLanguage()][2],0);
+						TextOut(5, 210,1,40+MGetLanguage()*12,20,(uint8_t*)_Menu_FJ[MGetLanguage()][3],0);
+						TextOut(5, 240,1,40+MGetLanguage()*12,20,(uint8_t*)_Menu_FJ[MGetLanguage()][4],0);
 						EraseDrawRectangle(26*C_ECHAR_HDOT, 380, 26*C_ECHAR_HDOT + (5+2)*C_CCHAR_HDOT, 380 + 1 * (C_CCHAR_VDOT+12)) ;
-						TextOut(27*C_ECHAR_HDOT,380+4,1,10,24,(u_char*)_MenuPrompt_P1[MGetLanguage()][0],4);
+						TextOut(27*C_ECHAR_HDOT,380+4,1,10,24,(uint8_t*)_MenuPrompt_P1[MGetLanguage()][0],4);
 
 						MSetColor(C_CR_PARA);
 						Write_Number(340+MGetLanguage()*180,150,BG,4,1,0);
@@ -9688,16 +9688,16 @@ int TestForging(void)
 						if(MGetLanguage()==0)
 						{
 							EraseDrawRectangle(menu_xpos, menu_ypos, C_COORHORIUNIT * 10+17, menu_ypos + crow_height *(row_number+MGetLanguage())-60) ;
-							TextOut(menu_xpos + C_ECHAR_HDOT-10-12*MGetLanguage(),menu_ypos+4, row_number+2*MGetLanguage(), 16+MGetLanguage()*20,crow_height-12*MGetLanguage(), (u_char*)_TestForging[MGetLanguage()][1], 4);
-							TextOut(menu_xpos + C_ECHAR_HDOT-10-50*MGetLanguage(),menu_ypos+28, row_number+2*MGetLanguage(), 16+MGetLanguage()*20,crow_height-12*MGetLanguage(), (u_char*)_TestForging[MGetLanguage()][2], 4);
-							TextOut(menu_xpos + C_ECHAR_HDOT-10-12*MGetLanguage(),menu_ypos+52, row_number+2*MGetLanguage(), 16+MGetLanguage()*20,crow_height-12*MGetLanguage(), (u_char*)_TestForging[MGetLanguage()][3], 4);
+							TextOut(menu_xpos + C_ECHAR_HDOT-10-12*MGetLanguage(),menu_ypos+4, row_number+2*MGetLanguage(), 16+MGetLanguage()*20,crow_height-12*MGetLanguage(), (uint8_t*)_TestForging[MGetLanguage()][1], 4);
+							TextOut(menu_xpos + C_ECHAR_HDOT-10-50*MGetLanguage(),menu_ypos+28, row_number+2*MGetLanguage(), 16+MGetLanguage()*20,crow_height-12*MGetLanguage(), (uint8_t*)_TestForging[MGetLanguage()][2], 4);
+							TextOut(menu_xpos + C_ECHAR_HDOT-10-12*MGetLanguage(),menu_ypos+52, row_number+2*MGetLanguage(), 16+MGetLanguage()*20,crow_height-12*MGetLanguage(), (uint8_t*)_TestForging[MGetLanguage()][3], 4);
 							WriteLongness(menu_xpos+25 + 1 * C_ECHAR_HDOT+16*MGetLanguage(), menu_ypos  + 3+(crow_height+13)*1*MGetLanguage()+50 ,800,2/*总长*/,0/*是否写单位*/);
 							EMenuOut(menu_xpos+65 + 1 * C_ECHAR_HDOT+40*MGetLanguage(), menu_ypos  + 20+20*MGetLanguage()+32,"%",2,1,8);
 						}
 						else 
 						{
 							EraseDrawRectangle(menu_xpos + C_ECHAR_HDOT-20-100*MGetLanguage(), menu_ypos, C_COORHORIUNIT * 10+17, menu_ypos + crow_height *(row_number+MGetLanguage())-30) ;
-							TextOut(menu_xpos + C_ECHAR_HDOT-10-100*MGetLanguage(),menu_ypos+4, row_number+1*MGetLanguage(), 16+MGetLanguage()*6,crow_height-12*MGetLanguage(), (u_char*)_TestForging[MGetLanguage()][1], 4);
+							TextOut(menu_xpos + C_ECHAR_HDOT-10-100*MGetLanguage(),menu_ypos+4, row_number+1*MGetLanguage(), 16+MGetLanguage()*6,crow_height-12*MGetLanguage(), (uint8_t*)_TestForging[MGetLanguage()][1], 4);
 							WriteLongness(menu_xpos+25 + 1 * C_ECHAR_HDOT+16*MGetLanguage()-100*MGetLanguage(), menu_ypos  + 3+(crow_height+13)*1*MGetLanguage()+20 ,800,2/*总长*/,0/*是否写单位*/);
 							EMenuOut(menu_xpos+45 + 1 * C_ECHAR_HDOT+40*MGetLanguage()-100*MGetLanguage(), menu_ypos  + 20+20*MGetLanguage()+32,"%",2,1,8);
 						}
@@ -9710,7 +9710,7 @@ int TestForging(void)
 						DisplayPrompt(15);
 						MSetColor(C_CR_MENU);
 						// MEraseWindow(0,ypos,C_CCHAR_HDOT*16,C_CCHAR_VDOT+ypos);
-						TextOut(0,0,1,38,26,(u_char*)_Forging_A2[MGetLanguage()][0],4);
+						TextOut(0,0,1,38,26,(uint8_t*)_Forging_A2[MGetLanguage()][0],4);
 
 
 					}
@@ -9740,16 +9740,16 @@ int TestForging(void)
 						if(MGetLanguage()==0)
 						{
 							EraseDrawRectangle(menu_xpos-24, menu_ypos, C_COORHORIUNIT * 10+17, menu_ypos + crow_height *(row_number+MGetLanguage())-60) ;
-							TextOut(menu_xpos + C_ECHAR_HDOT-34,menu_ypos+4, row_number+2*MGetLanguage(), 18+MGetLanguage(),crow_height-12*MGetLanguage(), (u_char*)_TestForging[MGetLanguage()][4], 4);
-							TextOut(menu_xpos + C_ECHAR_HDOT-34,menu_ypos+28, row_number+2*MGetLanguage(), 18+MGetLanguage(),crow_height-12*MGetLanguage(), (u_char*)_TestForging[MGetLanguage()][5], 4);
-							TextOut(menu_xpos + C_ECHAR_HDOT-34,menu_ypos+52, row_number+2*MGetLanguage(), 18+MGetLanguage(),crow_height-12*MGetLanguage(), (u_char*)_TestForging[MGetLanguage()][6], 4);
+							TextOut(menu_xpos + C_ECHAR_HDOT-34,menu_ypos+4, row_number+2*MGetLanguage(), 18+MGetLanguage(),crow_height-12*MGetLanguage(), (uint8_t*)_TestForging[MGetLanguage()][4], 4);
+							TextOut(menu_xpos + C_ECHAR_HDOT-34,menu_ypos+28, row_number+2*MGetLanguage(), 18+MGetLanguage(),crow_height-12*MGetLanguage(), (uint8_t*)_TestForging[MGetLanguage()][5], 4);
+							TextOut(menu_xpos + C_ECHAR_HDOT-34,menu_ypos+52, row_number+2*MGetLanguage(), 18+MGetLanguage(),crow_height-12*MGetLanguage(), (uint8_t*)_TestForging[MGetLanguage()][6], 4);
 							WriteLongness(menu_xpos+40 + 1 * C_ECHAR_HDOT+16*MGetLanguage(), menu_ypos  + 3+(crow_height+13)*1*MGetLanguage()+50 ,800,2/*总长*/,0/*是否写单位*/);
 							EMenuOut(menu_xpos+75 + 1 * C_ECHAR_HDOT+40*MGetLanguage(), menu_ypos  + 20+20*MGetLanguage()+32,"%",2,1,8);
 						}
 						else 
 						{
 							EraseDrawRectangle(menu_xpos + C_ECHAR_HDOT-20-100*MGetLanguage(), menu_ypos, C_COORHORIUNIT * 10+17, menu_ypos + crow_height *(row_number+MGetLanguage())-30) ;
-							TextOut(menu_xpos + C_ECHAR_HDOT-10-100*MGetLanguage(),menu_ypos+4, row_number+1*MGetLanguage(), 16+MGetLanguage()*6,crow_height-12*MGetLanguage(), (u_char*)_TestForging[MGetLanguage()][4], 4);
+							TextOut(menu_xpos + C_ECHAR_HDOT-10-100*MGetLanguage(),menu_ypos+4, row_number+1*MGetLanguage(), 16+MGetLanguage()*6,crow_height-12*MGetLanguage(), (uint8_t*)_TestForging[MGetLanguage()][4], 4);
 							WriteLongness(menu_xpos+25 + 1 * C_ECHAR_HDOT+146*MGetLanguage(), menu_ypos +20+1*MGetLanguage()+30 ,800,2/*总长*/,0/*是否写单位*/);
 							EMenuOut(menu_xpos+45 + 1 * C_ECHAR_HDOT+170*MGetLanguage(), menu_ypos  + 20+1*MGetLanguage()+30,"%",2,1,8);
 						}
@@ -9776,10 +9776,10 @@ int TestForging(void)
 						MSetColor(C_CR_MENU);
 					
 						EraseDrawRectangle(menu_xpos, menu_ypos, menu_xpos + 16*C_CCHAR_HDOT+30, menu_ypos + crow_height * 4) ;
-						TextOut(menu_xpos+4,menu_ypos+8,1,34,32,(u_char*)_Forging_A1[MGetLanguage()][0],4);
-						TextOut(menu_xpos+4,menu_ypos+8+crow_height,1,34,32,(u_char*)_Forging_A1[MGetLanguage()][1],4);
-						TextOut( menu_xpos+4,menu_ypos+4+crow_height*2,1,34,16, (u_char*)_MenuPrompt_P3[MGetLanguage()][0], 24 );
-						TextOut( menu_xpos+4,menu_ypos+4+crow_height*3,1,34,16, (u_char*)_MenuPrompt_P4[MGetLanguage()][0], 24 );
+						TextOut(menu_xpos+4,menu_ypos+8,1,34,32,(uint8_t*)_Forging_A1[MGetLanguage()][0],4);
+						TextOut(menu_xpos+4,menu_ypos+8+crow_height,1,34,32,(uint8_t*)_Forging_A1[MGetLanguage()][1],4);
+						TextOut( menu_xpos+4,menu_ypos+4+crow_height*2,1,34,16, (uint8_t*)_MenuPrompt_P3[MGetLanguage()][0], 24 );
+						TextOut( menu_xpos+4,menu_ypos+4+crow_height*3,1,34,16, (uint8_t*)_MenuPrompt_P4[MGetLanguage()][0], 24 );
 						
 						MSetColor(C_CR_UNDO);	
 						row = 0;
@@ -9836,15 +9836,15 @@ int TestForging(void)
 						MSetAcquisition(0);
 						MFclearScreen();
 
-						TextOut(5, 120,1,40+MGetLanguage()*0,20,(u_char*)_Menu_FJ[MGetLanguage()][5],0);
-						TextOut(5, 150,1,40+MGetLanguage()*0,20,(u_char*)_Menu_FJ[MGetLanguage()][6],0);
-						TextOut(5, 180,1,40+MGetLanguage()*0,20,(u_char*)_Menu_FJ[MGetLanguage()][7],0);
-						TextOut(5, 210,1,40+MGetLanguage()*0,20,(u_char*)_Menu_FJ[MGetLanguage()][8],0);
-						TextOut(5, 240,1,40+MGetLanguage()*0,20,(u_char*)_Menu_FJ[MGetLanguage()][9],0);
-						TextOut(5, 270,1,40+MGetLanguage()*0,20,(u_char*)_Menu_FJ[MGetLanguage()][10],0);
-						TextOut(5, 300,1,40+MGetLanguage()*0,20,(u_char*)_Menu_FJ[MGetLanguage()][11],0);
+						TextOut(5, 120,1,40+MGetLanguage()*0,20,(uint8_t*)_Menu_FJ[MGetLanguage()][5],0);
+						TextOut(5, 150,1,40+MGetLanguage()*0,20,(uint8_t*)_Menu_FJ[MGetLanguage()][6],0);
+						TextOut(5, 180,1,40+MGetLanguage()*0,20,(uint8_t*)_Menu_FJ[MGetLanguage()][7],0);
+						TextOut(5, 210,1,40+MGetLanguage()*0,20,(uint8_t*)_Menu_FJ[MGetLanguage()][8],0);
+						TextOut(5, 240,1,40+MGetLanguage()*0,20,(uint8_t*)_Menu_FJ[MGetLanguage()][9],0);
+						TextOut(5, 270,1,40+MGetLanguage()*0,20,(uint8_t*)_Menu_FJ[MGetLanguage()][10],0);
+						TextOut(5, 300,1,40+MGetLanguage()*0,20,(uint8_t*)_Menu_FJ[MGetLanguage()][11],0);
 						EraseDrawRectangle(26*C_ECHAR_HDOT-200, 380, 26*C_ECHAR_HDOT + (8+1)*C_CCHAR_HDOT, 380 + 1 * (C_CCHAR_VDOT+12)) ;
-						TextOut(27*C_ECHAR_HDOT-200,380+4,1,30,50,(u_char*)_MenuPrompt_P2[MGetLanguage()][0],4);
+						TextOut(27*C_ECHAR_HDOT-200,380+4,1,30,50,(uint8_t*)_MenuPrompt_P2[MGetLanguage()][0],4);
 
 						MSetColor(C_CR_PARA);
 
@@ -9977,19 +9977,19 @@ int TestForging(void)
 void BScan(void)//B扫描
 {
     int gain ,range;//, angle, speed;
-    u_int amp,nextamp;
+    uint32_t amp,nextamp;
 //	int gatetype = 0;
-    u_int gateamp;
-//	u_int char_len,row_number,crow_height;
+    uint32_t gateamp;
+//	uint32_t char_len,row_number,crow_height;
     //int number,deci_len;
 //	int xposPeak,yposPeak,
     int xpos,ypos,x0,y0;
-    u_int preElapsedtime;
+    uint32_t preElapsedtime;
     int keycode;
-    u_char* sampbuffer;
+    uint8_t* sampbuffer;
     int i, j, k,l;
     int tm ;
-    u_char bug[C_LEN_BUFF][4][2];
+    uint8_t bug[C_LEN_BUFF][4][2];
     int ip,jp,kp,Unit;//,lp;
     int flag;//=0表示前一个点无底波无回波，1有底波无回波，2有回波无底波，3有回波有底波
     int preypos=0;

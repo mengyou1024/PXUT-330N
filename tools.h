@@ -4,13 +4,13 @@
 #include "sysdef.h"
 #include "M10Era.h"
 
-#define RGB(r, g ,b)  ((u_int) (((u_char) (r) | \
-    ((u_short) (g) << 8)) | \
-    (((u_int) (u_char) (b)) << 16)))
+#define RGB(r, g ,b)  ((uint32_t) (((uint8_t) (r) | \
+    ((uint16_t) (g) << 8)) | \
+    (((uint32_t) (uint8_t) (b)) << 16)))
 
 
-void delay(u_int interval);
-u_int drawpixel(u_int x,u_int y,u_int color);
+void delay(uint32_t interval);
+uint32_t drawpixel(uint32_t x,uint32_t y,uint32_t color);
 
 void   _trace(int x, int y,char   *prompt,   ...);
 

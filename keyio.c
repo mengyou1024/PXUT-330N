@@ -249,7 +249,7 @@ int MGetKey2()
     return keycode;
 }
 extern int SecondTime;
-int MGetKeyCode(u_int time)
+int MGetKeyCode(uint32_t time)
 {
     TIME_CLOCK TimeClock;
     static int elapsedtime1=0;
@@ -269,7 +269,7 @@ int MGetKeyCode(u_int time)
 
 
 
-    u_char samekeytime;		//Í¬Ò»¼üÖµÁ¬Ðø°´¼ü´ÎÊý
+    uint8_t samekeytime;		//Í¬Ò»¼üÖµÁ¬Ðø°´¼ü´ÎÊý
     int offset;
 
 //    keycode = ( keycode > 0)? keycode : 0 ;
@@ -278,8 +278,8 @@ int MGetKeyCode(u_int time)
 
 
     int startchargetime;			//¿ªÊ¼³äÊ±Ê±¼ä
-    u_char powerlevel=0;
-    u_char powerstatus=0;
+    uint8_t powerlevel=0;
+    uint8_t powerstatus=0;
     int ontime = elapsedtime / (1000*60);		//¿ª»úÊ±³¤£¬µ¥Î»·ÖÖÓ
 
     if( MGetAcquisitionEnable() == 1 && SecondTime<=elapsedtime)
@@ -436,7 +436,7 @@ int MGetKeyCode(u_int time)
 //		MSetAcquisitionEnable(MGetAcquisitionEnable(),C_SETMODE_SETSAVE);
     return keycode;
 }
-int MGetAnyKey(u_int time)
+int MGetAnyKey(uint32_t time)
 {
     int keycode;
     do
@@ -465,7 +465,7 @@ int MAnyKeyReturn(void)		/*Ö±µ½ÊÍ·Åµ±Ç°°´¼ü²¢ÓÐÐÂµÄ°´¼ü²ÅÍË³ö*/
     return keycode;
 }
 
-int MAnyTimeReturn(u_int time)			/*Ö±µ½ÓÐ°´¼ü»òÊ±¼äµ½²ÅÍË³ö */
+int MAnyTimeReturn(uint32_t time)			/*Ö±µ½ÓÐ°´¼ü»òÊ±¼äµ½²ÅÍË³ö */
 {
     int keycode = 0;
     int i = 0;
@@ -508,11 +508,11 @@ void MKeyRlx(void)		/*Ö»ÓÐ°´¼üÒÑÊÍ·Å²ÅÍË³ö*/
     //{}
 }
 
-int CopyMemoryToSystem(void* memsrc, u_int bytesize,u_int copymode)
+int CopyMemoryToSystem(void* memsrc, uint32_t bytesize,uint32_t copymode)
 {
-    u_int rev=0,i;
+    uint32_t rev=0,i;
 
-    u_int FileMax=bytesize;//(bytesize+4095)/4096*4096;
+    uint32_t FileMax=bytesize;//(bytesize+4095)/4096*4096;
     char temp[FileMax];
     switch(copymode)
     {
@@ -546,10 +546,10 @@ int CopyMemoryToSystem(void* memsrc, u_int bytesize,u_int copymode)
     return rev;
 }
 
-int CopyMemoryAllData(u_int file_total,u_int copymode)
+int CopyMemoryAllData(uint32_t file_total,uint32_t copymode)
 {
     long int FileMax=file_total*C_LEN_FILE;
-    u_int length=C_LEN_FILE;
+    uint32_t length=C_LEN_FILE;
     char temp[FileMax];
     int offset = C_OFF_FILE;
     int rev=0;
@@ -580,7 +580,7 @@ int CopyMemoryAllData(u_int file_total,u_int copymode)
 
 }
 
-int CopyMemoryAllSystem(u_int copymode)
+int CopyMemoryAllSystem(uint32_t copymode)
 {
     int offset = C_OFF_BATTERY;//C_OFF_INIT;
     int FileMax=C_OFF_FILEINFO-C_OFF_BATTERY;//(C_OFF_FILE+4095)/4096*4096;//C_OFF_FILEMAX/4;C_OFF_FILE
@@ -606,7 +606,7 @@ int CopyMemoryAllSystem(u_int copymode)
     return rev;
 }
 
-int MCopyProtectedMemory(void* memdes, void* memsrc, u_int bytesize, u_int copymode)
+int MCopyProtectedMemory(void* memdes, void* memsrc, uint32_t bytesize, uint32_t copymode)
 {
     switch(copymode)
     {
@@ -628,7 +628,7 @@ void MFclearScreen(void)
 {
 
     int offset = C_OFF_SAMP;
-    u_char sampbuff[C_LEN_SAMP+1];
+    uint8_t sampbuff[C_LEN_SAMP+1];
     int i;
     for( i = 0 ; i <= C_LEN_SAMP; i++)sampbuff[i] = 0;
     MCopyProtectedMemory( (void*)offset, sampbuff, C_LEN_SAMP, PM_COPY_WRITE);//Çå°üÂç´æ´¢Çø
@@ -636,7 +636,7 @@ void MFclearScreen(void)
     EraseWindow(0, 0, C_HORIDOT_VIDEO-10, C_VERTDOT_VIDEO) ;
 }
 
-void MCTextOut(u_int x, u_int y, u_short* pzText, u_int len)
+void MCTextOut(uint32_t x, uint32_t y, uint16_t* pzText, uint32_t len)
 {
     int i;
     x += HoriOffsetScreen;
@@ -644,16 +644,16 @@ void MCTextOut(u_int x, u_int y, u_short* pzText, u_int len)
 
     for(i=0; i<len; i++)
     {
-        WriteCharDots24((u_short *)pzText+i,x+i*C_CCHAR_HDOT, y) ;
+        WriteCharDots24((uint16_t *)pzText+i,x+i*C_CCHAR_HDOT, y) ;
     }
     //  CTextOut(x , y,  pzText,  len) ;
     /*  for(i=0; i<len; i++)
       {
-          WriteCharDots32((u_short *)pzText+i,x+i*C_CCHAR_HDOT, y) ;
+          WriteCharDots32((uint16_t *)pzText+i,x+i*C_CCHAR_HDOT, y) ;
       }*/
 }
 
-void METextOut(u_int x, u_int y, char* pzText, u_int len)
+void METextOut(uint32_t x, uint32_t y, char* pzText, uint32_t len)
 {
     int i;
     // x += HoriOffsetScreen;
@@ -661,12 +661,12 @@ void METextOut(u_int x, u_int y, char* pzText, u_int len)
     //Ex (x , y,  pzText,  len) ;
     for(i=0; i<len; i++)
     {
-        // WriteCharDots24((u_char *)pzText+i,x+i*C_ECHAR_HDOT, y) ;
-        WriteCharDots16((u_char *)pzText+i,x+i*C_ECHAR_HDOT, y) ;
+        // WriteCharDots24((uint8_t *)pzText+i,x+i*C_ECHAR_HDOT, y) ;
+        WriteCharDots16((uint8_t *)pzText+i,x+i*C_ECHAR_HDOT, y) ;
     }
 }
 
-void MDrawLine(u_int x1, u_int y1, u_int x2, u_int y2,u_int BGColor )   //BGColor,±³¾°É«
+void MDrawLine(uint32_t x1, uint32_t y1, uint32_t x2, uint32_t y2,uint32_t BGColor )   //BGColor,±³¾°É«
 {
     int temp;
 
@@ -740,7 +740,7 @@ void MDrawPixel(int x, int y, int mode)
 #endif
     }
 }
-u_int MGetPixels(u_int x, u_int y, u_int len)
+uint32_t MGetPixels(uint32_t x, uint32_t y, uint32_t len)
 {
     int i,j,k;
 #if C_COLOR == 1
@@ -1253,8 +1253,8 @@ void m_DrawCircle(int x,int y,int radius)
 }
 
 #define C_PUSH_TIME 2
-u_int push_left[C_PUSH_TIME],push_top[C_PUSH_TIME],push_top_init, push_right[C_PUSH_TIME],push_bottom[C_PUSH_TIME];
-int MPushWindow(u_int left, u_int top, u_int right, u_int bottom)
+uint32_t push_left[C_PUSH_TIME],push_top[C_PUSH_TIME],push_top_init, push_right[C_PUSH_TIME],push_bottom[C_PUSH_TIME];
+int MPushWindow(uint32_t left, uint32_t top, uint32_t right, uint32_t bottom)
 {
     int i;
     i = 0;
@@ -1333,7 +1333,7 @@ int MPopWindow(void)
     return 0;
 }
 
-void MEraseWindow(u_int left, u_int top, u_int right, u_int bottom)
+void MEraseWindow(uint32_t left, uint32_t top, uint32_t right, uint32_t bottom)
 {
     left += HoriOffsetScreen;
     right += HoriOffsetScreen;
@@ -1353,7 +1353,7 @@ void MEraseWindow(u_int left, u_int top, u_int right, u_int bottom)
 #endif
 }
 
-void MInvertWindow(u_int left, u_int top, u_int right, u_int bottom)
+void MInvertWindow(uint32_t left, uint32_t top, uint32_t right, uint32_t bottom)
 {
     left += HoriOffsetScreen;
     right += HoriOffsetScreen;
@@ -1387,9 +1387,9 @@ void   MDacGatePeak()
 #endif
 }
 
-int mSendByteToPrinter(u_int pdata)
+int mSendByteToPrinter(uint32_t pdata)
 {
-    u_int fn, tm0, tm ;
+    uint32_t fn, tm0, tm ;
 
 
     tm0 = GetElapsedTime() ;
@@ -1404,9 +1404,9 @@ int mSendByteToPrinter(u_int pdata)
     return fn;
 }
 
-void MSetEchoColor(u_int pos_s, u_int pos_e, u_int rgb)
+void MSetEchoColor(uint32_t pos_s, uint32_t pos_e, uint32_t rgb)
 {
-    u_int Color;
+    uint32_t Color;
 #if C_COLOR == 1 || C_DEVLIB == 23
     if( pos_e >= C_SCREEN_WIDTH)pos_e = C_SCREEN_WIDTH - 1;
     else if( pos_e < 1)pos_e = 1;
@@ -1436,7 +1436,7 @@ void MSetEchoColor(u_int pos_s, u_int pos_e, u_int rgb)
 //	SetEchoColor(0, 300,  rgb) ;
 #endif
 }
-u_int 	MSetEchoRange(u_int range)
+uint32_t 	MSetEchoRange(uint32_t range)
 {
     range = range * C_HORIUNIT / C_COORHORIUNIT;
 #if C_DEVLIB == 4
@@ -1445,7 +1445,7 @@ u_int 	MSetEchoRange(u_int range)
     return SetEchoRange(range);
 #endif
 }
-void 	MSetDisplayColor(u_int rgb)
+void 	MSetDisplayColor(uint32_t rgb)
 {
 #if C_COLOR == 1 || C_DEVLIB == 23
     // rgb &= 0x0ff;
@@ -1455,11 +1455,11 @@ void 	MSetDisplayColor(u_int rgb)
 #endif
 
 }
-int DrawWave(u_char *buff, int start, int dots)
+int DrawWave(uint8_t *buff, int start, int dots)
 {
     int i ;
     int hpos,lpos = 0;
-    u_char buffer[C_COORWIDTH + 1];
+    uint8_t buffer[C_COORWIDTH + 1];
 
     if( start >= C_COORWIDTH)return -1;
     if( start + dots >= C_COORWIDTH)dots = C_COORWIDTH - start;
@@ -1501,7 +1501,7 @@ int DrawWave(u_char *buff, int start, int dots)
 
     return 1;
 }
-u_int DrawMultiEdge(int xpos,int ypos,u_int edge,float angle,int len)	/*»­¶à±ßÐÎ*/
+uint32_t DrawMultiEdge(int xpos,int ypos,uint32_t edge,float angle,int len)	/*»­¶à±ßÐÎ*/
 {
     /*ÒÔÖ¸¶¨Î»ÖÃÎªÖÐÐÄ£¬»­±ßÊý=edge£¬ÇãÐ±½Ç=angle£¬¶¥µãµ½ÖÐÐÄ¾àÀëÎªlenµÄ¶à±ßÐÎ*/
 
@@ -1637,7 +1637,7 @@ int DrawCurver( short * buff,int startposi,int dotnumber)
 }
 
 
-int DrawEnvelope(	u_char * buff,int startposi,int dotnumber)
+int DrawEnvelope(	uint8_t * buff,int startposi,int dotnumber)
 {
     int endposi = startposi + dotnumber ;
     int x1,y1,x2,y2;
@@ -1719,7 +1719,7 @@ int DrawGateCurver( short * buff,int startposi,int dotnumber,int mode)
     return 1;
 }
 
-void DrawRectangle(u_int left, u_int top, u_int right, u_int bottom)
+void DrawRectangle(uint32_t left, uint32_t top, uint32_t right, uint32_t bottom)
 {
     if( left > right )Swap(&left,&right);
     if( top > bottom)Swap(&top,&bottom);
@@ -1729,7 +1729,7 @@ void DrawRectangle(u_int left, u_int top, u_int right, u_int bottom)
     CheckDrawLine(left+1,  bottom, right-1, bottom) ;/* ÏÂ±ß */
 }
 
-u_int CheckDrawLine(int x1,int y1,int x2,int y2)
+uint32_t CheckDrawLine(int x1,int y1,int x2,int y2)
 {
     /*ÔÚÆÁÄ»ÄÚ»­Ò»ÌõÏß£¬³¬³öÆÁÄ»·¶Î§²»ÏÔÊ¾*/
     int temp;
@@ -1795,7 +1795,7 @@ u_int CheckDrawLine(int x1,int y1,int x2,int y2)
 }
 
 /* ÇåÆÁ²¢»­¾ØÐÎ */
-void EraseDrawRectangle(u_int left, u_int top, u_int right, u_int bottom)
+void EraseDrawRectangle(uint32_t left, uint32_t top, uint32_t right, uint32_t bottom)
 {
     MEraseWindow(left, top, right+1, bottom+1) ; /* Çå³ý´°Ìå */
     DrawRectangle(left, top, right, bottom) ; /* »­¾ØÐÎ */
@@ -1806,8 +1806,8 @@ void EraseDrawRectangle(u_int left, u_int top, u_int right, u_int bottom)
 
 
 /* »­Ô²£¬Ô²ÐÄ×ø±êºÍ°ë¾¶ */
-void CirclePlotPoints(u_int, u_int, u_int, u_int) ;
-void DrawCircle(u_int HCenter, u_int VCenter, u_int CircleRadius)
+void CirclePlotPoints(uint32_t, uint32_t, uint32_t, uint32_t) ;
+void DrawCircle(uint32_t HCenter, uint32_t VCenter, uint32_t CircleRadius)
 {
     int x = 0 ;
     int y = CircleRadius ;
@@ -1864,7 +1864,7 @@ void DrawArc1(int x1,int y1,int x2,int y2,int r)//»­´Óµã(x1,y1)µ½µã(x2,y2)°ë¾¶Îª
     }
 }
 /* »­Ô²ÖÜÉÏµÄµã */
-void CirclePlotPoints(u_int HCenter, u_int VCenter, u_int x, u_int y)
+void CirclePlotPoints(uint32_t HCenter, uint32_t VCenter, uint32_t x, uint32_t y)
 {
     MDrawPixel( HCenter + x, VCenter + y, DP_NOT) ;
     MDrawPixel( HCenter - x, VCenter + y, DP_NOT) ;
@@ -1878,7 +1878,7 @@ void CirclePlotPoints(u_int HCenter, u_int VCenter, u_int x, u_int y)
         MDrawPixel( HCenter - y, VCenter - x, DP_NOT) ;
     }
 }
-void DrawCursor(u_int xpos,u_int ypos,u_int mode)	/*»­¹â±ê£¬mode=0Ó¢ÎÄ1ÖÐÎÄ*/
+void DrawCursor(uint32_t xpos,uint32_t ypos,uint32_t mode)	/*»­¹â±ê£¬mode=0Ó¢ÎÄ1ÖÐÎÄ*/
 {
     int operate = 0;	//Èç¹û½øÐÐÁË²Ù×÷ÔòÎª1£¬·ñÔòÎª0
     int offset;
@@ -1920,10 +1920,10 @@ void DrawCursor(u_int xpos,u_int ypos,u_int mode)	/*»­¹â±ê£¬mode=0Ó¢ÎÄ1ÖÐÎÄ*/
     MSetCursorShow( ( MGetCursorShow() + operate)%2  ,0);
     MSetColor(C_CR_UNDO);
 }
-void ClearCursor(u_int mode)	/*Çå¹â±ê£¬mode=0Ó¢ÎÄ1ÖÐÎÄ*/
+void ClearCursor(uint32_t mode)	/*Çå¹â±ê£¬mode=0Ó¢ÎÄ1ÖÐÎÄ*/
 {
     int offset;
-    u_int xpos,ypos;
+    uint32_t xpos,ypos;
 
     offset = C_OFF_STORE + 4;	//4-11		»­¹â±êÊ±µÄ¹â±êÎ»ÖÃxpos
     MCopyProtectedMemory(&xpos, (void*)offset, 4, PM_COPY_READ);
@@ -1935,19 +1935,19 @@ void ClearCursor(u_int mode)	/*Çå¹â±ê£¬mode=0Ó¢ÎÄ1ÖÐÎÄ*/
 }
 
 
-void CMenuOut(u_int xpos,u_int ypos,const u_short pzText[],u_int char_len,u_int row_number,u_int row_height)
+void CMenuOut(uint32_t xpos,uint32_t ypos,const uint16_t pzText[],uint32_t char_len,uint32_t row_number,uint32_t row_height)
 {
     /*ÔÚÖ¸¶¨Î»ÖÃ¸ù¾ÝÃ¿ÐÐ×Ö·ûÊý¡¢ÐÐÊý¡¢ÐÐ¸ßÐ´²Ëµ¥*/
     int i;
     for ( i=0; i< row_number ; i++ )
     {
-        MCTextOut(xpos, ypos, (u_short *)pzText, char_len) ;
+        MCTextOut(xpos, ypos, (uint16_t *)pzText, char_len) ;
         ypos += row_height;
         pzText += char_len;
     }
 }
 
-void EMenuOut(u_int xpos,u_int ypos,const u_char* pzText,u_int char_len,u_int row_number,u_int row_height)
+void EMenuOut(uint32_t xpos,uint32_t ypos,const uint8_t* pzText,uint32_t char_len,uint32_t row_number,uint32_t row_height)
 {
     /*ÔÚÖ¸¶¨Î»ÖÃ¸ù¾ÝÃ¿ÐÐ×Ö·ûÊý¡¢ÐÐÊý¡¢ÐÐ¸ßÐ´²Ëµ¥*/
     int i;
@@ -1958,15 +1958,15 @@ void EMenuOut(u_int xpos,u_int ypos,const u_char* pzText,u_int char_len,u_int ro
         pzText += char_len;
     }
 }
-void CEMenuOut2(u_int xpos,u_int ypos,const u_short* pzText,u_int char_len,u_int row_number,u_int row_height)
+void CEMenuOut2(uint32_t xpos,uint32_t ypos,const uint16_t* pzText,uint32_t char_len,uint32_t row_number,uint32_t row_height)
 {
     /*ÔÚÖ¸¶¨Î»ÖÃ¸ù¾ÝÃ¿ÐÐ×Ö·ûÊý¡¢ÐÐÊý¡¢ÐÐ¸ßÐ´²Ëµ¥*/
 
-    u_int sour_xpos = xpos;
+    uint32_t sour_xpos = xpos;
     int row,col,pointer;
-    u_short textvalue;
-    u_short cpzText[2];
-    u_char epzText[3];
+    uint16_t textvalue;
+    uint16_t cpzText[2];
+    uint8_t epzText[3];
 
     pointer = 0;
     if(char_len > 80 )char_len = 0;
@@ -2002,7 +2002,7 @@ void CEMenuOut2(u_int xpos,u_int ypos,const u_short* pzText,u_int char_len,u_int
             else
             {
                 cpzText[0] = textvalue;
-                MCTextOut(xpos, ypos, (u_short *)cpzText, 1) ;
+                MCTextOut(xpos, ypos, (uint16_t *)cpzText, 1) ;
                 xpos += C_CCHAR_HDOT;
             }
             pointer++;		//Ö¸ÕëÖ¸ÏòÏÂÒ»¸ö
@@ -2012,15 +2012,15 @@ void CEMenuOut2(u_int xpos,u_int ypos,const u_short* pzText,u_int char_len,u_int
     }
 }
 
-void CEMenuOut(u_int xpos,u_int ypos,const u_short* pzText,u_int char_len,u_int row_number,u_int row_height)
+void CEMenuOut(uint32_t xpos,uint32_t ypos,const uint16_t* pzText,uint32_t char_len,uint32_t row_number,uint32_t row_height)
 {
     /*ÔÚÖ¸¶¨Î»ÖÃ¸ù¾ÝÃ¿ÐÐ×Ö·ûÊý¡¢ÐÐÊý¡¢ÐÐ¸ßÐ´²Ëµ¥*/
 
-    u_int sour_xpos = xpos;
+    uint32_t sour_xpos = xpos;
     int row,col,pointer;
-    u_short textvalue;
-    u_short cpzText[2];
-    u_char epzText[3];
+    uint16_t textvalue;
+    uint16_t cpzText[2];
+    uint8_t epzText[3];
 
     pointer = 0;
     if(char_len > 80 )char_len = 0;
@@ -2055,7 +2055,7 @@ void CEMenuOut(u_int xpos,u_int ypos,const u_short* pzText,u_int char_len,u_int 
             else
             {
                 cpzText[0] = textvalue;
-                MCTextOut(xpos, ypos, (u_short *)cpzText, 1) ;
+                MCTextOut(xpos, ypos, (uint16_t *)cpzText, 1) ;
                 xpos += C_CCHAR_HDOT;
             }
             pointer++;		//Ö¸ÕëÖ¸ÏòÏÂÒ»¸ö
@@ -2065,13 +2065,13 @@ void CEMenuOut(u_int xpos,u_int ypos,const u_short* pzText,u_int char_len,u_int 
     }
 }
 
-int CETextOut(u_int xpos,u_int ypos,u_int lpos,u_int rpos,const u_short* pzText,u_int char_max,u_int row_height,u_int type)
+int CETextOut(uint32_t xpos,uint32_t ypos,uint32_t lpos,uint32_t rpos,const uint16_t* pzText,uint32_t char_max,uint32_t row_height,uint32_t type)
 /*×î×ólpos×îÓÒrpos£¬¿ªÊ¼(xpos,ypos)£¬¹²Ð´×Ö·ûÊýchar_max,Ã¿ÐÐµãÊý£¬ÎÄ±¾ÀàÐÍtype=0Ó¢1ÖÐ*/
 {
-    u_short textvalue;
-    u_short cpzText[2];
-    u_char epzText[3];
-    u_int i;
+    uint16_t textvalue;
+    uint16_t cpzText[2];
+    uint8_t epzText[3];
+    uint32_t i;
 
 //	lpos = (lpos + 7 )/8 * 8 ;
 //	rpos = rpos/8 * 8;	//ÒÔ×Ö½ÚÈ¡Õû
@@ -2099,7 +2099,7 @@ int CETextOut(u_int xpos,u_int ypos,u_int lpos,u_int rpos,const u_short* pzText,
         else if(textvalue >= 256)
         {
             cpzText[0] = textvalue;
-            MCTextOut(xpos, ypos, (u_short *)cpzText, 1) ;
+            MCTextOut(xpos, ypos, (uint16_t *)cpzText, 1) ;
             xpos += C_CCHAR_HDOT;
         }
         else
@@ -2115,7 +2115,7 @@ int CETextOut(u_int xpos,u_int ypos,u_int lpos,u_int rpos,const u_short* pzText,
     return C_TRUE;
 }
 
-void Write_Space(u_int xpos ,u_int ypos,u_int len,u_int mode)
+void Write_Space(uint32_t xpos ,uint32_t ypos,uint32_t len,uint32_t mode)
 {
     int i,j;
 
@@ -2131,14 +2131,14 @@ void Write_Space(u_int xpos ,u_int ypos,u_int len,u_int mode)
         //  ypos += C_ECHAR_VDOT;
     }
 }
-int CETextOut2(int xpos,int ypos,const u_short* pzText,int col_max,int row_number,int row_height,int serial,int align)
+int CETextOut2(int xpos,int ypos,const uint16_t* pzText,int col_max,int row_number,int row_height,int serial,int align)
 /*¿ªÊ¼(xpos,ypos)£¬Ã¿ÐÐ×î¶à×Ö·ûÊýcol_max(Ó¢ÎÄ),ÐÐÊýrow_number,ÐÐ¸ßrow_height,¿¼ÂÇ±àºÅserial=0²»1ÓÐ,¶ÔÆë·½Ê½align£½0×ó1ÓÒ2ÖÐ¼ä3Á½¶Ë*/
 {
     int sour_xpos = xpos;
-    u_short textvalue;
-    u_short cpzText[2];
-    u_char epzText[3];
-    u_short *pTemp;	//ÁÙÊ±Ö¸Õë
+    uint16_t textvalue;
+    uint16_t cpzText[2];
+    uint8_t epzText[3];
+    uint16_t *pTemp;	//ÁÙÊ±Ö¸Õë
     int len_erow;//Ã¿ÐÐÓ¢ÎÄ×Ö·ûÊý£¬Ã¿¸öÖÐÎÄ×÷Á½¸öÓ¢ÎÄ
     int len_row;//Ã¿ÐÐ×Ö·ûÊý£¬Ã¿¸öÖÐÎÄ×ÖÎª1£¬Ã¿¸öÓ¢ÎÄ´Ê£¨ÒÔ¿Õ¸ñ½áÎ²£©Ò²Îª1
     int len_char;//Ã¿ÐÐ×Ö·ûÊý£¬Ã¿¸öÖÐÎÄ×ÖÎª1£¬Ã¿¸öÓ¢ÎÄ×ÖÒ²Îª1
@@ -2148,11 +2148,11 @@ int CETextOut2(int xpos,int ypos,const u_short* pzText,int col_max,int row_numbe
     int pointer;
 
     MEraseWindow(xpos, ypos, xpos+C_ECHAR_HDOT*col_max,ypos+row_number*row_height-(row_height-17) ) ;	//ÇåÏÔÊ¾Çø
-    pTemp = (u_short*)pzText ;
+    pTemp = (uint16_t*)pzText ;
     for(i = 0  , len_char = 0 ; i < row_number; i++,ypos += row_height)
     {
         xpos = sour_xpos ;
-        pTemp = (u_short*)(pTemp + len_char);
+        pTemp = (uint16_t*)(pTemp + len_char);
         for( j = 0, len_dots = 0, len_row = 0, len_erow = 0, len_char = 1 ; j < col_max ; j++, len_erow++, len_char++)//10H»»ÐÐ·û
         {
             if( *(pTemp+j) < 32)break;	//Óöµ½»»ÐÐ·û
@@ -2191,7 +2191,7 @@ int CETextOut2(int xpos,int ypos,const u_short* pzText,int col_max,int row_numbe
                 {
                     //ÎªÖÐÎÄ×Ö·û
                     cpzText[0] = textvalue;
-                    MCTextOut(xpos, ypos, (u_short *)cpzText, 1) ;
+                    MCTextOut(xpos, ypos, (uint16_t *)cpzText, 1) ;
                     xpos += C_CCHAR_HDOT;
                 }
                 else if( textvalue < 32 )break;//Ð¡ÓÚ32Îª¿ØÖÆ·û£¬±ÈÈç10h»»ÐÐ13h»Ø³µ
@@ -2231,7 +2231,7 @@ int CETextOut2(int xpos,int ypos,const u_short* pzText,int col_max,int row_numbe
                 {
                     //ÎªÖÐÎÄ×Ö·û
                     cpzText[0] = textvalue;
-                    MCTextOut(xpos, ypos, (u_short *)cpzText, 1) ;
+                    MCTextOut(xpos, ypos, (uint16_t *)cpzText, 1) ;
                     xpos += C_CCHAR_HDOT;
                 }
                 else break;//Ð¡ÓÚ32Îª¿ØÖÆ·û£¬±ÈÈç10h»»ÐÐ13h»Ø³µ
@@ -2241,14 +2241,14 @@ int CETextOut2(int xpos,int ypos,const u_short* pzText,int col_max,int row_numbe
     }
     return C_TRUE;
 }
-int Write_UNumber(u_int xpos,u_int ypos,u_int number,u_int total_len,u_int deci_len)
+int Write_UNumber(uint32_t xpos,uint32_t ypos,uint32_t number,uint32_t total_len,uint32_t deci_len)
 {
     /*ÔÚÖ¸¶¨Î»ÖÃ(xpos,yposÎªÆÁÄ»ÉÏµÄµã£©Ð´ÎÞ·ûºÅÊý£¬total_lenÎª¿ÉÐ´×Ü³¤¶È£¨°üÀ¨µãÕûÊýÐ¡Êý³¤£©£¬deci_lenÎªÐ¡ÊýÎ»³¤¶È*/
 
     int iLoop;
     int int_len,actual_len = 1; /*×Ü³¤¶È,Êµ¼Ê³¤¶È */
-    u_char AscChar;
-    u_int int_number,deci_number,power_number; /*ÕûÊý£¬Ð¡Êý£¬ÃÝ */
+    uint8_t AscChar;
+    uint32_t int_number,deci_number,power_number; /*ÕûÊý£¬Ð¡Êý£¬ÃÝ */
 
     do
     {
@@ -2309,10 +2309,10 @@ int Write_UNumber(u_int xpos,u_int ypos,u_int number,u_int total_len,u_int deci_
     return C_TRUE;
 }
 
-int Write_Number(u_int xpos,u_int ypos,int number,u_int total_len,u_int deci_len,u_int sign)
+int Write_Number(uint32_t xpos,uint32_t ypos,int number,uint32_t total_len,uint32_t deci_len,uint32_t sign)
 {
     /*ÔÚÖ¸¶¨Î»ÖÃ(xpos,yposÎªÆÁÄ»ÉÏµÄµã£©Ð´ÓÐ·ûºÅÊý£¬total_lenÎª×Ü³¤¶È£¨°üÀ¨·ûºÅµãÕûÊýÐ¡Êý£©£¬deci_lenÎªÐ¡ÊýÎ»³¤¶È*/
-    u_char AscChar = 0;
+    uint8_t AscChar = 0;
 
     if (sign)
     {
@@ -2344,7 +2344,7 @@ int Write_Number(u_int xpos,u_int ypos,int number,u_int total_len,u_int deci_len
     }
 }
 
-void Write_Ascii(u_int xpos,u_int ypos,u_char AscChar)
+void Write_Ascii(uint32_t xpos,uint32_t ypos,uint8_t AscChar)
 {
     /*ÔÚÖ¸¶¨Î»ÖÃÐ´Ò»¸öASCII×Ö·û*/
 
@@ -2354,7 +2354,7 @@ void Write_Ascii(u_int xpos,u_int ypos,u_char AscChar)
     METextOut(xpos,ypos, pzText, 1) ;
 }
 
-void Write_Crystal(u_int xpos,u_int ypos,u_int crystal_l,u_int crystal_w)		/*Ð´¾§Æ¬³ß´ç*/
+void Write_Crystal(uint32_t xpos,uint32_t ypos,uint32_t crystal_l,uint32_t crystal_w)		/*Ð´¾§Æ¬³ß´ç*/
 {
     int number;
 
@@ -2398,7 +2398,7 @@ void Write_Crystal(u_int xpos,u_int ypos,u_int crystal_l,u_int crystal_w)		/*Ð´¾
     }
 }
 
-void Write_Crystals(u_int xpos,u_int ypos,u_int crystal_l,u_int crystal_w)		/*Ð´¾§Æ¬³ß´ç*/
+void Write_Crystals(uint32_t xpos,uint32_t ypos,uint32_t crystal_l,uint32_t crystal_w)		/*Ð´¾§Æ¬³ß´ç*/
 {
     int number;
 
@@ -2442,25 +2442,25 @@ void Write_Crystals(u_int xpos,u_int ypos,u_int crystal_l,u_int crystal_w)		/*Ð´
     }
 }
 
-int Input_Crystal(u_int xpos1,u_int ypos1,int *number_l,int *number_w)			//ÊäÈë¾§Æ¬³ß´ç
+int Input_Crystal(uint32_t xpos1,uint32_t ypos1,int *number_l,int *number_w)			//ÊäÈë¾§Æ¬³ß´ç
 {
-    u_int xpos = xpos1;
-    u_int ypos = ypos1;
+    uint32_t xpos = xpos1;
+    uint32_t ypos = ypos1;
 
-    u_int s_xPos =xpos ;		//³õÊ¼Ë®Æ½Î»ÖÃ
-    u_int int_len ;			//´ú±íµ±Ç°ÊäÈëµÄÕûÊýÎ»
-    u_int int_len1 =0;			//´ú±íµ±Ç°ÊäÈëµÄÕûÊýÎ»
-    u_int deci_len1=0;	//´ú±íµ±Ç°ÊäÈëµÄÐ¡ÊýÎ»
-    u_int int_len2 =0;			//´ú±íµ±Ç°ÊäÈëµÄÕûÊýÎ»
-    u_int deci_len2=0;	//´ú±íµ±Ç°ÊäÈëµÄÐ¡ÊýÎ»
-    u_int exitcode=0;
+    uint32_t s_xPos =xpos ;		//³õÊ¼Ë®Æ½Î»ÖÃ
+    uint32_t int_len ;			//´ú±íµ±Ç°ÊäÈëµÄÕûÊýÎ»
+    uint32_t int_len1 =0;			//´ú±íµ±Ç°ÊäÈëµÄÕûÊýÎ»
+    uint32_t deci_len1=0;	//´ú±íµ±Ç°ÊäÈëµÄÐ¡ÊýÎ»
+    uint32_t int_len2 =0;			//´ú±íµ±Ç°ÊäÈëµÄÕûÊýÎ»
+    uint32_t deci_len2=0;	//´ú±íµ±Ç°ÊäÈëµÄÐ¡ÊýÎ»
+    uint32_t exitcode=0;
 
-    u_int temp_number = 0;
-    u_int temp_number1 = 0;
-    u_int temp_number2 = 0;
-    u_int temp_multiple=1;
+    uint32_t temp_number = 0;
+    uint32_t temp_number1 = 0;
+    uint32_t temp_number2 = 0;
+    uint32_t temp_multiple=1;
     int keycode=0;
-    u_char AscChar = 0;
+    uint8_t AscChar = 0;
 
     int i;
     int_len =13;
@@ -2639,7 +2639,7 @@ int Input_Crystal(u_int xpos1,u_int ypos1,int *number_l,int *number_w)			//ÊäÈë¾
     return 1;
 }
 
-int Input_Number(u_int xpos,u_int ypos,int *number,u_int int_len,int *deci_len,u_int sign )
+int Input_Number(uint32_t xpos,uint32_t ypos,int *number,uint32_t int_len,int *deci_len,uint32_t sign )
 {
     /*ÔÚÖ¸¶¨Î»ÖÃ(xpos,yposÎªÆÁÄ»ÉÏµÄµã£©ÊäÈëÓÐ·ûºÅÊý£¬int_lenÎªÕûÊýÎ»×î´ó³¤¶È£¬
     deci_lenÎªÐ¡ÊýÎ»×î´ó³¤¶È,ÈçÎª¸ºÊýÔò¿É±äÐ¡Êý³¤¶È£¬signÎª·ûºÅ0ÎÞ·ûºÅ1ÓÐ·ûºÅ*/
@@ -2647,11 +2647,11 @@ int Input_Number(u_int xpos,u_int ypos,int *number,u_int int_len,int *deci_len,u
 //	int temp_number;
     int temp_sign = 0;
     int total_len; /*×Ü³¤¶È*/
-    u_int s_xPos = xpos;		/*³õÊ¼Ë®Æ½Î»ÖÃ*/
+    uint32_t s_xPos = xpos;		/*³õÊ¼Ë®Æ½Î»ÖÃ*/
     int keycode = 0;
     int exitcode = 0;
-    u_char AscChar = 0;
-    u_int int_number = 0;
+    uint8_t AscChar = 0;
+    uint32_t int_number = 0;
     int i;
 
     if (deci_len !=0)
@@ -2780,17 +2780,17 @@ int Input_Number(u_int xpos,u_int ypos,int *number,u_int int_len,int *deci_len,u
 int signFlag ;
 
 
-int Input_Float(u_int xpos,u_int ypos,float *number,u_int int_len,u_int deci_len,u_int sign)
+int Input_Float(uint32_t xpos,uint32_t ypos,float *number,uint32_t int_len,uint32_t deci_len,uint32_t sign)
 {
     /*ÔÚÖ¸¶¨Î»ÖÃ(xpos,yposÎªÆÁÄ»ÉÏµÄµã£©ÊäÈë¸¡µãÊý£¬int_lenÎªÕûÊýÎ»×î´ó³¤¶È£¬
     deci_lenÎªÐ¡ÊýÎ»×î´ó³¤¶È,signÎª·ûºÅ0ÎÞ·ûºÅ1ÓÐ·ûºÅ*/
 
-    u_int total_len,temp_deci_len ; /*×Ü³¤¶È*/
-    u_int s_xPos = xpos;		/*³õÊ¼Ë®Æ½Î»ÖÃ*/
+    uint32_t total_len,temp_deci_len ; /*×Ü³¤¶È*/
+    uint32_t s_xPos = xpos;		/*³õÊ¼Ë®Æ½Î»ÖÃ*/
     int keycode;
     int exitcode = 0,temp_sign;
-    u_char AscChar = 0;
-    u_int int_number = 0;
+    uint8_t AscChar = 0;
+    uint32_t int_number = 0;
     float deci_number = 1.0;
     int i;
 
@@ -2860,39 +2860,39 @@ int Input_Float(u_int xpos,u_int ypos,float *number,u_int int_len,u_int deci_len
     else return 1;
 }
 
-int EMessageBox( int x,int y, u_char * epText,int len,int mode )
+int EMessageBox( int x,int y, uint8_t * epText,int len,int mode )
 {
     int len1 = 0, len2 = 0;
     int x1,y1,x2,y2;
-    u_short *szText;
+    uint16_t *szText;
     int keycode;
     int retvalue;
 
-    const u_short _MB_OK[] =
+    const uint16_t _MB_OK[] =
     {
         ENTER,CH(4023),CH(2208),
     };//(»Ø³µ)È·¶¨
-    const u_short _MB_CANCEL[] =
+    const uint16_t _MB_CANCEL[] =
     {
         '#',CH(4001),CH(4791),
     };//£¨£££©È¡Ïû
-    const u_short _MB_OKCANCEL[] =
+    const uint16_t _MB_OKCANCEL[] =
     {
         ENTER,CH(4023),CH(2208),' ','#',CH(4001),CH(4791),
     };//(»Ø³µ)È·¶¨ £¨£££©È¡Ïû
-    const u_short _MB_YES[] =
+    const uint16_t _MB_YES[] =
     {
         'Y',CH(4239),
     };//(Y)ÊÇ
-    const u_short _MB_NO[] =
+    const uint16_t _MB_NO[] =
     {
         'N',CH(2381),
     };//(N)·ñ
-    const u_short _MB_YESNO[] =
+    const uint16_t _MB_YESNO[] =
     {
         'Y',CH(4239),' ','N',CH(2381),
     };//(Y)ÊÇ (N)·ñ
-    szText = (u_short *)_MB_OK;
+    szText = (uint16_t *)_MB_OK;
     x1 = x2 = x+8;
     y1 = y+10;
     y2 = y + 32+4;
@@ -2900,27 +2900,27 @@ int EMessageBox( int x,int y, u_char * epText,int len,int mode )
     switch( mode )
     {
     case MB_OK:
-        szText = (u_short *)_MB_OK;
+        szText = (uint16_t *)_MB_OK;
         len2 = 3;
         break;
     case MB_CANCEL:
-        szText = (u_short *)_MB_CANCEL;
+        szText = (uint16_t *)_MB_CANCEL;
         len2 = 3;
         break;
     case MB_OKCANCEL:
-        szText = (u_short *)_MB_OKCANCEL;
+        szText = (uint16_t *)_MB_OKCANCEL;
         len2 = 7;
         break;
     case MB_YES:
-        szText = (u_short *)_MB_YES;
+        szText = (uint16_t *)_MB_YES;
         len2 = 2;
         break;
     case MB_NO:
-        szText = (u_short *)_MB_NO;
+        szText = (uint16_t *)_MB_NO;
         len2 = 2;
         break;
     case MB_YESNO:
-        szText = (u_short *)_MB_YESNO;
+        szText = (uint16_t *)_MB_YESNO;
         len2 = 5;
         break;
     }
@@ -2955,40 +2955,40 @@ int EMessageBox( int x,int y, u_char * epText,int len,int mode )
     MPopWindow();
     return retvalue;
 }
-int EMessageBox2( int x,int y, u_char * epText,int len, int row,int mode )
+int EMessageBox2( int x,int y, uint8_t * epText,int len, int row,int mode )
 {
     int len1 = 0, len2 = 0;
     int x1,y1,x2,y2;
-    u_short *szText;
+    uint16_t *szText;
     int keycode;
     int row_height = 32;
     int retvalue;
 
-    const u_short _MB_OK[] =
+    const uint16_t _MB_OK[] =
     {
         ENTER,
     };//(»Ø³µ)È·¶¨
-    const u_short _MB_CANCEL[] =
+    const uint16_t _MB_CANCEL[] =
     {
         '#',
     };//£¨£££©È¡Ïû
-    const u_short _MB_OKCANCEL[] =
+    const uint16_t _MB_OKCANCEL[] =
     {
         ENTER,' ','#',
     };//(»Ø³µ)È·¶¨ £¨£££©È¡Ïû
-    const u_short _MB_YES[] =
+    const uint16_t _MB_YES[] =
     {
         'Y',
     };//(Y)ÊÇ
-    const u_short _MB_NO[] =
+    const uint16_t _MB_NO[] =
     {
         'N',
     };//(N)·ñ
-    const u_short _MB_YESNO[] =
+    const uint16_t _MB_YESNO[] =
     {
         'Y',' ','N',
     };//(Y)ÊÇ (N)·ñ
-    szText = (u_short *)_MB_OK;
+    szText = (uint16_t *)_MB_OK;
     x1 = x2 = x+8;
     y1 = y + 10 ;
     y2 = y +row_height * row + 4;
@@ -2996,27 +2996,27 @@ int EMessageBox2( int x,int y, u_char * epText,int len, int row,int mode )
     switch( mode )
     {
     case MB_OK:
-        szText = (u_short *)_MB_OK;
+        szText = (uint16_t *)_MB_OK;
         len2 = 1;
         break;
     case MB_CANCEL:
-        szText = (u_short *)_MB_CANCEL;
+        szText = (uint16_t *)_MB_CANCEL;
         len2 = 1;
         break;
     case MB_OKCANCEL:
-        szText = (u_short *)_MB_OKCANCEL;
+        szText = (uint16_t *)_MB_OKCANCEL;
         len2 = 3;
         break;
     case MB_YES:
-        szText = (u_short *)_MB_YES;
+        szText = (uint16_t *)_MB_YES;
         len2 = 1;
         break;
     case MB_NO:
-        szText = (u_short *)_MB_NO;
+        szText = (uint16_t *)_MB_NO;
         len2 = 1;
         break;
     case MB_YESNO:
-        szText = (u_short *)_MB_YESNO;
+        szText = (uint16_t *)_MB_YESNO;
         len2 = 3;
         break;
     }
@@ -3051,41 +3051,41 @@ int EMessageBox2( int x,int y, u_char * epText,int len, int row,int mode )
     MPopWindow();
     return retvalue;
 }
-int CMessageBox( int x,int y, u_char * epText,int len,int mode )
+int CMessageBox( int x,int y, uint8_t * epText,int len,int mode )
 {
     int len1 = 0, len2 = 0;
     int x1,y1,x2,y2;
-    u_short *szText ;
+    uint16_t *szText ;
     int keycode;
     int retvalue;
     int row = 1;
     int row1= 0;
 
-    const u_short _MB_OK[] =
+    const uint16_t _MB_OK[] =
     {
         ENTER,CH(4023),CH(2208),
     };//(»Ø³µ)È·¶¨
-    const u_short _MB_CANCEL[] =
+    const uint16_t _MB_CANCEL[] =
     {
         '#',CH(4543),CH(1986),
     };//£¨£££©ÍË³ö
-    const u_short _MB_OKCANCEL[] =
+    const uint16_t _MB_OKCANCEL[] =
     {
         ENTER,CH(4023),CH(2208),' ','#',CH(4543),CH(1986),
     };//(»Ø³µ)È·¶¨ £¨£££©ÍË³ö
-    const u_short _MB_YES[] =
+    const uint16_t _MB_YES[] =
     {
         'Y',CH(4239),
     };//(Y)ÊÇ
-    const u_short _MB_NO[] =
+    const uint16_t _MB_NO[] =
     {
         'N',CH(2381),
     };//(N)·ñ
-    const u_short _MB_YESNO[] =
+    const uint16_t _MB_YESNO[] =
     {
         'Y',CH(4239),' ','N',CH(2381),
     };//(Y)ÊÇ (N)·ñ
-    szText = (u_short *)_MB_OK;
+    szText = (uint16_t *)_MB_OK;
     x1 = x2 = x;
     y1 = y+6;
     y2 = y + C_CCHAR_VDOT+8;
@@ -3093,27 +3093,27 @@ int CMessageBox( int x,int y, u_char * epText,int len,int mode )
     switch( mode )
     {
     case MB_OK:
-        szText = (u_short *)_MB_OK;
+        szText = (uint16_t *)_MB_OK;
         len2 = 3;
         break;
     case MB_CANCEL:
-        szText = (u_short *)_MB_CANCEL;
+        szText = (uint16_t *)_MB_CANCEL;
         len2 = 3;
         break;
     case MB_OKCANCEL:
-        szText = (u_short *)_MB_OKCANCEL;
+        szText = (uint16_t *)_MB_OKCANCEL;
         len2 = 7;
         break;
     case MB_YES:
-        szText = (u_short *)_MB_YES;
+        szText = (uint16_t *)_MB_YES;
         len2 = 2;
         break;
     case MB_NO:
-        szText = (u_short *)_MB_NO;
+        szText = (uint16_t *)_MB_NO;
         len2 = 2;
         break;
     case MB_YESNO:
-        szText = (u_short *)_MB_YESNO;
+        szText = (uint16_t *)_MB_YESNO;
         len2 = 5;
         break;
     }
@@ -3141,7 +3141,7 @@ int CMessageBox( int x,int y, u_char * epText,int len,int mode )
     EraseDrawRectangle(x+3, y+3, x + (len+2)*C_ECHAR_HDOT-2, y +42*row+row1*30-2) ;
 
 //	CETextOut2(x+C_ECHAR_HDOT,y+1,epText,len1,row,16,0,0);
-    TextOut(x+C_ECHAR_HDOT,y+5,row+MGetLanguage(),len+MGetLanguage(),C_ECHAR_VDOT,(u_char *)epText,4);
+    TextOut(x+C_ECHAR_HDOT,y+5,row+MGetLanguage(),len+MGetLanguage(),C_ECHAR_VDOT,(uint8_t *)epText,4);
 
 //	CETextOut2(x2+C_ECHAR_HDOT,y2,szText,len2,1,16,0,0);
     while(true)
@@ -3164,15 +3164,15 @@ int CMessageBox( int x,int y, u_char * epText,int len,int mode )
 /* ÏÔÊ¾ÌáÊ¾ÐÅÏ¢ */
 extern const char _Message_A1[C_LANGUAGE][31][22] ;
 
-extern const u_char _Message_B1[C_LANGUAGE][15][24];
-extern const u_short _Message_B2[] ;
+extern const uint8_t _Message_B1[C_LANGUAGE][15][24];
+extern const uint16_t _Message_B2[] ;
 extern const unsigned char _usbdisk[];
 extern const unsigned char _usberror[];
 
-void DisplayPrompt(u_int num)
+void DisplayPrompt(uint32_t num)
 {
-    u_short xpos,ypos;
-    u_char char_len,row_number,row_height;	/*×Ö·ûÊýºÍ×Ö·ûÐÐÊý*/
+    uint16_t xpos,ypos;
+    uint8_t char_len,row_number,row_height;	/*×Ö·ûÊýºÍ×Ö·ûÐÐÊý*/
 
     xpos = 0 ;
     ypos = 0 ;
@@ -3264,11 +3264,11 @@ void DisplayPrompt(u_int num)
     {
         if (SDCardGetStatus()==1 && MGetSaveMode())	//ÏÔÊ¾UÅÌÍ¼±ê
         {
-            PageDisp(504,450,(u_char*)_usbdisk);
+            PageDisp(504,450,(uint8_t*)_usbdisk);
         }
         else if (SDCardGetStatus()==0 && MGetSaveMode())
         {
-            PageDisp(504,450,(u_char*)_usberror);
+            PageDisp(504,450,(uint8_t*)_usberror);
         }
         else
         {
@@ -3280,8 +3280,8 @@ void DisplayPrompt(u_int num)
 
 int DisplayQuery1(int index)
 {
-	u_int xpos,ypos;
-	u_int char_len,row_number,row_height;	/*×Ö·ûÊýºÍ×Ö·ûÐÐÊý*/
+	uint32_t xpos,ypos;
+	uint32_t char_len,row_number,row_height;	/*×Ö·ûÊýºÍ×Ö·ûÐÐÊý*/
 	int keycode;
 	int retvalue;
 
@@ -3294,7 +3294,7 @@ int DisplayQuery1(int index)
 	MPushWindow(xpos, ypos, 14 *C_CCHAR_HDOT, row_height+24) ;
 	MEraseWindow(xpos,ypos,C_CCHAR_HDOT*13,C_CCHAR_VDOT+4);
 //	CMenuOut(xpos, ypos, _Message_B1 + index * char_len, char_len, row_number, row_height);
-	TextOut(xpos, ypos, 1, 23,row_height, (u_char*)_Message_B1[MGetLanguage()][index], 4);
+	TextOut(xpos, ypos, 1, 23,row_height, (uint8_t*)_Message_B1[MGetLanguage()][index], 4);
 	/*	if (MGetLanguage())
 		{
 			EMenuOut(xpos+23*C_ECHAR_HDOT, ypos+1+4,"y/n",3,1,16);
@@ -3325,8 +3325,8 @@ int DisplayQuery1(int index)
 
 int DisplayQuery(int index)
 {
-    u_int xpos,ypos;
-    u_int char_len,row_number,row_height;	/*×Ö·ûÊýºÍ×Ö·ûÐÐÊý*/
+    uint32_t xpos,ypos;
+    uint32_t char_len,row_number,row_height;	/*×Ö·ûÊýºÍ×Ö·ûÐÐÊý*/
     int keycode;
     int retvalue;
 
@@ -3339,7 +3339,7 @@ int DisplayQuery(int index)
     MPushWindow(xpos, ypos, 14 *C_CCHAR_HDOT, row_height+24) ;
     MEraseWindow(xpos,ypos,C_CCHAR_HDOT*13,C_CCHAR_VDOT+4);
 //	CMenuOut(xpos, ypos, _Message_B1 + index * char_len, char_len, row_number, row_height);
-    TextOut(xpos, ypos, 1, 23,row_height, (u_char*)_Message_B1[MGetLanguage()][index], 4);
+    TextOut(xpos, ypos, 1, 23,row_height, (uint8_t*)_Message_B1[MGetLanguage()][index], 4);
     /*	if (MGetLanguage())
     	{
     		EMenuOut(xpos+23*C_ECHAR_HDOT, ypos+1+4,"y/n",3,1,16);
@@ -3378,14 +3378,14 @@ int DisplayQuery(int index)
 
 		if(index==2||index==1)
 		{
-			TextOut(xpos+2, ypos+2, 1, 20,row_height, (u_char*)_Message_B1[MGetLanguage()][index], 4);
+			TextOut(xpos+2, ypos+2, 1, 20,row_height, (uint8_t*)_Message_B1[MGetLanguage()][index], 4);
 		}
 		else
 		{
-			TextOut(xpos+2, ypos+2, 1, 20,row_height, (u_char*)_Message_B1[MGetLanguage()][4], 4);
+			TextOut(xpos+2, ypos+2, 1, 20,row_height, (uint8_t*)_Message_B1[MGetLanguage()][4], 4);
 		}
 			
-        ///TextOut(xpos+2, ypos+2, 1, 20,row_height, (u_char*)"ÍË³öµ±Ç°²âÊÔ?Y/N", 4);
+        ///TextOut(xpos+2, ypos+2, 1, 20,row_height, (uint8_t*)"ÍË³öµ±Ç°²âÊÔ?Y/N", 4);
         int keycode1=0;
         while(1)
         {
@@ -3407,7 +3407,7 @@ int DisplayQuery(int index)
     }
 }
 
-void WriteFileDate(u_int xpos, u_int ypos, u_int date)
+void WriteFileDate(uint32_t xpos, uint32_t ypos, uint32_t date)
 {
     int year,month;
     year = date/65536 ;
@@ -3437,7 +3437,7 @@ void WriteFileDate(u_int xpos, u_int ypos, u_int date)
 //	WriteDate(xpos, ypos, &tm);
 }
 
-void WriteFileDate1(u_int xpos, u_int ypos, u_int date)
+void WriteFileDate1(uint32_t xpos, uint32_t ypos, uint32_t date)
 {
     int year,month;
     /*
@@ -3461,16 +3461,16 @@ void WriteFileDate1(u_int xpos, u_int ypos, u_int date)
     else Write_Number(xpos, ypos,date,6,0,0);
 }
 
-void WriteDate(u_int xpos, u_int ypos, TIME_CLOCK *tm)
+void WriteDate(uint32_t xpos, uint32_t ypos, TIME_CLOCK *tm)
 {
 //*
-    u_int year = Bcd2Hex( tm->yearh ) * 100 + Bcd2Hex(tm->yearl) ;
-    u_int month = Bcd2Hex( (tm->month) & 0x1f );
-    u_int date = Bcd2Hex( (tm->date) & 0x3f );	// ÈÕÆÚ  BCDÂë×ª»»³ÉÊ®Áù½øÖÆ
+    uint32_t year = Bcd2Hex( tm->yearh ) * 100 + Bcd2Hex(tm->yearl) ;
+    uint32_t month = Bcd2Hex( (tm->month) & 0x1f );
+    uint32_t date = Bcd2Hex( (tm->date) & 0x3f );	// ÈÕÆÚ  BCDÂë×ª»»³ÉÊ®Áù½øÖÆ
     /*/
-    	u_int year =  tm->yearh  * 100 + tm->yearl ;
-        u_int month =tm->month & 0x1f ;
-    	u_int date = tm->date & 0x3f ;	// ÈÕÆÚ  BCDÂë×ª»»³ÉÊ®Áù½øÖÆ
+    	uint32_t year =  tm->yearh  * 100 + tm->yearl ;
+        uint32_t month =tm->month & 0x1f ;
+    	uint32_t date = tm->date & 0x3f ;	// ÈÕÆÚ  BCDÂë×ª»»³ÉÊ®Áù½øÖÆ
     //*/
     /* 2003-05-02 */
     if(year < 1000)year += 1000;
@@ -3483,20 +3483,20 @@ void WriteDate(u_int xpos, u_int ypos, TIME_CLOCK *tm)
     Write_Ascii(xpos + C_ECHAR_HDOT * 7, ypos,'-');
 }
 
-void WriteWeek(u_int xpos, u_int ypos, TIME_CLOCK *tm)
+void WriteWeek(uint32_t xpos, uint32_t ypos, TIME_CLOCK *tm)
 {
-    u_int day = Bcd2Hex( (tm->day) & 0x0f );	// ÈÕÆÚ  BCDÂë×ª»»³ÉÊ®Áù½øÖÆ
+    uint32_t day = Bcd2Hex( (tm->day) & 0x0f );	// ÈÕÆÚ  BCDÂë×ª»»³ÉÊ®Áù½øÖÆ
     Write_Number(xpos , ypos,day,2,0,0);
 }
-void WriteTime(u_int xpos, u_int ypos, TIME_CLOCK *tm)
+void WriteTime(uint32_t xpos, uint32_t ypos, TIME_CLOCK *tm)
 {
 //*
-    u_int hour = Bcd2Hex( tm->hour & 0x3f ) % 24;// ÌáÈ¡ÓÐÐ§Î» ²¢×ª»»ÎªÊ®Áù½øÖÆ
-    u_int minute = Bcd2Hex( tm->minute & 0x7f ) % 60;
-    u_int second = Bcd2Hex( tm->second & 0x7f ) % 60;
+    uint32_t hour = Bcd2Hex( tm->hour & 0x3f ) % 24;// ÌáÈ¡ÓÐÐ§Î» ²¢×ª»»ÎªÊ®Áù½øÖÆ
+    uint32_t minute = Bcd2Hex( tm->minute & 0x7f ) % 60;
+    uint32_t second = Bcd2Hex( tm->second & 0x7f ) % 60;
     /*/
-    	u_int hour =  (tm->hour & 0x3f ) % 24;// ÌáÈ¡ÓÐÐ§Î» ²¢×ª»»ÎªÊ®Áù½øÖÆ
-    	u_int minute =  (tm->minute & 0x7f ) % 60;
+    	uint32_t hour =  (tm->hour & 0x3f ) % 24;// ÌáÈ¡ÓÐÐ§Î» ²¢×ª»»ÎªÊ®Áù½øÖÆ
+    	uint32_t minute =  (tm->minute & 0x7f ) % 60;
     //*/
     if(hour < 10 )
     {
@@ -3511,14 +3511,14 @@ void WriteTime(u_int xpos, u_int ypos, TIME_CLOCK *tm)
     // Write_Ascii(xpos + C_ECHAR_HDOT * 5, ypos,':');
     /*8:2*/
 }
-void WriteTime1(u_int xpos, u_int ypos, u_int tm)
+void WriteTime1(uint32_t xpos, uint32_t ypos, uint32_t tm)
 {
 //*
-    u_int hour = ( (tm >> 16) & 0x3f) % 24;// ÌáÈ¡ÓÐÐ§Î» ²¢×ª»»ÎªÊ®Áù½øÖÆ
-    u_int minute = ( (tm >> 8 ) & 0x7f ) % 60;
+    uint32_t hour = ( (tm >> 16) & 0x3f) % 24;// ÌáÈ¡ÓÐÐ§Î» ²¢×ª»»ÎªÊ®Áù½øÖÆ
+    uint32_t minute = ( (tm >> 8 ) & 0x7f ) % 60;
     /*/
-    	u_int hour =  (tm->hour & 0x3f ) % 24;// ÌáÈ¡ÓÐÐ§Î» ²¢×ª»»ÎªÊ®Áù½øÖÆ
-    	u_int minute =  (tm->minute & 0x7f ) % 60;
+    	uint32_t hour =  (tm->hour & 0x3f ) % 24;// ÌáÈ¡ÓÐÐ§Î» ²¢×ª»»ÎªÊ®Áù½øÖÆ
+    	uint32_t minute =  (tm->minute & 0x7f ) % 60;
     //*/
     if(hour < 10 )
         Write_Number(xpos + C_ECHAR_HDOT, ypos,hour * 10 ,3,1,0);
@@ -3529,14 +3529,14 @@ void WriteTime1(u_int xpos, u_int ypos, u_int tm)
     /*8:2*/
 }
 
-u_int InputDate(u_int xpos, u_int ypos, TIME_CLOCK *tm)
+uint32_t InputDate(uint32_t xpos, uint32_t ypos, TIME_CLOCK *tm)
 {
-    u_char input[10] = {0};
-    u_int year,month,date;
+    uint8_t input[10] = {0};
+    uint32_t year,month,date;
 
     int i = 0;/* ¹â±êÎ»ÖÃ */
 
-    u_int keycode = C_KEYCODMAX ;		/* ¸½ÖµÎª²»ÓÃµÄ¼üÖµ */
+    uint32_t keycode = C_KEYCODMAX ;		/* ¸½ÖµÎª²»ÓÃµÄ¼üÖµ */
 
     year = Bcd2Hex( tm->yearh ) * 100 + Bcd2Hex(tm->yearl) ;
     month = Bcd2Hex(tm->month & 0x1f );
@@ -3650,11 +3650,11 @@ u_int InputDate(u_int xpos, u_int ypos, TIME_CLOCK *tm)
     }
 }
 
-u_int InputTime(u_int xpos, u_int ypos, TIME_CLOCK *tm)
+uint32_t InputTime(uint32_t xpos, uint32_t ypos, TIME_CLOCK *tm)
 {
     TIME_CLOCK tmp;
-    u_int hour,minute;
-    u_char input[5] = {0};
+    uint32_t hour,minute;
+    uint8_t input[5] = {0};
 
     hour = Bcd2Hex( tm->hour & 0x3f ) % 24;// ÌáÈ¡ÓÐÐ§Î» ²¢×ª»»ÎªÊ®Áù½øÖÆ
     minute = Bcd2Hex( tm->minute & 0x7f ) % 60;
@@ -3664,7 +3664,7 @@ u_int InputTime(u_int xpos, u_int ypos, TIME_CLOCK *tm)
     input[4]=minute%10;
     int i = 0;/* ¹â±êÎ»ÖÃ */
 
-    u_int keycode = C_KEYCODMAX ;		/* ¸½ÖµÎª²»ÓÃµÄ¼üÖµ */
+    uint32_t keycode = C_KEYCODMAX ;		/* ¸½ÖµÎª²»ÓÃµÄ¼üÖµ */
 
     InvertBytes(xpos, ypos,1) ;
     /* ÌáÊ¾ÊäÈëÊ±¼ä */
@@ -3766,16 +3766,16 @@ u_int InputTime(u_int xpos, u_int ypos, TIME_CLOCK *tm)
     }
 }
 
-u_int InputWeek(u_int xpos, u_int ypos, TIME_CLOCK *tm)
+uint32_t InputWeek(uint32_t xpos, uint32_t ypos, TIME_CLOCK *tm)
 {
     TIME_CLOCK tmp;
-    u_char day;
+    uint8_t day;
 
     day = Bcd2Hex( (tm->day) & 0x0f );	// ÈÕÆÚ  BCDÂë×ª»»³ÉÊ®Áù½øÖÆ
 
     int i = 0;/* ¹â±êÎ»ÖÃ */
 
-    u_int keycode = C_KEYCODMAX ;		/* ¸½ÖµÎª²»ÓÃµÄ¼üÖµ */
+    uint32_t keycode = C_KEYCODMAX ;		/* ¸½ÖµÎª²»ÓÃµÄ¼üÖµ */
 
     InvertBytes(xpos, ypos,1) ;
     /* ÌáÊ¾ÊäÈëÊ±¼ä */
@@ -3812,17 +3812,17 @@ u_int InputWeek(u_int xpos, u_int ypos, TIME_CLOCK *tm)
         }
     }
 }
-u_int date2int(TIME_CLOCK *tm)
+uint32_t date2int(TIME_CLOCK *tm)
 {
     return ( ( ( (Bcd2Hex( tm->yearh & 0x3f) ) * 100 + Bcd2Hex(tm->yearl)) * 256 + (Bcd2Hex(tm->month & 0x1f)) ) *256 + (Bcd2Hex(tm->date &0x3f)) );
 }
-u_int date2int2(TIME_CLOCK *tm)
+uint32_t date2int2(TIME_CLOCK *tm)
 {
     unsigned int date =  ( ( ( (Bcd2Hex(tm->yearh & 0x3f) ) * 100 + Bcd2Hex(tm->yearl)) * 256 + (Bcd2Hex(tm->month & 0x1f)) ) *256 + (Bcd2Hex(tm->date &0x3f)) );
     unsigned int year = (Bcd2Hex(tm->yearh & 0x3f) ) * 100 + Bcd2Hex(tm->yearl);
     return ( MGetYearDateCount(2000,year) + MGetCurrentYearTimeCount( date, 0,2) );
 }
-void int2date(TIME_CLOCK *tm,u_int date)
+void int2date(TIME_CLOCK *tm,uint32_t date)
 {
     int year,month;
 
@@ -3836,7 +3836,7 @@ void int2date(TIME_CLOCK *tm,u_int date)
     ( tm->month ) = ( ( (tm->month) & (0xe0) ) + Hex2Bcd(month) );
     ( tm->date  ) = ( ( (tm->date ) & (0xc0) ) + Hex2Bcd(date) );
 }
-void int2date2(TIME_CLOCK *tm,u_int date)//´Óµ½2000£­1£­1µÄÌìÊý£­¡·tm
+void int2date2(TIME_CLOCK *tm,uint32_t date)//´Óµ½2000£­1£­1µÄÌìÊý£­¡·tm
 {
 }
 
@@ -3853,7 +3853,7 @@ int qw2hf(int qw)
     return 0;
 }
 
-void WriteCharDots24(const u_short* type, int xpos, int ypos)
+void WriteCharDots24(const uint16_t* type, int xpos, int ypos)
 //Ð´Ò»¸ö32*32µÄ×Ö·û£¬type=ÇøÎ»Âë£¬xpos,ypos=×ø±ê
 {
     int i,j,k,x,y;
@@ -3865,7 +3865,7 @@ void WriteCharDots24(const u_short* type, int xpos, int ypos)
     int numbertype=*type;
     int number=numbertype;
 
-    u_char *char_dots;
+    uint8_t *char_dots;
     //  GrColor yellow = GrAllocColor(255,255,0);
     //´¦ÀíÇøÎ»Âë
     //ÇøÎ»Âë´Ó101¿ªÊ¼£¬Ã¿¹ýÒ»°Ù»á²î6¸öÖµ¡£±ÈÈç´Ó194Ö±½Óµ½201£¬Ô¤ÁôÁË6¸öÊýÖµ¿Õ¼ä¡£
@@ -3882,7 +3882,7 @@ void WriteCharDots24(const u_short* type, int xpos, int ypos)
     x = xpos;
     y = ypos;
     //ÆðÊ¼Î»ÖÃ
-    char_dots = (u_char *)Dots_simkai24 + (number%20) * 24 +(number/20)*480*3; //Dots_stsong24
+    char_dots = (uint8_t *)Dots_simkai24 + (number%20) * 24 +(number/20)*480*3; //Dots_stsong24
     //È¡³öµãÕó
     for(k=0; k<3; k++)
     {
@@ -3900,7 +3900,7 @@ void WriteCharDots24(const u_short* type, int xpos, int ypos)
     }
 
 }
-void WriteCharDots32(const u_short* type, int xpos, int ypos)
+void WriteCharDots32(const uint16_t* type, int xpos, int ypos)
 //Ð´Ò»¸ö32*32µÄ×Ö·û£¬type=ÇøÎ»Âë£¬xpos,ypos=×ø±ê
 {
     int i,j,k,x,y;
@@ -3912,7 +3912,7 @@ void WriteCharDots32(const u_short* type, int xpos, int ypos)
     int numbertype=*type;
     int number=numbertype;
 
-    u_char *char_dots;
+    uint8_t *char_dots;
     //  GrColor yellow = GrAllocColor(255,255,0);
     //´¦ÀíÇøÎ»Âë
     //ÇøÎ»Âë´Ó101¿ªÊ¼£¬Ã¿¹ýÒ»°Ù»á²î6¸öÖµ¡£±ÈÈç´Ó194Ö±½Óµ½201£¬Ô¤ÁôÁË6¸öÊýÖµ¿Õ¼ä¡£
@@ -3929,7 +3929,7 @@ void WriteCharDots32(const u_short* type, int xpos, int ypos)
     x = xpos;
     y = ypos;
     //ÆðÊ¼Î»ÖÃ
-    //  char_dots = (u_char *)Dots_msyh32 + (number%20) * 32 +(number/20)*640*4;
+    //  char_dots = (uint8_t *)Dots_msyh32 + (number%20) * 32 +(number/20)*640*4;
     //È¡³öµãÕó
     for(k=0; k<4; k++)
     {
@@ -3948,7 +3948,7 @@ void WriteCharDots32(const u_short* type, int xpos, int ypos)
 
 }
 
-void WriteCharDots16(const u_char* type, int xpos, int ypos)
+void WriteCharDots16(const uint8_t* type, int xpos, int ypos)
 //Ð´Ò»¸ö24*24µÄ×Ö·û£¬type=ÇøÎ»Âë£¬xpos,ypos=×ø±ê, mode =16/24×ÖÌå´óÐ¡
 {
     int i,j,k,x,y;
@@ -3957,8 +3957,8 @@ void WriteCharDots16(const u_char* type, int xpos, int ypos)
     ypos += VertOffsetScreen;
     if(ypos >= C_VERTDOT_VIDEO)ypos = C_VERTDOT_VIDEO-1;
     if( xpos >= C_HORIDOT_VIDEO) xpos = C_HORIDOT_VIDEO-1;
-    u_char numbertype=*type;
-    u_char *char_dots;
+    uint8_t numbertype=*type;
+    uint8_t *char_dots;
     int number,number1;
     //  GrColor yellow = GrAllocColor(255,255,0);
     //´¦ÀíÇøÎ»Âë
@@ -3981,7 +3981,7 @@ void WriteCharDots16(const u_char* type, int xpos, int ypos)
     x = xpos;
     y = ypos;
     //ÆðÊ¼Î»ÖÃ
-    char_dots = (u_char *)Dots_times24 + (number%20) * 24 +(number/20)*480*3;
+    char_dots = (uint8_t *)Dots_times24 + (number%20) * 24 +(number/20)*480*3;
     //È¡³öµãÕó
     for(k=0; k<3; k++)
     {
@@ -3999,21 +3999,21 @@ void WriteCharDots16(const u_char* type, int xpos, int ypos)
     }
 
 }
-int TextOut(int x,int y,int row,int len,int height, u_char* szText, int dots)
+int TextOut(int x,int y,int row,int len,int height, uint8_t* szText, int dots)
 {
 
     float len_space;//Ã¿ÐÐÁ½¸ö×Ö·û¼äµÄ¿Õ¸ñµãÊý
     int sx = x;//±£´æ³õÊ¼Ë®Æ½Î»ÖÃ
-    u_short textvalue;
-    u_short total_len;
-    u_short total_row;
-    u_short cpzText[2];
-    u_char epzText[2];
-    u_char *pTemp;	//ÁÙÊ±Ö¸Õë
+    uint16_t textvalue;
+    uint16_t total_len;
+    uint16_t total_row;
+    uint16_t cpzText[2];
+    uint8_t epzText[2];
+    uint8_t *pTemp;	//ÁÙÊ±Ö¸Õë
     short i,j;
-    u_short len_dots;//Ã¿ÐÐÊµ¼Ê×Ö·ûÕ¼ÓÃµÄµãÊý
-    u_char align;//Ã¿ÐÐµÄ¶ÔÆë·½Ê½
-    u_char rh;
+    uint16_t len_dots;//Ã¿ÐÐÊµ¼Ê×Ö·ûÕ¼ÓÃµÄµãÊý
+    uint8_t align;//Ã¿ÐÐµÄ¶ÔÆë·½Ê½
+    uint8_t rh;
 
     if( dots > 200)rh = 24;
     else rh = 0;
@@ -4131,46 +4131,46 @@ int TextOut(int x,int y,int row,int len,int height, u_char* szText, int dots)
                 j++;
                 cpzText[0] = (textvalue - 160) * 100 + ( szText[i + j] - 160);
 
-                WriteCharDots24((u_short *)cpzText,x, y) ;
+                WriteCharDots24((uint16_t *)cpzText,x, y) ;
                 x += (C_CCHAR_VDOT + len_space);
             }
             else if( textvalue >= HZCDEF)// ;//×Ô½¨16*16×Ö¿â
             {
                 j++;
                 textvalue = (textvalue - HZCDEF)*(HZCODE - HZCDEF ) + ( szText[i + j] - HZCDEF);
-                //	pTemp = (u_char*)CHAR_DOT16M16+ textvalue * 32 ;
-                MUserDotsOut(x, y , (u_char*)pTemp,8) ;
-                //	pTemp = (u_char*)CHAR_DOT16M16+ textvalue * 32+8 ;
-                MUserDotsOut(x, y +8, (u_char*)(pTemp),8) ;
-                //	pTemp = (u_char*)CHAR_DOT16M16+ textvalue * 32+16;
-                MUserDotsOut(x+8, y , (u_char*)pTemp,8) ;
-                //	pTemp = (u_char*)CHAR_DOT16M16 + textvalue * 32+24 ;
-                MUserDotsOut(x+8, y +8, (u_char*)(pTemp),8) ;
+                //	pTemp = (uint8_t*)CHAR_DOT16M16+ textvalue * 32 ;
+                MUserDotsOut(x, y , (uint8_t*)pTemp,8) ;
+                //	pTemp = (uint8_t*)CHAR_DOT16M16+ textvalue * 32+8 ;
+                MUserDotsOut(x, y +8, (uint8_t*)(pTemp),8) ;
+                //	pTemp = (uint8_t*)CHAR_DOT16M16+ textvalue * 32+16;
+                MUserDotsOut(x+8, y , (uint8_t*)pTemp,8) ;
+                //	pTemp = (uint8_t*)CHAR_DOT16M16 + textvalue * 32+24 ;
+                MUserDotsOut(x+8, y +8, (uint8_t*)(pTemp),8) ;
                 x += (C_CCHAR_VDOT + len_space);
             }
             else if( textvalue >= HZCEDEF)//140×Ô½¨16*8ÎÄ×Ö¿â
             {
                 j++;
                 textvalue = (textvalue - HZCEDEF)*(HZCDEF - HZCEDEF )+( szText[i + j] - HZCEDEF);
-                //	pTemp = (u_char*)CHAR_DOT16M8+ textvalue * 16 ;
-                MUserDotsOut(x,y,(u_char*)pTemp,8);
-                //	pTemp = (u_char*)CHAR_DOT16M8 + (textvalue * 16)+8  ;
-                MUserDotsOut(x,y+C_ECHAR_VDOT,(u_char*)pTemp,8);
+                //	pTemp = (uint8_t*)CHAR_DOT16M8+ textvalue * 16 ;
+                MUserDotsOut(x,y,(uint8_t*)pTemp,8);
+                //	pTemp = (uint8_t*)CHAR_DOT16M8 + (textvalue * 16)+8  ;
+                MUserDotsOut(x,y+C_ECHAR_VDOT,(uint8_t*)pTemp,8);
                 x += (C_ECHAR_VDOT + len_space);
             }
             else if( textvalue >= HZECODE)//Õý³£16*16×Ö¿â
             {
                 epzText[0] = textvalue;
-                // WriteCharDots24((u_char *)epzText,x, y+ dots*2) ;
-                WriteCharDots16((u_char *)epzText,x, y+ dots*2) ;
+                // WriteCharDots24((uint8_t *)epzText,x, y+ dots*2) ;
+                WriteCharDots16((uint8_t *)epzText,x, y+ dots*2) ;
                 //epzText[0] = textvalue;
-                //METextOut(x, y + dots , (u_char*)epzText, 1) ;
+                //METextOut(x, y + dots , (uint8_t*)epzText, 1) ;
                 x += (C_ECHAR_HDOT + len_space);
             }
             else if( textvalue >= HZEDEF && textvalue < TXSP)//×Ô½¨8*8×Ö¿â,< 32
             {
-                //		pTemp = (u_char*)CHAR_DOT8M8 +  (textvalue - HZEDEF) * 8 ;
-                MUserDotsOut(x,y+dots,(u_char*)pTemp,8);
+                //		pTemp = (uint8_t*)CHAR_DOT8M8 +  (textvalue - HZEDEF) * 8 ;
+                MUserDotsOut(x,y+dots,(uint8_t*)pTemp,8);
                 x += (C_ECHAR_VDOT + len_space);
             }
         }
@@ -4213,7 +4213,7 @@ void WordOut(int x,int y,int code,int mode)
         TextOut(x,y,1,2,16,buff,0);
     }
 }
-int GetStrLen( u_char * szText)//µÃµ½×Ö·û´®µÄ³¤¶È
+int GetStrLen( uint8_t * szText)//µÃµ½×Ö·û´®µÄ³¤¶È
 {
     int len;
     for( len = 0; ; len++)
@@ -4245,7 +4245,7 @@ int GetHZcode(int code, int mode)
     else retvalue = -1;
     return retvalue;
 }
-void HZ2Code( int code, int mode, u_char *szText, int point)
+void HZ2Code( int code, int mode, uint8_t *szText, int point)
 {
     int retvalue;
     if( (code >= 0 )&& ( mode == HZCODE || mode == HZCDEF || mode == HZCEDEF ) )

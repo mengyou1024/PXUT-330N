@@ -7,23 +7,23 @@
 
 USER stUser[C_USERMAX];
 
-const u_short _User_A1[] =
+const uint16_t _User_A1[] =
 {
     CH(5135),CH( 100),CH(2707),CH( 100),CH(2139),CH( 100),CH(3428)
 };
 /* 用户登录*/
 
-const u_short _User_A2[] =
+const uint16_t _User_A2[] =
 {
     CH( 100),CH( 100),CH(4853),CH(3591),CH( 100),
     CH( 100),CH( 100),CH( 100),CH(2504),CH(2637)
 };
 /* 姓名 工号*/
-const u_short _User_B1[] =
+const uint16_t _User_B1[] =
 {
     '+',CH(5286),CH(5217),' ','-',CH(2885),CH(5217),' ','#',CH(2436),CH(3560),' ',215,CH(2988),CH(4075),0,
 };//＋增员 － 减员 ＃改密 (回车)进入
-const u_short _User_B2[] =
+const uint16_t _User_B2[] =
 {
     CH(5286),CH(2851),CH(4043),CH(5217),
     CH(217),CH(4853),CH(3591),CH(326),
@@ -36,7 +36,7 @@ const u_short _User_B2[] =
 工号：
 密码：
 */
-const u_short _User_B3[] =
+const uint16_t _User_B3[] =
 {
     CH(5213),CH(3560),CH(3475),CH(326),
     CH(4834),CH(3560),CH(3475),CH(326),
@@ -46,25 +46,25 @@ const u_short _User_B3[] =
 新密码：
 */
 
-u_short _User_C1[] =  /* 请选择用户*/
+uint16_t _User_C1[] =  /* 请选择用户*/
 {
     CH(3975),CH(4901),CH(5281),CH(5135),CH(2707)
 };
 /* 请选择用户*/
 
-u_short _User_C2[] =  /* 密码错误*/
+uint16_t _User_C2[] =  /* 密码错误*/
 {
     CH(3560),CH(3475),CH(2077),CH(4683)
 };
 
 
-u_short _User_C3[] =  /* 不存在用户*/
+uint16_t _User_C3[] =  /* 不存在用户*/
 {
     CH(1827),CH(2070),CH(5258),CH(5135),CH(2707)
 };
 
 
-u_short _User_C4[] =  /* 用户数已最大*/
+uint16_t _User_C4[] =  /* 用户数已最大*/
 {
     CH(5135),CH(2707),CH(4293),CH(5049),CH(5578),CH(2083)
 };
@@ -73,22 +73,22 @@ RECT frame;
 int xpos,ypos;
 int para_xpos,para_ypos;
 int i,j;
-u_short *cpText;
-u_short szText[20];
+uint16_t *cpText;
+uint16_t szText[20];
 int keycode;
 //int temp;
 //int deci = 0,number;
 int current_pwd,pwd;
 int loop_number;//循环层数
 int len,row,height;
-//u_short InputChar[20];
+//uint16_t InputChar[20];
 int nUserNumber;	//当前员工个数
 int nCurrentUser;	//当前选中的员工顺序号
 
 int CheckPwd(int x, int y, int pwd)
 {
     int number;
-    const u_short szText[] = {CH(3560),CH(3475),CH(326)};//密码
+    const uint16_t szText[] = {CH(3560),CH(3475),CH(326)};//密码
     MPushWindow(x, y, x + 8*C_CCHAR_HDOT, y + 24) ;
     EraseDrawRectangle(x, y, x + 8*C_CCHAR_HDOT, y + 24) ;
     CETextOut2(x+4,y+4,szText,3,1,16,0,0);
@@ -105,7 +105,7 @@ int CheckPwd(int x, int y, int pwd)
 
 int InputPwd(int x, int y,int total_len/*总长度*/)//返回负值表示自己退出，正值有输入
 {
-    u_int s_xPos = x;		/*初始水平位置*/
+    uint32_t s_xPos = x;		/*初始水平位置*/
     int keycode;
     bool repeat = true;
     int number = 0;
@@ -254,9 +254,9 @@ void SetCurrentUser( int user)
 //Write_Number( 0,0,retvalue,4,0,0);
 }
 
-int GetUserName( u_short name[],int nUserNumber)
+int GetUserName( uint16_t name[],int nUserNumber)
 {
-//	u_int offset;
+//	uint32_t offset;
     int ret = 0;
     if( nUserNumber >= GetUserNumber() || nUserNumber < 0)return ret;
 
@@ -272,7 +272,7 @@ int GetUserName( u_short name[],int nUserNumber)
     {
         "ID1:ID2:ID3:"
     };*/
-    const u_char _Pwd_A1[C_LANGUAGE][11][22] =
+    const uint8_t _Pwd_A1[C_LANGUAGE][11][22] =
     {
         {
             "⒈类型    ：",
@@ -285,20 +285,20 @@ int GetUserName( u_short name[],int nUserNumber)
             "3.maturity：",
         },
     };
-    u_short _Pwd_B1[] =
+    uint16_t _Pwd_B1[] =
     {
         CH(4721),CH(4519),CH(2302),CH(4190),CH(2077),CH(4683),',',CH(16),
         CH(3975),CH(5175),CH(3647),CH(4508),CH(5149),CH(3310),CH(3310),CH(4721),'!',CH(16),
         CH(2171),CH(2716),':','0','5','1','3','8','5','2','9','6','9','7','1',CH(16),
     };//系统发生错误，请与南通友联联系！电话：05135296971！
 
-    u_short _Pwd_C1[] =
+    uint16_t _Pwd_C1[] =
     {
         CH(4721),CH(4519),CH(2302),CH(4190),CH(5434),CH(3592),CH(2077),CH(4683),',',CH(16),
         CH(3975),CH(5175),CH(3647),CH(4508),CH(5149),CH(3310),CH(3310),CH(4721),'!',CH(16),
         CH(2171),CH(2716),':','0','5','1','3','8','5','2','9','6','9','7','1',CH(16),
     };//系统发生致命错误，请与南通友联联系！电话：05135296971
-    u_short _Pwd_D1[] =
+    uint16_t _Pwd_D1[] =
     {
         CH(2077),CH(4683),CH(2637),':',
     };//错误号：
@@ -307,8 +307,8 @@ void SysPwd(int mode)
 {
     int xpos,ypos,para_xpos,para_ypos;
     int i,j,k;
-//	u_short *cpText;
-//	u_short szText[20];
+//	uint16_t *cpText;
+//	uint16_t szText[20];
 //	int keycode;
     unsigned int pwd,pwd1,pwd2;
     unsigned int number, deci_len;
@@ -318,18 +318,18 @@ void SysPwd(int mode)
     /*
         	char _Pwd_A1[] = {
         	"ID1:ID2:ID3:"};
-        	u_short _Pwd_B1[] = {
+        	uint16_t _Pwd_B1[] = {
         		CH(4721),CH(4519),CH(2302),CH(4190),CH(2077),CH(4683),',',CH(16),
         		CH(3975),CH(5175),CH(3647),CH(4508),CH(5149),CH(3310),CH(3310),CH(4721),'!',CH(16),
         		CH(2171),CH(2716),':','0','5','1','3','8','5','2','9','6','9','7','1',CH(16),
         	};//系统发生错误，请与南通友联联系！电话：05135296971！
 
-        	u_short _Pwd_C1[] = {
+        	uint16_t _Pwd_C1[] = {
         		CH(4721),CH(4519),CH(2302),CH(4190),CH(5434),CH(3592),CH(2077),CH(4683),',',CH(16),
         		CH(3975),CH(5175),CH(3647),CH(4508),CH(5149),CH(3310),CH(3310),CH(4721),'!',CH(16),
         		CH(2171),CH(2716),':','0','5','1','3','8','5','2','9','6','9','7','1',CH(16),
         	};//系统发生致命错误，请与南通友联联系！电话：05135296971
-        	u_short _Pwd_D1[] = {
+        	uint16_t _Pwd_D1[] = {
         	CH(2077),CH(4683),CH(2637),':',
         	};//错误号：
     */
@@ -381,9 +381,9 @@ void SysPwd(int mode)
         para_xpos = xpos = 20;
         para_ypos = ypos = 40;
         //EMenuOut(xpos ,ypos,_Pwd_A1,4,3,row);
-        TextOut(xpos ,ypos,1,12,C_CCHAR_VDOT,(u_char*)_Pwd_A1[MGetLanguage()][0],4);
-        TextOut(xpos ,ypos+24,1,12,C_CCHAR_VDOT,(u_char*)_Pwd_A1[MGetLanguage()][1],4);
-        TextOut(xpos ,ypos+24*2,1,12,C_CCHAR_VDOT,(u_char*)_Pwd_A1[MGetLanguage()][2],4);
+        TextOut(xpos ,ypos,1,12,C_CCHAR_VDOT,(uint8_t*)_Pwd_A1[MGetLanguage()][0],4);
+        TextOut(xpos ,ypos+24,1,12,C_CCHAR_VDOT,(uint8_t*)_Pwd_A1[MGetLanguage()][1],4);
+        TextOut(xpos ,ypos+24*2,1,12,C_CCHAR_VDOT,(uint8_t*)_Pwd_A1[MGetLanguage()][2],4);
         xpos = para_xpos + 10*C_ECHAR_HDOT;
         number = 0;
         deci_len = 0;

@@ -69,8 +69,8 @@ void HexTextOut(int x, int y, char *pzText, int iSectionLen, int color1, int col
     // Decimal to Hex
     //
     for (i = 0; i < iSectionLen; i++) {
-        outText[2 * i]     = ((u_char)pzText[i] / 16);
-        outText[2 * i + 1] = ((u_char)pzText[i] % 16);
+        outText[2 * i]     = ((uint8_t)pzText[i] / 16);
+        outText[2 * i + 1] = ((uint8_t)pzText[i] % 16);
     }
 
     for (i = 0; i < iSectionLen * 2; i++)

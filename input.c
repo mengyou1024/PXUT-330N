@@ -1,18 +1,18 @@
 #include "hzk.h"
 
-int MInputChar(u_int xpos,u_int ypos,u_int type, u_short* InputChar,u_short len_char_max,u_short char_max)
+int MInputChar(uint32_t xpos,uint32_t ypos,uint32_t type, uint16_t* InputChar,uint16_t len_char_max,uint16_t char_max)
 {
     /*输入字符，type = 0只能英文，1可英可中*/
-    u_short pzText[4];
-    u_short char_len = 0;	/*输入长度*/
-    u_short cursor_posi = 0;	/*光标所在位置，一般在最后*/
-    u_short insert_sign = 0;	/*中间插入标志，0未插入，1有插入*/
-    u_short association;
+    uint16_t pzText[4];
+    uint16_t char_len = 0;	/*输入长度*/
+    uint16_t cursor_posi = 0;	/*光标所在位置，一般在最后*/
+    uint16_t insert_sign = 0;	/*中间插入标志，0未插入，1有插入*/
+    uint16_t association;
     xpos = (xpos+16)/16 * 16;
-    //u_int s_xpos = xpos,s_ypos = ypos;	//初始位置
-    u_int s_xpos = xpos;	//初始位置
-    u_int lpos = xpos,rpos = xpos+16*len_char_max;	//两端位置
-    u_int retvalue;
+    //uint32_t s_xpos = xpos,s_ypos = ypos;	//初始位置
+    uint32_t s_xpos = xpos;	//初始位置
+    uint32_t lpos = xpos,rpos = xpos+16*len_char_max;	//两端位置
+    uint32_t retvalue;
 
     int i;
     if (MGetLanguage())
@@ -37,7 +37,7 @@ int MInputChar(u_int xpos,u_int ypos,u_int type, u_short* InputChar,u_short len_
         EraseDrawRectangle(C_WORD_HPOSI,C_WORD_VPOSI+6,C_HORIDOT_SCREEN, C_WORD_VPOSI + 1 * 30+12) ;
         EraseDrawRectangle(C_WORD_HPOSI,C_WORD_VPOSI+ 1 * 30+12,C_HORIDOT_SCREEN, C_WORD_VPOSI + 2 * 30+1) ;
 
-        TextOut(C_PINYIN_HPOSI,C_PINYIN_VPOSI + 4, 1, 10,24, (u_char*)_inputmode[MGetLanguage()][MGetInputMode()], 4);
+        TextOut(C_PINYIN_HPOSI,C_PINYIN_VPOSI + 4, 1, 10,24, (uint8_t*)_inputmode[MGetLanguage()][MGetInputMode()], 4);
 
         //Write_Number(0,30,char_len,4,0,0);
         pzText[0] = 0;
@@ -229,7 +229,7 @@ int MInputChar(u_int xpos,u_int ypos,u_int type, u_short* InputChar,u_short len_
     return retvalue;
 }
 
-int MGetCChar(u_int xpos,u_int ypos,u_short association)
+int MGetCChar(uint32_t xpos,uint32_t ypos,uint16_t association)
 {
 
     int i,j,k;
@@ -710,7 +710,7 @@ int MGetCChar(u_int xpos,u_int ypos,u_short association)
     do
     {
         MEraseWindow(C_PINYIN_HPOSI + C_CCHAR_HDOT*2,C_PINYIN_VPOSI +1,C_PINYIN_HPOSI + C_CCHAR_HDOT*3,C_PINYIN_VPOSI +25);
-        CMenuOut(C_PINYIN_HPOSI + C_CCHAR_HDOT*2,C_PINYIN_VPOSI +1, (const u_short*)(_PINYINMODE+mode) ,1,1,24);
+        CMenuOut(C_PINYIN_HPOSI + C_CCHAR_HDOT*2,C_PINYIN_VPOSI +1, (const uint16_t*)(_PINYINMODE+mode) ,1,1,24);
 
         t_ypos = C_PINYIN_VPOSI + 4;
         t_xpos = C_PINYIN_HPOSI + C_CCHAR_HDOT*3 + 8;
@@ -1016,17 +1016,17 @@ int MGetCChar(u_int xpos,u_int ypos,u_short association)
     ClearCursor(1);	/*画光标，mode=0英文1中文*/
     return pzText[0];
 }
-u_short MGetEChar(u_int xpos,u_int ypos,u_short* pzText,u_int mode)		/*得到ASCII字符*/
+uint16_t MGetEChar(uint32_t xpos,uint32_t ypos,uint16_t* pzText,uint32_t mode)		/*得到ASCII字符*/
 {
-    u_int keycode,Prekeycode = C_KEYCODMAX;
-    u_int TimeSlot ;		/*间隔时间*/
-    u_int inputmode = MGetInputMode()-0;
+    uint32_t keycode,Prekeycode = C_KEYCODMAX;
+    uint32_t TimeSlot ;		/*间隔时间*/
+    uint32_t inputmode = MGetInputMode()-0;
     char InputTable[] = {'0','1','2','3','4','5','6','7','8','9','9'+1,
                          '-','_','A','D','G','J','M','P','T','W','Z'+1,
                          '-','_','a','d','g','j','m','p','t','w','z'+1
                         };
     char SymbolTable[] = {'-',':','+',' ','_','/','(',')'};
-    u_int KeyInTime = 0;	/*按键次数*/
+    uint32_t KeyInTime = 0;	/*按键次数*/
     int i;
     if(pzText[0] >= 32)
         Prekeycode = pzText[2];	/*前次按下的键值*/
@@ -1172,10 +1172,10 @@ u_short MGetEChar(u_int xpos,u_int ypos,u_short* pzText,u_int mode)		/*得到ASCII
     pzText[2] = keycode;
     return pzText[0];
 }
-int MGetQuwei(u_int xpos,u_int ypos,u_short association)
+int MGetQuwei(uint32_t xpos,uint32_t ypos,uint16_t association)
 {
-    //u_int int_len = 4;
-    //u_int deci_len = 0;
+    //uint32_t int_len = 4;
+    //uint32_t deci_len = 0;
     //int retvalue;
     int i,k;
     int t_xpos,t_ypos;
@@ -1187,8 +1187,8 @@ int MGetQuwei(u_int xpos,u_int ypos,u_short association)
     unsigned char page_num = 0;			/*当前拼音对应的汉字页总数，每页9个*/
     unsigned char page_no;			/*当前拼音对应的汉字页数,第几页*/
     unsigned char page_word_num;	/*当前拼音对应的汉字页中的字数，最大9*/
-    u_short word_num = 0;	/*当前输入具有的汉字数*/
-    u_short wordindex_posi = 0;
+    uint16_t word_num = 0;	/*当前输入具有的汉字数*/
+    uint16_t wordindex_posi = 0;
     pzText[0] = 0;
     page_no = 0;
     input_degree = 0;
@@ -1386,7 +1386,7 @@ char MGetSymbol()
     unsigned char page_num = 3;			/*当前拼音对应的汉字页总数，每页9个*/
     unsigned char page_no = 0;			/*当前拼音对应的汉字页数,第几页*/
     unsigned char page_word_num = 10;	/*当前拼音对应的汉字页中的字数，最大10*/
-    u_int xpos,ypos;
+    uint32_t xpos,ypos;
     int i;
     MPushWindow(C_PINYIN_HPOSI,C_PINYIN_VPOSI,C_PINYIN_HPOSI+10*C_CCHAR_HDOT, C_PINYIN_VPOSI + 2 * 30) ;
     MPushWindow(C_PINYIN_HPOSI+10*C_CCHAR_HDOT,C_PINYIN_VPOSI,C_PINYIN_HPOSI+20*C_CCHAR_HDOT, C_PINYIN_VPOSI + 2 * 30) ;

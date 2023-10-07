@@ -3,22 +3,22 @@
 
 //int iPrnPosiAbVert;
 //int iPrnPosiAbHori;
-extern const const u_char _ParaMenu_AB1[C_LANGUAGE][3][10];
-extern const u_char _ParaMenu_AB2[C_LANGUAGE][4][10];
+extern const const uint8_t _ParaMenu_AB1[C_LANGUAGE][3][10];
+extern const uint8_t _ParaMenu_AB2[C_LANGUAGE][4][10];
 extern int HoriOffsetScreen ;		//ËùÓÐÐ´ÔÚÆÁÄ»ÉÏµÄÄÚÈÝ£¬Ë®Æ½·½Ïò¿ªÊ¼µã
-extern u_char _infinity[C_LANGUAGE][1][6];
-extern const u_char _MainMenu_C1A1[C_LANGUAGE][4][16];
-extern const u_char _MainMenu_C1A4[C_LANGUAGE][4][16];
+extern uint8_t _infinity[C_LANGUAGE][1][6];
+extern const uint8_t _MainMenu_C1A1[C_LANGUAGE][4][16];
+extern const uint8_t _MainMenu_C1A4[C_LANGUAGE][4][16];
 
-const u_short _Report_A1[] =
+const uint16_t _Report_A1[] =
 {
     CH(1912),CH( 100),CH(4189),CH( 100),CH(1808),CH( 100),CH(2876),
     CH( 100),CH(1866),CH( 100),CH(1708),CH( 100),CH(2470)
 };
 /*³¬ Éù ²¨ ¼ì ²â ±¨ ¸æ*/
-const u_char _Report_A12[] = {"Ultrasonic Flaw Report"};//22
+const uint8_t _Report_A12[] = {"Ultrasonic Flaw Report"};//22
 
-const u_short _Report_A2[] =
+const uint16_t _Report_A2[] =
 {
     CH(2876),CH(4973),CH(2105),CH(4627),
     CH(4615),CH(4548),CH(2105),CH(4627),
@@ -34,7 +34,7 @@ const u_short _Report_A2[] =
 	¹¤¼þ¹æ¸ñ
 	²ÄÁÏÅÆºÅ
 */
-const u_char _Report_A22[] = {"\
+const uint8_t _Report_A22[] = {"\
 Duty DEP. \
           \
 Commission\
@@ -49,15 +49,15 @@ Material  \
 Kind      "
                              };//10
 
-const u_short _Report_A3[] =
+const uint16_t _Report_A3[] =
 {
     CH(2158),CH( 100),CH( 100),CH(5019),
     CH(2518),CH( 100),CH( 100),CH(5019)
 };
 /*µÚ   Ò³¹²   Ò³*/
-const u_char _Report_A32[] = {"Current Page    Total Page    "};//30
+const uint8_t _Report_A32[] = {"Current Page    Total Page    "};//30
 
-const u_short _Report_A4[] =
+const uint16_t _Report_A4[] =
 {
     CH(2839),CH(3428),CH(1764),CH(2637),
     CH(2876),CH(1866),CH(1831),CH(4627),
@@ -74,7 +74,7 @@ const u_short _Report_A4[] =
 	ºÏ¸ñ¼¶±ð
 */
 
-const u_char _Report_A42[] = {"\
+const uint8_t _Report_A42[] = {"\
 Report  \
 NO.     \
 Detect  \
@@ -88,7 +88,7 @@ Standard\
 Grade   \
         "
                              };//8
-const u_short _Report_B1[] =
+const uint16_t _Report_B1[] =
 {
     CH(1777),CH(3570),CH(5520),CH(3186),
     CH(4040),CH(2006),CH(3277),CH( 100),
@@ -109,7 +109,7 @@ const u_short _Report_B1[] =
 	ÁéÃô¶È
 */
 
-const u_char _Report_B12[] = {"\
+const uint8_t _Report_B12[] = {"\
 Surface    \
 Status     \
 Heat       \
@@ -127,7 +127,7 @@ Angle      \
 Sensitivity\
            "
                              };//11
-const u_short _Report_B2[] =
+const uint16_t _Report_B2[] =
 {
     CH(2208),CH(4627),CH(2329),CH(4229),
     CH(4429),CH(4523),CH(3264),CH(4845),
@@ -137,21 +137,21 @@ const u_short _Report_B2[] =
 	Ì½Í·ÀàÐÍ
 	Ì½Í·Ç°ÑØ
 */
-const u_char _Report_B22[] = {"\
+const uint8_t _Report_B22[] = {"\
 Orientation\
 Probe type \
 Front size "
                              };//11
 
-const u_short _Report_B3[] =
+const uint16_t _Report_B3[] =
 {
     CH(4017),CH(4761),CH(4627),CH(5435),
     CH(2816),CH(4429),CH(1866),CH(2965),CH(2591)
 };
 /*È±ÏÝÎ»ÖÃ¼°Ì½²â½á¹û*/
-const u_char _Report_B32[] = {"Detect position  "};
+const uint8_t _Report_B32[] = {"Detect position  "};
 
-const u_short _Report_B4[] =
+const uint16_t _Report_B4[] =
 {
     CH(4189),CH( 100),CH(1944),
     CH(4314),CH( 100),CH(3829),
@@ -168,7 +168,7 @@ const u_short _Report_B4[] =
 	³¤¶È
 	¸ß¶È
 */
-const u_short _Report_B4A1[] =
+const uint16_t _Report_B4A1[] =
 {
     'A',CH(2208),CH(4627),
     'A',CH(2117),CH(3331),
@@ -185,7 +185,7 @@ const u_short _Report_B4A1[] =
 	³¤¶È
 	¸ß¶È
 */
-const u_char _Report_B42[] = {"\
+const uint8_t _Report_B42[] = {"\
 S range   \
 X range   \
 Y range   \
@@ -193,7 +193,7 @@ Equivalent\
 Length    \
 High      "
                              };//10
-const u_char _Report_B43[] = {"\
+const uint8_t _Report_B43[] = {"\
 A range   \
 A Equiv   \
 B range   \
@@ -201,30 +201,30 @@ B Equiv   \
 Length    \
 High      "
                              };//10
-const u_short _Report_B5[] =
+const uint16_t _Report_B5[] =
 {
     CH(2876),CH(4973),CH(1831),CH(4627),CH(2816),
     CH(4017),CH(4761),CH(4627),CH(5435),CH(4230),CH(5066),CH(4528),CH( 326)
 };
 /*¼ìÑé²¿Î»¼°È±ÏÝÎ»ÖÃÊ¾ÒâÍ¼:*/
-const u_char _Report_B52[] = {"Detect part & Flaw position picture:"};
+const uint8_t _Report_B52[] = {"Detect part & Flaw position picture:"};
 
-const u_short _Report_B6[] =
+const uint16_t _Report_B6[] =
 {
     CH(4017),CH(4761),CH(1808),CH(4846),
     CH(2816),CH(3990),CH(4763),CH(4528),CH( 326)
 };
 /*È±ÏÝ²¨ÐÎ¼°ÇúÏßÍ¼: */
-const u_char _Report_B62[] = {"Flaw echo & Curves lines"};//24
+const uint8_t _Report_B62[] = {"Flaw echo & Curves lines"};//24
 
-const u_short _Report_B7[] = {CH(3832),CH(2208),CH(2822),CH(1780)};
+const uint16_t _Report_B7[] = {CH(3832),CH(2208),CH(2822),CH(1780)};
 /*ÆÀ¶¨¼¶±ð*/
-const u_char _Report_B72[] = {"AssessGrade "};//12
-const u_short _Report_C1[] = {CH(2876),CH(4973),CH(2965),CH(3459)};
+const uint8_t _Report_B72[] = {"AssessGrade "};//12
+const uint16_t _Report_C1[] = {CH(2876),CH(4973),CH(2965),CH(3459)};
 /*¼ìÑé½áÂÛ*/
-const u_char _Report_C12[] = {"Check Result"};
+const uint8_t _Report_C12[] = {"Check Result"};
 
-const u_short _Report_C2[] =
+const uint16_t _Report_C2[] =
 {
     CH(2876),CH(4973),CH(5363),CH( 100),
     CH( 308),CH(5542),CH(2481),CH( 309)
@@ -232,13 +232,13 @@ const u_short _Report_C2[] =
 /*	¼ìÑéÕß
 	£¨×Ê¸ñ£©
 */
-const u_char _Report_C22[] = {"Detector"};
+const uint8_t _Report_C22[] = {"Detector"};
 
-const u_short _Report_C3[] = {CH(4053),CH(3858)};
+const uint16_t _Report_C3[] = {CH(4053),CH(3858)};
 /*ÈÕÆÚ*/
-const u_char _Report_C32[] = {"Date"};
+const uint8_t _Report_C32[] = {"Date"};
 
-const u_short _Report_C4[] =
+const uint16_t _Report_C4[] =
 {
     CH(4183),CH(2643),CH(5363),CH( 100),
     CH( 308),CH(5542),CH(2481),CH( 309)
@@ -246,9 +246,9 @@ const u_short _Report_C4[] =
 /*	ÉóºËÕß
 	£¨×Ê¸ñ£©
 */
-const u_char _Report_C42[] = {"Principal"};
+const uint8_t _Report_C42[] = {"Principal"};
 
-u_int TestPrinterReady()	//¼ì²â´òÓ¡»úÊÇ·ñ×¼±¸ºÃ£¬ÈçÃ»ÓÐ³öÏÖÌáÊ¾£¬¹²3´Î£¬·µ»Ø1Îª×¼±¸ºÃ
+uint32_t TestPrinterReady()	//¼ì²â´òÓ¡»úÊÇ·ñ×¼±¸ºÃ£¬ÈçÃ»ÓÐ³öÏÖÌáÊ¾£¬¹²3´Î£¬·µ»Ø1Îª×¼±¸ºÃ
 {
     int i;
     int retvalue = 0;
@@ -268,22 +268,22 @@ u_int TestPrinterReady()	//¼ì²â´òÓ¡»úÊÇ·ñ×¼±¸ºÃ£¬ÈçÃ»ÓÐ³öÏÖÌáÊ¾£¬¹²3´Î£¬·µ»Ø1Îª×
     return retvalue;
 }
 
-const u_char Init_LQ[] = {7,		//ESC @ CR LF
+const uint8_t Init_LQ[] = {7,		//ESC @ CR LF
                           0x1b,0x40,0x0d,0x0a,
                           27,85,1
                          };		//³õÊ¼»¯¼Ó»Ø³µ»»ÐÐ
-const u_char Init_HP[] = {18,
+const uint8_t Init_HP[] = {18,
                           0x1b,69,13 ,10,13,10,	//³õÊ¼»¯£¬Á½¸ö»Ø³µ»»ÐÐ
                           0x1b,42,112,48,78,	//Print mode (Graphics),Graphic default (no break),Ec*p0N,00x1b 042 112 048 078
                           0x1b,42,116,49,48,48,82
                          };	//ÒÔÉÏÉèÖÃ³É150 Dots Per inch,Ec * t150R
-const u_char Init_EPC61[] = {16,
+const uint8_t Init_EPC61[] = {16,
                              0x1b,0x40,10,10,
                              0x1b,0x28,0x47,1,0,1,	//ESC ( G nL nH m, Select graphics mode
                              0x1b,0x28,0x55,1,0,20
                             };	//	;20 * 1/3600 = 180dpi, ESC ( U nL nH m, Set unit(Set the number of 1/3600 inch units per grograming value)
 //		0x1b,0x28,0x4b,1,0,0,1};	//0/2:color mode,1:monochrome mode	;ESC ( K nL nH m n,Monochrome Mode/Color Mode Selection
-const u_char Init_TP[] = {2,		//ESC @ CR LF
+const uint8_t Init_TP[] = {2,		//ESC @ CR LF
                           0x1b,0x40
                          };		//³õÊ¼»¯¼Ó»Ø³µ»»ÐÐ
 
@@ -357,7 +357,7 @@ void PrinterFormFeed()		//´òÓ¡»ú½øÖ½
     }
 }
 
-void SetPrnPosi_AbHori_EpC61(u_char nl,u_char nh)
+void SetPrnPosi_AbHori_EpC61(uint8_t nl,uint8_t nh)
 //Set absolute horizontial print positon,Epson C61 ,	ESC $ nL nH;
 {
     mSendByteToPrinter(0x1b) ;		//´«ËÍ ESE(0x1b) µ½´òÓ¡»ú
@@ -367,7 +367,7 @@ void SetPrnPosi_AbHori_EpC61(u_char nl,u_char nh)
 }
 
 
-void SetPrnPosi_ReVert_EpC61(u_char ml,u_char mh)
+void SetPrnPosi_ReVert_EpC61(uint8_t ml,uint8_t mh)
 //ÉèÖÃ´¹Ö±Ïà¶Ô´òÓ¡Î»ÖÃ£¬  ESC ( v nl nh mL mH,
 {
     mSendByteToPrinter(0x1b) ;		//´«ËÍ ESE(0x1b) µ½´òÓ¡»ú
@@ -379,7 +379,7 @@ void SetPrnPosi_ReVert_EpC61(u_char ml,u_char mh)
     mSendByteToPrinter(mh) ;		//
 }
 
-void SetPrn_Raster_EpC61(u_short PrintHoriBytes)	//Para:Print_HoriBytes,´ý´òÓ¡ºáÏò×Ö½ÚÊý£¬ÆÁ¿½40±¨¸æ80
+void SetPrn_Raster_EpC61(uint16_t PrintHoriBytes)	//Para:Print_HoriBytes,´ý´òÓ¡ºáÏò×Ö½ÚÊý£¬ÆÁ¿½40±¨¸æ80
 //ESC . c v h m nl nh d1...dk(d1...dkÔÚÏÂ¶ÎÊä³ö£©
 {
     mSendByteToPrinter(0x1b) ;		//´«ËÍ ESE(0x1b) µ½´òÓ¡»ú
@@ -392,9 +392,9 @@ void SetPrn_Raster_EpC61(u_short PrintHoriBytes)	//Para:Print_HoriBytes,´ý´òÓ¡ºá
     mSendByteToPrinter( (8*4*PrintHoriBytes) / 256 ) ;		//nh
 }
 
-void LQ12To24(u_int xpos,u_int ypos,u_char PrnBuff[])		//Õë´ò´¹Ö±12Õë±äÎª24Õë
+void LQ12To24(uint32_t xpos,uint32_t ypos,uint8_t PrnBuff[])		//Õë´ò´¹Ö±12Õë±äÎª24Õë
 {
-    u_char Ax,Bx,Cx;
+    uint8_t Ax,Bx,Cx;
     int i,j,k;
 
     for(i=0; i<8; i++)
@@ -419,9 +419,9 @@ void LQ12To24(u_int xpos,u_int ypos,u_char PrnBuff[])		//Õë´ò´¹Ö±12Õë±äÎª24Õë
 }
 
 
-void HPTP(u_int xpos,u_int ypos,u_char PrnBuff[])		//ÈÈÃô´òÓ¡»ú Õë´ò´¹Ö±12Õë±äÎª24Õë
+void HPTP(uint32_t xpos,uint32_t ypos,uint8_t PrnBuff[])		//ÈÈÃô´òÓ¡»ú Õë´ò´¹Ö±12Õë±äÎª24Õë
 {
-    u_char Ax,Cx;
+    uint8_t Ax,Cx;
     int i,j,k;
 
     for(i=0; i<8; i++)
@@ -442,9 +442,9 @@ void HPTP(u_int xpos,u_int ypos,u_char PrnBuff[])		//ÈÈÃô´òÓ¡»ú Õë´ò´¹Ö±12Õë±äÎª
         }
     }
 }
-u_short Byte2Word(u_char Byte)		//Ò»¸ö×Ö½Ú±äÎªÒ»¸ö×Ö
+uint16_t Byte2Word(uint8_t Byte)		//Ò»¸ö×Ö½Ú±äÎªÒ»¸ö×Ö
 {
-    u_short Ax = Byte,Bx = 6/*d2d1=11*/,Dx = 1;
+    uint16_t Ax = Byte,Bx = 6/*d2d1=11*/,Dx = 1;
     int i;
 
     Dx = (Dx & Ax);		//±£ÁôD0
@@ -457,16 +457,16 @@ u_short Byte2Word(u_char Byte)		//Ò»¸ö×Ö½Ú±äÎªÒ»¸ö×Ö
     return Dx;
 }
 
-u_int Byte2DWord(u_char Byte)		//Ò»¸ö×Ö½Ú±äÎªÒ»¸öË«×Ö8-32
+uint32_t Byte2DWord(uint8_t Byte)		//Ò»¸ö×Ö½Ú±äÎªÒ»¸öË«×Ö8-32
 {
-    u_int Ax;
+    uint32_t Ax;
     Ax = Byte2Word( Byte2Word(Byte)/256 ) * 256 * 256 + Byte2Word( Byte2Word(Byte)%256 ) ;
 
     return Ax;
 }
 
 
-void ScrcpyInit(u_short PrintHoriBytes)
+void ScrcpyInit(uint16_t PrintHoriBytes)
 {
 
     PrinterFormFeed();		//´òÓ¡»ú½øÖ½(Ò»ÐÐ£©
@@ -531,11 +531,11 @@ void ScrcpyInit(u_short PrintHoriBytes)
     }
 }
 
-void ScrcpyInvert(u_int xpos,u_int ypos,u_short PrintHoriBytes)
+void ScrcpyInvert(uint32_t xpos,uint32_t ypos,uint16_t PrintHoriBytes)
 {
     int i,j,k;
-    u_short Ax,Bx;
-    u_char PrnBuff[24];
+    uint16_t Ax,Bx;
+    uint8_t PrnBuff[24];
 
     switch ( MGetPrinterMode() )	/*·µ»ØÖµÎªµ±Ç°´òÓ¡»úÀàÐÍ1\2\3\4=LQ\HP\EPSON C/P*/
     {
@@ -624,10 +624,10 @@ void ScrcpyInvert(u_int xpos,u_int ypos,u_short PrintHoriBytes)
     }
 }
 
-u_int ScreenCopy(void)		//ÆÁ¿½
+uint32_t ScreenCopy(void)		//ÆÁ¿½
 {
-    u_short PrintHoriBytes = 39;	//Ã¿ÐÐ40¸ö×Ö½Ú
-    u_int xpos = 0,ypos = 0;
+    uint16_t PrintHoriBytes = 39;	//Ã¿ÐÐ40¸ö×Ö½Ú
+    uint32_t xpos = 0,ypos = 0;
     int i,j;
 
     if( TestPrinterReady() == 0) return 0;
@@ -664,10 +664,10 @@ u_int ScreenCopy(void)		//ÆÁ¿½
 
     return 1;
 }
-u_int ScreenCopy2(int vdots,int hbytes)		//ÆÁ¿½
+uint32_t ScreenCopy2(int vdots,int hbytes)		//ÆÁ¿½
 {
     //Ã¿ÐÐ40¸ö×Ö½Ú
-    u_int xpos = 0,ypos = 0;
+    uint32_t xpos = 0,ypos = 0;
     int i,j;
 
     if( TestPrinterReady() == 0) return 0;
@@ -707,8 +707,8 @@ u_int ScreenCopy2(int vdots,int hbytes)		//ÆÁ¿½
 
 void ReportPrint(void)		//±¨¸æ´òÓ¡
 {
-    u_short PrintHoriBytes = 64;	//Ã¿ÐÐ40¸ö×Ö½Ú
-    u_int xpos = 0,ypos = 0;
+    uint16_t PrintHoriBytes = 64;	//Ã¿ÐÐ40¸ö×Ö½Ú
+    uint32_t xpos = 0,ypos = 0;
     int i;
 
     switch ( MGetPrinterMode() )	//·µ»ØÖµÎªµ±Ç°´òÓ¡»úÀàÐÍ1\2\3\4=LQ\HP\EPSON C/P
@@ -763,8 +763,8 @@ void DispEchoPara(void)
     int mode1,mode2;
     int offset;
 
-    u_int testrange[3];		//´ý²âÉù³ÌÖµ
-    u_char pzText[] = "   x         ";
+    uint32_t testrange[3];		//´ý²âÉù³ÌÖµ
+    uint8_t pzText[] = "   x         ";
 
     pzText[0] = PHI;
 
@@ -978,13 +978,13 @@ void DispEchoPara(void)
 }
 
 
-const u_short _PReport_title[]=
+const uint16_t _PReport_title[]=
 {
     //³¬Éù²¨¼ì²â±¨¸æ
     CH(1912),CH(4189),CH(1808),CH(2876),CH(1866),CH(1708),CH(2470)
 };
 
-const u_short _PReport_C1[] =
+const uint16_t _PReport_C1[] =
 {
     CH(2158),CH( 100),CH( 100),CH(5019),
     CH(2518),CH( 100),CH( 100),CH(5019)
@@ -992,7 +992,7 @@ const u_short _PReport_C1[] =
 /*µÚ   Ò³¹²   Ò³*/
 
 
-const u_short _PReport_C2[]=
+const uint16_t _PReport_C2[]=
 {
 
     //ÒÇÆ÷ÐÍºÅ:	//¼ÇÂ¼±àºÅ:
@@ -1009,7 +1009,7 @@ const u_short _PReport_C2[]=
 };
 
 
-const u_short _PReport_C3[]=
+const uint16_t _PReport_C3[]=
 {
     //Î»    ÖÃ:4627 5435
     //µ±    Á¿:
@@ -1017,14 +1017,14 @@ const u_short _PReport_C3[]=
     CH(2117),CH( 100),CH( 100),CH(3331),CH( 326)
 };
 
-const u_short _PReport_C4[] =
+const uint16_t _PReport_C4[] =
 {
     CH(4017),CH(4761),CH(1808),CH(4846),
     CH(2816),CH(3990),CH(4763),CH(4528),CH( 326)
 };
 /*È±ÏÝ²¨ÐÎ¼°ÇúÏßÍ¼: */
 
-const u_short _PReport_C5[]=
+const uint16_t _PReport_C5[]=
 {
     //¼ìÑé½áÂÛ
     //Éó ºË Õß
@@ -1044,8 +1044,8 @@ void DispEchoParat(void)
     int mode1,mode2;
     int offset;
 
-    u_int testrange[3];		//´ý²âÉù³ÌÖµ
-    u_char pzText[] = "   x         ";
+    uint32_t testrange[3];		//´ý²âÉù³ÌÖµ
+    uint8_t pzText[] = "   x         ";
 
     pzText[0] = PHI;
 
@@ -1297,9 +1297,9 @@ int ReportText2(int mode, int file_no)		//±¨¸æÎÄ±¾
     int xpos,ypos;
     int	row_height = 24;
     int xpos2,ypos2;
-    u_short* cpText;
+    uint16_t* cpText;
     //	int i;
-    u_char* epText;
+    uint8_t* epText;
     int offset;
 
     if( TestPrinterReady() == 0) return 0;	//´òÓ¡»ú×¼±¸ºÃ²âÊÔ
@@ -1323,7 +1323,7 @@ int ReportText2(int mode, int file_no)		//±¨¸æÎÄ±¾
     CMenuOut(24+24, 24+row_height*2, _PReport_C4, 9,1,row_height);/*È±ÏÝ²¨ÐÎ¼°ÇúÏßÍ¼: */
 //	ReportPrint();
     xpos = 0;//ypos = 24;
-    u_short PrintHoriBytes = 48;
+    uint16_t PrintHoriBytes = 48;
     while( ypos <= 96 - 24)
     {
         ScrcpyInit(PrintHoriBytes);
@@ -1355,7 +1355,7 @@ int ReportText2(int mode, int file_no)		//±¨¸æÎÄ±¾
     }
 
     DataRestore(file_no);
-    u_char echobuffer[C_LEN_SAMP];
+    uint8_t echobuffer[C_LEN_SAMP];
     offset = C_OFF_SAMP;
     MCopyProtectedMemory(echobuffer, (void*)offset, C_LEN_SAMP, PM_COPY_READ);	//²¨ÐÎ²ÎÊý
     DrawWave(echobuffer,0,C_LEN_SAMP);
@@ -1374,7 +1374,7 @@ int ReportText2(int mode, int file_no)		//±¨¸æÎÄ±¾
 //	MDrawLine(501, ypos, 501, 255);
 
     xpos = 0;//ypos = 24;
-//	u_short PrintHoriBytes = 48;
+//	uint16_t PrintHoriBytes = 48;
     while( ypos <= 240 - 24)
     {
         ScrcpyInit(PrintHoriBytes);
@@ -1432,7 +1432,7 @@ int ReportText2(int mode, int file_no)		//±¨¸æÎÄ±¾
     Write_Number(xpos2+13*8 ,ypos2 ,MGetAngle(0),4,1,0);	//angle
     Write_Ascii(xpos2+17*8 ,ypos2 ,ANGLE);
 
-//	cpText = (u_short*)_ParaMenu_AB2 + ( (MGetProbeMode()-0)*4+1 );	//ÀàÐÍ
+//	cpText = (uint16_t*)_ParaMenu_AB2 + ( (MGetProbeMode()-0)*4+1 );	//ÀàÐÍ
 //	CEMenuOut(xpos2+19*8 ,ypos2-8, cpText ,3,1,row_height);
     epText = (char *)_ParaMenu_AB2[MGetLanguage()][MGetProbeMode()]+2;
     TextOut(xpos2+19*8 ,ypos2-8,1,8,16,epText,4);
@@ -1472,8 +1472,8 @@ int ReportText(int mode, int file_no)		//±¨¸æÎÄ±¾
 //	int row_char_len = 38,row_number = 6;
     int	row_height = 24;
     int xpos2,ypos2;
-    u_short* cpText;
-    u_char * epText;
+    uint16_t* cpText;
+    uint8_t * epText;
     int i;
     int offset;
 
@@ -1581,10 +1581,10 @@ int ReportText(int mode, int file_no)		//±¨¸æÎÄ±¾
 
     xpos2 = xpos + C_ECHAR_HDOT * 31 + 4;
     ypos2 = ypos + row_height * 4 + 4 ;
-//	cpText = (u_short*)_ParaMenu_AB2 + ( (MGetProbeMode()-0)*4+1 );	//ÀàÐÍ
+//	cpText = (uint16_t*)_ParaMenu_AB2 + ( (MGetProbeMode()-0)*4+1 );	//ÀàÐÍ
 //	CEMenuOut(xpos2,ypos2 , cpText ,3,1,row_height);
 //	epText = (char *)_ParaMenu_AB2[MGetLanguage()][MGetProbeMode()]+2;
-    TextOut(xpos2 ,ypos2,1,8,16,(u_char *)_ParaMenu_AB2[MGetLanguage()][MGetProbeMode()]+2,4);
+    TextOut(xpos2 ,ypos2,1,8,16,(uint8_t *)_ParaMenu_AB2[MGetLanguage()][MGetProbeMode()]+2,4);
 
     ypos2 = ypos + row_height * 5 + 8 ;
     WriteLongness(xpos2,ypos2,MGetForward(),5,1);
@@ -1592,9 +1592,9 @@ int ReportText(int mode, int file_no)		//±¨¸æÎÄ±¾
     //EMenuOut(xpos2+ 4*8,ypos2, "mm",2,1,12);
 
     ypos2 = ypos + row_height * 3 + 4 ;
-//	cpText = (u_short*)_ParaMenu_AB1 + (MGetScaleMode()-0) * 3 + 1;//Éù³Ì±ê¶È
+//	cpText = (uint16_t*)_ParaMenu_AB1 + (MGetScaleMode()-0) * 3 + 1;//Éù³Ì±ê¶È
 //	CEMenuOut(xpos2,ypos2 , cpText ,2,1,row_height);	/*ÔÚÖ¸¶¨Î»ÖÃ¸ù¾ÝÃ¿ÐÐ×Ö·ûÊý¡¢ÐÐÊý¡¢ÐÐ¸ßÐ´²Ëµ¥*/
-    TextOut(xpos2,ypos2 ,1,8,row_height,(u_char*)_ParaMenu_AB1[MGetLanguage()][MGetScaleMode()]+2,4);
+    TextOut(xpos2,ypos2 ,1,8,row_height,(uint8_t*)_ParaMenu_AB1[MGetLanguage()][MGetScaleMode()]+2,4);
 
     //ÓÒ
     xpos = C_HORIDOT_SCREEN;
@@ -1637,7 +1637,7 @@ int ReportText(int mode, int file_no)		//±¨¸æÎÄ±¾
     MGateDraw();
 
     DataRestore(file_no);
-    u_char echobuffer[C_LEN_SAMP];
+    uint8_t echobuffer[C_LEN_SAMP];
     offset = C_OFF_SAMP;
     MCopyProtectedMemory(echobuffer, (void*)offset, C_LEN_SAMP, PM_COPY_READ);	//²¨ÐÎ²ÎÊý
     DrawWave(echobuffer,0,C_LEN_SAMP);
@@ -1663,7 +1663,7 @@ int ReportText(int mode, int file_no)		//±¨¸æÎÄ±¾
     }
     xpos = 0;
     ypos = 24;
-    u_short PrintHoriBytes = 64;
+    uint16_t PrintHoriBytes = 64;
     while( ypos <= 240 - 12)
     {
         ScrcpyInit(PrintHoriBytes);
@@ -1710,8 +1710,8 @@ int ReportTextE(int mode, int file_no)		//±¨¸æÎÄ±¾
 //	int row_char_len = 38,row_number = 6;
     int	row_height = 24;
     int xpos2,ypos2;
-//	u_short* cpText;
-    u_char* epText;
+//	uint16_t* cpText;
+    uint8_t* epText;
     int i;
     int offset;
 
@@ -1824,12 +1824,12 @@ int ReportTextE(int mode, int file_no)		//±¨¸æÎÄ±¾
     ypos2 = ypos + row_height * 4 + 4 ;	//ÀàÐÍ
 //	epText = (char *)_ParaMenu_AB2[MGetLanguage()][MGetProbeMode()]+2;
 //	TextOut(xpos2+19*8 ,ypos2-8,1,8,16,epText,4);
-    TextOut(xpos2 ,ypos2,1,8,16,(u_char *)_ParaMenu_AB2[MGetLanguage()][MGetProbeMode()]+2,4);
+    TextOut(xpos2 ,ypos2,1,8,16,(uint8_t *)_ParaMenu_AB2[MGetLanguage()][MGetProbeMode()]+2,4);
     ypos2 = ypos + row_height * 5 + 8 ;	//Ì½Í·Ç°ÑØ
     WriteLongness(xpos2,ypos2,MGetForward(),4,1);
 
     ypos2 = ypos + row_height * 3 + 4 ;//Éù³Ì±ê¶È
-    TextOut(xpos2,ypos2 ,1,8,row_height,(u_char*)_ParaMenu_AB1[MGetLanguage()][MGetScaleMode()]+2,4);
+    TextOut(xpos2,ypos2 ,1,8,row_height,(uint8_t*)_ParaMenu_AB1[MGetLanguage()][MGetScaleMode()]+2,4);
 
 //	epText = (char *)_MainMenu_C1A1[1][MGetSaveMode()];//Éù³Ì±ê¶È
 //	TextOut(xpos2+4,ypos2,1,8,16,epText,4);
@@ -1867,7 +1867,7 @@ int ReportTextE(int mode, int file_no)		//±¨¸æÎÄ±¾
 
     DataRestore(file_no);
     MSetLanguage(mode);
-    u_char echobuffer[C_LEN_SAMP];
+    uint8_t echobuffer[C_LEN_SAMP];
     offset = C_OFF_SAMP;
     MCopyProtectedMemory(echobuffer, (void*)offset, C_LEN_SAMP, PM_COPY_READ);	//²¨ÐÎ²ÎÊý
     DrawWave(echobuffer,0,C_LEN_SAMP);
@@ -1884,7 +1884,7 @@ int ReportTextE(int mode, int file_no)		//±¨¸æÎÄ±¾
 
     xpos = 0;
     ypos = 24;
-    u_short PrintHoriBytes = 64;
+    uint16_t PrintHoriBytes = 64;
     while( ypos <= 240 - 12)
     {
         ScrcpyInit(PrintHoriBytes);

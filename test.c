@@ -1,15 +1,16 @@
 /*test.c,∏˜÷÷≤‚ ‘∫Ø ˝*/
 #include "sdcard.h"
+
 extern UDISK_INFO g_UDiskInfo;
 extern const unsigned short c_SystemPowerStd[];
 extern GATE_PEAK			GatePeak;
 
 #if C_MAX_DOT_NUMBER > C_SCREEN_WIDTH
-u_short dac_line[C_MAX_DOT_NUMBER];
+uint16_t dac_line[C_MAX_DOT_NUMBER];
 #else
-u_short dac_line[C_SCREEN_WIDTH];
+uint16_t dac_line[C_SCREEN_WIDTH];
 #endif
-u_short daccurve[C_SCREEN_WIDTH];
+uint16_t daccurve[C_SCREEN_WIDTH];
 
 typedef struct _TagPOINT
 {
@@ -21,17 +22,17 @@ int tspLine(POINT *PosIn, POINT *PosOut, int n, int ch, float tx1, float tx2, fl
 
 void HotKeySet(void)
 {
-    u_int char_len = 6, crow_height = 48;
+    uint32_t char_len = 6, crow_height = 48;
     int xpos,ypos;
     int para_xpos = C_CCHAR_HDOT * ( char_len + 0) ,para_ypos =  4;
     int retvalue = C_TRUE;
     int keycode;
     int row;
-    u_short* cpText = 0;
+    uint16_t* cpText = 0;
     int i;
     int len;
     int item;
-    u_int elapsedtime1 = GetElapsedTime();
+    uint32_t elapsedtime1 = GetElapsedTime();
     int offset;
     int crnum = 0;
 
@@ -54,10 +55,10 @@ void HotKeySet(void)
         MSetColor(C_CR_MENU);
         for (i=0; i<crnum; i++)
         {
-            TextOut(C_ECHAR_HDOT,para_ypos+crow_height*i,1,16,24,(u_char*)_FuncHotKey_A[MGetLanguage()][i],4);
+            TextOut(C_ECHAR_HDOT,para_ypos+crow_height*i,1,16,24,(uint8_t*)_FuncHotKey_A[MGetLanguage()][i],4);
         }
-        TextOut(27*C_ECHAR_HDOT,380+4,1,10,24,(u_char*)_MenuPrompt_B1[MGetLanguage()][0],4);
-        TextOut(27*C_ECHAR_HDOT,380+4+36,1,10,24,(u_char*)_MenuPrompt_B1[MGetLanguage()][0]+10,4);
+        TextOut(27*C_ECHAR_HDOT,380+4,1,10,24,(uint8_t*)_MenuPrompt_B1[MGetLanguage()][0],4);
+        TextOut(27*C_ECHAR_HDOT,380+4+36,1,10,24,(uint8_t*)_MenuPrompt_B1[MGetLanguage()][0]+10,4);
 //        EMenuOut(27*C_ECHAR_HDOT,380+4,_TestMenu_Enter,1,1,C_ECHAR_VDOT);
         MSetColor(C_CR_PARA);
         if(MGetLanguage())
@@ -69,7 +70,7 @@ void HotKeySet(void)
             xpos = para_xpos + C_ECHAR_HDOT+24*MGetLanguage();
             ypos = para_ypos + crow_height *row ;
             //MSetColor( i ) ;
-            TextOut(xpos,ypos,1,17,crow_height,(u_char*)_FuncHotKey_B[MGetLanguage()][Function.funcMenu[i]]+2,4);
+            TextOut(xpos,ypos,1,17,crow_height,(uint8_t*)_FuncHotKey_B[MGetLanguage()][Function.funcMenu[i]]+2,4);
             // MSetColor(C_CR_UNDO);
         }
         MKeyRlx();		/*÷ª”–∞¥º¸“— Õ∑≈≤≈ÕÀ≥ˆ*/
@@ -134,7 +135,7 @@ void HotKeySet(void)
         EraseDrawRectangle(xpos, ypos, xpos+ (len+5+10*MGetLanguage())*C_ECHAR_HDOT, ypos + (row+0) * crow_height) ;
         for( i = 0; i < row ; i++)
         {
-            TextOut(xpos + C_ECHAR_HDOT,ypos+4+i*crow_height,1,17,crow_height,(u_char*)_FuncHotKey_B[MGetLanguage()][i],4);
+            TextOut(xpos + C_ECHAR_HDOT,ypos+4+i*crow_height,1,17,crow_height,(uint8_t*)_FuncHotKey_B[MGetLanguage()][i],4);
         }
         while(1)
         {
@@ -190,7 +191,7 @@ void AmplitudedBTable(void)
     ScreenRenovate();	/*∆¡ƒªÀ¢–¬*/
     DrawDac(0);
 
-    u_int elapsedtime = GetElapsedTime() + 100;
+    uint32_t elapsedtime = GetElapsedTime() + 100;
 
     while( GetElapsedTime() < elapsedtime || key==C_KEYCODMAX)
     {
@@ -212,8 +213,8 @@ void AmplitudedBTable(void)
     MSetAcquisition(0);
     MFclearScreen();
     MSetColor(C_CR_MENU);
-    TextOut(10,36,1,30,32,(u_char*)_AmplitudedB[MGetLanguage()][0],4*(1-MGetLanguage()));
-	TextOut(325,36,1,30,32,(u_char*)_AmplitudedB[MGetLanguage()][0],4*(1-MGetLanguage()));
+    TextOut(10,36,1,30,32,(uint8_t*)_AmplitudedB[MGetLanguage()][0],4*(1-MGetLanguage()));
+	TextOut(325,36,1,30,32,(uint8_t*)_AmplitudedB[MGetLanguage()][0],4*(1-MGetLanguage()));
 	MSetColor(C_CR_PARA);
     EMenuOut(45,ypos+36," 510152025303540",2,8,48);
 	EMenuOut(360,ypos+36,"4550556065707580",2,8,48);
@@ -253,14 +254,14 @@ void AmplitudedBTable(void)
 
 int MenuChoice(void)	//—°‘Ò≤Àµ•
 {
-    u_int char_len = 5,row_number = 9,crow_height = 38;
+    uint32_t char_len = 5,row_number = 9,crow_height = 38;
     int xpos,ypos,inv_xpos = 0,inv_ypos = 0;
     int keycode;
-    u_short *cpText;
-    u_char *epText;
+    uint16_t *cpText;
+    uint8_t *epText;
     int i;
     int prestatus=0;
-    u_int elapsedtime1 = GetElapsedTime() ;
+    uint32_t elapsedtime1 = GetElapsedTime() ;
     int deci_len ,number ,row;
     int para_xpos ,para_ypos;
     int revalue=1;
@@ -283,7 +284,7 @@ int MenuChoice(void)	//—°‘Ò≤Àµ•
 
     for (i=0; i<row_number; i++)
     {
-        epText = (u_char*) _Menu_Choice[MGetLanguage()][i];
+        epText = (uint8_t*) _Menu_Choice[MGetLanguage()][i];
         TextOut(xpos+4,ypos+3+crow_height*i,1,11+5*MGetLanguage(),crow_height,epText,4*(1-MGetLanguage()));
         //  if (MGetLanguage())
         {
@@ -367,14 +368,14 @@ int MenuChoice(void)	//—°‘Ò≤Àµ•
 }
 int TestChoice(int Test)
 {
-    u_int char_len = 5,row_number = 9,crow_height = 38;
+    uint32_t char_len = 5,row_number = 9,crow_height = 38;
     int xpos,ypos,inv_xpos = 0,inv_ypos = 0;
     int keycode;
-    u_short *cpText;
-    u_char *epText;
+    uint16_t *cpText;
+    uint8_t *epText;
     int i;
     int prestatus=0;
-    u_int elapsedtime1 = GetElapsedTime() ;
+    uint32_t elapsedtime1 = GetElapsedTime() ;
     int deci_len ,number ,row;
     int para_xpos ,para_ypos;
     //int revalue=-1;
@@ -396,7 +397,7 @@ int TestChoice(int Test)
     {
         WriteParaName(C_OFFSET);
         //EMenuOut(C_CCHAR_HDOT * 8, 0,"us",2,1,12);
-        TextOut(C_CCHAR_HDOT * (8+MGetLanguage()*4), 5,1,4,16,(u_char*)_us[0][0],0);
+        TextOut(C_CCHAR_HDOT * (8+MGetLanguage()*4), 5,1,4,16,(uint8_t*)_us[0][0],0);
         EMenuOut(C_CCHAR_HDOT * (8+MGetLanguage()*4)+C_ECHAR_HDOT+4, 0,"s",1,1,12);
         WriteOffset((4+MGetLanguage()*4)*C_CCHAR_HDOT,0);
     }
@@ -451,7 +452,7 @@ int TestChoice(int Test)
 
     for (i=0; i<row_number; i++)
     {
-        epText = (u_char*) _TestMenu_Menu[MGetLanguage()][i];
+        epText = (uint8_t*) _TestMenu_Menu[MGetLanguage()][i];
         TextOut(xpos+4,ypos+3+crow_height*i,1,10-2*MGetLanguage(),crow_height,epText,0);
         //    if (MGetLanguage())
         {
@@ -536,7 +537,7 @@ int TestMenu(void)
     int keycode;
     int char_len = 6;
     int row_number = 6;
-    u_int row_height = 48;
+    uint32_t row_height = 48;
     int retvalue = 0;
 #if C_DEVTYPE == 1
     row_number = 6;
@@ -565,7 +566,7 @@ int TestMenu(void)
     MSetColor(C_CR_MENU);
     EraseDrawRectangle(xpos, ypos, xpos+ (char_len+1+2*MGetLanguage())*C_CCHAR_HDOT+16, ypos + row_number * row_height) ;
 //	CMenuOut(xpos + C_ECHAR_HDOT,ypos+4,_TestMenu_A1,char_len,row_number,row_height);	/*‘⁄÷∏∂®Œª÷√∏˘æ›√ø––◊÷∑˚ ˝°¢–– ˝°¢––∏ﬂ–¥≤Àµ•*/
-    TextOut(xpos + C_ECHAR_HDOT-1,ypos+4,row_number,13,row_height,(u_char*)_TestMenu_A1[MGetLanguage()][0],4);
+    TextOut(xpos + C_ECHAR_HDOT-1,ypos+4,row_number,13,row_height,(uint8_t*)_TestMenu_A1[MGetLanguage()][0],4);
     MSetColor(C_CR_UNDO);
 
     MSetSystemMode(1,0);		//…Ë÷√≥…◊‘∂Øµ˜Ω⁄◊¥Ã¨
@@ -663,24 +664,24 @@ int TestMenuOffset(void)
 {
     int xpos = ( C_HORIDOT_SCREEN - C_CCHAR_HDOT * 8 - C_ECHAR_HDOT * (13+6*MGetLanguage())) / 8 * 8;
     int ypos = C_COORVPOSI;
-    u_int para_xpos,para_ypos;
-    u_int testrange[3];		//¥˝≤‚…˘≥Ã÷µ
-    u_int offset;
+    uint32_t para_xpos,para_ypos;
+    uint32_t testrange[3];		//¥˝≤‚…˘≥Ã÷µ
+    uint32_t offset;
     int deci_len, number = 1;
-    //u_short* cpText;
-    //u_int crow_height = 24;
+    //uint16_t* cpText;
+    //uint32_t crow_height = 24;
 
     int retvalue = -1;
-    u_int row_height = 48;
+    uint32_t row_height = 48;
     int keycode;
 
     DisplayPrompt(15);
     MSetColor(C_CR_MENU);
     //CMenuOut(0,0,_TestMenu_A1+1,5,1,row_height);
-    TextOut(0,0,1,11,row_height,(u_char*)_TestMenu_A1[MGetLanguage()][0]+2,4);
+    TextOut(0,0,1,11,row_height,(uint8_t*)_TestMenu_A1[MGetLanguage()][0]+2,4);
     EraseDrawRectangle(xpos, ypos, xpos+ (14+3*MGetLanguage())*C_CCHAR_HDOT+4, ypos + 4 * row_height+24) ;
 //	CEMenuOut(xpos + C_ECHAR_HDOT,ypos+4,_TestMenu_AB1,8,4,row_height);
-    TextOut(xpos + C_ECHAR_HDOT,ypos+4+24,4,17,row_height,(u_char*)_TestMenu_AB1[MGetLanguage()][0],4);
+    TextOut(xpos + C_ECHAR_HDOT,ypos+4+24,4,17,row_height,(uint8_t*)_TestMenu_AB1[MGetLanguage()][0],4);
 //    EMenuOut(xpos + 2*C_ECHAR_HDOT+8-2*C_ECHAR_HDOT*MGetLanguage(),ypos+3 * row_height,_TestMenu_Enter,1,1,C_ECHAR_VDOT);
 
     MSetColor(C_CR_UNDO);
@@ -838,7 +839,7 @@ int TestMenuOffset(void)
     return C_FALSE;
 }
 
-int TestOffset(u_int testrange1,u_int testrange2,u_int mode)
+int TestOffset(uint32_t testrange1,uint32_t testrange2,uint32_t mode)
 {
     /*
     t = ( R2*T1 - R1 * T2)/( R2 - R1) = T1 - (T2-T1)R1/(R2-R1)
@@ -846,20 +847,20 @@ int TestOffset(u_int testrange1,u_int testrange2,u_int mode)
     GateMax.Amp = 0;	//◊Ó∏ﬂ≤®÷√≥ı÷µŒ™0
 
     int gain = 400,range = 1000,offset = 0, offset0 = 0, delay = 0,speed = MGetSpeed();
-    u_int echotime = 0;
+    uint32_t echotime = 0;
     short gateamp;
     int i;
-    u_int char_len,row_number,crow_height;
+    uint32_t char_len,row_number,crow_height;
     //int number,deci_len;
     int xpos,ypos,menu_xpos,menu_ypos;
     int confirm_num = 0;
-    u_int preElapsedtime;
+    uint32_t preElapsedtime;
     int retvalue = C_TRUE;
     int keycode;
     int gatetype = 0;
     //int i;
 //	int elapsedtime = GetElapsedTime() + 1000;
-    u_int testrange0 = testrange1;
+    uint32_t testrange0 = testrange1;
 
 
     MSetEchoMode(0,C_SETMODE_SAVE);
@@ -908,7 +909,7 @@ int TestOffset(u_int testrange1,u_int testrange2,u_int mode)
     MSetColor(C_CR_MENU);
     EraseDrawRectangle(menu_xpos, menu_ypos, C_COORHORIUNIT * 10+17, menu_ypos + crow_height *(row_number+MGetLanguage())) ;
 //	CEMenuOut(menu_xpos + C_ECHAR_HDOT,menu_ypos + 4, _TestMenu_AB3 ,char_len,row_number,crow_height);	/*‘⁄÷∏∂®Œª÷√∏˘æ›√ø––◊÷∑˚ ˝°¢–– ˝°¢––∏ﬂ–¥≤Àµ•*/
-    TextOut(menu_xpos + C_ECHAR_HDOT,menu_ypos+4, row_number+2*MGetLanguage(), 16+MGetLanguage(),crow_height-12*MGetLanguage(), (u_char*)_TestMenu_AB3[MGetLanguage()][0], 4);
+    TextOut(menu_xpos + C_ECHAR_HDOT,menu_ypos+4, row_number+2*MGetLanguage(), 16+MGetLanguage(),crow_height-12*MGetLanguage(), (uint8_t*)_TestMenu_AB3[MGetLanguage()][0], 4);
 
     WriteLongness(menu_xpos + 9 * C_ECHAR_HDOT+16*MGetLanguage(), menu_ypos  + 3+(crow_height+13)*1*MGetLanguage() ,testrange0,4/*◊‹≥§*/,0/* «∑Ò–¥µ•Œª*/);
     if( MGetUnitType() > 0)EMenuOut(menu_xpos + 9 * C_ECHAR_HDOT+40*MGetLanguage(), menu_ypos  + 20+20*MGetLanguage(),"in",2,1,8);
@@ -928,7 +929,7 @@ int TestOffset(u_int testrange1,u_int testrange2,u_int mode)
     DisplayPrompt(15);
     MSetColor(C_CR_MENU);
     //CMenuOut(0,0,_TestMenu_A1+1,5,1,24);
-    TextOut(0,0,1,11,24,(u_char*)_TestMenu_A1[MGetLanguage()][0]+2,4);
+    TextOut(0,0,1,11,24,(uint8_t*)_TestMenu_A1[MGetLanguage()][0]+2,4);
     while (1)
     {
         ///if( !MGetFunctionMode(C_ECHOMAX_MEMORY) && !MGetFunctionMode(C_ECHO_ENVELOPE) )
@@ -1024,7 +1025,7 @@ int TestOffset(u_int testrange1,u_int testrange2,u_int mode)
                 MSetColor(C_CR_MENU);
                 EraseDrawRectangle(menu_xpos, menu_ypos, C_COORHORIUNIT * 10+17, menu_ypos + crow_height * (row_number+MGetLanguage())) ;
                 //	CEMenuOut(menu_xpos + C_ECHAR_HDOT,menu_ypos + 4, _TestMenu_AB3 ,char_len,row_number,crow_height);	/*‘⁄÷∏∂®Œª÷√∏˘æ›√ø––◊÷∑˚ ˝°¢–– ˝°¢––∏ﬂ–¥≤Àµ•*/
-                TextOut(menu_xpos + C_ECHAR_HDOT,menu_ypos+4, row_number+2*MGetLanguage(), 16+MGetLanguage(),crow_height-12*MGetLanguage(), (u_char*)_TestMenu_AB3[MGetLanguage()][0], 4);
+                TextOut(menu_xpos + C_ECHAR_HDOT,menu_ypos+4, row_number+2*MGetLanguage(), 16+MGetLanguage(),crow_height-12*MGetLanguage(), (uint8_t*)_TestMenu_AB3[MGetLanguage()][0], 4);
 
                 WriteLongness(menu_xpos + 9 * C_ECHAR_HDOT+16*MGetLanguage(), menu_ypos  + 3+(crow_height+13)*1*MGetLanguage() ,testrange0,4/*◊‹≥§*/,0/* «∑Ò–¥µ•Œª*/);
                 if( MGetUnitType() > 0)EMenuOut(menu_xpos + 9 * C_ECHAR_HDOT+40*MGetLanguage(), menu_ypos  + 20+20*MGetLanguage(),"in",2,1,8);
@@ -1128,7 +1129,7 @@ int TestOffset(u_int testrange1,u_int testrange2,u_int mode)
         DisplayPrompt(15);
         MSetColor(C_CR_MENU);
         //	CMenuOut(0,0,_TestMenu_A1+1,5,1,24);
-        TextOut(0,0,1,11,24,(u_char*)_TestMenu_A1[MGetLanguage()][0]+2,4);
+        TextOut(0,0,1,11,24,(uint8_t*)_TestMenu_A1[MGetLanguage()][0]+2,4);
         //ExpendTime(10);
     }
     if( confirm_num > 1)
@@ -1151,7 +1152,7 @@ int TestOffset(u_int testrange1,u_int testrange2,u_int mode)
             MSetColor(C_CR_MENU);
 //			CEMenuOut(menu_xpos + C_ECHAR_HDOT,menu_ypos + 4, _TestMenu_AB7,char_len,row_number,crow_height);
             EraseDrawRectangle(menu_xpos, menu_ypos, C_COORHORIUNIT * 10+17, menu_ypos + (crow_height+MGetLanguage()) * row_number+8*MGetLanguage()) ;
-            TextOut(menu_xpos + C_ECHAR_HDOT,menu_ypos+6, row_number+1*MGetLanguage(), 16+MGetLanguage(),crow_height-12*MGetLanguage(), (u_char*)_TestMenu_AB3[MGetLanguage()][1], 4);
+            TextOut(menu_xpos + C_ECHAR_HDOT,menu_ypos+6, row_number+1*MGetLanguage(), 16+MGetLanguage(),crow_height-12*MGetLanguage(), (uint8_t*)_TestMenu_AB3[MGetLanguage()][1], 4);
 
             int number,deci_len;
 
@@ -1205,20 +1206,20 @@ int TestMenuAngle(void)
 	MCopyProtectedMemory(&UserInfo, (void*)offsets, sizeof(USER_INFO), PM_COPY_READ);
     int xpos = ( C_HORIDOT_SCREEN - C_CCHAR_HDOT * 11 - C_ECHAR_HDOT * (10+MGetLanguage()*11)) / 8 * 8;
     int ypos = C_COORVPOSI;
-    u_int para_xpos,para_ypos;
-    u_int testrange[2];		//[0]∑¥…‰ÃÂ…Ó∂»£¨[1]∑¥…‰ÃÂ÷±æ∂£¨
-    u_int offset;
+    uint32_t para_xpos,para_ypos;
+    uint32_t testrange[2];		//[0]∑¥…‰ÃÂ…Ó∂»£¨[1]∑¥…‰ÃÂ÷±æ∂£¨
+    uint32_t offset;
     int deci_len, number = 1;
 
     int retvalue = -1;
-    u_int row_height = 48;
+    uint32_t row_height = 48;
     int keycode;
 
     ScreenRenovate();
     DisplayPrompt(15);
     MSetColor(C_CR_MENU);
 //	CMenuOut(0,0,_TestMenu_A1+7,5,1,row_height);
-    TextOut(0,0,1,11,row_height,(u_char*)_TestMenu_A1[MGetLanguage()][1]+2,4);
+    TextOut(0,0,1,11,row_height,(uint8_t*)_TestMenu_A1[MGetLanguage()][1]+2,4);
 
     if(UserInfo.pzPurchaser[0]==0)
 		MSetKvalue(UserInfo.pzSerial[15],C_SETMODE_SAVE);
@@ -1232,7 +1233,7 @@ int TestMenuAngle(void)
 //	CEMenuOut(xpos + C_ECHAR_HDOT,ypos+4,_TestMenu_AC1,9,4,row_height);	/*‘⁄÷∏∂®Œª÷√∏˘æ›√ø––◊÷∑˚ ˝°¢–– ˝°¢––∏ﬂ–¥≤Àµ•*/
     EraseDrawRectangle(xpos, ypos, xpos+ (16+3*MGetLanguage())*C_CCHAR_HDOT+16, ypos + 4 * row_height+24) ;
     //	CEMenuOut(xpos + C_ECHAR_HDOT,ypos+4,_TestMenu_AB1,8,4,row_height);
-    TextOut(xpos + C_ECHAR_HDOT,ypos+4+24,4,18,row_height,(u_char*)_TestMenu_AC1[MGetLanguage()][0],4);
+    TextOut(xpos + C_ECHAR_HDOT,ypos+4+24,4,18,row_height,(uint8_t*)_TestMenu_AC1[MGetLanguage()][0],4);
 //    EMenuOut(xpos + 2*C_ECHAR_HDOT+8-2*C_ECHAR_HDOT*MGetLanguage(),ypos+3 * row_height,_TestMenu_Enter,1,1,C_ECHAR_VDOT);
 
     MSetColor(C_CR_UNDO);
@@ -1391,24 +1392,24 @@ int TestMenuAngle(void)
     return C_FALSE;
 }
 
-int TestAngle(u_int diameter,u_int depth)	//÷±æ∂°¢…Ó∂»
+int TestAngle(uint32_t diameter,uint32_t depth)	//÷±æ∂°¢…Ó∂»
 {
     GateMax.Amp = 0;	//◊Ó∏ﬂ≤®÷√≥ı÷µŒ™0
 
     int gain = 600,range = 1000,angle;
-    //u_int echotime;
-    u_int gateamp;
+    //uint32_t echotime;
+    uint32_t gateamp;
 
-    u_int char_len,row_number,crow_height;
+    uint32_t char_len,row_number,crow_height;
     //int number,deci_len;
     int xpos,ypos;
-    u_int preElapsedtime;
+    uint32_t preElapsedtime;
     int retvalue = C_TRUE;
     int keycode,i;
     int gatetype = 0;
     double dAngle;
 //	int elapsedtime = GetElapsedTime() + 1000;
-    u_int testrange0 = depth * 10000 / MGetAngle(3) - diameter/2;
+    uint32_t testrange0 = depth * 10000 / MGetAngle(3) - diameter/2;
     //MGetAngle(3) = 34.2
     //depth = 0.03
     MSetAcquisition(1);
@@ -1443,7 +1444,7 @@ int TestAngle(u_int diameter,u_int depth)	//÷±æ∂°¢…Ó∂»
     ypos = C_COORVPOSI + 1;
     MSetColor(C_CR_MENU);
     EraseDrawRectangle(xpos, ypos, xpos+(char_len+3+MGetLanguage()*2)*C_CCHAR_HDOT+6*MGetLanguage(), ypos + crow_height * (row_number+MGetLanguage())) ;
-    TextOut(xpos + C_ECHAR_HDOT,ypos+4, row_number+2*MGetLanguage(), 16+MGetLanguage(),crow_height-12*MGetLanguage(), (u_char*)_TestMenu_AB3[MGetLanguage()][2], 4);
+    TextOut(xpos + C_ECHAR_HDOT,ypos+4, row_number+2*MGetLanguage(), 16+MGetLanguage(),crow_height-12*MGetLanguage(), (uint8_t*)_TestMenu_AB3[MGetLanguage()][2], 4);
 
     WriteLongness(xpos + 9 * C_ECHAR_HDOT+32*MGetLanguage(), ypos  + 4+(crow_height+13)*1*MGetLanguage() ,depth,4/*◊‹≥§*/,0/* «∑Ò–¥µ•Œª*/);
     if( MGetUnitType() > 0)EMenuOut(xpos + 9 * C_ECHAR_HDOT+40*MGetLanguage(), ypos  + 20+20*MGetLanguage(),"in",2,1,8);
@@ -1464,7 +1465,7 @@ int TestAngle(u_int diameter,u_int depth)	//÷±æ∂°¢…Ó∂»
     DisplayPrompt(15);
     MSetColor(C_CR_MENU);
     //CMenuOut(0,0,_TestMenu_A1+7,5,1,24);
-    TextOut(0,0,1,11,24,(u_char*)_TestMenu_A1[MGetLanguage()][1]+2,4);
+    TextOut(0,0,1,11,24,(uint8_t*)_TestMenu_A1[MGetLanguage()][1]+2,4);
     while (1)
     {
 //		AdjustTime.ParaDisplayTime++;
@@ -1535,7 +1536,7 @@ int TestAngle(u_int diameter,u_int depth)	//÷±æ∂°¢…Ó∂»
 
 				DisplayPrompt(15);
 				MSetColor(C_CR_MENU);
-				TextOut(0,0,1,11,24,(u_char*)_TestMenu_A1[MGetLanguage()][1]+2,4);
+				TextOut(0,0,1,11,24,(uint8_t*)_TestMenu_A1[MGetLanguage()][1]+2,4);
             }
         }
 
@@ -1599,7 +1600,7 @@ int TestAngle(u_int diameter,u_int depth)	//÷±æ∂°¢…Ó∂»
             DisplayPrompt(15);
             MSetColor(C_CR_MENU);
             //CMenuOut(0,0,_TestMenu_A1+7,5,1,24);
-            TextOut(0,0,1,11,24,(u_char*)_TestMenu_A1[MGetLanguage()][1]+2,4);
+            TextOut(0,0,1,11,24,(uint8_t*)_TestMenu_A1[MGetLanguage()][1]+2,4);
         }
 #if C_ACQU == 1
         if (GetElapsedTime() >= elapsedtime)
@@ -1620,14 +1621,14 @@ int TestMenuDac(void)
     int xpos = ( C_HORIDOT_SCREEN - C_CCHAR_HDOT * 9 - C_ECHAR_HDOT * (9+8*MGetLanguage())) / 8 * 8-32;
     int ypos = C_COORVPOSI;
 	int k, i, j;
-    u_int para_xpos,para_ypos;
-    u_int testrange[3];		//◊Ó¥Û…Ó∂»°¢÷±æ∂°¢≥§∂»
-    u_int offset;
-    u_short* cpText = 0;
+    uint32_t para_xpos,para_ypos;
+    uint32_t testrange[3];		//◊Ó¥Û…Ó∂»°¢÷±æ∂°¢≥§∂»
+    uint32_t offset;
+    uint16_t* cpText = 0;
     int deci_len, number = 1;
 
     int retvalue = -1;
-    u_short row_height = 48, row_number = 3;//≤Àµ•–– ˝
+    uint16_t row_height = 48, row_number = 3;//≤Àµ•–– ˝
 
     int keycode;
 
@@ -1689,10 +1690,10 @@ int TestMenuDac(void)
     DisplayPrompt(15);
     if( MGetTestStatus(C_MAKE_DACAVG) == 0 )
         //	CMenuOut(0,0,_TestMenu_A1+13,5,1,row_height);
-        TextOut(0,0,1,11,row_height,(u_char*)_TestMenu_A1[MGetLanguage()][2]+2,4);
+        TextOut(0,0,1,11,row_height,(uint8_t*)_TestMenu_A1[MGetLanguage()][2]+2,4);
     else
         //	CMenuOut(0,0,_TestMenu_A1+19,5,1,row_height);
-        TextOut(0,0,1,11,row_height,(u_char*)_TestMenu_A1[MGetLanguage()][3]+2,4);
+        TextOut(0,0,1,11,row_height,(uint8_t*)_TestMenu_A1[MGetLanguage()][3]+2,4);
 
 
 
@@ -1700,12 +1701,12 @@ int TestMenuDac(void)
 
     if( MGetTestStatus(C_MAKE_DACAVG) == 0 )
     {
-        TextOut(xpos + C_ECHAR_HDOT,ypos+4+24,(row_number+1),17,row_height,(u_char*)_TestMenu_DAC[MGetLanguage()][0],4);
+        TextOut(xpos + C_ECHAR_HDOT,ypos+4+24,(row_number+1),17,row_height,(uint8_t*)_TestMenu_DAC[MGetLanguage()][0],4);
 //        EMenuOut(xpos + 2*C_ECHAR_HDOT+8-2*C_ECHAR_HDOT*MGetLanguage(),ypos+3 * row_height,_TestMenu_Enter,1,1,C_ECHAR_VDOT);
         if( MGetTestStatus(C_TEST_DAC) != 0 )
         {
             MEraseWindow(xpos + C_ECHAR_HDOT,ypos+4+row_height*3+24, xpos+C_ECHAR_HDOT*18,ypos+4+row_height*3+24*2) ;
-            TextOut(xpos + C_ECHAR_HDOT,ypos+4+row_height*3+24,(1),17,row_height,(u_char*)_TestMenu_DAC[MGetLanguage()][4],4);
+            TextOut(xpos + C_ECHAR_HDOT,ypos+4+row_height*3+24,(1),17,row_height,(uint8_t*)_TestMenu_DAC[MGetLanguage()][4],4);
 //            EMenuOut(xpos + C_ECHAR_HDOT+8,ypos+3 * row_height,_TestMenu_Enter,1,1,C_ECHAR_VDOT);
         }
         //	CEMenuOut(xpos + C_ECHAR_HDOT,ypos+4,_TestMenu_AD1A,7,(row_number+1),row_height);	/*‘⁄÷∏∂®Œª÷√∏˘æ›√ø––◊÷∑˚ ˝°¢–– ˝°¢––∏ﬂ–¥≤Àµ•*/
@@ -1713,12 +1714,12 @@ int TestMenuDac(void)
     }
     else
     {
-        TextOut(xpos + C_ECHAR_HDOT,ypos+4+24,(row_number+1),17,row_height,(u_char*)_TestMenu_AVG[MGetLanguage()][0],4);
+        TextOut(xpos + C_ECHAR_HDOT,ypos+4+24,(row_number+1),17,row_height,(uint8_t*)_TestMenu_AVG[MGetLanguage()][0],4);
 //        EMenuOut(xpos + 2*C_ECHAR_HDOT+8-2*C_ECHAR_HDOT*MGetLanguage(),ypos+3 * row_height,_TestMenu_Enter,1,1,C_ECHAR_VDOT);
         if( MGetTestStatus(C_TEST_AVG) != 0 )
         {
             MEraseWindow(xpos + C_ECHAR_HDOT,ypos+4+row_height*3+24, xpos+C_ECHAR_HDOT*18,ypos+4+row_height*3+24*2) ;
-            TextOut(xpos + C_ECHAR_HDOT,ypos+4+row_height*3+24,(1),17,row_height,(u_char*)_TestMenu_AVG[MGetLanguage()][4],4);
+            TextOut(xpos + C_ECHAR_HDOT,ypos+4+row_height*3+24,(1),17,row_height,(uint8_t*)_TestMenu_AVG[MGetLanguage()][4],4);
 //            EMenuOut(xpos + C_ECHAR_HDOT+8,ypos+3 * row_height,_TestMenu_Enter,1,1,C_ECHAR_VDOT);
         }
         //	CEMenuOut(xpos + C_ECHAR_HDOT,ypos+4,_TestMenu_AD1,7,(row_number+1),row_height);	/*‘⁄÷∏∂®Œª÷√∏˘æ›√ø––◊÷∑˚ ˝°¢–– ˝°¢––∏ﬂ–¥≤Àµ•*/
@@ -2041,10 +2042,10 @@ int TestMenuDac(void)
             MSetAvgMode(0,C_SETMODE_SAVE);
 #endif
             ypos = para_ypos + row_height *2+24 ;
-            //	cpText = (u_short*)_ParaMenu_AC3A + (MGetAvgMode()-0) * 5 + 1;		//”…”⁄DBÀ„Œ™¡Ω∏ˆ◊÷
+            //	cpText = (uint16_t*)_ParaMenu_AC3A + (MGetAvgMode()-0) * 5 + 1;		//”…”⁄DBÀ„Œ™¡Ω∏ˆ◊÷
             //	CEMenuOut(xpos,ypos , cpText ,2,1,16);
             MEraseWindow(xpos, ypos, xpos + C_CCHAR_HDOT*2, ypos + C_CCHAR_VDOT) ;
-            TextOut(xpos,ypos ,1,6,16,(u_char*)_ParaMenu_AC3A[MGetLanguage()][MGetAvgMode()]+2,4);
+            TextOut(xpos,ypos ,1,6,16,(uint8_t*)_ParaMenu_AC3A[MGetLanguage()][MGetAvgMode()]+2,4);
             /*±Ì√Ê≤π≥•*/
             ypos = para_ypos + row_height *3 ;
             ///		WriteLongness(xpos,ypos+C_ECHAR_VDOT+1,testrange[1],5,1);
@@ -2136,11 +2137,11 @@ int TestMenuDac(void)
             else
             {
 #if C_DEVTYPE!=20
-                //	cpText = (u_short*)_ParaMenu_AC3A ;
+                //	cpText = (uint16_t*)_ParaMenu_AC3A ;
                 MPushWindow(xpos, ypos, xpos + 5*C_CCHAR_HDOT+1, ypos + C_CCHAR_VDOT * 2+4+24) ;
                 EraseDrawRectangle(xpos, ypos, xpos + (5)*C_CCHAR_HDOT, ypos + C_CCHAR_VDOT * 2+24) ;
                 //CEMenuOut(xpos+4,ypos+4 , cpText ,3,2,22);	/*‘⁄÷∏∂®Œª÷√∏˘æ›√ø––◊÷∑˚ ˝°¢–– ˝°¢––∏ﬂ–¥≤Àµ•*/
-                TextOut(xpos+4,ypos+4 ,2,8,C_CCHAR_VDOT+8,(u_char*)_ParaMenu_AC3A[MGetLanguage()][0],4);
+                TextOut(xpos+4,ypos+4 ,2,8,C_CCHAR_VDOT+8,(uint8_t*)_ParaMenu_AC3A[MGetLanguage()][0],4);
                 while(1)
                 {
                     keycode = MAnyKeyReturn();
@@ -2193,10 +2194,10 @@ int TestMenuDac(void)
                     DisplayPrompt(15);
                     if( MGetTestStatus(C_MAKE_DACAVG) == 0 )
                         //	CMenuOut(0,0,_TestMenu_A1+13,5,1,row_height);
-                        TextOut(0,0,1,11,row_height,(u_char*)_TestMenu_A1[MGetLanguage()][2]+2,4);
+                        TextOut(0,0,1,11,row_height,(uint8_t*)_TestMenu_A1[MGetLanguage()][2]+2,4);
                     else
                         //	CMenuOut(0,0,_TestMenu_A1+19,5,1,row_height);
-                        TextOut(0,0,1,11,row_height,(u_char*)_TestMenu_A1[MGetLanguage()][3]+2,4);
+                        TextOut(0,0,1,11,row_height,(uint8_t*)_TestMenu_A1[MGetLanguage()][3]+2,4);
 
                     break;
                 }
@@ -2209,10 +2210,10 @@ int TestMenuDac(void)
                     DisplayPrompt(15);
                     if( MGetTestStatus(C_MAKE_DACAVG) == 0 )
                         //	CMenuOut(0,0,_TestMenu_A1+13,5,1,row_height);
-                        TextOut(0,0,1,11,row_height,(u_char*)_TestMenu_A1[MGetLanguage()][2]+2,4);
+                        TextOut(0,0,1,11,row_height,(uint8_t*)_TestMenu_A1[MGetLanguage()][2]+2,4);
                     else
                         //	CMenuOut(0,0,_TestMenu_A1+19,5,1,row_height);
-                        TextOut(0,0,1,11,row_height,(u_char*)_TestMenu_A1[MGetLanguage()][3]+2,4);
+                        TextOut(0,0,1,11,row_height,(uint8_t*)_TestMenu_A1[MGetLanguage()][3]+2,4);
 
                     break;
                 }
@@ -2249,7 +2250,7 @@ int TestMenuDac(void)
     return C_FALSE;
 }
 
-int TestDac(u_int depthmax,u_int diameter,u_int length,short test_num )//◊Ó¥Û…Ó∂»°¢∑¥…‰ÃÂ÷±æ∂°¢≥§∂»
+int TestDac(uint32_t depthmax,uint32_t diameter,uint32_t length,short test_num )//◊Ó¥Û…Ó∂»°¢∑¥…‰ÃÂ÷±æ∂°¢≥§∂»
 {
 	USER_INFO UserInfo;
     int offsets = C_OFF_USER_INFO;
@@ -2262,22 +2263,22 @@ int TestDac(u_int depthmax,u_int diameter,u_int length,short test_num )//◊Ó¥Û…Ó∂
 	int ndiameter = diameter;
 	int nlength = length;
     int gain = 500,range = 1000;
-    u_int gateamp;
+    uint32_t gateamp;
 
-    u_char* sampbuffer;
+    uint8_t* sampbuffer;
 
-    u_short char_len,row_number,crow_height;
+    uint16_t char_len,row_number,crow_height;
     //int number,deci_len;
     short xpos,ypos,menu_xpos,menu_ypos,para_xpos,para_ypos;
     int deci_len, number = 1;
 
-    u_int preElapsedtime;
+    uint32_t preElapsedtime;
     int retvalue = C_FALSE;
     short keycode,rotary;
-    u_short gatetype = 0;
+    uint16_t gatetype = 0;
 
     int space;
-    u_short dac_db[10],dac_dist[10];
+    uint16_t dac_db[10],dac_dist[10];
     short SameKeyTime;
     int temp,i,j;
 //	int offset;
@@ -2359,14 +2360,14 @@ int TestDac(u_int depthmax,u_int diameter,u_int length,short test_num )//◊Ó¥Û…Ó∂
     if( MGetTestStatus(C_MAKE_DACAVG) == 0 )
     {
         //	CMenuOut(0,0,_TestMenu_A1+13,5,1,24);
-        TextOut(0,0,1,11,C_CCHAR_VDOT,(u_char*)_TestMenu_A1[MGetLanguage()][2]+2,4);
+        TextOut(0,0,1,11,C_CCHAR_VDOT,(uint8_t*)_TestMenu_A1[MGetLanguage()][2]+2,4);
         menu_xpos = C_COORHORIUNIT * 11-(char_len+3+MGetLanguage())*C_CCHAR_HDOT-20*MGetLanguage();
         menu_ypos = C_COORVPOSI ;
     }
     else
     {
         //	CMenuOut(0,0,_TestMenu_A1+19,5,1,24);
-        TextOut(0,0,1,11,C_CCHAR_VDOT,(u_char*)_TestMenu_A1[MGetLanguage()][3]+2,4);
+        TextOut(0,0,1,11,C_CCHAR_VDOT,(uint8_t*)_TestMenu_A1[MGetLanguage()][3]+2,4);
         menu_xpos = 0;
         menu_ypos = C_COORVPOSI ;
     }
@@ -2376,10 +2377,10 @@ int TestDac(u_int depthmax,u_int diameter,u_int length,short test_num )//◊Ó¥Û…Ó∂
     MSetColor(C_CR_MENU);
     if(test_num > 0)
     {
-        TextOut(menu_xpos + C_ECHAR_HDOT-10*MGetLanguage(),menu_ypos + 4,1,28+5*MGetLanguage(),C_CCHAR_VDOT,(u_char*)_TestMenu_AD2[MGetLanguage()][2],4);
+        TextOut(menu_xpos + C_ECHAR_HDOT-10*MGetLanguage(),menu_ypos + 4,1,28+5*MGetLanguage(),C_CCHAR_VDOT,(uint8_t*)_TestMenu_AD2[MGetLanguage()][2],4);
 //        EMenuOut(menu_xpos+8 + (16+3*MGetLanguage())*C_ECHAR_HDOT,menu_ypos+1,_TestMenu_Enter,1,1,C_ECHAR_VDOT);
     }
-    else TextOut(menu_xpos + C_ECHAR_HDOT-10*MGetLanguage(),menu_ypos + 4,1,28+5*MGetLanguage(),C_CCHAR_VDOT,(u_char*)_TestMenu_AD2[MGetLanguage()][0],4);
+    else TextOut(menu_xpos + C_ECHAR_HDOT-10*MGetLanguage(),menu_ypos + 4,1,28+5*MGetLanguage(),C_CCHAR_VDOT,(uint8_t*)_TestMenu_AD2[MGetLanguage()][0],4);
 //	if(test_num > 0)CEMenuOut(menu_xpos + C_ECHAR_HDOT,menu_ypos + 4, _TestMenu_AD5 ,char_len,row_number,crow_height);
 //	else CEMenuOut(menu_xpos + C_ECHAR_HDOT,menu_ypos + 4, _TestMenu_AD2 ,char_len,row_number,crow_height);
 
@@ -2453,10 +2454,10 @@ int TestDac(u_int depthmax,u_int diameter,u_int length,short test_num )//◊Ó¥Û…Ó∂
             MSetColor(C_CR_MENU);
             if(test_num > 0)
             {
-                TextOut(menu_xpos + C_ECHAR_HDOT-10*MGetLanguage(),menu_ypos + 4,1,28+5*MGetLanguage(),C_CCHAR_VDOT,(u_char*)_TestMenu_AD2[MGetLanguage()][2],4);
+                TextOut(menu_xpos + C_ECHAR_HDOT-10*MGetLanguage(),menu_ypos + 4,1,28+5*MGetLanguage(),C_CCHAR_VDOT,(uint8_t*)_TestMenu_AD2[MGetLanguage()][2],4);
 //                EMenuOut(menu_xpos + (16+3*MGetLanguage())*C_ECHAR_HDOT,menu_ypos+1,_TestMenu_Enter,1,1,C_CCHAR_VDOT);
             }
-            else TextOut(menu_xpos + C_ECHAR_HDOT-10*MGetLanguage(),menu_ypos + 4,1,28+5*MGetLanguage(),C_CCHAR_VDOT,(u_char*)_TestMenu_AD2[MGetLanguage()][0],4);
+            else TextOut(menu_xpos + C_ECHAR_HDOT-10*MGetLanguage(),menu_ypos + 4,1,28+5*MGetLanguage(),C_CCHAR_VDOT,(uint8_t*)_TestMenu_AD2[MGetLanguage()][0],4);
 
             /*			EraseDrawRectangle(menu_xpos, menu_ypos, menu_xpos + (char_len+1)*C_CCHAR_HDOT, menu_ypos + crow_height * row_number) ;
             			MSetColor(C_CR_MENU);
@@ -2482,8 +2483,8 @@ int TestDac(u_int depthmax,u_int diameter,u_int length,short test_num )//◊Ó¥Û…Ó∂
             ///xpos = GateMax.Pos;
 			ClearCursor(2);
             int iAmpMax=0,iPosMax=0;
-		    u_char SampBuf[C_LEN_SAMP+1] ;
-            u_int  offset1 = C_OFF_SAMP ;
+		    uint8_t SampBuf[C_LEN_SAMP+1] ;
+            uint32_t  offset1 = C_OFF_SAMP ;
             MCopyProtectedMemory( SampBuf, (void*)offset1, C_LEN_SAMP, PM_COPY_READ);
 
             for(i=MGetGatePara(0,0);i<MGetGatePara(0,0)+MGetGatePara(0,1);i++)
@@ -2565,15 +2566,15 @@ int TestDac(u_int depthmax,u_int diameter,u_int length,short test_num )//◊Ó¥Û…Ó∂
                 if (MGetLanguage())
                 {
                     EraseDrawRectangle(xpos-112, ypos-C_CCHAR_VDOT, xpos+ 10*C_CCHAR_HDOT + (1+3*MGetLanguage())*C_ECHAR_HDOT, ypos + 2 * crow_height) ;
-                    //  TextOut(xpos + C_ECHAR_HDOT-10,ypos+10-24, 1, 14,C_ECHAR_VDOT, (u_char*)_TestMenu_set[MGetLanguage()][0]+14, 4);
-                    TextOut(xpos + C_ECHAR_HDOT-112,ypos+1, 1, 15,C_ECHAR_VDOT, (u_char*)_TestMenu_set[MGetLanguage()][0], 4);
-                    TextOut(xpos + C_ECHAR_HDOT-112,ypos+4+crow_height, 1, 16,C_ECHAR_VDOT, (u_char*)_TestMenu_set[MGetLanguage()][2], 4);
+                    //  TextOut(xpos + C_ECHAR_HDOT-10,ypos+10-24, 1, 14,C_ECHAR_VDOT, (uint8_t*)_TestMenu_set[MGetLanguage()][0]+14, 4);
+                    TextOut(xpos + C_ECHAR_HDOT-112,ypos+1, 1, 15,C_ECHAR_VDOT, (uint8_t*)_TestMenu_set[MGetLanguage()][0], 4);
+                    TextOut(xpos + C_ECHAR_HDOT-112,ypos+4+crow_height, 1, 16,C_ECHAR_VDOT, (uint8_t*)_TestMenu_set[MGetLanguage()][2], 4);
                 }
                 else
                 {
                     EraseDrawRectangle(xpos, ypos-C_CCHAR_VDOT, xpos+ 10*C_CCHAR_HDOT + C_ECHAR_HDOT, ypos + 2 * crow_height) ;
-                    TextOut(xpos + C_ECHAR_HDOT,ypos+4, 1, 14,C_CCHAR_VDOT, (u_char*)_TestMenu_set[MGetLanguage()][0], 4);
-                    TextOut(xpos + C_ECHAR_HDOT,ypos+4+crow_height, 1, 14,C_CCHAR_VDOT, (u_char*)_TestMenu_set[MGetLanguage()][2], 4);
+                    TextOut(xpos + C_ECHAR_HDOT,ypos+4, 1, 14,C_CCHAR_VDOT, (uint8_t*)_TestMenu_set[MGetLanguage()][0], 4);
+                    TextOut(xpos + C_ECHAR_HDOT,ypos+4+crow_height, 1, 14,C_CCHAR_VDOT, (uint8_t*)_TestMenu_set[MGetLanguage()][2], 4);
                 }
 //                EMenuOut(xpos + 2*C_ECHAR_HDOT+3*C_CCHAR_HDOT+8,ypos+4+ crow_height,_TestMenu_Enter,1,1,C_ECHAR_VDOT);
             }
@@ -2582,17 +2583,17 @@ int TestDac(u_int depthmax,u_int diameter,u_int length,short test_num )//◊Ó¥Û…Ó∂
                 if (MGetLanguage())
                 {
                     EraseDrawRectangle(xpos-112, ypos-C_CCHAR_VDOT, xpos+ 10*C_CCHAR_HDOT + C_ECHAR_HDOT, ypos + 3 * crow_height) ;
-                    //  TextOut(xpos + C_ECHAR_HDOT-16,ypos+10-24, 1, 14,C_ECHAR_VDOT, (u_char*)_TestMenu_set[MGetLanguage()][0]+14, 4);
-                    TextOut(xpos + C_ECHAR_HDOT-112,ypos+1, 1, 15,C_ECHAR_VDOT, (u_char*)_TestMenu_set[MGetLanguage()][0], 4);
-                    TextOut(xpos + C_ECHAR_HDOT-112,ypos+4+crow_height, 1, 15,C_ECHAR_VDOT, (u_char*)_TestMenu_set[MGetLanguage()][1], 4);
-                    TextOut(xpos + C_ECHAR_HDOT-112,ypos+4+crow_height*2, 1, 16,C_ECHAR_VDOT, (u_char*)_TestMenu_set[MGetLanguage()][2], 4);
+                    //  TextOut(xpos + C_ECHAR_HDOT-16,ypos+10-24, 1, 14,C_ECHAR_VDOT, (uint8_t*)_TestMenu_set[MGetLanguage()][0]+14, 4);
+                    TextOut(xpos + C_ECHAR_HDOT-112,ypos+1, 1, 15,C_ECHAR_VDOT, (uint8_t*)_TestMenu_set[MGetLanguage()][0], 4);
+                    TextOut(xpos + C_ECHAR_HDOT-112,ypos+4+crow_height, 1, 15,C_ECHAR_VDOT, (uint8_t*)_TestMenu_set[MGetLanguage()][1], 4);
+                    TextOut(xpos + C_ECHAR_HDOT-112,ypos+4+crow_height*2, 1, 16,C_ECHAR_VDOT, (uint8_t*)_TestMenu_set[MGetLanguage()][2], 4);
                 }
                 else
                 {
                     EraseDrawRectangle(xpos, ypos-C_CCHAR_VDOT, xpos+ 10*C_CCHAR_HDOT + C_ECHAR_HDOT, ypos + 3 * crow_height) ;
-                    TextOut(xpos + C_ECHAR_HDOT,ypos+4, 1, 14,C_CCHAR_VDOT, (u_char*)_TestMenu_set[MGetLanguage()][0], 4);
-                    TextOut(xpos + C_ECHAR_HDOT,ypos+4+crow_height, 1, 14,C_CCHAR_VDOT, (u_char*)_TestMenu_set[MGetLanguage()][1], 4);
-                    TextOut(xpos + C_ECHAR_HDOT,ypos+4+crow_height*2, 1, 14,C_CCHAR_VDOT, (u_char*)_TestMenu_set[MGetLanguage()][2], 4);
+                    TextOut(xpos + C_ECHAR_HDOT,ypos+4, 1, 14,C_CCHAR_VDOT, (uint8_t*)_TestMenu_set[MGetLanguage()][0], 4);
+                    TextOut(xpos + C_ECHAR_HDOT,ypos+4+crow_height, 1, 14,C_CCHAR_VDOT, (uint8_t*)_TestMenu_set[MGetLanguage()][1], 4);
+                    TextOut(xpos + C_ECHAR_HDOT,ypos+4+crow_height*2, 1, 14,C_CCHAR_VDOT, (uint8_t*)_TestMenu_set[MGetLanguage()][2], 4);
                 }
 //                EMenuOut(xpos + 2*C_ECHAR_HDOT+2*C_CCHAR_HDOT+8,ypos+4+ 2* crow_height,_TestMenu_Enter,1,1,C_ECHAR_VDOT);
             }
@@ -2690,14 +2691,14 @@ int TestDac(u_int depthmax,u_int diameter,u_int length,short test_num )//◊Ó¥Û…Ó∂
                 if( MGetTestStatus(C_MAKE_DACAVG) == 0 )
                 {
                     //	CMenuOut(0,0,_TestMenu_A1+13,5,1,24);
-                    TextOut(0,0,1,11,C_CCHAR_VDOT,(u_char*)_TestMenu_A1[MGetLanguage()][2]+2,4);
+                    TextOut(0,0,1,11,C_CCHAR_VDOT,(uint8_t*)_TestMenu_A1[MGetLanguage()][2]+2,4);
                     menu_xpos = C_COORHORIUNIT * 11-(char_len+3+MGetLanguage())*C_CCHAR_HDOT-20*MGetLanguage();
                     menu_ypos = C_COORVPOSI ;
                 }
                 else
                 {
                     //	CMenuOut(0,0,_TestMenu_A1+19,5,1,24);
-                    TextOut(0,0,1,11,C_CCHAR_VDOT,(u_char*)_TestMenu_A1[MGetLanguage()][3]+2,4);
+                    TextOut(0,0,1,11,C_CCHAR_VDOT,(uint8_t*)_TestMenu_A1[MGetLanguage()][3]+2,4);
                     menu_xpos = 0;
                     menu_ypos = C_COORVPOSI ;
                 }
@@ -2706,10 +2707,10 @@ int TestDac(u_int depthmax,u_int diameter,u_int length,short test_num )//◊Ó¥Û…Ó∂
                 MSetColor(C_CR_MENU);
                 if(test_num > 0)
                 {
-                    TextOut(menu_xpos + C_ECHAR_HDOT-10*MGetLanguage(),menu_ypos + 4,1,28+5*MGetLanguage(),C_CCHAR_VDOT,(u_char*)_TestMenu_AD2[MGetLanguage()][2],4);
+                    TextOut(menu_xpos + C_ECHAR_HDOT-10*MGetLanguage(),menu_ypos + 4,1,28+5*MGetLanguage(),C_CCHAR_VDOT,(uint8_t*)_TestMenu_AD2[MGetLanguage()][2],4);
 //                    EMenuOut(menu_xpos+8 + (25+3*MGetLanguage())*C_ECHAR_HDOT,menu_ypos+1,_TestMenu_Enter,1,1,C_ECHAR_VDOT);
                 }
-                else TextOut(menu_xpos + C_ECHAR_HDOT-10*MGetLanguage(),menu_ypos + 4,1,28+5*MGetLanguage(),C_CCHAR_VDOT,(u_char*)_TestMenu_AD2[MGetLanguage()][0],4);
+                else TextOut(menu_xpos + C_ECHAR_HDOT-10*MGetLanguage(),menu_ypos + 4,1,28+5*MGetLanguage(),C_CCHAR_VDOT,(uint8_t*)_TestMenu_AD2[MGetLanguage()][0],4);
 
                 /*				EraseDrawRectangle(menu_xpos, menu_ypos, menu_xpos + (char_len+1)*C_CCHAR_HDOT, menu_ypos + crow_height * row_number) ;
                 				MSetColor(C_CR_MENU);
@@ -2794,13 +2795,13 @@ int TestDac(u_int depthmax,u_int diameter,u_int length,short test_num )//◊Ó¥Û…Ó∂
 				{
 					 DisplayPrompt(15);
 					//	CMenuOut(0,0,_TestMenu_A1+13,5,1,24);
-					TextOut(0,0,1,11,C_CCHAR_VDOT,(u_char*)_TestMenu_A1[MGetLanguage()][2]+2,4);
+					TextOut(0,0,1,11,C_CCHAR_VDOT,(uint8_t*)_TestMenu_A1[MGetLanguage()][2]+2,4);
 				}
 				else
 				{
 					 DisplayPrompt(15);
 					//	CMenuOut(0,0,_TestMenu_A1+19,5,1,24);
-					TextOut(0,0,1,11,C_CCHAR_VDOT,(u_char*)_TestMenu_A1[MGetLanguage()][3]+2,4);
+					TextOut(0,0,1,11,C_CCHAR_VDOT,(uint8_t*)_TestMenu_A1[MGetLanguage()][3]+2,4);
 				}
             }
 
@@ -2808,8 +2809,8 @@ int TestDac(u_int depthmax,u_int diameter,u_int length,short test_num )//◊Ó¥Û…Ó∂
         else if( (gateamp > 5 || MGetFunctionMode(C_ECHOMAX_MEMORY) ) && (keycode == C_KEYCOD_LEFT || keycode == C_KEYCOD_RIGHT || ( keycode == C_KEYCOD_CONFIRM && MGetTestStatus(C_MAKE_DACAVG)  && test_num == 0 ) ) )
         {
             int search = 1;
-            u_char echobuff[C_LEN_SAMP+1] ;
-            u_int  offset = C_OFF_SAMP ;
+            uint8_t echobuff[C_LEN_SAMP+1] ;
+            uint32_t  offset = C_OFF_SAMP ;
 
             if( MGetFunctionMode(C_ECHOMAX_MEMORY) ) search = 0;
             MSetAcquisitionEnable(0,C_SETMODE_SETSAVE);
@@ -2826,7 +2827,7 @@ int TestDac(u_int depthmax,u_int diameter,u_int length,short test_num )//◊Ó¥Û…Ó∂
             EraseDrawRectangle(menu_xpos, menu_ypos, menu_xpos + (char_len+1+2*MGetLanguage())*C_CCHAR_HDOT+18, menu_ypos + crow_height * row_number);
             MSetColor(C_CR_MENU);
             //	CEMenuOut(menu_xpos + C_ECHAR_HDOT,menu_ypos + 4, _TestMenu_AD3 ,char_len,row_number,crow_height);
-            TextOut(menu_xpos + C_ECHAR_HDOT-10*MGetLanguage(),menu_ypos + 4,1,28+4*MGetLanguage(),C_CCHAR_VDOT,(u_char*)_TestMenu_AD2[MGetLanguage()][1],4);
+            TextOut(menu_xpos + C_ECHAR_HDOT-10*MGetLanguage(),menu_ypos + 4,1,28+4*MGetLanguage(),C_CCHAR_VDOT,(uint8_t*)_TestMenu_AD2[MGetLanguage()][1],4);
 //            EMenuOut(menu_xpos +8+ (11+2*MGetLanguage())*C_ECHAR_HDOT,menu_ypos+1,_TestMenu_Enter,1,1,C_ECHAR_VDOT);
 
             ExpendTime(10);
@@ -3123,10 +3124,10 @@ int TestDac(u_int depthmax,u_int diameter,u_int length,short test_num )//◊Ó¥Û…Ó∂
             MSetColor(C_CR_MENU);
             if( MGetTestStatus(C_MAKE_DACAVG) == 0 )
                 //	CMenuOut(0,0,_TestMenu_A1+13,5,1,24);
-                TextOut(0,0,1,11,C_CCHAR_VDOT,(u_char*)_TestMenu_A1[MGetLanguage()][2]+2,4);
+                TextOut(0,0,1,11,C_CCHAR_VDOT,(uint8_t*)_TestMenu_A1[MGetLanguage()][2]+2,4);
             else
                 //	CMenuOut(0,0,_TestMenu_A1+19,5,1,24);
-                TextOut(0,0,1,11,C_CCHAR_VDOT,(u_char*)_TestMenu_A1[MGetLanguage()][3]+2,4);
+                TextOut(0,0,1,11,C_CCHAR_VDOT,(uint8_t*)_TestMenu_A1[MGetLanguage()][3]+2,4);
             GateMax.Amp = 0;
             MKeyRlx();
         }
@@ -3164,7 +3165,7 @@ int TestDac(u_int depthmax,u_int diameter,u_int length,short test_num )//◊Ó¥Û…Ó∂
             EraseDrawRectangle(menu_xpos, menu_ypos, menu_xpos + (char_len+1+2*MGetLanguage())*C_CCHAR_HDOT+18, menu_ypos + crow_height * row_number);
             MSetColor(C_CR_MENU);
             //	CEMenuOut(menu_xpos + C_ECHAR_HDOT,menu_ypos + 4, _TestMenu_AD6 ,char_len,row_number,crow_height);
-            TextOut(menu_xpos + C_ECHAR_HDOT-10*MGetLanguage(),menu_ypos + 4,1,28+5*MGetLanguage(),C_CCHAR_VDOT,(u_char*)_TestMenu_AD2[MGetLanguage()][3],4);
+            TextOut(menu_xpos + C_ECHAR_HDOT-10*MGetLanguage(),menu_ypos + 4,1,28+5*MGetLanguage(),C_CCHAR_VDOT,(uint8_t*)_TestMenu_AD2[MGetLanguage()][3],4);
 //            EMenuOut(menu_xpos +8+ (17+3*MGetLanguage())*C_ECHAR_HDOT,menu_ypos+1,_TestMenu_Enter,1,1,C_ECHAR_VDOT);
 
             ExpendTime(10);
@@ -3272,7 +3273,7 @@ int TestDac(u_int depthmax,u_int diameter,u_int length,short test_num )//◊Ó¥Û…Ó∂
                     EraseDrawRectangle(menu_xpos, menu_ypos, menu_xpos + (char_len+1+2*MGetLanguage())*C_CCHAR_HDOT+18, menu_ypos + crow_height * row_number);
                     MSetColor(C_CR_MENU);
                     //	CEMenuOut(menu_xpos + C_ECHAR_HDOT,menu_ypos + 4, _TestMenu_AD6 ,char_len,row_number,crow_height);
-                    TextOut(menu_xpos + C_ECHAR_HDOT-10*MGetLanguage(),menu_ypos + 4,1,28+5*MGetLanguage(),C_CCHAR_VDOT,(u_char*)_TestMenu_AD2[MGetLanguage()][3],4);
+                    TextOut(menu_xpos + C_ECHAR_HDOT-10*MGetLanguage(),menu_ypos + 4,1,28+5*MGetLanguage(),C_CCHAR_VDOT,(uint8_t*)_TestMenu_AD2[MGetLanguage()][3],4);
 //                    EMenuOut(menu_xpos +8+ (17+3*MGetLanguage())*C_ECHAR_HDOT,menu_ypos+1,_TestMenu_Enter,1,1,C_ECHAR_VDOT);
 
                     xpos = dac_dist[num] * C_COORWIDTH/MGetRange(3);	//µ√µΩ≤…—˘µ„æ‡¿Î
@@ -3312,10 +3313,10 @@ int TestDac(u_int depthmax,u_int diameter,u_int length,short test_num )//◊Ó¥Û…Ó∂
             MSetColor(C_CR_MENU);
             if( MGetTestStatus(C_MAKE_DACAVG) == 0 )
                 //	CMenuOut(0,0,_TestMenu_A1+13,5,1,24);
-                TextOut(0,0,1,11,C_CCHAR_VDOT,(u_char*)_TestMenu_A1[MGetLanguage()][2]+2,4);
+                TextOut(0,0,1,11,C_CCHAR_VDOT,(uint8_t*)_TestMenu_A1[MGetLanguage()][2]+2,4);
             else
                 //CMenuOut(0,0,_TestMenu_A1+19,5,1,24);
-                TextOut(0,0,1,11,C_CCHAR_VDOT,(u_char*)_TestMenu_A1[MGetLanguage()][3]+2,4);
+                TextOut(0,0,1,11,C_CCHAR_VDOT,(uint8_t*)_TestMenu_A1[MGetLanguage()][3]+2,4);
 
             GateMax.Amp = 0;
         }
@@ -3331,10 +3332,10 @@ int TestDac(u_int depthmax,u_int diameter,u_int length,short test_num )//◊Ó¥Û…Ó∂
 
         if(test_num > 0)
         {
-            TextOut(menu_xpos + C_ECHAR_HDOT-10*MGetLanguage(),menu_ypos + 4,1,28+5*MGetLanguage(),C_CCHAR_VDOT,(u_char*)_TestMenu_AD2[MGetLanguage()][2],4);
+            TextOut(menu_xpos + C_ECHAR_HDOT-10*MGetLanguage(),menu_ypos + 4,1,28+5*MGetLanguage(),C_CCHAR_VDOT,(uint8_t*)_TestMenu_AD2[MGetLanguage()][2],4);
 //            EMenuOut(menu_xpos+8 + (20+3*MGetLanguage())*C_ECHAR_HDOT,menu_ypos+1,_TestMenu_Enter,1,1,C_ECHAR_VDOT);
         }
-        else TextOut(menu_xpos + C_ECHAR_HDOT-10*MGetLanguage(),menu_ypos + 4,1,28+5*MGetLanguage(),C_CCHAR_VDOT,(u_char*)_TestMenu_AD2[MGetLanguage()][0],4);
+        else TextOut(menu_xpos + C_ECHAR_HDOT-10*MGetLanguage(),menu_ypos + 4,1,28+5*MGetLanguage(),C_CCHAR_VDOT,(uint8_t*)_TestMenu_AD2[MGetLanguage()][0],4);
 
     }
     for(i = 0 ; i < 6; i++)
@@ -3428,7 +3429,7 @@ int CalcuDac(void)
     short test_num = 0;	//—°÷–≤®¥Œ ˝
     short near_time = 1;
     int dac_db[10+2],dac_dist[10+2];	//‘⁄ª≠DAC«˙œﬂ ±‘ˆº”πÿŒ≤¡Ωµ„£¨∆‰÷µ”Î‘≠Õ∑Œ≤œ‡Õ¨
-//	u_short dac_line[308*2];
+//	uint16_t dac_line[308*2];
     //int basegain;
     int i,j;
     int dist1,dist2;
@@ -3597,8 +3598,8 @@ int DrawDac2(int mode)		//ª≠∫ÕªÚº∆À„DAC«˙œﬂ,mode=0º∆À„,=1≤ª
     int i;
     int dist1,dist2;
     int step = 4;
-//	u_short dac_line[308*2];
-//	u_int dac_temp;
+//	uint16_t dac_line[308*2];
+//	uint32_t dac_temp;
     int retvalue = -1;
 #define C_EXPF 2.302585
     //#define C_EXPF 1.848489938
@@ -3606,7 +3607,7 @@ int DrawDac2(int mode)		//ª≠∫ÕªÚº∆À„DAC«˙œﬂ,mode=0º∆À„,=1≤ª
     int test_num;
     double dTemp;
 //	int xpos, ypos;
-    u_char pzText[2] = " ";
+    uint8_t pzText[2] = " ";
 
     pzText[0] = PHI;
 
@@ -3638,7 +3639,7 @@ int DrawDac2(int mode)		//ª≠∫ÕªÚº∆À„DAC«˙œﬂ,mode=0º∆À„,=1≤ª
         {
             /*           dist1 = 0;
                        dist2 = C_COORWIDTH-1;
-                       dac_line[dist2] = (u_int)( 160 / Mexpf(C_EXPF*( MGetDepthGain() )/200.0, C_SIZE_SHORT) + 0.5 );
+                       dac_line[dist2] = (uint32_t)( 160 / Mexpf(C_EXPF*( MGetDepthGain() )/200.0, C_SIZE_SHORT) + 0.5 );
                        //Write_Number( 100,30,dac_line[dist1],10,0,0);
                        dac_line[dist1] = 160;
                        GetLine_TwoDot(dac_line,dist1,dist2);
@@ -3670,7 +3671,7 @@ int DrawDac2(int mode)		//ª≠∫ÕªÚº∆À„DAC«˙œﬂ,mode=0º∆À„,=1≤ª
 #if C_DEVLIB == 1 || C_DEVLIB == 2 || C_DEVLIB == 23 || C_DEVLIB == 24
     if( MGetSystemMode() == 0 && MGetFunctionMode(C_DEPTH_COMPENSATE))
     {
-        u_short DynamicGain[C_MAX_DOT_NUMBER];
+        uint16_t DynamicGain[C_MAX_DOT_NUMBER];
         offset = C_OFF_DACDB;
         MCopyProtectedMemory( dac_line, (void*)offset, C_LEN_DACDB, PM_COPY_READ);
 
@@ -3685,15 +3686,15 @@ int DrawDac2(int mode)		//ª≠∫ÕªÚº∆À„DAC«˙œﬂ,mode=0º∆À„,=1≤ª
 //        SetAmplifierDynamicGain(DynamicGain) ;
         /* basegain = MGetBaseGain() + 481.31;	//ª˘◊º‘ˆ“Ê
          dist2 = 0;
-         //dac_line[dist2] = (u_int)expf( C_EXPF*( basegain - dac_line[dist2] )/200.0) ;
-        dac_line[dist2] = (u_int)( dac_line[dist2] + MGetLineGain(0)  - ( 200 * ( log10(255) - log10(MGetAmpStdMax()) ) ) + 0.5) ;
+         //dac_line[dist2] = (uint32_t)expf( C_EXPF*( basegain - dac_line[dist2] )/200.0) ;
+        dac_line[dist2] = (uint32_t)( dac_line[dist2] + MGetLineGain(0)  - ( 200 * ( log10(255) - log10(MGetAmpStdMax()) ) ) + 0.5) ;
          dac_line[dist2] /= 5;
          while(dist2 <= C_COORWIDTH)
          {
              dist1 = dist2;
              dist2 += step;
-             //dac_line[dist2] = (u_int)expf(C_EXPF*( basegain - dac_line[dist2] )/200.0) ;
-        	dac_line[dist2] = (u_int)( dac_line[dist2] + MGetLineGain(0) - ( 200 * ( log10(255) - log10(MGetAmpStdMax()) ) ) + 0.5) ;
+             //dac_line[dist2] = (uint32_t)expf(C_EXPF*( basegain - dac_line[dist2] )/200.0) ;
+        	dac_line[dist2] = (uint32_t)( dac_line[dist2] + MGetLineGain(0) - ( 200 * ( log10(255) - log10(MGetAmpStdMax()) ) ) + 0.5) ;
              dac_line[dist2] /= 5;
              GetLine_TwoDot(dac_line,dist1,dist2);
          }
@@ -3742,8 +3743,8 @@ int DrawDac2(int mode)		//ª≠∫ÕªÚº∆À„DAC«˙œﬂ,mode=0º∆À„,=1≤ª
         basegain = MGetBaseGain() + MGetLineGain(0) + 481.31;	//ª˘◊º‘ˆ“Ê£¨”¶º”…œ≈–∑œœﬂ
     }
     dist2 = 0;
-    //dac_line[dist2] = (u_int)expf( C_EXPF*( basegain - dac_line[dist2] )/200.0) ;
-    dac_line[dist2] = (u_int)( dac_line[dist2] + MGetLineGain(0)  - ( 200 * ( log10(255) - log10(MGetAmpStdMax()) ) ) + 0.5) ;
+    //dac_line[dist2] = (uint32_t)expf( C_EXPF*( basegain - dac_line[dist2] )/200.0) ;
+    dac_line[dist2] = (uint32_t)( dac_line[dist2] + MGetLineGain(0)  - ( 200 * ( log10(255) - log10(MGetAmpStdMax()) ) ) + 0.5) ;
     dac_line[dist2] /= 5;
     if(MGetFunctionMode(C_DEPTH_COMPENSATE) == 1)
     {
@@ -3758,8 +3759,8 @@ int DrawDac2(int mode)		//ª≠∫ÕªÚº∆À„DAC«˙œﬂ,mode=0º∆À„,=1≤ª
         {
             dist1 = dist2;
             dist2 += step;
-            //dac_line[dist2] = (u_int)expf(C_EXPF*( basegain - dac_line[dist2] )/200.0) ;
-            dac_line[dist2] = (u_int)( dac_line[dist2] + MGetLineGain(0)  - ( 200 * ( log10(255) - log10(MGetAmpStdMax()) ) ) + 0.5) ;
+            //dac_line[dist2] = (uint32_t)expf(C_EXPF*( basegain - dac_line[dist2] )/200.0) ;
+            dac_line[dist2] = (uint32_t)( dac_line[dist2] + MGetLineGain(0)  - ( 200 * ( log10(255) - log10(MGetAmpStdMax()) ) ) + 0.5) ;
             dac_line[dist2] /= 5;
             GetLine_TwoDot(dac_line,dist1,dist2);
         }
@@ -3803,15 +3804,15 @@ int DrawDac(int mode)		//ª≠∫ÕªÚº∆À„DAC«˙œﬂ,mode=0º∆À„,=1≤ª
     int i;
     int dist1,dist2;
     int step = 1;
-//	u_short dac_line[308*2];
-//	u_int dac_temp;
+//	uint16_t dac_line[308*2];
+//	uint32_t dac_temp;
     int retvalue = -1;
     //#define C_EXPF 1.848489938
     //#define C_EXPF 1.319249827
     int test_num;
     double dTemp;
 //	int xpos, ypos;
-    u_char pzText[2] = " ";
+    uint8_t pzText[2] = " ";
 
     POINT PTin[16],PTout[C_SCREEN_WIDTH];
 //;	if( MGetDacShowMode() > 0)return DrawDac2(mode);//ø…“‘œ‘ æ¥”µÕµΩ∏ﬂµƒDAC«˙œﬂ
@@ -3835,7 +3836,7 @@ int DrawDac(int mode)		//ª≠∫ÕªÚº∆À„DAC«˙œﬂ,mode=0º∆À„,=1≤ª
 
 
 
-    u_int DynamicGain[C_MAX_DOT_NUMBER];
+    uint32_t DynamicGain[C_MAX_DOT_NUMBER];
     //if( (MGetSystemMode() == 1 || MGetTestStatus(C_TEST_DAC) == 1 || MGetTestStatus(C_TEST_AVG) == 1) )
 #if ( C_DEVLIB == 1 || C_DEVLIB	== 2 || C_DEVLIB == 23 || C_DEVLIB == 24)
     if( MGetSystemMode() == 0 && MGetFunctionMode(C_DEPTH_COMPENSATE))
@@ -3900,7 +3901,7 @@ int DrawDac(int mode)		//ª≠∫ÕªÚº∆À„DAC«˙œﬂ,mode=0º∆À„,=1≤ª
 
             /*            dist1 = 0;
             dist2 = C_COORWIDTH-1;
-            dac_line[dist2] = (u_int)( 160 / Mexpf(C_EXPF*( MGetDepthGain() )/200.0, C_SIZE_SHORT) + 0.5 );
+            dac_line[dist2] = (uint32_t)( 160 / Mexpf(C_EXPF*( MGetDepthGain() )/200.0, C_SIZE_SHORT) + 0.5 );
             //Write_Number( 100,30,dac_line[dist1],10,0,0);
             dac_line[dist1] = 160;
             GetLine_TwoDot(dac_line,dist1,dist2);
@@ -3952,8 +3953,8 @@ int DrawDac(int mode)		//ª≠∫ÕªÚº∆À„DAC«˙œﬂ,mode=0º∆À„,=1≤ª
         basegain = MGetBaseGain() + MGetLineGain(0) + 481.31;	//ª˘◊º‘ˆ“Ê£¨”¶º”…œ≈–∑œœﬂ
     }
     dist2 = 0;
-    //dac_line[dist2] = (u_int)expf( C_EXPF*( basegain - dac_line[dist2] )/200.0) ;
-    dac_line[dist2] = (u_int)(Mexpf(C_EXPF*( basegain - dac_line[dist2] )/200.0, C_SIZE_SHORT) *2);
+    //dac_line[dist2] = (uint32_t)expf( C_EXPF*( basegain - dac_line[dist2] )/200.0) ;
+    dac_line[dist2] = (uint32_t)(Mexpf(C_EXPF*( basegain - dac_line[dist2] )/200.0, C_SIZE_SHORT) *2);
     if(dac_line[dist2] > 32767 )    dac_line[dist2] = 32767;
     if(MGetFunctionMode(C_DEPTH_COMPENSATE) == 1)
     {
@@ -3974,10 +3975,10 @@ int DrawDac(int mode)		//ª≠∫ÕªÚº∆À„DAC«˙œﬂ,mode=0º∆À„,=1≤ª
         {
             dist1 = dist2;
             dist2 += step;
-            //dac_line[dist2] = (u_int)expf(C_EXPF*( basegain - dac_line[dist2] )/200.0) ;
-            dac_line[dist2] = (u_int)(Mexpf(C_EXPF*( basegain - dac_line[dist2] )/200.0,C_SIZE_SHORT)*2);// C_SIZE_SHORT) ;
-            //dac_line[dist2] = (u_int)exp( (0.011512925465*( basegain - dac_line[dist2] ) ) );
-            //dac_line[dist2] = (u_int)pow(10.0,( basegain - dac_line[dist2] )/200.0) ;
+            //dac_line[dist2] = (uint32_t)expf(C_EXPF*( basegain - dac_line[dist2] )/200.0) ;
+            dac_line[dist2] = (uint32_t)(Mexpf(C_EXPF*( basegain - dac_line[dist2] )/200.0,C_SIZE_SHORT)*2);// C_SIZE_SHORT) ;
+            //dac_line[dist2] = (uint32_t)exp( (0.011512925465*( basegain - dac_line[dist2] ) ) );
+            //dac_line[dist2] = (uint32_t)pow(10.0,( basegain - dac_line[dist2] )/200.0) ;
 
             if(dac_line[dist2] > 32767 )    dac_line[dist2] = 32767;
             GetLine_TwoDot(dac_line,dist1,dist2);
@@ -4007,7 +4008,7 @@ int DrawDac(int mode)		//ª≠∫ÕªÚº∆À„DAC«˙œﬂ,mode=0º∆À„,=1≤ª
 //    offset = C_OFF_DACDB;
 //    MCopyProtectedMemory( dac_line, (void*)offset, C_LEN_DACDB, PM_COPY_READ);
         /* PTin[0].x=0;
-         PTin[0].y=(u_int)Mexpf(C_EXPF*( basegain - dac_line[0] )/200.0,C_SIZE_SHORT);
+         PTin[0].y=(uint32_t)Mexpf(C_EXPF*( basegain - dac_line[0] )/200.0,C_SIZE_SHORT);
          PTin[7].x=C_SCREEN_WIDTH-1;
          PTin[7].y=dac_line[C_SCREEN_WIDTH-1];*/
         /*    DrawCurver(dac_line,0,C_COORWIDTH);
@@ -4092,7 +4093,7 @@ int GetMiddleValue(int dist1,int db1,int dist2,int db2,int dist)
 }
 
 
-int GetLine_TwoDot(u_short line[],int dist1,int dist2)
+int GetLine_TwoDot(uint16_t line[],int dist1,int dist2)
 {
 
 //*
@@ -4145,9 +4146,9 @@ void GetDacCompensateTable(void)
     //int i,j;
     int dist1,dist2;
     int step = 14;
-    u_short dac_line[C_SCREEN_WIDTH];
+    uint16_t dac_line[C_SCREEN_WIDTH];
     //int test_num;
-    u_short first_high;
+    uint16_t first_high;
     basegain = MGetBaseGain() + 481.31;	//ª˘◊º‘ˆ“Ê
 
     if( MGetSystemMode() != 0 && MGetTestStatus(C_TEST_DAC) == 1)
@@ -4213,7 +4214,7 @@ int TestMenuFft(void)
     //EraseDrawRectangle(xpos, ypos, 28*8, 229) ;
     MSetColor(C_CR_MENU);
     //CEMenuOut(xpos, ypos, _Menu_DB3 ,8,1,24);	//«Î ‰»ÎÃΩÕ∑∆µ¬ 
-    TextOut(xpos, ypos,1,14+MGetLanguage()*12,8,(u_char*)_Menu_DB[MGetLanguage()][1],0);
+    TextOut(xpos, ypos,1,14+MGetLanguage()*12,8,(uint8_t*)_Menu_DB[MGetLanguage()][1],0);
     number = 0;
     deci_len = 2;
     if ( Input_Number(xpos + (17+MGetLanguage()*12)*C_ECHAR_HDOT,ypos,&number,2,&deci_len,0) )
@@ -4222,15 +4223,15 @@ int TestMenuFft(void)
 
         //	CEMenuOut(xpos, ypos, _Menu_DB2 ,8,1,24);	// ‘øÈ…˘≥Ã
         MEraseWindow(xpos, ypos,xpos+C_CCHAR_HDOT*7, ypos+24);
-        TextOut(xpos, ypos,1,14+MGetLanguage()*12,8,(u_char*)_Menu_DB[MGetLanguage()][0],0);
+        TextOut(xpos, ypos,1,14+MGetLanguage()*12,8,(uint8_t*)_Menu_DB[MGetLanguage()][0],0);
 
         number = 0;
         if( MGetUnitType() > 0)deci_len = 3;//µ•Œªinch
         else deci_len = 1;
         if( Input_Number(xpos + (17+MGetLanguage()*12)*C_ECHAR_HDOT,ypos,&number,2,&deci_len,0) )
         {
-            u_char *sampbuff;
-            u_char echobuffer[C_LEN_SAMP];	//”√¿¥¥Ê¥¢∞¸¬ÁªÚ∑Â÷µ
+            uint8_t *sampbuff;
+            uint8_t echobuffer[C_LEN_SAMP];	//”√¿¥¥Ê¥¢∞¸¬ÁªÚ∑Â÷µ
             int i;
 
             MSetSaveFrequency(1, C_SETMODE_SETSAVE ) ;
@@ -4278,14 +4279,14 @@ int TestMenuFft(void)
                 MSetColor(C_CR_MENU);
                 //	CEMenuOut(0,0, _Menu_DB4 ,8,1,24);	//ÃΩÕ∑∆µ∆’≤‚ ‘÷–
                 MEraseWindow(xpos, ypos,xpos+C_CCHAR_HDOT*7, ypos+24);
-                TextOut(0, 0,1,21+MGetLanguage()*2,16,(u_char*)_Menu_DB[MGetLanguage()][2],4);
+                TextOut(0, 0,1,21+MGetLanguage()*2,16,(uint8_t*)_Menu_DB[MGetLanguage()][2],4);
                 //MAdjustGain(0,0,120,160) ;
                 frequency = test_fft();
                 MEraseWindow(0, 0, 10*32, 24) ;
                 MSetColor(C_CR_MENU);
                 //	CEMenuOut(0, 0, _Menu_DB5 ,10,1,24);
                 MEraseWindow(xpos, ypos,xpos+C_CCHAR_HDOT*7, ypos+24);
-                TextOut(0, 0,1,22+MGetLanguage()*3,32,(u_char*)_Menu_DB[MGetLanguage()][3],4);
+                TextOut(0, 0,1,22+MGetLanguage()*3,32,(uint8_t*)_Menu_DB[MGetLanguage()][3],4);
                 Write_Number(5*16+2+124*MGetLanguage(),4,frequency,4,2,0);
                 keycode = MAnyKeyReturn();
                 if( keycode == C_KEYCOD_RETURN)
@@ -4362,13 +4363,13 @@ int TestMenuSensitivity(void)//¡È√Ù∂»–£—È
 {
     int xpos = ( C_HORIDOT_SCREEN - C_CCHAR_HDOT * 9 - C_ECHAR_HDOT * 10) / 8 * 8;
     int ypos = C_COORVPOSI;
-    u_int para_xpos,para_ypos;
-    u_int testrange[2];		//[0]∑¥…‰ÃÂ…Ó∂»£¨[1]ª˘◊º≤®∏ﬂ∂»£¨
-    u_int offset;
+    uint32_t para_xpos,para_ypos;
+    uint32_t testrange[2];		//[0]∑¥…‰ÃÂ…Ó∂»£¨[1]ª˘◊º≤®∏ﬂ∂»£¨
+    uint32_t offset;
     int deci_len, number = 1;
 
     int retvalue = -1;
-    u_int row_height = 48;
+    uint32_t row_height = 48;
     int keycode;
 
     ScreenRenovate();
@@ -4376,7 +4377,7 @@ int TestMenuSensitivity(void)//¡È√Ù∂»–£—È
     MSetColor(C_CR_MENU);
 //	CMenuOut(0,0,_TestMenu_A1+6*5+1,5,1,row_height);//Ã· æ£∫¡È√Ù∂»–£—È
 
-    TextOut(0,0,1,11,row_height,(u_char*)_TestMenu_A1[MGetLanguage()][5]+2,4);
+    TextOut(0,0,1,11,row_height,(uint8_t*)_TestMenu_A1[MGetLanguage()][5]+2,4);
 
     EraseDrawRectangle(xpos, ypos, xpos+ 14*C_CCHAR_HDOT, ypos + 3 * row_height) ;
     MSetColor(C_CR_MENU);
@@ -4439,23 +4440,23 @@ int TestMenuSensitivity(void)//¡È√Ù∂»–£—È
     }
     return C_FALSE;
 }
-int TestSensitivity(u_int depth/*∑¥…‰ÃÂ…Ó∂»*/, u_int stdamp/*ª˘◊º≤®∏ﬂ∂»*/, int mode/*0ø…µ˜‘ˆ“Ê£¨1≤ªø…µ˜*/)
+int TestSensitivity(uint32_t depth/*∑¥…‰ÃÂ…Ó∂»*/, uint32_t stdamp/*ª˘◊º≤®∏ﬂ∂»*/, int mode/*0ø…µ˜‘ˆ“Ê£¨1≤ªø…µ˜*/)
 {
 
     int gain ,range;//, angle, speed;
-    //u_int echotime;
-    u_int gateamp;
+    //uint32_t echotime;
+    uint32_t gateamp;
 
-    u_int char_len,row_number,crow_height;
+    uint32_t char_len,row_number,crow_height;
     //int number,deci_len;
     int xpos,ypos;
-    u_int preElapsedtime;
+    uint32_t preElapsedtime;
     int retvalue = C_TRUE;
     int keycode;
     int gatetype = 0;
     int diameter = 0;
 
-    u_int testrange0 = depth * 10000 / MGetAngle(3) - diameter/2;
+    uint32_t testrange0 = depth * 10000 / MGetAngle(3) - diameter/2;
 
     MSetAcquisition(1);
 
@@ -4484,7 +4485,7 @@ int TestSensitivity(u_int depth/*∑¥…‰ÃÂ…Ó∂»*/, u_int stdamp/*ª˘◊º≤®∏ﬂ∂»*/, int m
     ypos = C_COORVPOSI + 1;
     MSetColor(C_CR_MENU);
     EraseDrawRectangle(xpos, ypos, C_COORHORIUNIT * 6, ypos + crow_height * row_number) ;
-    TextOut(xpos + C_ECHAR_HDOT,ypos+4, row_number+2*MGetLanguage(), 17,crow_height-12*MGetLanguage(), (u_char*)_TestMenu_AB3[MGetLanguage()][2], 4);
+    TextOut(xpos + C_ECHAR_HDOT,ypos+4, row_number+2*MGetLanguage(), 17,crow_height-12*MGetLanguage(), (uint8_t*)_TestMenu_AB3[MGetLanguage()][2], 4);
     if (MGetLanguage())
     {
 //        EMenuOut(xpos + 18*C_ECHAR_HDOT,ypos+4 * (crow_height-12*MGetLanguage()),_TestMenu_Enter,1,1,C_ECHAR_VDOT);
@@ -4513,7 +4514,7 @@ int TestSensitivity(u_int depth/*∑¥…‰ÃÂ…Ó∂»*/, u_int stdamp/*ª˘◊º≤®∏ﬂ∂»*/, int m
     DisplayPrompt(15);
     MSetColor(C_CR_MENU);
     //CMenuOut(0,0,_TestMenu_A1+6*5+1,5,1,24);
-    TextOut(0,0,1,11,24,(u_char*)_TestMenu_A1[MGetLanguage()][5]+2,4);
+    TextOut(0,0,1,11,24,(uint8_t*)_TestMenu_A1[MGetLanguage()][5]+2,4);
     GateMax.Amp = 0;	//◊Ó∏ﬂ≤®÷√≥ı÷µŒ™0
 
     while (1)
@@ -4567,7 +4568,7 @@ int TestSensitivity(u_int depth/*∑¥…‰ÃÂ…Ó∂»*/, u_int stdamp/*ª˘◊º≤®∏ﬂ∂»*/, int m
             DisplayPrompt(15);
             MSetColor(C_CR_MENU);
             //	CMenuOut(0,0,_TestMenu_A1+6*5+1,5,1,24);
-            TextOut(0,0,1,11,24,(u_char*)_TestMenu_A1[MGetLanguage()][5]+2,4);
+            TextOut(0,0,1,11,24,(uint8_t*)_TestMenu_A1[MGetLanguage()][5]+2,4);
         }
     }
     MKeyRlx();
@@ -4577,18 +4578,18 @@ int TestSensitivity(u_int depth/*∑¥…‰ÃÂ…Ó∂»*/, u_int stdamp/*ª˘◊º≤®∏ﬂ∂»*/, int m
 int ManualMonthTest(void)//»Àπ§‘¬–‘ƒ‹–£—È
 {
 
-    u_int gain,range,offset,delay,speed;
+    uint32_t gain,range,offset,delay,speed;
     int retvalue = C_FALSE;
-    u_int echotime;
+    uint32_t echotime;
 //	int i,j;
     int keycode;
-    u_int gateamp;
+    uint32_t gateamp;
 
-    u_int xpos,ypos;//,menu_xpos,menu_ypos;
-    u_int char_len,row_number,crow_height;//,row_height;
-    u_int gatetype = 0;
+    uint32_t xpos,ypos;//,menu_xpos,menu_ypos;
+    uint32_t char_len,row_number,crow_height;//,row_height;
+    uint32_t gatetype = 0;
 
-    u_short _Prompt_TB1[] =
+    uint16_t _Prompt_TB1[] =
     {
         CH(5039),CH(3887),CH(4852),CH(3660),CH(4254),CH(2215),CH(1866),CH(4252)
     };//	“«∆˜–‘ƒ‹ ÷∂Ø≤‚ ‘
@@ -4634,7 +4635,7 @@ int ManualMonthTest(void)//»Àπ§‘¬–‘ƒ‹–£—È
          CEMenuOut(xpos + C_ECHAR_HDOT,ypos + 4, _Menu_Power1 ,11,2,24);
      }*/
     EraseDrawRectangle(xpos, ypos, C_COORWIDTH, ypos+32 * (2+MGetLanguage())+MGetLanguage()*8) ;
-    TextOut(xpos + C_ECHAR_HDOT,ypos + 8,2+MGetLanguage()*2,22,32-MGetLanguage()*6,(u_char*)_Menu_Power[MGetLanguage()][0],4);
+    TextOut(xpos + C_ECHAR_HDOT,ypos + 8,2+MGetLanguage()*2,22,32-MGetLanguage()*6,(uint8_t*)_Menu_Power[MGetLanguage()][0],4);
 
     CEMenuOut(0,0, _Prompt_TB1 ,8,1,16);
 
@@ -4718,31 +4719,31 @@ int ManualMonthTest(void)//»Àπ§‘¬–‘ƒ‹–£—È
     return 1;
 }
 
-extern const u_int c_crPara[];
-extern const u_int Echo_crPara[];
+extern const uint32_t c_crPara[];
+extern const uint32_t Echo_crPara[];
 
-extern u_char crPara[];
+extern uint8_t crPara[];
 int MenuMonthTest(void)//‘¬–‘ƒ‹–£—È
 {
     POWER power;
-    u_int table[] = {1000, 794, 631, 501, 398, 316, 251, 200, 158, 125, 100, 79, 63, 50, 39};
+    uint32_t table[] = {1000, 794, 631, 501, 398, 316, 251, 200, 158, 125, 100, 79, 63, 50, 39};
 
     int gain_temp;
     int number2 = 0;
 
-    u_char tempcrPara[C_CR_MAX+12];
-    u_int gain,range,offset,delay,speed;
+    uint8_t tempcrPara[C_CR_MAX+12];
+    uint32_t gain,range,offset,delay,speed;
     int retvalue = C_FALSE;
-    u_int echotime;
+    uint32_t echotime;
     int number;//,deci_len;
     int i,j;
     int keycode;
-    u_int gateamp;
-    u_char *sampbuff;
+    uint32_t gateamp;
+    uint8_t *sampbuff;
 
-    u_int xpos,ypos;//,menu_xpos,menu_ypos;
-    u_int char_len,row_number,crow_height,row_height;
-    u_int gatetype = 0;
+    uint32_t xpos,ypos;//,menu_xpos,menu_ypos;
+    uint32_t char_len,row_number,crow_height,row_height;
+    uint32_t gatetype = 0;
     const char _Prompt_B[C_LANGUAGE][6][50] =
     {
         {
@@ -4830,7 +4831,7 @@ int MenuMonthTest(void)//‘¬–‘ƒ‹–£—È
                }*/
 
             EraseDrawRectangle(xpos, ypos, C_COORWIDTH+18, ypos+32 * (2+MGetLanguage())+10+MGetLanguage()*8) ;
-            TextOut(xpos + C_ECHAR_HDOT,ypos + 8,2+MGetLanguage()*2,22,32-MGetLanguage()*6,(u_char*)_Menu_Power[MGetLanguage()][0],4);
+            TextOut(xpos + C_ECHAR_HDOT,ypos + 8,2+MGetLanguage()*2,22,32-MGetLanguage()*6,(uint8_t*)_Menu_Power[MGetLanguage()][0],4);
 
             MEraseWindow(0, 0, 24*C_ECHAR_HDOT,17 ) ;
             //	CMenuOut(0,0, _Power_prompt + 1 * 6, 6, 1, 24);
@@ -4987,7 +4988,7 @@ int MenuMonthTest(void)//‘¬–‘ƒ‹–£—È
                }*/
 
             EraseDrawRectangle(xpos, ypos, C_COORWIDTH+18, ypos+32 * 3+10) ;
-            TextOut(xpos + C_ECHAR_HDOT,ypos + 8,3,22,32-MGetLanguage()*6,(u_char*)_Menu_Power[MGetLanguage()][2],4);
+            TextOut(xpos + C_ECHAR_HDOT,ypos + 8,3,22,32-MGetLanguage()*6,(uint8_t*)_Menu_Power[MGetLanguage()][2],4);
             //	CEMenuOut(xpos + C_ECHAR_HDOT,ypos + 4, _Menu_Power3,char_len,row_number,crow_height);	/*‘⁄÷∏∂®Œª÷√∏˘æ›√ø––◊÷∑˚ ˝°¢–– ˝°¢––∏ﬂ–¥≤Àµ•*/
             //	CMenuOut(0,0, _Power_prompt + 3 * 6, 6, 1, 24);
 
@@ -5026,7 +5027,7 @@ int MenuMonthTest(void)//‘¬–‘ƒ‹–£—È
                     power.gain[2] = MGetBaseGain();
 
                     sampbuff = GetSampleBuffer() ;
-//					u_char temp;
+//					uint8_t temp;
 
                     MSetAcquisitionEnable(0,C_SETMODE_SETSAVE);
                     sampbuff = GetSampleBuffer() ;
@@ -5096,7 +5097,7 @@ int MenuMonthTest(void)//‘¬–‘ƒ‹–£—È
             		power.gain[2] = MGetBaseGain();
 
             		sampbuff = GetSampleBuffer() ;
-            		u_char temp;
+            		uint8_t temp;
 
             		while(true)
             		{
@@ -5179,7 +5180,7 @@ int MenuMonthTest(void)//‘¬–‘ƒ‹–£—È
               }*/
 
             EraseDrawRectangle(xpos, ypos, C_COORWIDTH+18, ypos+32 * (3+MGetLanguage())+10) ;
-            TextOut(xpos + C_ECHAR_HDOT,ypos + 8,3+MGetLanguage(),21,32-MGetLanguage()*6,(u_char*)_Menu_Power[MGetLanguage()][3],4);
+            TextOut(xpos + C_ECHAR_HDOT,ypos + 8,3+MGetLanguage(),21,32-MGetLanguage()*6,(uint8_t*)_Menu_Power[MGetLanguage()][3],4);
 
 //			CEMenuOut(xpos + C_ECHAR_HDOT,ypos + 4, _Menu_Power4 ,char_len,row_number,crow_height);
             //	CMenuOut(0, 0, _Power_prompt + 2 * 6, 6, 1, 24);
@@ -5366,7 +5367,7 @@ int MenuMonthTest(void)//‘¬–‘ƒ‹–£—È
              }*/
 
             EraseDrawRectangle(xpos, ypos, C_COORWIDTH+18, ypos+32 * (3+MGetLanguage())+10) ;
-            TextOut(xpos + C_ECHAR_HDOT,ypos + 8,3+MGetLanguage(),21,32-MGetLanguage()*6,(u_char*)_Menu_Power[MGetLanguage()][3],4);
+            TextOut(xpos + C_ECHAR_HDOT,ypos + 8,3+MGetLanguage(),21,32-MGetLanguage()*6,(uint8_t*)_Menu_Power[MGetLanguage()][3],4);
             //	CEMenuOut(xpos + C_ECHAR_HDOT,ypos + 4, _Menu_Power4 ,char_len,row_number,crow_height);
             MSetColor(C_CR_MENU);
             //	CMenuOut(0,0, _Power_prompt + 5 * 6, 6, 1, 24);
@@ -5441,7 +5442,7 @@ int MenuMonthTest(void)//‘¬–‘ƒ‹–£—È
               }*/
 
             EraseDrawRectangle(xpos+2, ypos, xpos+(20+MGetLanguage()*11)*C_ECHAR_HDOT, ypos+32+10) ;
-            TextOut(xpos+2 + C_ECHAR_HDOT,ypos + 8,1,18+MGetLanguage()*11,32-MGetLanguage()*6,(u_char*)_Menu_Power[MGetLanguage()][4],4);
+            TextOut(xpos+2 + C_ECHAR_HDOT,ypos + 8,1,18+MGetLanguage()*11,32-MGetLanguage()*6,(uint8_t*)_Menu_Power[MGetLanguage()][4],4);
 //			CEMenuOut(xpos + 2 + C_ECHAR_HDOT,ypos + 4, _Menu_Power5 ,9,1,crow_height);
             MSetColor(C_CR_MENU);
             //	CMenuOut(0,0, _Power_prompt + 5 * 6, 6, 1, 24);
@@ -5640,7 +5641,7 @@ int MenuMonthTest(void)//‘¬–‘ƒ‹–£—È
 
 int WeldSetup(void)
 {
-    u_int char_len = 6,row_number = 9,crow_height = 44;
+    uint32_t char_len = 6,row_number = 9,crow_height = 44;
     int number,deci_len;
     int xpos,ypos;
     //int x1,y1,x2,y2,r;
@@ -5653,10 +5654,10 @@ int WeldSetup(void)
     int page_max = 2, page = 0;
     int row;
     //unsigned int offset;
-    u_short* cpText = 0;
-    //u_char* epText = 0;
+    uint16_t* cpText = 0;
+    //uint8_t* epText = 0;
     int i;
-    //u_int elapsedtime1 = GetElapsedTime() ;//,elapsedtime2;
+    //uint32_t elapsedtime1 = GetElapsedTime() ;//,elapsedtime2;
 
 
 
@@ -5672,7 +5673,7 @@ int WeldSetup(void)
         if( page < 1)page = 1;
         else if(page > page_max )page = page_max;
 
-        TextOut(C_ECHAR_HDOT,4,1,25,16,(u_char*)_Weld_A1[MGetLanguage()][0],4);
+        TextOut(C_ECHAR_HDOT,4,1,25,16,(uint8_t*)_Weld_A1[MGetLanguage()][0],4);
         //	CEMenuOut(C_ECHAR_HDOT,4, _Weld_A1,12,1,crow_height);
         Write_Number(C_ECHAR_HDOT + (10+MGetLanguage()*2) * C_ECHAR_HDOT, 4+3*MGetLanguage(),page,1,0,0);
         if (MGetLanguage())
@@ -5698,7 +5699,7 @@ int WeldSetup(void)
             {
                 for (i=0; i<row_number; i++)
                 {
-                    TextOut(menu_xpos+C_ECHAR_HDOT,para_ypos+crow_height*i,1,22,12+12*MGetLanguage(),(u_char*)_Weld_B1[MGetLanguage()][i],4);
+                    TextOut(menu_xpos+C_ECHAR_HDOT,para_ypos+crow_height*i,1,22,12+12*MGetLanguage(),(uint8_t*)_Weld_B1[MGetLanguage()][i],4);
                 }
             }
             else
@@ -5706,7 +5707,7 @@ int WeldSetup(void)
                 for (i=0; i<row_number; i++)
                 {
 
-                    TextOut(menu_xpos+C_ECHAR_HDOT,para_ypos+crow_height*i,1,22,12+12*MGetLanguage(),(u_char*)_Weld_B2[MGetLanguage()][i],4);
+                    TextOut(menu_xpos+C_ECHAR_HDOT,para_ypos+crow_height*i,1,22,12+12*MGetLanguage(),(uint8_t*)_Weld_B2[MGetLanguage()][i],4);
                 }
             }
         }
@@ -5717,14 +5718,14 @@ int WeldSetup(void)
             {
                 for (i=0; i<row_number; i++)
                 {
-                    TextOut(menu_xpos+C_ECHAR_HDOT,para_ypos+crow_height*i,1,22,12+12*MGetLanguage(),(u_char*)_Weld_B12[MGetLanguage()][i],4);
+                    TextOut(menu_xpos+C_ECHAR_HDOT,para_ypos+crow_height*i,1,22,12+12*MGetLanguage(),(uint8_t*)_Weld_B12[MGetLanguage()][i],4);
                 }
             }
             else
             {
                 for (i=0; i<row_number; i++)
                 {
-                    TextOut(menu_xpos+C_ECHAR_HDOT,para_ypos+crow_height*i,1,22,12+12*MGetLanguage(),(u_char*)_Weld_B22[MGetLanguage()][i],4);
+                    TextOut(menu_xpos+C_ECHAR_HDOT,para_ypos+crow_height*i,1,22,12+12*MGetLanguage(),(uint8_t*)_Weld_B22[MGetLanguage()][i],4);
 
                 }
             }
@@ -5813,18 +5814,18 @@ int WeldSetup(void)
             row = 0;
             xpos = para_xpos;
             ypos = para_ypos + crow_height *row;
-            //	cpText = (u_short*)_Weld_C1 + stWeldPara.type * 3 + 1;
+            //	cpText = (uint16_t*)_Weld_C1 + stWeldPara.type * 3 + 1;
             //	CEMenuOut(xpos,ypos , cpText ,2,1,crow_height);	//‘⁄÷∏∂®Œª÷√∏˘æ›√ø––◊÷∑˚ ˝°¢–– ˝°¢––∏ﬂ–¥≤Àµ•
-            TextOut(xpos,ypos,1,8,16,(u_char*)_Weld_C1[MGetLanguage()][stWeldPara.type]+2,4);
+            TextOut(xpos,ypos,1,8,16,(uint8_t*)_Weld_C1[MGetLanguage()][stWeldPara.type]+2,4);
 
 
             //ÃΩ≤‚√Ê
             row = 1;
             xpos = para_xpos;
             ypos = para_ypos + crow_height *row;
-            //	cpText = (u_short*)_Weld_D1 + stWeldPara.face * 3 + 1;
+            //	cpText = (uint16_t*)_Weld_D1 + stWeldPara.face * 3 + 1;
             //	CEMenuOut(xpos,ypos , cpText ,2,1,crow_height);	//‘⁄÷∏∂®Œª÷√∏˘æ›√ø––◊÷∑˚ ˝°¢–– ˝°¢––∏ﬂ–¥≤Àµ•
-            TextOut(xpos,ypos,1,2,16,(u_char*)_Weld_D1[MGetLanguage()][stWeldPara.face]+2+8*MGetLanguage(),4);
+            TextOut(xpos,ypos,1,2,16,(uint8_t*)_Weld_D1[MGetLanguage()][stWeldPara.face]+2+8*MGetLanguage(),4);
 
             //π§º˛∫Ò∂»
             row = 2;
@@ -6018,13 +6019,13 @@ int WeldSetup(void)
             switch (keycode)
             {
             case 1:		//∫∏∑Ï¿‡–Õ
-                //	cpText = (u_short*)_Weld_C1 ;
+                //	cpText = (uint16_t*)_Weld_C1 ;
                 MPushWindow(xpos, ypos, xpos + (5+MGetLanguage())*C_CCHAR_HDOT+10, ypos + crow_height * 4) ;
                 EraseDrawRectangle(xpos, ypos, xpos + (5+MGetLanguage())*C_CCHAR_HDOT+10, ypos + crow_height * 4) ;
                 //	CEMenuOut(xpos+4,ypos+4 , cpText ,3,4,crow_height);	//‘⁄÷∏∂®Œª÷√∏˘æ›√ø––◊÷∑˚ ˝°¢–– ˝°¢––∏ﬂ–¥≤Àµ•
                 for (i=0; i<4; i++)
                 {
-                    TextOut(xpos+4,ypos+4+crow_height*i,1,6+2*MGetLanguage(),16,(u_char*)_Weld_C1[MGetLanguage()][i],4);
+                    TextOut(xpos+4,ypos+4+crow_height*i,1,6+2*MGetLanguage(),16,(uint8_t*)_Weld_C1[MGetLanguage()][i],4);
                 }
                 while(1)
                 {
@@ -6043,13 +6044,13 @@ int WeldSetup(void)
                 MPopWindow();
                 break;
             case 2:	//ÃΩ≤‚√Ê
-//				cpText = (u_short*)_Weld_D1 ;
+//				cpText = (uint16_t*)_Weld_D1 ;
                 MPushWindow(xpos, ypos, xpos + (6+2*MGetLanguage())*C_CCHAR_HDOT+1, ypos + crow_height * 3+1) ;
                 EraseDrawRectangle(xpos, ypos, xpos + (6+2*MGetLanguage())*C_CCHAR_HDOT, ypos + crow_height * 3) ;
                 //CEMenuOut(xpos+4,ypos+4 , cpText ,3,3,crow_height);	//‘⁄÷∏∂®Œª÷√∏˘æ›√ø––◊÷∑˚ ˝°¢–– ˝°¢––∏ﬂ–¥≤Àµ•
                 for (i=0; i<3; i++)
                 {
-                    TextOut(xpos+4,ypos+4+crow_height*i,1,8+3*MGetLanguage(),16,(u_char*)_Weld_D1[MGetLanguage()][i],4);
+                    TextOut(xpos+4,ypos+4+crow_height*i,1,8+3*MGetLanguage(),16,(uint8_t*)_Weld_D1[MGetLanguage()][i],4);
                 }
                 while(1)
                 {
@@ -6315,7 +6316,7 @@ int ShowWeld(short lxpos,short lypos,short width,short height,short angle,int di
 //	int number;
     int probe;
 
-    u_char echo[C_LEN_SAMP];
+    uint8_t echo[C_LEN_SAMP];
     probe = C_OFF_SAMP;
     MCopyProtectedMemory( echo, (void*)probe, C_LEN_SAMP, PM_COPY_READ);
 
@@ -6323,7 +6324,7 @@ int ShowWeld(short lxpos,short lypos,short width,short height,short angle,int di
     ypos = C_COORVPOSI;
     EraseDrawRectangle(xpos, ypos, C_COORWIDTH+24+9*8*MGetLanguage(), ypos + 60) ;
 //	CEMenuOut(xpos + C_ECHAR_HDOT,ypos+4,_Weld_A2,12,1,24);
-    TextOut(xpos + C_ECHAR_HDOT,ypos+4,1,28,32,(u_char*)_Weld_A2[MGetLanguage()][0],4);
+    TextOut(xpos + C_ECHAR_HDOT,ypos+4,1,28,32,(uint8_t*)_Weld_A2[MGetLanguage()][0],4);
 
     if( stWeldPara.type == 3)
     {
@@ -6384,7 +6385,7 @@ int ShowWeldA(short lxpos,short lypos,short width,short height,short angle,int d
     ypos = C_COORVPOSI;
     EraseDrawRectangle(xpos, ypos, C_COORWIDTH, ypos + 40) ;
 //	CEMenuOut(xpos + C_ECHAR_HDOT,ypos+4,_Weld_A2,12,1,24);
-    TextOut(xpos + C_ECHAR_HDOT,ypos+4,1,28,24,(u_char*)_Weld_A2[MGetLanguage()][0],4);
+    TextOut(xpos + C_ECHAR_HDOT,ypos+4,1,28,24,(uint8_t*)_Weld_A2[MGetLanguage()][0],4);
     xpos += C_CCHAR_HDOT * 12;
     ypos += 4;
     EraseDrawRectangle(lxpos, lypos, lxpos+500, lypos+height) ;

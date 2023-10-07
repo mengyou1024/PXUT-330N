@@ -52,7 +52,7 @@ int CreateEchoDataFile()
     	TRACE(g_xpos,g_ypos+=10,"-I- CreateEchoDataFile TP_1_0  ");
         // UdkSetFilePointer(1,0);
         f_lseek(&g_FileObject,0);
-        //if(!UdkReadFile(1,sizeof(u_int),&g_UDiskInfo.TotalWriteTimes))
+        //if(!UdkReadFile(1,sizeof(uint32_t),&g_UDiskInfo.TotalWriteTimes))
         if(f_read(&g_FileObject,&g_UDiskInfo.TotalWriteTimes,4,NULL)!=FR_OK)
         {
             ShowProblemLine();
@@ -61,7 +61,7 @@ int CreateEchoDataFile()
 		TRACE(g_xpos,g_ypos+=10,"-I- CreateEchoDataFile TP_1_1  ");
         //READ
 
-        // if(!UdkReadFile(1,sizeof(u_int),&g_UDiskInfo.LastFileLength))
+        // if(!UdkReadFile(1,sizeof(uint32_t),&g_UDiskInfo.LastFileLength))
         if(f_read(&g_FileObject,&g_UDiskInfo.LastFileLength,4,NULL)!=FR_OK)
         {
             ShowProblemLine();
@@ -84,17 +84,17 @@ int CreateEchoDataFile()
             g_UDiskInfo.LastFileLength = g_UDiskInfo.filelen;
 
         }
-        memcpy(g_UDiskInfo.UDiskBuffer,&g_UDiskInfo.LastFileLength,sizeof(u_int));
+        memcpy(g_UDiskInfo.UDiskBuffer,&g_UDiskInfo.LastFileLength,sizeof(uint32_t));
 
-        //if(!UdkSetFilePointer(1,sizeof(u_int)))
-        if(f_lseek(&g_FileObject,sizeof(u_int))!=FR_OK)
+        //if(!UdkSetFilePointer(1,sizeof(uint32_t)))
+        if(f_lseek(&g_FileObject,sizeof(uint32_t))!=FR_OK)
         {
             ShowProblemLine();
             return FALSE;
         }
 
         // Save
-        //if(!UdkWriteFile(1,sizeof(u_int), g_UDiskInfo.UDiskBuffer))
+        //if(!UdkWriteFile(1,sizeof(uint32_t), g_UDiskInfo.UDiskBuffer))
         if(f_write(&g_FileObject,g_UDiskInfo.UDiskBuffer,4,NULL)!=FR_OK)
         {
             ShowProblemLine();
@@ -125,8 +125,8 @@ int CreateEchoDataFile()
 
         TRACE(g_xpos,g_ypos+=10,"-I- CreateEchoDataFile TP_3  ");
 
-        memset(g_UDiskInfo.UDiskBuffer,0,sizeof(u_int));
-        g_UDiskInfo.transfer_surplus = 2*sizeof(u_int);
+        memset(g_UDiskInfo.UDiskBuffer,0,sizeof(uint32_t));
+        g_UDiskInfo.transfer_surplus = 2*sizeof(uint32_t);
     }
     g_UDiskInfo.operatormode = 1;
     g_UDiskInfo.DataHeaderMark = 1;
@@ -141,10 +141,10 @@ int CreateEchoDataFile()
 
 typedef struct
 {
-    u_char	second;
-    u_char	minute;
-    u_char	hour;
-    u_char  notes_len;
+    uint8_t	second;
+    uint8_t	minute;
+    uint8_t	hour;
+    uint8_t  notes_len;
 }  HEADER_TIMESTAMP;
 
 
@@ -235,9 +235,9 @@ int WriteEchoDateToFile(int mode)
 {
 
     unsigned char rtn;
-    u_int time2,time3;
+    uint32_t time2,time3;
     long out_len, total_len,len,in_len, info_len;
-    u_char echobuffer[C_LEN_SAMP];
+    uint8_t echobuffer[C_LEN_SAMP];
     int offset;
     if(mode>0)	//for 单幅数据存U盘
     {
@@ -265,17 +265,17 @@ int WriteEchoDateToFile(int mode)
 
     LzwInitBuf();
 
-    LzwEncode(in_len, g_UDiskInfo.pEchoWriteBuffer, &out_len, g_UDiskInfo.UDiskBuffer+g_UDiskInfo.transfer_surplus+ 2*sizeof(u_long));
+    LzwEncode(in_len, g_UDiskInfo.pEchoWriteBuffer, &out_len, g_UDiskInfo.UDiskBuffer+g_UDiskInfo.transfer_surplus+ 2*sizeof(uint32_t));
 
     LzwDestroyBuf();
 
 
-    memcpy(g_UDiskInfo.UDiskBuffer + g_UDiskInfo.transfer_surplus, &out_len, sizeof(u_long));
-    memcpy(g_UDiskInfo.UDiskBuffer + g_UDiskInfo.transfer_surplus + sizeof(u_long), &info_len, sizeof(u_long));
+    memcpy(g_UDiskInfo.UDiskBuffer + g_UDiskInfo.transfer_surplus, &out_len, sizeof(uint32_t));
+    memcpy(g_UDiskInfo.UDiskBuffer + g_UDiskInfo.transfer_surplus + sizeof(uint32_t), &info_len, sizeof(uint32_t));
 
     g_UDiskInfo.TotalWriteTimes++;
 
-    total_len = g_UDiskInfo.transfer_surplus + 2*sizeof(u_long) + out_len;
+    total_len = g_UDiskInfo.transfer_surplus + 2*sizeof(uint32_t) + out_len;
 
 
     if((g_UDiskInfo.filelen%BUFFER_LENGTH)!=0)
@@ -493,11 +493,11 @@ extern unsigned char _usbarrow[];
 int EchoDataStorageFunc(int keycode,int mode)
 {
 
-    u_char* ptr;
+    uint8_t* ptr;
     TIME_CLOCK cur_time;
     int i,j;
-    u_int  offset = C_OFF_SAMP ;
-    u_char sampbuff[C_LEN_SAMP+1] ;
+    uint32_t  offset = C_OFF_SAMP ;
+    uint8_t sampbuff[C_LEN_SAMP+1] ;
     //unsigned int FreeSpaceLowPart, FreeSpaceHighPart, TotalSpaceLowPart,TotalSpaceHighPart,Cluster;
     unsigned int ClusterSize,FreeSpaceLowPart, TotalSpaceLowPart;
     WAVEPARA pWavePara;
@@ -552,7 +552,7 @@ int EchoDataStorageFunc(int keycode,int mode)
             return FALSE;
         }
 
-        PageDisp(16*7+9+MGetLanguage()*8*C_ECHAR_HDOT,0,(u_char*)_usbarrow);
+        PageDisp(16*7+9+MGetLanguage()*8*C_ECHAR_HDOT,0,(uint8_t*)_usbarrow);
         MEraseWindow(16*7+9+MGetLanguage()*8*C_ECHAR_HDOT,0,16*7+16+MGetLanguage()*8*C_ECHAR_HDOT,4*(4-g_UDiskInfo.TotalWriteTimes%5));	//0~4
         g_UDiskInfo.sample_num = 0;
         g_UDiskInfo.system_time.second = cur_time.second;
@@ -636,19 +636,19 @@ int FileClose(int mode)
         //UdkSetFilePointer(1,0);
         f_lseek(&g_FileObject,0);
 
-        memcpy(g_UDiskInfo.UDiskBuffer,&g_UDiskInfo.TotalWriteTimes,sizeof(u_int));
-        //if(!UdkWriteFile(1,sizeof(u_int), g_UDiskInfo.UDiskBuffer))
-        if(f_write(&g_FileObject,g_UDiskInfo.UDiskBuffer,sizeof(u_int),NULL)!=FR_OK)
+        memcpy(g_UDiskInfo.UDiskBuffer,&g_UDiskInfo.TotalWriteTimes,sizeof(uint32_t));
+        //if(!UdkWriteFile(1,sizeof(uint32_t), g_UDiskInfo.UDiskBuffer))
+        if(f_write(&g_FileObject,g_UDiskInfo.UDiskBuffer,sizeof(uint32_t),NULL)!=FR_OK)
         {
             ShowProblemLine();
             return FALSE;
         }
 
         g_UDiskInfo.LastFileLength = 0;
-        memcpy(g_UDiskInfo.UDiskBuffer,&g_UDiskInfo.LastFileLength,sizeof(u_int));
+        memcpy(g_UDiskInfo.UDiskBuffer,&g_UDiskInfo.LastFileLength,sizeof(uint32_t));
 
-        //if(!UdkWriteFile(1,sizeof(u_int), g_UDiskInfo.UDiskBuffer))
-        if(f_write(&g_FileObject,g_UDiskInfo.UDiskBuffer,sizeof(u_int),NULL)!=FR_OK)
+        //if(!UdkWriteFile(1,sizeof(uint32_t), g_UDiskInfo.UDiskBuffer))
+        if(f_write(&g_FileObject,g_UDiskInfo.UDiskBuffer,sizeof(uint32_t),NULL)!=FR_OK)
         {
             ShowProblemLine();
             return FALSE;
@@ -680,8 +680,8 @@ void Write_UDisk_Len(int xpos,int ypos,int SpacePart,int Cluster,int filelen)
     	filelen	 ：小于2G的可以直接写大小，大于2G的置0。
      */
 
-    u_int NumLen=1,tempLen,Len,LenLow;
-    u_int LenKB,LenMB,LenGB;
+    uint32_t NumLen=1,tempLen,Len,LenLow;
+    uint32_t LenKB,LenMB,LenGB;
     if (filelen>0)
     {
         Write_Number(xpos,ypos,filelen,11,0,0);

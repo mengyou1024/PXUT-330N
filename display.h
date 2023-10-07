@@ -5,20 +5,20 @@ extern int NumHigh;
 #ifndef _DISPLAY_H_
 
 
-void PageDisp(int xpos,int ypos,u_char* mainpage);		//显示16*16图形
+void PageDisp(int xpos,int ypos,uint8_t* mainpage);		//显示16*16图形
 
-int DrawPower(u_char powerlevel,int mode);	//画电量指示,mode = 0立即1每分钟更新一次
+int DrawPower(uint8_t powerlevel,int mode);	//画电量指示,mode = 0立即1每分钟更新一次
 void SysParaDisp(void);		//显示通道号、探头类型、频带等
 void WriteProbe(int type, int xpos, int ypos);
 
 
 //与各参量调节有关的函数
 
-void WriteParaName(u_int ParaIndex); /*根据参量索引号写参量名*/
+void WriteParaName(uint32_t ParaIndex); /*根据参量索引号写参量名*/
 
 int MSelectPrompt(int keycode);//在退出参数调节时判断师父要显示提示
 
-int MAdjustGain(u_int type,u_int mode,short low,short high);	/*调节增益,type=0系统增益=1补偿；mode=0立即*/
+int MAdjustGain(uint32_t type,uint32_t mode,short low,short high);	/*调节增益,type=0系统增益=1补偿；mode=0立即*/
 int ChannelChange(void);
 int GainChange(void);
 int BaseGainPlus(int step);		/*增益根据步长增加*/
@@ -57,17 +57,17 @@ void MGateHigh(int keycod,int gatetype,int step);	/* 门高改变*/
 void MDACGateChange(int keycode, int type);	/* 门改变*/
 
 /*显示各参数值*/
-void WriteBaseGain(u_int xpos,u_int ypos);	//基本增益
-void WriteCompGain(u_int xpos,u_int ypos);	//补偿增益
-void WriteSurfGain(u_int xpos,u_int ypos);	//表面补偿
-void WriteRange(u_int xpos,u_int ypos);	//声程范围
-void WriteSpeed(u_int xpos,u_int ypos);	//声速
-void WriteOffset(u_int xpos,u_int ypos);//零点
-void WriteReject(u_int xpos,u_int ypos);//零点
-void WriteDelay(u_int xpos,u_int ypos);	//延时
-void WriteAngle(u_int xpos,u_int ypos);	//角度
+void WriteBaseGain(uint32_t xpos,uint32_t ypos);	//基本增益
+void WriteCompGain(uint32_t xpos,uint32_t ypos);	//补偿增益
+void WriteSurfGain(uint32_t xpos,uint32_t ypos);	//表面补偿
+void WriteRange(uint32_t xpos,uint32_t ypos);	//声程范围
+void WriteSpeed(uint32_t xpos,uint32_t ypos);	//声速
+void WriteOffset(uint32_t xpos,uint32_t ypos);//零点
+void WriteReject(uint32_t xpos,uint32_t ypos);//零点
+void WriteDelay(uint32_t xpos,uint32_t ypos);	//延时
+void WriteAngle(uint32_t xpos,uint32_t ypos);	//角度
 void WriteScale(void);	//标度
-void WriteLongness(u_short xpos, u_short ypos,int number,u_char total_len/*总长*/,u_char mode/*是否写单位*/);//写长度
+void WriteLongness(uint16_t xpos, uint16_t ypos,int number,uint8_t total_len/*总长*/,uint8_t mode/*是否写单位*/);//写长度
 
 
 
@@ -80,8 +80,8 @@ void DispEchoPara2(void);
 void WritePeakPrompt(int mode1,int mode2);	////mode1=0B门失波1进波，mode2=0波高1dB数
 void WritePeakInfo(int mode1,int mode2,int para1,int para2,int para3,int para4);//mode1=0B门失波1进波，mode2=0波高1dB数
 
-void MParaRenovate(u_int mode);	/*参数刷新,0立即*/
-int MCoorDraw(u_int CoorHPosi , u_int CoorVPosi , u_int CoorHeight , u_int CoorWidth );	/*画指定位置和大小的波形坐标*/
+void MParaRenovate(uint32_t mode);	/*参数刷新,0立即*/
+int MCoorDraw(uint32_t CoorHPosi , uint32_t CoorVPosi , uint32_t CoorHeight , uint32_t CoorWidth );	/*画指定位置和大小的波形坐标*/
 void MGateDraw(void);	/*画门*/
 void MGateDraw1(int gatetype, int mode);	/*画门*/
 void MDrawGate( int/*-1两门都画0A门1B门*/ gatetype, int/*-1向下1向上*/ mode,
@@ -93,8 +93,8 @@ void MSetGateAmpColor();
 
 //色彩
 void MSetColor(int item);
-void MSaveColor(int item,u_int cr);
-u_int MLoadColor(int item);
+void MSaveColor(int item,uint32_t cr);
+uint32_t MLoadColor(int item);
 void MSaveDefualtColor(int item);//设置默认颜色
 #define _DISPLAY_H_
 #endif

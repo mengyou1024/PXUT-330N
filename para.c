@@ -1,5 +1,5 @@
 //”Î∏˜÷÷≤Œ¡ø”–πÿµƒ∫Ø ˝
-extern u_short dac_line[];
+extern uint16_t dac_line[];
 extern FUNCTION             Function;   //π¶ƒ‹
 extern int nFlag;
 
@@ -7,11 +7,11 @@ int ChannelParaInit(int mode)	/*≤Œ ˝≥ı ºªØ£¨mode=0µ±«∞“ª∏ˆÕ®µ¿£¨mode=1À˘”–Õ®µ¿,2
 {
     int retvalue = 1;
     //int offset = C_OFF_CHANNEL;
-    //u_char i=0;
+    //uint8_t i=0;
     //int probe,speed;
 //	int speed;
     int i;
-    u_char Channel;
+    uint8_t Channel;
     int stdmode=MGetStdMode();
     int nCurrentUser = GetCurrentUser();
 	int frequence = MGetFrequence();
@@ -465,7 +465,7 @@ int ChannelParaInit(int mode)	/*≤Œ ˝≥ı ºªØ£¨mode=0µ±«∞“ª∏ˆÕ®µ¿£¨mode=1À˘”–Õ®µ¿,2
 }
 
 //√≈”–πÿµƒ
-void MSetGatePara(u_short Posi,u_short Wide,u_short High,int gatetype,int mode)
+void MSetGatePara(uint16_t Posi,uint16_t Wide,uint16_t High,int gatetype,int mode)
 /*…Ë÷√√≈≤Œ ˝£¨gatetype=0A√≈1B√≈*/
 {
     if (mode == C_SETMODE_SAVE || mode == C_SETMODE_SETSAVE)
@@ -519,7 +519,7 @@ void MSetGatePara(u_short Posi,u_short Wide,u_short High,int gatetype,int mode)
 }
 
 
-u_short MGetGatePara(int gatetype, int paratype)   /* ∑µªÿ÷µŒ™√≈≤Œ ˝ */
+uint16_t MGetGatePara(int gatetype, int paratype)   /* ∑µªÿ÷µŒ™√≈≤Œ ˝ */
 {
     if(gatetype == 0 && paratype == 0)
     {
@@ -565,7 +565,7 @@ u_short MGetGatePara(int gatetype, int paratype)   /* ∑µªÿ÷µŒ™√≈≤Œ ˝ */
 int MGetDacDb(void)
 {
     int offset;
-    u_short dac_dB;
+    uint16_t dac_dB;
     int basegain;
 
     basegain = MGetBaseGain() + 481.31;	//ª˘◊º‘ˆ“Ê
@@ -628,8 +628,8 @@ void DACGatedB(void)	//DAC√≈dB≤Ó
 {
     int offset;
     int basegain;
-    u_short Height;
-    u_short gatedB;
+    uint16_t Height;
+    uint16_t gatedB;
 
     basegain = MGetBaseGain() + 481.31;	//ª˘◊º‘ˆ“Ê
     offset = C_OFF_DACDB + MGetGatePara(0,0);	//√≈Œª
@@ -679,20 +679,20 @@ void MSetPara(int bgain,int cgain,int sgain,int scale,int range,int offset,int d
     }
 }
 
-u_short MGetThick(void)//µ√µΩπ§º˛∫Ò∂»
+uint16_t MGetThick(void)//µ√µΩπ§º˛∫Ò∂»
 {
     return ChannelPara.Thick;
 }
-void MSetThick(u_short thick)//…Ë÷√π§º˛∫Ò∂»
+void MSetThick(uint16_t thick)//…Ë÷√π§º˛∫Ò∂»
 {
     ChannelPara.Thick = thick;
 }
 
-u_short MGetDiameter(void)//µ√µΩπ§º˛÷±æ∂
+uint16_t MGetDiameter(void)//µ√µΩπ§º˛÷±æ∂
 {
     return ChannelPara.Diameter;
 }
-void MSetDiameter(u_short Diameter)//…Ë÷√π§º˛÷±æ∂
+void MSetDiameter(uint16_t Diameter)//…Ë÷√π§º˛÷±æ∂
 {
     ChannelPara.Diameter = Diameter;
     if( Diameter >= 2 * MGetThick() )
@@ -705,13 +705,13 @@ void MSetDiameter(u_short Diameter)//…Ë÷√π§º˛÷±æ∂
     }
 }
 
-u_short MGetOffset(void)			/*∑µªÿ÷µŒ™µ±«∞Õ®µ¿	*/
+uint16_t MGetOffset(void)			/*∑µªÿ÷µŒ™µ±«∞Õ®µ¿	*/
 {
     if( ChannelPara.Offset > C_MAX_OFFSET)MSetOffset(C_MAX_OFFSET,C_SETMODE_SAVE);
     return ChannelPara.Offset;
 }
 
-void MSetOffset(u_int Offset,int mode/*mode = 0\1\2*/)	/*…Ë÷√µ±«∞Õ®µ¿	*/
+void MSetOffset(uint32_t Offset,int mode/*mode = 0\1\2*/)	/*…Ë÷√µ±«∞Õ®µ¿	*/
 {
     if (mode == C_SETMODE_SAVE || mode == C_SETMODE_SETSAVE)
     {
@@ -730,7 +730,7 @@ void MSetOffset(u_int Offset,int mode/*mode = 0\1\2*/)	/*…Ë÷√µ±«∞Õ®µ¿	*/
     }
 }
 
-u_short MGetSpeed(void)			/*∑µªÿ÷µŒ™µ±«∞Õ®µ¿ ‘º˛…˘ÀŸ£∫	Œﬁ–° ˝	*/
+uint16_t MGetSpeed(void)			/*∑µªÿ÷µŒ™µ±«∞Õ®µ¿ ‘º˛…˘ÀŸ£∫	Œﬁ–° ˝	*/
 {
     if( MGetUnitType() > 0)
     {
@@ -747,7 +747,7 @@ u_short MGetSpeed(void)			/*∑µªÿ÷µŒ™µ±«∞Õ®µ¿ ‘º˛…˘ÀŸ£∫	Œﬁ–° ˝	*/
     return ChannelPara.Speed;
 }
 
-void MSetSpeed(u_short Speed,int mode/*mode = 0\1\2*/)	/*…Ë÷√µ±«∞Õ®µ¿	*/
+void MSetSpeed(uint16_t Speed,int mode/*mode = 0\1\2*/)	/*…Ë÷√µ±«∞Õ®µ¿	*/
 {
     int Scale=MGetScaleMode();
     if (mode == C_SETMODE_SETSAVE || mode == C_SETMODE_SET)
@@ -763,9 +763,9 @@ void MSetSpeed(u_short Speed,int mode/*mode = 0\1\2*/)	/*…Ë÷√µ±«∞Õ®µ¿	*/
     }
 }
 
-u_int MGetAngle(u_int mode)			/*∑µªÿ÷µŒ™µ±«∞Õ®µ¿’€…‰Ω«0Ω«∂»1’˝«–2’˝œ“3”‡œ“	“ªŒª–° ˝*/
+uint32_t MGetAngle(uint32_t mode)			/*∑µªÿ÷µŒ™µ±«∞Õ®µ¿’€…‰Ω«0Ω«∂»1’˝«–2’˝œ“3”‡œ“	“ªŒª–° ˝*/
 {
-    u_int retvalue = ChannelPara.Angle;
+    uint32_t retvalue = ChannelPara.Angle;
     float angle = (float)retvalue * C_PI/1800.0;	//Ω«∂»ªØŒ™ª°∂»
     switch (mode)
     {
@@ -784,7 +784,7 @@ u_int MGetAngle(u_int mode)			/*∑µªÿ÷µŒ™µ±«∞Õ®µ¿’€…‰Ω«0Ω«∂»1’˝«–2’˝œ“3”‡œ“	“ªŒª–
     }
     return retvalue;
 }
-void MSetAngle(u_short Angle,int mode)	/*…Ë÷√µ±«∞Õ®µ¿	*/
+void MSetAngle(uint16_t Angle,int mode)	/*…Ë÷√µ±«∞Õ®µ¿	*/
 {
     ChannelPara.Angle = Angle;
 }
@@ -797,7 +797,7 @@ void MSetDepth(int depth,int mode)
 {
     ChannelPara.depth = depth;
 }
-u_short MGetKvalue(void)			/*∑µªÿ÷µŒ™µ±«∞Õ®µ¿K÷µ ¡ΩŒª–° ˝	*/
+uint16_t MGetKvalue(void)			/*∑µªÿ÷µŒ™µ±«∞Õ®µ¿K÷µ ¡ΩŒª–° ˝	*/
 {
     float Angle = ChannelPara.Angle;
     if( Angle > 810 ) return 999;
@@ -807,27 +807,27 @@ u_short MGetKvalue(void)			/*∑µªÿ÷µŒ™µ±«∞Õ®µ¿K÷µ ¡ΩŒª–° ˝	*/
 		return (int)(tan(Angle)*100+0.5);
     }
 }
-void MSetKvalue(u_short Kvalue,int mode/*mode = 0\1\2*/)	/*…Ë÷√µ±«∞Õ®µ¿	*/
+void MSetKvalue(uint16_t Kvalue,int mode/*mode = 0\1\2*/)	/*…Ë÷√µ±«∞Õ®µ¿	*/
 {
 	ChannelPara.Angle = (int)( atan( (float)Kvalue/100.0) *1800/C_PI + 0.5);
 }
 
-u_short MGetForward(void)			/*∑µªÿ÷µŒ™µ±«∞Õ®µ¿ÃΩÕ∑«∞—ÿ≥§∂» “ªŒª–° ˝	*/
+uint16_t MGetForward(void)			/*∑µªÿ÷µŒ™µ±«∞Õ®µ¿ÃΩÕ∑«∞—ÿ≥§∂» “ªŒª–° ˝	*/
 {
     return ChannelPara.Forward;
 }
-void MSetForward(u_short Forward,int mode/*mode = 0*/)	/*…Ë÷√µ±«∞Õ®µ¿	*/
+void MSetForward(uint16_t Forward,int mode/*mode = 0*/)	/*…Ë÷√µ±«∞Õ®µ¿	*/
 {
     ChannelPara.Forward = Forward;
 }
 
-u_short MGetFrequence(void)			/*∑µªÿ÷µŒ™µ±«∞Õ®µ¿ÃΩÕ∑∆µ¬  “ªŒª–° ˝	*/
+uint16_t MGetFrequence(void)			/*∑µªÿ÷µŒ™µ±«∞Õ®µ¿ÃΩÕ∑∆µ¬  “ªŒª–° ˝	*/
 {
     if( ChannelPara.Frequence > 0)
         return ChannelPara.Frequence;
     else return 5;
 }
-void MSetFrequence(u_short Frequence,int mode/*mode = 0*/)	/*…Ë÷√µ±«∞Õ®µ¿	*/
+void MSetFrequence(uint16_t Frequence,int mode/*mode = 0*/)	/*…Ë÷√µ±«∞Õ®µ¿	*/
 {
     ChannelPara.Frequence = Frequence;
     if( C_DEVLIB != 3)
@@ -839,20 +839,20 @@ void MSetFrequence(u_short Frequence,int mode/*mode = 0*/)	/*…Ë÷√µ±«∞Õ®µ¿	*/
     }
 }
 
-u_short MGetCrystal_l(void)			/*∑µªÿ÷µŒ™µ±«∞Õ®µ¿æß∆¨≥ﬂ¥Á a*256+b	*/
+uint16_t MGetCrystal_l(void)			/*∑µªÿ÷µŒ™µ±«∞Õ®µ¿æß∆¨≥ﬂ¥Á a*256+b	*/
 {
     return ChannelPara.Crystal_l;
 }
-u_short MGetCrystal_w(void)			/*∑µªÿ÷µŒ™µ±«∞Õ®µ¿æß∆¨≥ﬂ¥Á a*256+b	*/
+uint16_t MGetCrystal_w(void)			/*∑µªÿ÷µŒ™µ±«∞Õ®µ¿æß∆¨≥ﬂ¥Á a*256+b	*/
 {
     return ChannelPara.Crystal_w;
 }
 
-void MSetCrystal_l(u_short Crystal,int mode/*mode = 0*/)	/*…Ë÷√µ±«∞Õ®µ¿	*/
+void MSetCrystal_l(uint16_t Crystal,int mode/*mode = 0*/)	/*…Ë÷√µ±«∞Õ®µ¿	*/
 {
     ChannelPara.Crystal_l = Crystal;
 }
-void MSetCrystal_w(u_short Crystal,int mode/*mode = 0*/)	/*…Ë÷√µ±«∞Õ®µ¿	*/
+void MSetCrystal_w(uint16_t Crystal,int mode/*mode = 0*/)	/*…Ë÷√µ±«∞Õ®µ¿	*/
 {
     ChannelPara.Crystal_w = Crystal;
 }
@@ -903,10 +903,10 @@ float MGetAttenuate(int depth)
     return att;
 }
 
-u_int MGetRange(int mode)			/*∑µªÿ÷µŒ™µ±«∞±Í∂»œ¬µƒ…˘≥Ã∑∂Œß	*/
+uint32_t MGetRange(int mode)			/*∑µªÿ÷µŒ™µ±«∞±Í∂»œ¬µƒ…˘≥Ã∑∂Œß	*/
 {
     if( ChannelPara.Range > C_MAX_RANGE)MSetRange(1000,C_SETMODE_SAVE);
-    u_int retvalue = ChannelPara.Range ;	//
+    uint32_t retvalue = ChannelPara.Range ;	//
     if( mode == -1)
     {
         //’πøÌ«∞…˘≥Ã
@@ -945,7 +945,7 @@ u_int MGetRange(int mode)			/*∑µªÿ÷µŒ™µ±«∞±Í∂»œ¬µƒ…˘≥Ã∑∂Œß	*/
     if( MGetUnitType() > 0)
     {
         //µ•Œªinch
-///		retvalue = (u_int)( retvalue*100/25.4+0.5);
+///		retvalue = (uint32_t)( retvalue*100/25.4+0.5);
     }
     return retvalue;
 }
@@ -966,10 +966,10 @@ void MSetRange(int Range,int mode/*mode = 0\1\2*/)	/*…Ë÷√µ±«∞Õ®µ¿	*/
     switch ( MGetScaleMode() )
     {
     case 0:		//¥π÷±
-        Range = (u_int)( Range * 10000.0 / MGetAngle(3) + 0.5);		//”‡œ“
+        Range = (uint32_t)( Range * 10000.0 / MGetAngle(3) + 0.5);		//”‡œ“
         break;
     case 1:		//ÀÆ∆Ω
-        Range = (u_int)( Range * 10000.0 / MGetAngle(2) + 0.5);		//’˝œ“
+        Range = (uint32_t)( Range * 10000.0 / MGetAngle(2) + 0.5);		//’˝œ“
         break;
     case 2:		//æ‡¿Î
         break;
@@ -981,9 +981,9 @@ void MSetRange(int Range,int mode/*mode = 0\1\2*/)	/*…Ë÷√µ±«∞Õ®µ¿	*/
     }
     if (mode == C_SETMODE_SETSAVE || mode == C_SETMODE_SET)
     {
-        u_int speed = MGetSpeed();
+        uint32_t speed = MGetSpeed();
 
-        u_int rm = C_MAX_RANGE*90/100;
+        uint32_t rm = C_MAX_RANGE*90/100;
         if( MGetSpeed() < CD_SPEED_2 * 110/100 && MGetProbeMode() == C_APROBE)rm /= 2;
         if(Range >= rm) Range = rm + (Range - rm)*60/100;
         Range = (C_SAMPLE_FREQ * Range + speed/2)/speed;
@@ -1003,10 +1003,10 @@ void MSetRange(int Range,int mode/*mode = 0\1\2*/)	/*…Ë÷√µ±«∞Õ®µ¿	*/
     }
 }
 
-u_int MGetDelay(int mode)			/*∑µªÿ÷µŒ™µ±«∞Õ®µ¿	*/
+uint32_t MGetDelay(int mode)			/*∑µªÿ÷µŒ™µ±«∞Õ®µ¿	*/
 {
     if( ChannelPara.Delay > C_MAX_DELAY ) MSetDelay(0,C_SETMODE_SAVE);
-    u_int retvalue = ChannelPara.Delay ;	//—” ± ±º‰£¨µ•Œª1/80 000 ms
+    uint32_t retvalue = ChannelPara.Delay ;	//—” ± ±º‰£¨µ•Œª1/80 000 ms
 
     if( mode == -1)return ChannelPara.OldDelay;//’πøÌ«∞—” ±
     else if( mode == -2)return ChannelPara.Delay;
@@ -1072,12 +1072,12 @@ void MSetScaleDelay(int Delay,int mode/*mode = 0\1\2*/)	/*…Ë÷√µ±«∞±Í∂»œ¬µƒ—” ±æ‡
     MSetDelay(Delay,mode);
 }
 
-u_short MGetReject(void)			/*∑µªÿ÷µŒ™µ±«∞Õ®µ¿	*/
+uint16_t MGetReject(void)			/*∑µªÿ÷µŒ™µ±«∞Õ®µ¿	*/
 {
     if( ChannelPara.Reject < C_MAX_REJECT)return ChannelPara.Reject;
     else return C_MAX_REJECT;
 }
-void MSetReject(u_short Reject,int mode/*mode = 0\1\2*/)	/*…Ë÷√µ±«∞Õ®µ¿	*/
+void MSetReject(uint16_t Reject,int mode/*mode = 0\1\2*/)	/*…Ë÷√µ±«∞Õ®µ¿	*/
 {
     if( Reject > 800 )Reject = 800;
     if (mode == C_SETMODE_SAVE || mode == C_SETMODE_SETSAVE)
@@ -1094,7 +1094,7 @@ void MSetReject(u_short Reject,int mode/*mode = 0\1\2*/)	/*…Ë÷√µ±«∞Õ®µ¿	*/
     }
 }
 
-u_short MGetSysGain(void)	//µ√µΩ◊‹ÃÂ‘ˆ“Ê
+uint16_t MGetSysGain(void)	//µ√µΩ◊‹ÃÂ‘ˆ“Ê
 {
     if( ChannelPara.SurfGain + ChannelPara.BaseGain + ChannelPara.CompGain > C_MAX_SYSGAIN)
     {
@@ -1104,13 +1104,13 @@ u_short MGetSysGain(void)	//µ√µΩ◊‹ÃÂ‘ˆ“Ê
     return ( ChannelPara.SurfGain + ChannelPara.BaseGain + ChannelPara.CompGain );
 }
 
-u_short MGetSurfGain(void)			/*∑µªÿ÷µŒ™µ±«∞Õ®µ¿±Ì√Ê≤π≥•‘ˆ“Ê “ªŒª–° ˝	*/
+uint16_t MGetSurfGain(void)			/*∑µªÿ÷µŒ™µ±«∞Õ®µ¿±Ì√Ê≤π≥•‘ˆ“Ê “ªŒª–° ˝	*/
 {
     if (ChannelPara.SurfGain > C_MAX_SURFGAIN)ChannelPara.SurfGain = 0;
     return ChannelPara.SurfGain;
 }
 
-int MSetSurfGain(u_short SurfGain,int mode/*mode = 0\1\2*/)	/*…Ë÷√µ±«∞Õ®µ¿	*/
+int MSetSurfGain(uint16_t SurfGain,int mode/*mode = 0\1\2*/)	/*…Ë÷√µ±«∞Õ®µ¿	*/
 {
     if (SurfGain > C_MAX_SURFGAIN)
     {
@@ -1129,7 +1129,7 @@ int MSetSurfGain(u_short SurfGain,int mode/*mode = 0\1\2*/)	/*…Ë÷√µ±«∞Õ®µ¿	*/
     return C_TRUE;
 }
 
-u_short MGetBaseGain(void)			/*∑µªÿ÷µŒ™µ±«∞Õ®µ¿ª˘±æ‘ˆ“Ê “ªŒª–° ˝	*/
+uint16_t MGetBaseGain(void)			/*∑µªÿ÷µŒ™µ±«∞Õ®µ¿ª˘±æ‘ˆ“Ê “ªŒª–° ˝	*/
 {
     return ( ( ChannelPara.BaseGain > C_MAX_BASEGAIN)? C_MAX_BASEGAIN : ChannelPara.BaseGain );
 }
@@ -1144,7 +1144,7 @@ int MSetBaseGain(short BaseGain,int mode/*mode = 0\1\2*/)	/*…Ë÷√µ±«∞Õ®µ¿	*/
     }
     if (mode == C_SETMODE_SETSAVE || mode == C_SETMODE_SET)
     {
-        u_short gain = BaseGain + MGetSurfGain() + MGetCompGain() ;
+        uint16_t gain = BaseGain + MGetSurfGain() + MGetCompGain() ;
         if (gain > C_MAX_BASEGAIN)gain = C_MAX_BASEGAIN;
 //		if (gain > 1000)gain = 1000 + (gain - 1000)/2;
 //		if (gain > 900)gain = 900 + (gain - 900)/2;
@@ -1179,7 +1179,7 @@ int MSetCompGain(short CompGain,int mode/*mode = 0\1\2*/)	/*…Ë÷√µ±«∞Õ®µ¿	*/
     if (mode == C_SETMODE_SETSAVE || mode == C_SETMODE_SET)
     {
         MSetSystemGain();
-        u_short gain = CompGain + MGetSurfGain() + MGetBaseGain();
+        uint16_t gain = CompGain + MGetSurfGain() + MGetBaseGain();
         if (gain > C_MAX_BASEGAIN)gain = C_MAX_BASEGAIN;
 //		if (gain > 1000)gain = 1000 + (gain - 1000)/2;
 //		if (gain > 900)gain = 900 + (gain - 900)/2;
@@ -1190,11 +1190,11 @@ int MSetCompGain(short CompGain,int mode/*mode = 0\1\2*/)	/*…Ë÷√µ±«∞Õ®µ¿	*/
     return 0;
 }
 
-u_short MGetDepthGain(void)
+uint16_t MGetDepthGain(void)
 {
     return	ChannelPara.DepthGain;
 }
-void MSetDepthGain(u_short gain)//…Ë÷√ŒﬁDAC/AVG ±…Ó∂»≤π≥•÷µ
+void MSetDepthGain(uint16_t gain)//…Ë÷√ŒﬁDAC/AVG ±…Ó∂»≤π≥•÷µ
 {
     if( gain > 300 )gain = 300;
     ChannelPara.DepthGain = gain;
@@ -1224,7 +1224,7 @@ void MSetLineGain(int line,short gain)//…Ë÷√«˙œﬂµƒ∆´“∆¡ø
 
 void MSetSystemGain(void)	/*…Ë÷√µ±«∞‘ˆ“Ê */
 {
-    u_short gain = MGetBaseGain() + MGetSurfGain() + MGetCompGain() ;
+    uint16_t gain = MGetBaseGain() + MGetSurfGain() + MGetCompGain() ;
 //;	if (gain > 1100)gain = 1100 + (gain - 1100)/2;
 //;	if (gain > 1000)gain = 1000 + (gain - 1000)/2;
 //;	if (gain > C_MAX_BASEGAIN)gain = C_MAX_BASEGAIN;
@@ -1234,9 +1234,9 @@ void MSetSystemGain(void)	/*…Ë÷√µ±«∞‘ˆ“Ê */
 void MSetSystemRange(void)	/*…Ë÷√µ±«∞…˘≥Ã */
 {
     /*SAMPLE_FREQ*1000*RANGE/SPEED */
-    u_int range = MGetRange(3);
-    u_int speed = MGetSpeed();
-    u_int rm = C_MAX_RANGE*90/100;
+    uint32_t range = MGetRange(3);
+    uint32_t speed = MGetSpeed();
+    uint32_t rm = C_MAX_RANGE*90/100;
     if( MGetSpeed() < CD_SPEED_2 * 110/100 && MGetProbeMode() == C_APROBE)rm /= 2;
     if(range >= rm) range = rm + (range - rm)*60/100;
 
@@ -1248,7 +1248,7 @@ void MSetSystemRange(void)	/*…Ë÷√µ±«∞…˘≥Ã */
 
 void MSetSystemDelay(void)	/*…Ë÷√µ±«∞—” ±ªÚ¡„µ„ */
 {
-    u_int edelay = ( MGetDelay(0) + MGetOffset() ) /2;
+    uint32_t edelay = ( MGetDelay(0) + MGetOffset() ) /2;
     if( MGetProbeMode() == C_P_TRANSMISSION)edelay /= 2;
 #if C_DEVLIB == 4
     SetEchoDelay(MGetChannel(), edelay ) ;
@@ -1259,7 +1259,7 @@ void MSetSystemDelay(void)	/*…Ë÷√µ±«∞—” ±ªÚ¡„µ„ */
 
 void MSetSystemBright(void)	/*…Ë÷√µ±«∞∆¡ƒª¡¡∂»*/
 {
-    u_int cur_bright = 0,obj_bright = C_BRIGHTNESS_COM;
+    uint32_t cur_bright = 0,obj_bright = C_BRIGHTNESS_COM;
     int mode;
     cur_bright = 0;
     obj_bright = C_BRIGHTNESS_COM;

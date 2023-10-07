@@ -6,7 +6,7 @@ extern UDISK_INFO g_UDiskInfo;
 extern NOTES	Notes;
 extern CACHE	cache;
 FIL __attribute__((weak)) g_FileObject;
-u_char g_echobuffer[C_LEN_SAMP];
+uint8_t g_echobuffer[C_LEN_SAMP];
 // int bFirst = 0;
 int Channeltemp,Channeltemp1;
 FILINFO fi;
@@ -50,16 +50,16 @@ TIME_CLOCK TimeClock;
 int WaveSave(int mode)	//mode > 0 为长按键，直接进入记录菜单
 //返回值－1未做，0开或停自动存，1人工存，2屏拷3进入数据处理
 {
-    //u_int char_len = 5,row_number = 4,crow_height = 24;
+    //uint32_t char_len = 5,row_number = 4,crow_height = 24;
     //int xpos,ypos;
     int retvalue;
     int keycode;
-    //u_short pzName[12];
-    //u_short *cpText;
-    //u_char* epText;
-    u_char *sampbuff;
-    u_char echobuffer[C_LEN_SAMP];	//用来存储包络或峰值
-///	u_char SaveBuffer[C_LEN_SAMP];	//用来临时保存波形
+    //uint16_t pzName[12];
+    //uint16_t *cpText;
+    //uint8_t* epText;
+    uint8_t *sampbuff;
+    uint8_t echobuffer[C_LEN_SAMP];	//用来存储包络或峰值
+///	uint8_t SaveBuffer[C_LEN_SAMP];	//用来临时保存波形
     int offset;
     int i;
 	// TIME_CLOCK TimeClock;
@@ -144,11 +144,11 @@ int WaveSave(int mode)	//mode > 0 为长按键，直接进入记录菜单
         {
             MEraseWindow(0, 0, 20*C_ECHAR_HDOT, C_CCHAR_VDOT) ;
             //	CEMenuOut(0,0, _Menu_DB4 ,8,1,24);	//探头频普测试中
-            TextOut(0, 0,1,17,8,(u_char*)_Menu_DB[MGetLanguage()][2],4);
+            TextOut(0, 0,1,17,8,(uint8_t*)_Menu_DB[MGetLanguage()][2],4);
             fre1 = test_fft();
             MEraseWindow(0, 0, 10*C_ECHAR_HDOT, C_CCHAR_VDOT) ;
             //	CEMenuOut(0, 0, _Menu_DB5 ,10,1,24);
-            TextOut(0, 0,1,23,16,(u_char*)_Menu_DB[MGetLanguage()][3],4);
+            TextOut(0, 0,1,23,16,(uint8_t*)_Menu_DB[MGetLanguage()][3],4);
             Write_Number((5+6*MGetLanguage())*C_ECHAR_HDOT,0,fre1,4,2,0);
             keycode = MAnyKeyReturn();
         }
@@ -258,11 +258,11 @@ int WaveSave(int mode)	//mode > 0 为长按键，直接进入记录菜单
             MSetHardEchoShow(0,C_SETMODE_SETSAVE);
             ClearEnvelope();
             EraseDrawRectangle(12*C_CCHAR_HDOT, C_COORVPOSI+4, 12*C_CCHAR_HDOT + (5+1+MGetLanguage()*3)*C_CCHAR_HDOT, C_COORVPOSI+16 + 30 * (4) ) ;
-            TextOut(12*C_CCHAR_HDOT+4,C_COORVPOSI+8, 1, 12,24, (u_char*)_SaveMenu[MGetLanguage()][0], 4);
-            TextOut(12*C_CCHAR_HDOT+4,C_COORVPOSI+8+30, 1, 12,24, (u_char*)_SaveMenu[MGetLanguage()][1], 4);
-            TextOut(12*C_CCHAR_HDOT+4,C_COORVPOSI+8+30*2, 1, 12,24, (u_char*)_SaveMenu[MGetLanguage()][2], 4);
-            TextOut(12*C_CCHAR_HDOT+4,C_COORVPOSI+8+30*3, 1, 12,24, (u_char*)_SaveMenu[MGetLanguage()][3], 4);
-            //	CEMenuOut(12*16+4,29+4 , (u_short*)_SaveMenu ,5,4,24);	/*在指定位置根据每行字符数、行数、行高写菜单*/
+            TextOut(12*C_CCHAR_HDOT+4,C_COORVPOSI+8, 1, 12,24, (uint8_t*)_SaveMenu[MGetLanguage()][0], 4);
+            TextOut(12*C_CCHAR_HDOT+4,C_COORVPOSI+8+30, 1, 12,24, (uint8_t*)_SaveMenu[MGetLanguage()][1], 4);
+            TextOut(12*C_CCHAR_HDOT+4,C_COORVPOSI+8+30*2, 1, 12,24, (uint8_t*)_SaveMenu[MGetLanguage()][2], 4);
+            TextOut(12*C_CCHAR_HDOT+4,C_COORVPOSI+8+30*3, 1, 12,24, (uint8_t*)_SaveMenu[MGetLanguage()][3], 4);
+            //	CEMenuOut(12*16+4,29+4 , (uint16_t*)_SaveMenu ,5,4,24);	/*在指定位置根据每行字符数、行数、行高写菜单*/
             while (1)
             {
                 keycode = MGetKeyCode(0);
@@ -329,13 +329,13 @@ int WaveSave(int mode)	//mode > 0 为长按键，直接进入记录菜单
                     ClusterSize = SdCard_GetCapacity(&FreeSpaceLowPart,&TotalSpaceLowPart);
 
                     EraseDrawRectangle(1,C_COORVPOSI,C_CCHAR_HDOT*25+4,C_COORVPOSI+C_CCHAR_VDOT*6+15);
-                    //	CEMenuOut(24,29+8 , (u_short*)_UDiskMenu ,15,6,24);
-                    TextOut(C_CCHAR_HDOT,C_COORVPOSI+8+MGetLanguage()*4 , 1, 30,24, (u_char*)_UDiskMenu[MGetLanguage()][0], 4);
-                    TextOut(C_CCHAR_HDOT,C_COORVPOSI+8+C_CCHAR_VDOT+MGetLanguage()*4 , 1, 30,24, (u_char*)_UDiskMenu[MGetLanguage()][1], 4);
-                    TextOut(C_CCHAR_HDOT,C_COORVPOSI+8+C_CCHAR_VDOT*2+MGetLanguage()*4 , 1, 30,24, (u_char*)_UDiskMenu[MGetLanguage()][2], 4);
-                    TextOut(C_CCHAR_HDOT,C_COORVPOSI+8+C_CCHAR_VDOT*3+MGetLanguage()*4 , 1, 30,24, (u_char*)_UDiskMenu[MGetLanguage()][3], 4);
-                    TextOut(C_CCHAR_HDOT,C_COORVPOSI+8+C_CCHAR_VDOT*4+MGetLanguage()*4 , 1, 30,24, (u_char*)_UDiskMenu[MGetLanguage()][4], 4);
-                    TextOut(C_CCHAR_HDOT,C_COORVPOSI+8+C_CCHAR_VDOT*5+MGetLanguage()*4 , 1, 30,24, (u_char*)_UDiskMenu[MGetLanguage()][5], 4);
+                    //	CEMenuOut(24,29+8 , (uint16_t*)_UDiskMenu ,15,6,24);
+                    TextOut(C_CCHAR_HDOT,C_COORVPOSI+8+MGetLanguage()*4 , 1, 30,24, (uint8_t*)_UDiskMenu[MGetLanguage()][0], 4);
+                    TextOut(C_CCHAR_HDOT,C_COORVPOSI+8+C_CCHAR_VDOT+MGetLanguage()*4 , 1, 30,24, (uint8_t*)_UDiskMenu[MGetLanguage()][1], 4);
+                    TextOut(C_CCHAR_HDOT,C_COORVPOSI+8+C_CCHAR_VDOT*2+MGetLanguage()*4 , 1, 30,24, (uint8_t*)_UDiskMenu[MGetLanguage()][2], 4);
+                    TextOut(C_CCHAR_HDOT,C_COORVPOSI+8+C_CCHAR_VDOT*3+MGetLanguage()*4 , 1, 30,24, (uint8_t*)_UDiskMenu[MGetLanguage()][3], 4);
+                    TextOut(C_CCHAR_HDOT,C_COORVPOSI+8+C_CCHAR_VDOT*4+MGetLanguage()*4 , 1, 30,24, (uint8_t*)_UDiskMenu[MGetLanguage()][4], 4);
+                    TextOut(C_CCHAR_HDOT,C_COORVPOSI+8+C_CCHAR_VDOT*5+MGetLanguage()*4 , 1, 30,24, (uint8_t*)_UDiskMenu[MGetLanguage()][5], 4);
 
                     Write_UDisk_Len(28+(4+MGetLanguage())*C_CCHAR_HDOT,C_COORVPOSI+8+4*MGetLanguage(),0,0,g_UDiskInfo.filelen);	//当前文件
                     Write_UDisk_Len(28+(4+MGetLanguage())*C_CCHAR_HDOT,C_COORVPOSI+8+C_CCHAR_VDOT+4*MGetLanguage(),TotalSpaceLowPart-FreeSpaceLowPart,ClusterSize,0);	//已用容量
@@ -397,8 +397,8 @@ int WaveSave(int mode)	//mode > 0 为长按键，直接进入记录菜单
         else if (MGetSaveStatus() == 2)	//重新开始
         {
             EraseDrawRectangle(12*C_CCHAR_HDOT, C_COORVPOSI+4, 12*C_CCHAR_HDOT + (6+1*MGetLanguage())*C_CCHAR_HDOT, C_COORVPOSI+4 + 30 * (2) ) ;
-            TextOut(12*C_CCHAR_HDOT+4,C_COORVPOSI+8, 1, 10,24, (u_char*)_PushMenu[MGetLanguage()][0], 4);
-            TextOut(12*C_CCHAR_HDOT+4,C_COORVPOSI+8+30, 1, 10,24, (u_char*)_PushMenu[MGetLanguage()][1], 4);
+            TextOut(12*C_CCHAR_HDOT+4,C_COORVPOSI+8, 1, 10,24, (uint8_t*)_PushMenu[MGetLanguage()][0], 4);
+            TextOut(12*C_CCHAR_HDOT+4,C_COORVPOSI+8+30, 1, 10,24, (uint8_t*)_PushMenu[MGetLanguage()][1], 4);
             while (1)
             {
                 keycode = MGetKeyCode(0);
@@ -586,16 +586,16 @@ int WaveSave(int mode)	//mode > 0 为长按键，直接进入记录菜单
 int WaveSave1(int mode)	//mode > 0 为长按键，直接进入记录菜单
 //返回值－1未做，0开或停自动存，1人工存，2屏拷3进入数据处理
 {
-    //u_int char_len = 5,row_number = 4,crow_height = 24;
+    //uint32_t char_len = 5,row_number = 4,crow_height = 24;
     //int xpos,ypos;
     int retvalue;
     int keycode;
-    //u_short pzName[12];
-    //u_short *cpText;
-    //u_char* epText;
-    u_char *sampbuff;
-    u_char echobuffer[C_LEN_SAMP];	//用来存储包络或峰值
-///	u_char SaveBuffer[C_LEN_SAMP];	//用来临时保存波形
+    //uint16_t pzName[12];
+    //uint16_t *cpText;
+    //uint8_t* epText;
+    uint8_t *sampbuff;
+    uint8_t echobuffer[C_LEN_SAMP];	//用来存储包络或峰值
+///	uint8_t SaveBuffer[C_LEN_SAMP];	//用来临时保存波形
     int offset;
     int i;
 	// TIME_CLOCK TimeClock;
@@ -655,23 +655,23 @@ int WaveSave1(int mode)	//mode > 0 为长按键，直接进入记录菜单
 
 }
 
-extern const u_int c_crPara[];
-extern const u_int Echo_crPara[];
+extern const uint32_t c_crPara[];
+extern const uint32_t Echo_crPara[];
 
-extern u_char crPara[];
+extern uint8_t crPara[];
 int DataMenu(int mode)	//mode > 0 为长按键，直接进入记录菜单
 {
     //返回值－1未做，0开或停自动存，1人工存，2屏拷3进入数据处理
-    u_int char_len = 5,row_number = 2,crow_height = 48;
+    uint32_t char_len = 5,row_number = 2,crow_height = 48;
     int xpos,ypos;
     int retvalue;
     int keycode;
-//	u_short pzName[12];
-    u_short *cpText;
-//	u_char* epText;
-    u_char *sampbuff;
-    u_char echobuffer[C_LEN_SAMP];	//用来存储包络或峰值
-    u_char tempcrPara[C_CR_MAX+12];
+//	uint16_t pzName[12];
+    uint16_t *cpText;
+//	uint8_t* epText;
+    uint8_t *sampbuff;
+    uint8_t echobuffer[C_LEN_SAMP];	//用来存储包络或峰值
+    uint8_t tempcrPara[C_CR_MAX+12];
     int offset;
     int i;
 
@@ -698,10 +698,10 @@ int DataMenu(int mode)	//mode > 0 为长按键，直接进入记录菜单
         EraseDrawRectangle(xpos, ypos, xpos + ( char_len + 1 )*C_CCHAR_HDOT, ypos + crow_height * (row_number) ) ;
         for (i=0; i<row_number; i++)
         {
-            TextOut(xpos+4,ypos+4+i*crow_height,1,10,crow_height,(u_char*)_DataMenu_A1[MGetLanguage()][i],0);
+            TextOut(xpos+4,ypos+4+i*crow_height,1,10,crow_height,(uint8_t*)_DataMenu_A1[MGetLanguage()][i],0);
             if (MGetLanguage())
             {
-                TextOut(xpos+4,ypos+4+i*crow_height+10,1,10,8,(u_char*)_DataMenu_A1[MGetLanguage()][i]+10,0);
+                TextOut(xpos+4,ypos+4+i*crow_height+10,1,10,8,(uint8_t*)_DataMenu_A1[MGetLanguage()][i]+10,0);
             }
         }*/
         while(1)
@@ -774,7 +774,7 @@ int DataMenu(int mode)	//mode > 0 为长按键，直接进入记录菜单
 }
 int DataProcedure()	//数据处理
 {
-    u_int char_len = 3,row_number ,crow_height = 48;
+    uint32_t char_len = 3,row_number ,crow_height = 48;
 //	int deci_len;
     int xpos,ypos;
 //	int	menu_xpos = 0,menu_ypos = 0;
@@ -784,13 +784,13 @@ int DataProcedure()	//数据处理
     int SaveMode = MGetSaveMode();
     int datachannel;
     int file_no,file_total;
-    u_char echobuffer[C_LEN_SAMP];	//用来存储包络或峰值
-    u_short freqbuffer[C_LEN_SAMP];	//用来存频谱
+    uint8_t echobuffer[C_LEN_SAMP];	//用来存储包络或峰值
+    uint16_t freqbuffer[C_LEN_SAMP];	//用来存频谱
     int language;
     int SoundAlarm;
-//	u_short pzName[12];
-    u_short *cpText;
-//	u_char* epText;
+//	uint16_t pzName[12];
+    uint16_t *cpText;
+//	uint8_t* epText;
     int offset;
     int i;//,j;
     int temp;
@@ -839,7 +839,7 @@ int DataProcedure()	//数据处理
         crow_height = ( C_COORHEIGHT/row_number );
         xpos = C_COORWIDTH -(3+MGetLanguage()*2) * C_CCHAR_HDOT; //C_HORIDOT_SCREEN
         ypos = C_COORVPOSI + 1;
-        //cpText = (u_short*)_DataMenu_A2 ;
+        //cpText = (uint16_t*)_DataMenu_A2 ;
         //	MPushWindow(xpos-16, ypos, xpos + 3*C_CCHAR_HDOT+20, ypos + crow_height * row_number ) ;
         if(view%2==0)
         {
@@ -847,13 +847,13 @@ int DataProcedure()	//数据处理
             //	CEMenuOut(xpos+4,ypos+4 , cpText ,char_len,row_number,crow_height);	
             for(i=0;i<row_number;i++)
             {
-                TextOut(xpos+4,ypos+4+i*crow_height,1,6+MGetLanguage()*2,crow_height,(u_char*)_DataMenu_A2[MGetLanguage()][i],4);
+                TextOut(xpos+4,ypos+4+i*crow_height,1,6+MGetLanguage()*2,crow_height,(uint8_t*)_DataMenu_A2[MGetLanguage()][i],4);
             }
 
     #if C_UDISK == 0
             if (MGetSaveFrequency())
             {
-                TextOut(xpos+4,ypos+4+crow_height*7,1,10,crow_height,(u_char*)_DataMenu_A2[MGetLanguage()][9],4);
+                TextOut(xpos+4,ypos+4+crow_height*7,1,10,crow_height,(uint8_t*)_DataMenu_A2[MGetLanguage()][9],4);
             }
     #endif
             MDrawLine(xpos+1,ypos+crow_height*3,xpos + (3+MGetLanguage()*2)*C_CCHAR_HDOT+15,ypos+crow_height*3,C_CR_BACK);
@@ -1135,7 +1135,7 @@ int DataProcedure()	//数据处理
 
 int DataProceduresd()	//数据处理
 {
-    u_int char_len = 3,row_number ,crow_height = 48;
+    uint32_t char_len = 3,row_number ,crow_height = 48;
 //	int deci_len;
     int xpos,ypos;
 //	int	menu_xpos = 0,menu_ypos = 0;
@@ -1145,13 +1145,13 @@ int DataProceduresd()	//数据处理
     int SaveMode = MGetSaveMode();
     int datachannel;
     int file_no,file_total;
-    u_char echobuffer[C_LEN_SAMP];	//用来存储包络或峰值
-    u_short freqbuffer[C_LEN_SAMP];	//用来存频谱
+    uint8_t echobuffer[C_LEN_SAMP];	//用来存储包络或峰值
+    uint16_t freqbuffer[C_LEN_SAMP];	//用来存频谱
     int language;
     int SoundAlarm;
-//	u_short pzName[12];
-    u_short *cpText;
-//	u_char* epText;
+//	uint16_t pzName[12];
+    uint16_t *cpText;
+//	uint8_t* epText;
     int offset;
     int i;//,j;
     int temp;
@@ -1163,9 +1163,9 @@ int DataProceduresd()	//数据处理
 	
 	int number,number11,number12,number13,number14,number32=0,number35=0,number36=0,deci_len=0,sign;
     int para_xpos = C_CCHAR_HDOT * ( char_len + 1) ,para_ypos = crow_height ;
-    u_char *sampbuff;
-    // u_char echobuffer[C_LEN_SAMP];	//用来存储包络或峰值
-	u_char* epText = 0;
+    uint8_t *sampbuff;
+    // uint8_t echobuffer[C_LEN_SAMP];	//用来存储包络或峰值
+	uint8_t* epText = 0;
 
 
     language=MGetLanguage();
@@ -1216,7 +1216,7 @@ int DataSave()		//返回1表示已存，0未存
     ///输入编号
     int offset;
 //	int retvalue;
-    u_short *cpText;
+    uint16_t *cpText;
     int file_total;
 
     DisplayPrompt(15);
@@ -1364,7 +1364,7 @@ int DataSD()
 {
 	char szkey[32];
 	int i=0;
-	u_char echobuffer[C_LEN_SAMP];
+	uint8_t echobuffer[C_LEN_SAMP];
 	// TIME_CLOCK TimeClock;
 	// FILINFO fi;
 
@@ -1407,181 +1407,181 @@ int DataSD()
 					{
 						f_lseek( &g_FileObject, 0 );
 				
-						u_int Temp ;
+						uint32_t Temp ;
 
 						//SYSTEM_STATUS  整个系统的状态 68 BYTES
-						f_write(&g_FileObject, &SystemStatus.nElapsedTime, sizeof(u_int), NULL);//开机时长，以毫秒为单位
-						f_write(&g_FileObject, &SystemStatus.nStartElapsedTime, sizeof(u_int), NULL);//高16位开机时间，低16位开机时长，以分为单位
+						f_write(&g_FileObject, &SystemStatus.nElapsedTime, sizeof(uint32_t), NULL);//开机时长，以毫秒为单位
+						f_write(&g_FileObject, &SystemStatus.nStartElapsedTime, sizeof(uint32_t), NULL);//高16位开机时间，低16位开机时长，以分为单位
 						Temp = SystemStatus.days;//距2000年1月1日的天数
-						f_write(&g_FileObject, &Temp, sizeof(u_int), NULL);//降噪次数
+						f_write(&g_FileObject, &Temp, sizeof(uint32_t), NULL);//降噪次数
 						Temp = SystemStatus.denoise;//重复频率
-						f_write(&g_FileObject, &Temp, sizeof(u_int), NULL);//脉冲宽度
+						f_write(&g_FileObject, &Temp, sizeof(uint32_t), NULL);//脉冲宽度
 						Temp = SystemStatus.repeat;//实心波
-						f_write(&g_FileObject, &Temp, sizeof(u_int), NULL);
+						f_write(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
 						Temp = SystemStatus.pulsewidth;
-						f_write(&g_FileObject, &Temp, sizeof(u_int), NULL);
+						f_write(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
 						Temp = SystemStatus.fill;
-						f_write(&g_FileObject, &Temp, sizeof(u_int), NULL);
+						f_write(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
 						Temp = SystemStatus.sys;
-						f_write(&g_FileObject, &Temp, sizeof(u_int), NULL);
+						f_write(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
 						Temp = SystemStatus.option;
-						f_write(&g_FileObject, &Temp, sizeof(u_int), NULL);
+						f_write(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
 						Temp = SystemStatus.displaymode;
-						f_write(&g_FileObject, &Temp, sizeof(u_int), NULL);
+						f_write(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
 						Temp = SystemStatus.mainmenuitem;
-						f_write(&g_FileObject, &Temp, sizeof(u_int), NULL);
+						f_write(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
 						Temp = SystemStatus.samp_len;
-						f_write(&g_FileObject, &Temp, sizeof(u_int), NULL);
+						f_write(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
 						Temp = SystemStatus.coor_width;
-						f_write(&g_FileObject, &Temp, sizeof(u_int), NULL);
+						f_write(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
 						Temp = SystemStatus.coor_extern;
-						f_write(&g_FileObject, &Temp, sizeof(u_int), NULL);
+						f_write(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
 						Temp = SystemStatus.hunit;
-						f_write(&g_FileObject, &Temp, sizeof(u_int), NULL);
+						f_write(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
 						Temp = SystemStatus.language;
-						f_write(&g_FileObject, &Temp, sizeof(u_int), NULL);
+						f_write(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
 						Temp = SystemStatus.unit;
-						f_write(&g_FileObject, &Temp, sizeof(u_int), NULL);
+						f_write(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
 						f_write(&g_FileObject, SystemStatus.menu2page, sizeof(SystemStatus.menu2page), NULL);
 						f_write(&g_FileObject, SystemStatus.prepare, sizeof(SystemStatus.prepare), NULL);
 
 						//CHANNEL_STATUS 每个通道的状态 36 BYTES
-						f_write(&g_FileObject, &ChannelStatus.sys, sizeof(u_int), NULL);
-						f_write(&g_FileObject, &ChannelStatus.block, sizeof(u_int), NULL);
-						f_write(&g_FileObject, &ChannelStatus.option, sizeof(u_int), NULL);
-						f_write(&g_FileObject, &ChannelStatus.status, sizeof(u_int), NULL);
-						f_write(&g_FileObject, &ChannelStatus.externstatus, sizeof(u_int), NULL);
+						f_write(&g_FileObject, &ChannelStatus.sys, sizeof(uint32_t), NULL);
+						f_write(&g_FileObject, &ChannelStatus.block, sizeof(uint32_t), NULL);
+						f_write(&g_FileObject, &ChannelStatus.option, sizeof(uint32_t), NULL);
+						f_write(&g_FileObject, &ChannelStatus.status, sizeof(uint32_t), NULL);
+						f_write(&g_FileObject, &ChannelStatus.externstatus, sizeof(uint32_t), NULL);
 						f_write(&g_FileObject, ChannelStatus.prepare, sizeof(ChannelStatus.prepare), NULL);
 							
 						//CHANNEL_PARAMETER  100 BYTES							
-						f_write(&g_FileObject, &ChannelPara.Range, sizeof(u_int), NULL);
-						f_write(&g_FileObject, &ChannelPara.OldRange, sizeof(u_int), NULL);
-						f_write(&g_FileObject, &ChannelPara.OldDelay, sizeof(u_int), NULL);
-						f_write(&g_FileObject, &ChannelPara.Delay, sizeof(u_int), NULL);
+						f_write(&g_FileObject, &ChannelPara.Range, sizeof(uint32_t), NULL);
+						f_write(&g_FileObject, &ChannelPara.OldRange, sizeof(uint32_t), NULL);
+						f_write(&g_FileObject, &ChannelPara.OldDelay, sizeof(uint32_t), NULL);
+						f_write(&g_FileObject, &ChannelPara.Delay, sizeof(uint32_t), NULL);
 						f_write(&g_FileObject, ChannelPara.wavepara, sizeof(ChannelPara.wavepara), NULL);
-						f_write(&g_FileObject, &ChannelPara.Thick, sizeof(u_short), NULL);
-						f_write(&g_FileObject, &ChannelPara.Diameter, sizeof(u_short), NULL);
-						f_write(&g_FileObject, &ChannelPara.Offset, sizeof(u_short), NULL);
-						f_write(&g_FileObject, &ChannelPara.Speed, sizeof(u_short), NULL);
-						f_write(&g_FileObject, &ChannelPara.Angle, sizeof(u_short), NULL);
-						f_write(&g_FileObject, &ChannelPara.Forward, sizeof(u_short), NULL);
-						f_write(&g_FileObject, &ChannelPara.Frequence, sizeof(u_short), NULL);
-						f_write(&g_FileObject, &ChannelPara.Reject, sizeof(u_short), NULL);
-						f_write(&g_FileObject, &ChannelPara.SurfGain, sizeof(u_short), NULL);
-						f_write(&g_FileObject, &ChannelPara.BaseGain, sizeof(u_short), NULL);
-						f_write(&g_FileObject, &ChannelPara.DepthGain, sizeof(u_short), NULL);
+						f_write(&g_FileObject, &ChannelPara.Thick, sizeof(uint16_t), NULL);
+						f_write(&g_FileObject, &ChannelPara.Diameter, sizeof(uint16_t), NULL);
+						f_write(&g_FileObject, &ChannelPara.Offset, sizeof(uint16_t), NULL);
+						f_write(&g_FileObject, &ChannelPara.Speed, sizeof(uint16_t), NULL);
+						f_write(&g_FileObject, &ChannelPara.Angle, sizeof(uint16_t), NULL);
+						f_write(&g_FileObject, &ChannelPara.Forward, sizeof(uint16_t), NULL);
+						f_write(&g_FileObject, &ChannelPara.Frequence, sizeof(uint16_t), NULL);
+						f_write(&g_FileObject, &ChannelPara.Reject, sizeof(uint16_t), NULL);
+						f_write(&g_FileObject, &ChannelPara.SurfGain, sizeof(uint16_t), NULL);
+						f_write(&g_FileObject, &ChannelPara.BaseGain, sizeof(uint16_t), NULL);
+						f_write(&g_FileObject, &ChannelPara.DepthGain, sizeof(uint16_t), NULL);
 						f_write(&g_FileObject, &ChannelPara.CompGain, sizeof(short), NULL);
 						f_write(&g_FileObject, ChannelPara.lineGain, sizeof(ChannelPara.lineGain), NULL);
 						f_write(&g_FileObject, &ChannelPara.gatedB, sizeof(short), NULL);
 						f_write(&g_FileObject, &ChannelPara.depth, sizeof(short), NULL);
-						f_write(&g_FileObject, &ChannelPara.Crystal_l, sizeof(u_short), NULL);
-						f_write(&g_FileObject, &ChannelPara.Crystal_w, sizeof(u_short), NULL);
-						f_write(&g_FileObject, &ChannelPara.PoreLong, sizeof(u_short), NULL);
-						f_write(&g_FileObject, &ChannelPara.PoreDiameter, sizeof(u_short), NULL);
+						f_write(&g_FileObject, &ChannelPara.Crystal_l, sizeof(uint16_t), NULL);
+						f_write(&g_FileObject, &ChannelPara.Crystal_w, sizeof(uint16_t), NULL);
+						f_write(&g_FileObject, &ChannelPara.PoreLong, sizeof(uint16_t), NULL);
+						f_write(&g_FileObject, &ChannelPara.PoreDiameter, sizeof(uint16_t), NULL);
 						f_write(&g_FileObject, ChannelPara.PoreDepth, sizeof(ChannelPara.PoreDepth), NULL);
 						
 						//GATE_PARA
-						f_write(&g_FileObject, &AGatePara.Position, sizeof(u_short), NULL);
-						f_write(&g_FileObject, &AGatePara.Width, sizeof(u_short), NULL);
-						f_write(&g_FileObject, &AGatePara.Height, sizeof(u_short), NULL);
-						f_write(&g_FileObject, &AGatePara.Type, sizeof(u_char), NULL);
-						f_write(&g_FileObject, &AGatePara.AlarmEnable, sizeof(u_char), NULL);
-						f_write(&g_FileObject, &BGatePara.Position, sizeof(u_short), NULL);
-						f_write(&g_FileObject, &BGatePara.Width, sizeof(u_short), NULL);
-						f_write(&g_FileObject, &BGatePara.Height, sizeof(u_short), NULL);
-						f_write(&g_FileObject, &BGatePara.Type, sizeof(u_char), NULL);
-						f_write(&g_FileObject, &BGatePara.AlarmEnable, sizeof(u_char), NULL);
+						f_write(&g_FileObject, &AGatePara.Position, sizeof(uint16_t), NULL);
+						f_write(&g_FileObject, &AGatePara.Width, sizeof(uint16_t), NULL);
+						f_write(&g_FileObject, &AGatePara.Height, sizeof(uint16_t), NULL);
+						f_write(&g_FileObject, &AGatePara.Type, sizeof(uint8_t), NULL);
+						f_write(&g_FileObject, &AGatePara.AlarmEnable, sizeof(uint8_t), NULL);
+						f_write(&g_FileObject, &BGatePara.Position, sizeof(uint16_t), NULL);
+						f_write(&g_FileObject, &BGatePara.Width, sizeof(uint16_t), NULL);
+						f_write(&g_FileObject, &BGatePara.Height, sizeof(uint16_t), NULL);
+						f_write(&g_FileObject, &BGatePara.Type, sizeof(uint8_t), NULL);
+						f_write(&g_FileObject, &BGatePara.AlarmEnable, sizeof(uint8_t), NULL);
 						
 						//DAC
 						f_write(&g_FileObject, Dac.db, sizeof( Dac.db), NULL);
 						f_write(&g_FileObject, Dac.dist, sizeof(Dac.dist), NULL);
 						f_write(&g_FileObject, &Dac.num, sizeof(short), NULL);
-						f_write(&g_FileObject, &Dac.diameter, sizeof(u_short), NULL);
-						f_write(&g_FileObject, &Dac.length, sizeof(u_short), NULL); 
+						f_write(&g_FileObject, &Dac.diameter, sizeof(uint16_t), NULL);
+						f_write(&g_FileObject, &Dac.length, sizeof(uint16_t), NULL); 
 						
 						//WELD_PARA
 						Temp = stWeldPara.type;
-						f_write(&g_FileObject, &Temp, sizeof(u_int), NULL);
+						f_write(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
 						Temp = stWeldPara.face;
-						f_write(&g_FileObject, &Temp, sizeof(u_int), NULL);
+						f_write(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
 						Temp = stWeldPara.thick1;
-						f_write(&g_FileObject, &Temp, sizeof(u_int), NULL);
+						f_write(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
 						Temp = stWeldPara.thick2;
-						f_write(&g_FileObject, &Temp, sizeof(u_int), NULL);
+						f_write(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
 						Temp = stWeldPara.wide;
-						f_write(&g_FileObject, &Temp, sizeof(u_int), NULL);
+						f_write(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
 						Temp = stWeldPara.radius;
-						f_write(&g_FileObject, &Temp, sizeof(u_int), NULL);
+						f_write(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
 						Temp = stWeldPara.high1;
-						f_write(&g_FileObject, &Temp, sizeof(u_int), NULL);
+						f_write(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
 						Temp = stWeldPara.high2;
-						f_write(&g_FileObject, &Temp, sizeof(u_int), NULL);
+						f_write(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
 						Temp = stWeldPara.angle1;
-						f_write(&g_FileObject, &Temp, sizeof(u_int), NULL);
+						f_write(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
 						Temp = stWeldPara.angle2;
-						f_write(&g_FileObject, &Temp, sizeof(u_int), NULL);
+						f_write(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
 						Temp = stWeldPara.deep;
-						f_write(&g_FileObject, &Temp, sizeof(u_int), NULL);
+						f_write(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
 						Temp = stWeldPara.blunt;
-						f_write(&g_FileObject, &Temp, sizeof(u_int), NULL);
+						f_write(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
 						Temp= stWeldPara.space;
-						f_write(&g_FileObject, &Temp, sizeof(u_int), NULL);
+						f_write(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
 						Temp = stWeldPara.probe;
-						f_write(&g_FileObject, &Temp, sizeof(u_int), NULL);
+						f_write(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
 						Temp = stWeldPara.angle3;
-						f_write(&g_FileObject, &Temp, sizeof(u_int), NULL);
+						f_write(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
 						Temp = stWeldPara.angle4;
-						f_write(&g_FileObject, &Temp, sizeof(u_int), NULL);
+						f_write(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
 						Temp = stWeldPara.deep3;
-						f_write(&g_FileObject, &Temp, sizeof(u_int), NULL);  						//WELD_PARA
+						f_write(&g_FileObject, &Temp, sizeof(uint32_t), NULL);  						//WELD_PARA
 						Temp = stWeldPara.type;
-						f_write(&g_FileObject, &Temp, sizeof(u_int), NULL);
+						f_write(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
 						Temp = stWeldPara.face;
-						f_write(&g_FileObject, &Temp, sizeof(u_int), NULL);
+						f_write(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
 						Temp = stWeldPara.thick1;
-						f_write(&g_FileObject, &Temp, sizeof(u_int), NULL);
+						f_write(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
 						Temp = stWeldPara.thick2;
-						f_write(&g_FileObject, &Temp, sizeof(u_int), NULL);
+						f_write(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
 						Temp = stWeldPara.wide;
-						f_write(&g_FileObject, &Temp, sizeof(u_int), NULL);
+						f_write(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
 						Temp = stWeldPara.radius;
-						f_write(&g_FileObject, &Temp, sizeof(u_int), NULL);
+						f_write(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
 						Temp = stWeldPara.high1;
-						f_write(&g_FileObject, &Temp, sizeof(u_int), NULL);
+						f_write(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
 						Temp = stWeldPara.high2;
-						f_write(&g_FileObject, &Temp, sizeof(u_int), NULL);
+						f_write(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
 						Temp = stWeldPara.angle1;
-						f_write(&g_FileObject, &Temp, sizeof(u_int), NULL);
+						f_write(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
 						Temp = stWeldPara.angle2;
-						f_write(&g_FileObject, &Temp, sizeof(u_int), NULL);
+						f_write(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
 						Temp = stWeldPara.deep;
-						f_write(&g_FileObject, &Temp, sizeof(u_int), NULL);
+						f_write(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
 						Temp = stWeldPara.blunt;
-						f_write(&g_FileObject, &Temp, sizeof(u_int), NULL);
+						f_write(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
 						Temp= stWeldPara.space;
-						f_write(&g_FileObject, &Temp, sizeof(u_int), NULL);
+						f_write(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
 						Temp = stWeldPara.probe;
-						f_write(&g_FileObject, &Temp, sizeof(u_int), NULL);
+						f_write(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
 						Temp = stWeldPara.angle3;
-						f_write(&g_FileObject, &Temp, sizeof(u_int), NULL);
+						f_write(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
 						Temp = stWeldPara.angle4;
-						f_write(&g_FileObject, &Temp, sizeof(u_int), NULL);
+						f_write(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
 						Temp = stWeldPara.deep3;
-						f_write(&g_FileObject, &Temp, sizeof(u_int), NULL);   
+						f_write(&g_FileObject, &Temp, sizeof(uint32_t), NULL);   
 
 						//GATE_PEAK
-						f_write(&g_FileObject, &GatePeak.Gate1PeakSampPoints, sizeof(u_int), NULL);
-						f_write(&g_FileObject, &GatePeak.Gate2PeakSampPoints, sizeof(u_int), NULL);
-						f_write(&g_FileObject, &GatePeak.Gate3PeakSampPoints, sizeof(u_int), NULL);
-						f_write(&g_FileObject, &GatePeak.Gate1PeakPos, sizeof(u_short), NULL);
-						f_write(&g_FileObject, &GatePeak.Gate2PeakPos, sizeof(u_short), NULL);
-						f_write(&g_FileObject, &GatePeak.Gate3PeakPos, sizeof(u_short), NULL);
-						f_write(&g_FileObject, &GatePeak.Gate1PeakAmp, sizeof(u_short), NULL);
-						f_write(&g_FileObject, &GatePeak.Gate2PeakAmp, sizeof(u_short), NULL);
-						f_write(&g_FileObject, &GatePeak.Gate3PeakAmp, sizeof(u_short), NULL);
+						f_write(&g_FileObject, &GatePeak.Gate1PeakSampPoints, sizeof(uint32_t), NULL);
+						f_write(&g_FileObject, &GatePeak.Gate2PeakSampPoints, sizeof(uint32_t), NULL);
+						f_write(&g_FileObject, &GatePeak.Gate3PeakSampPoints, sizeof(uint32_t), NULL);
+						f_write(&g_FileObject, &GatePeak.Gate1PeakPos, sizeof(uint16_t), NULL);
+						f_write(&g_FileObject, &GatePeak.Gate2PeakPos, sizeof(uint16_t), NULL);
+						f_write(&g_FileObject, &GatePeak.Gate3PeakPos, sizeof(uint16_t), NULL);
+						f_write(&g_FileObject, &GatePeak.Gate1PeakAmp, sizeof(uint16_t), NULL);
+						f_write(&g_FileObject, &GatePeak.Gate2PeakAmp, sizeof(uint16_t), NULL);
+						f_write(&g_FileObject, &GatePeak.Gate3PeakAmp, sizeof(uint16_t), NULL);
 						
 						Channeltemp=MGetChannel();
-						f_write(&g_FileObject, &Channeltemp, sizeof(u_int), NULL);//通道号
+						f_write(&g_FileObject, &Channeltemp, sizeof(uint32_t), NULL);//通道号
 						
 
 						f_write(&g_FileObject, g_echobuffer, sizeof(g_echobuffer), NULL); //波形
@@ -1589,11 +1589,11 @@ int DataSD()
 						f_write(&g_FileObject, &TimeClock, sizeof(TimeClock), NULL); 
 						
 						//五大性能
-						f_write(&g_FileObject, &power.Horiline, sizeof(u_int), NULL);
-						f_write(&g_FileObject, &power.vertline, sizeof(u_int), NULL);
-						f_write(&g_FileObject, &power.ResolvingPower, sizeof(u_int), NULL);
-						f_write(&g_FileObject, &power.Dynamic, sizeof(u_int), NULL);
-						f_write(&g_FileObject, &power.Sensitivity, sizeof(u_int), NULL);
+						f_write(&g_FileObject, &power.Horiline, sizeof(uint32_t), NULL);
+						f_write(&g_FileObject, &power.vertline, sizeof(uint32_t), NULL);
+						f_write(&g_FileObject, &power.ResolvingPower, sizeof(uint32_t), NULL);
+						f_write(&g_FileObject, &power.Dynamic, sizeof(uint32_t), NULL);
+						f_write(&g_FileObject, &power.Sensitivity, sizeof(uint32_t), NULL);
 
 						f_close(&g_FileObject);
 					
@@ -1674,7 +1674,7 @@ int  LoadFile1()
 	int iPt = 105, is = 30;
 	bool bUpdate = true;
 	int bFirst = 0;
-	 u_char echobuffer[C_LEN_SAMP];
+	 uint8_t echobuffer[C_LEN_SAMP];
 	 // TIME_CLOCK TimeClock;
 	// int retvalue;
 
@@ -1765,143 +1765,143 @@ int  LoadFile1()
 						if( res == FR_OK )
 						{
 							f_lseek( &g_FileObject, 0 );
-							u_int Temp = 0;
+							uint32_t Temp = 0;
 				
 							//SYSTEM_STATUS  整个系统的状态 68 BYTES
-							f_read(&g_FileObject, &SystemStatus.nElapsedTime, sizeof(u_int), NULL);//开机时长，以毫秒为单位
-							f_read(&g_FileObject, &SystemStatus.nStartElapsedTime, sizeof(u_int), NULL);//高16位开机时间，低16位开机时长，以分为单位
+							f_read(&g_FileObject, &SystemStatus.nElapsedTime, sizeof(uint32_t), NULL);//开机时长，以毫秒为单位
+							f_read(&g_FileObject, &SystemStatus.nStartElapsedTime, sizeof(uint32_t), NULL);//高16位开机时间，低16位开机时长，以分为单位
 
-							f_read(&g_FileObject, &Temp, sizeof(u_int), NULL);//降噪次数
-							f_read(&g_FileObject, &Temp, sizeof(u_int), NULL);//脉冲宽度
-							f_read(&g_FileObject, &Temp, sizeof(u_int), NULL);
-							f_read(&g_FileObject, &Temp, sizeof(u_int), NULL);
-							f_read(&g_FileObject, &Temp, sizeof(u_int), NULL);
-							f_read(&g_FileObject, &Temp, sizeof(u_int), NULL);
-							f_read(&g_FileObject, &Temp, sizeof(u_int), NULL);
-							f_read(&g_FileObject, &Temp, sizeof(u_int), NULL);
-							f_read(&g_FileObject, &Temp, sizeof(u_int), NULL);
-							f_read(&g_FileObject, &Temp, sizeof(u_int), NULL);
-							f_read(&g_FileObject, &Temp, sizeof(u_int), NULL);
-							f_read(&g_FileObject, &Temp, sizeof(u_int), NULL);
-							f_read(&g_FileObject, &Temp, sizeof(u_int), NULL);
-							f_read(&g_FileObject, &Temp, sizeof(u_int), NULL);
-							f_read(&g_FileObject, &Temp, sizeof(u_int), NULL);
+							f_read(&g_FileObject, &Temp, sizeof(uint32_t), NULL);//降噪次数
+							f_read(&g_FileObject, &Temp, sizeof(uint32_t), NULL);//脉冲宽度
+							f_read(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
+							f_read(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
+							f_read(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
+							f_read(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
+							f_read(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
+							f_read(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
+							f_read(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
+							f_read(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
+							f_read(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
+							f_read(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
+							f_read(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
+							f_read(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
+							f_read(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
 							f_read(&g_FileObject, SystemStatus.menu2page, sizeof(SystemStatus.menu2page), NULL);
 							f_read(&g_FileObject, SystemStatus.prepare, sizeof(SystemStatus.prepare), NULL);
 
 							//CHANNEL_STATUS 每个通道的状态 36 BYTES
-							f_read(&g_FileObject, &ChannelStatus.sys, sizeof(u_int), NULL);
-							f_read(&g_FileObject, &ChannelStatus.block, sizeof(u_int), NULL);
-							f_read(&g_FileObject, &ChannelStatus.option, sizeof(u_int), NULL);
-							f_read(&g_FileObject, &ChannelStatus.status, sizeof(u_int), NULL);
-							f_read(&g_FileObject, &ChannelStatus.externstatus, sizeof(u_int), NULL);
+							f_read(&g_FileObject, &ChannelStatus.sys, sizeof(uint32_t), NULL);
+							f_read(&g_FileObject, &ChannelStatus.block, sizeof(uint32_t), NULL);
+							f_read(&g_FileObject, &ChannelStatus.option, sizeof(uint32_t), NULL);
+							f_read(&g_FileObject, &ChannelStatus.status, sizeof(uint32_t), NULL);
+							f_read(&g_FileObject, &ChannelStatus.externstatus, sizeof(uint32_t), NULL);
 							f_read(&g_FileObject, ChannelStatus.prepare, sizeof(ChannelStatus.prepare), NULL);
 								
 							//CHANNEL_PARAMETER  100 BYTES							
-							f_read(&g_FileObject, &ChannelPara.Range, sizeof(u_int), NULL);
-							f_read(&g_FileObject, &ChannelPara.OldRange, sizeof(u_int), NULL);
-							f_read(&g_FileObject, &ChannelPara.OldDelay, sizeof(u_int), NULL);
-							f_read(&g_FileObject, &ChannelPara.Delay, sizeof(u_int), NULL);
+							f_read(&g_FileObject, &ChannelPara.Range, sizeof(uint32_t), NULL);
+							f_read(&g_FileObject, &ChannelPara.OldRange, sizeof(uint32_t), NULL);
+							f_read(&g_FileObject, &ChannelPara.OldDelay, sizeof(uint32_t), NULL);
+							f_read(&g_FileObject, &ChannelPara.Delay, sizeof(uint32_t), NULL);
 							f_read(&g_FileObject, ChannelPara.wavepara, sizeof(ChannelPara.wavepara), NULL);
-							f_read(&g_FileObject, &ChannelPara.Thick, sizeof(u_short), NULL);
-							f_read(&g_FileObject, &ChannelPara.Diameter, sizeof(u_short), NULL);
-							f_read(&g_FileObject, &ChannelPara.Offset, sizeof(u_short), NULL);
-							f_read(&g_FileObject, &ChannelPara.Speed, sizeof(u_short), NULL);
-							f_read(&g_FileObject, &ChannelPara.Angle, sizeof(u_short), NULL);
-							f_read(&g_FileObject, &ChannelPara.Forward, sizeof(u_short), NULL);
-							f_read(&g_FileObject, &ChannelPara.Frequence, sizeof(u_short), NULL);
-							f_read(&g_FileObject, &ChannelPara.Reject, sizeof(u_short), NULL);
-							f_read(&g_FileObject, &ChannelPara.SurfGain, sizeof(u_short), NULL);
-							f_read(&g_FileObject, &ChannelPara.BaseGain, sizeof(u_short), NULL);
-							f_read(&g_FileObject, &ChannelPara.DepthGain, sizeof(u_short), NULL);
+							f_read(&g_FileObject, &ChannelPara.Thick, sizeof(uint16_t), NULL);
+							f_read(&g_FileObject, &ChannelPara.Diameter, sizeof(uint16_t), NULL);
+							f_read(&g_FileObject, &ChannelPara.Offset, sizeof(uint16_t), NULL);
+							f_read(&g_FileObject, &ChannelPara.Speed, sizeof(uint16_t), NULL);
+							f_read(&g_FileObject, &ChannelPara.Angle, sizeof(uint16_t), NULL);
+							f_read(&g_FileObject, &ChannelPara.Forward, sizeof(uint16_t), NULL);
+							f_read(&g_FileObject, &ChannelPara.Frequence, sizeof(uint16_t), NULL);
+							f_read(&g_FileObject, &ChannelPara.Reject, sizeof(uint16_t), NULL);
+							f_read(&g_FileObject, &ChannelPara.SurfGain, sizeof(uint16_t), NULL);
+							f_read(&g_FileObject, &ChannelPara.BaseGain, sizeof(uint16_t), NULL);
+							f_read(&g_FileObject, &ChannelPara.DepthGain, sizeof(uint16_t), NULL);
 							f_read(&g_FileObject, &ChannelPara.CompGain, sizeof(short), NULL);
 							f_read(&g_FileObject, ChannelPara.lineGain, sizeof(ChannelPara.lineGain), NULL);
 							f_read(&g_FileObject, &ChannelPara.gatedB, sizeof(short), NULL);
 							f_read(&g_FileObject, &ChannelPara.depth, sizeof(short), NULL);
-							f_read(&g_FileObject, &ChannelPara.Crystal_l, sizeof(u_short), NULL);
-							f_read(&g_FileObject, &ChannelPara.Crystal_w, sizeof(u_short), NULL);
-							f_read(&g_FileObject, &ChannelPara.PoreLong, sizeof(u_short), NULL);
-							f_read(&g_FileObject, &ChannelPara.PoreDiameter, sizeof(u_short), NULL);
+							f_read(&g_FileObject, &ChannelPara.Crystal_l, sizeof(uint16_t), NULL);
+							f_read(&g_FileObject, &ChannelPara.Crystal_w, sizeof(uint16_t), NULL);
+							f_read(&g_FileObject, &ChannelPara.PoreLong, sizeof(uint16_t), NULL);
+							f_read(&g_FileObject, &ChannelPara.PoreDiameter, sizeof(uint16_t), NULL);
 							f_read(&g_FileObject, ChannelPara.PoreDepth, sizeof(ChannelPara.PoreDepth), NULL);
 							
 							//GATE_PARA
-							f_read(&g_FileObject, &AGatePara.Position, sizeof(u_short), NULL);
-							f_read(&g_FileObject, &AGatePara.Width, sizeof(u_short), NULL);
-							f_read(&g_FileObject, &AGatePara.Height, sizeof(u_short), NULL);
-							f_read(&g_FileObject, &AGatePara.Type, sizeof(u_char), NULL);
-							f_read(&g_FileObject, &AGatePara.AlarmEnable, sizeof(u_char), NULL);
-							f_read(&g_FileObject, &BGatePara.Position, sizeof(u_short), NULL);
-							f_read(&g_FileObject, &BGatePara.Width, sizeof(u_short), NULL);
-							f_read(&g_FileObject, &BGatePara.Height, sizeof(u_short), NULL);
-							f_read(&g_FileObject, &BGatePara.Type, sizeof(u_char), NULL);
-							f_read(&g_FileObject, &BGatePara.AlarmEnable, sizeof(u_char), NULL);
+							f_read(&g_FileObject, &AGatePara.Position, sizeof(uint16_t), NULL);
+							f_read(&g_FileObject, &AGatePara.Width, sizeof(uint16_t), NULL);
+							f_read(&g_FileObject, &AGatePara.Height, sizeof(uint16_t), NULL);
+							f_read(&g_FileObject, &AGatePara.Type, sizeof(uint8_t), NULL);
+							f_read(&g_FileObject, &AGatePara.AlarmEnable, sizeof(uint8_t), NULL);
+							f_read(&g_FileObject, &BGatePara.Position, sizeof(uint16_t), NULL);
+							f_read(&g_FileObject, &BGatePara.Width, sizeof(uint16_t), NULL);
+							f_read(&g_FileObject, &BGatePara.Height, sizeof(uint16_t), NULL);
+							f_read(&g_FileObject, &BGatePara.Type, sizeof(uint8_t), NULL);
+							f_read(&g_FileObject, &BGatePara.AlarmEnable, sizeof(uint8_t), NULL);
 							
 							//DAC
 							f_read(&g_FileObject, Dac.db, sizeof(Dac.db), NULL);
 							f_read(&g_FileObject, Dac.dist, sizeof(Dac.dist), NULL);
 							f_read(&g_FileObject, &Dac.num, sizeof(short), NULL);
-							f_read(&g_FileObject, &Dac.diameter, sizeof(u_short), NULL);
-							f_read(&g_FileObject, &Dac.length, sizeof(u_short), NULL); 
+							f_read(&g_FileObject, &Dac.diameter, sizeof(uint16_t), NULL);
+							f_read(&g_FileObject, &Dac.length, sizeof(uint16_t), NULL); 
 							
 							//WELD_PARA
-							f_read(&g_FileObject, &Temp, sizeof(u_int), NULL);
-							f_read(&g_FileObject, &Temp, sizeof(u_int), NULL);
-							f_read(&g_FileObject, &Temp, sizeof(u_int), NULL);
-							f_read(&g_FileObject, &Temp, sizeof(u_int), NULL);
-							f_read(&g_FileObject, &Temp, sizeof(u_int), NULL);
-							f_read(&g_FileObject, &Temp, sizeof(u_int), NULL);
-							f_read(&g_FileObject, &Temp, sizeof(u_int), NULL);
-							f_read(&g_FileObject, &Temp, sizeof(u_int), NULL);
-							f_read(&g_FileObject, &Temp, sizeof(u_int), NULL);
-							f_read(&g_FileObject, &Temp, sizeof(u_int), NULL);
-							f_read(&g_FileObject, &Temp, sizeof(u_int), NULL);
-							f_read(&g_FileObject, &Temp, sizeof(u_int), NULL);
-							f_read(&g_FileObject, &Temp, sizeof(u_int), NULL);
-							f_read(&g_FileObject, &Temp, sizeof(u_int), NULL);
-							f_read(&g_FileObject, &Temp, sizeof(u_int), NULL);
-							f_read(&g_FileObject, &Temp, sizeof(u_int), NULL);
-							f_read(&g_FileObject, &Temp, sizeof(u_int), NULL);  						//WELD_PARA
-							f_read(&g_FileObject, &Temp, sizeof(u_int), NULL);
-							f_read(&g_FileObject, &Temp, sizeof(u_int), NULL);
-							f_read(&g_FileObject, &Temp, sizeof(u_int), NULL);
-							f_read(&g_FileObject, &Temp, sizeof(u_int), NULL);
-							f_read(&g_FileObject, &Temp, sizeof(u_int), NULL);
-							f_read(&g_FileObject, &Temp, sizeof(u_int), NULL);
-							f_read(&g_FileObject, &Temp, sizeof(u_int), NULL);
-							f_read(&g_FileObject, &Temp, sizeof(u_int), NULL);
-							f_read(&g_FileObject, &Temp, sizeof(u_int), NULL);
-							f_read(&g_FileObject, &Temp, sizeof(u_int), NULL);
-							f_read(&g_FileObject, &Temp, sizeof(u_int), NULL);
-							f_read(&g_FileObject, &Temp, sizeof(u_int), NULL);
-							f_read(&g_FileObject, &Temp, sizeof(u_int), NULL);
-							f_read(&g_FileObject, &Temp, sizeof(u_int), NULL);
-							f_read(&g_FileObject, &Temp, sizeof(u_int), NULL);
-							f_read(&g_FileObject, &Temp, sizeof(u_int), NULL);
-							f_read(&g_FileObject, &Temp, sizeof(u_int), NULL);  
+							f_read(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
+							f_read(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
+							f_read(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
+							f_read(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
+							f_read(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
+							f_read(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
+							f_read(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
+							f_read(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
+							f_read(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
+							f_read(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
+							f_read(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
+							f_read(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
+							f_read(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
+							f_read(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
+							f_read(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
+							f_read(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
+							f_read(&g_FileObject, &Temp, sizeof(uint32_t), NULL);  						//WELD_PARA
+							f_read(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
+							f_read(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
+							f_read(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
+							f_read(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
+							f_read(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
+							f_read(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
+							f_read(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
+							f_read(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
+							f_read(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
+							f_read(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
+							f_read(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
+							f_read(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
+							f_read(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
+							f_read(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
+							f_read(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
+							f_read(&g_FileObject, &Temp, sizeof(uint32_t), NULL);
+							f_read(&g_FileObject, &Temp, sizeof(uint32_t), NULL);  
 
 							//GATE_PEAK
-							f_read(&g_FileObject, &GatePeak.Gate1PeakSampPoints, sizeof(u_int), NULL);
-							f_read(&g_FileObject, &GatePeak.Gate2PeakSampPoints, sizeof(u_int), NULL);
-							f_read(&g_FileObject, &GatePeak.Gate3PeakSampPoints, sizeof(u_int), NULL);
-							f_read(&g_FileObject, &GatePeak.Gate1PeakPos, sizeof(u_short), NULL);
-							f_read(&g_FileObject, &GatePeak.Gate2PeakPos, sizeof(u_short), NULL);
-							f_read(&g_FileObject, &GatePeak.Gate3PeakPos, sizeof(u_short), NULL);
-							f_read(&g_FileObject, &GatePeak.Gate1PeakAmp, sizeof(u_short), NULL);
-							f_read(&g_FileObject, &GatePeak.Gate2PeakAmp, sizeof(u_short), NULL);
-							f_read(&g_FileObject, &GatePeak.Gate3PeakAmp, sizeof(u_short), NULL);
+							f_read(&g_FileObject, &GatePeak.Gate1PeakSampPoints, sizeof(uint32_t), NULL);
+							f_read(&g_FileObject, &GatePeak.Gate2PeakSampPoints, sizeof(uint32_t), NULL);
+							f_read(&g_FileObject, &GatePeak.Gate3PeakSampPoints, sizeof(uint32_t), NULL);
+							f_read(&g_FileObject, &GatePeak.Gate1PeakPos, sizeof(uint16_t), NULL);
+							f_read(&g_FileObject, &GatePeak.Gate2PeakPos, sizeof(uint16_t), NULL);
+							f_read(&g_FileObject, &GatePeak.Gate3PeakPos, sizeof(uint16_t), NULL);
+							f_read(&g_FileObject, &GatePeak.Gate1PeakAmp, sizeof(uint16_t), NULL);
+							f_read(&g_FileObject, &GatePeak.Gate2PeakAmp, sizeof(uint16_t), NULL);
+							f_read(&g_FileObject, &GatePeak.Gate3PeakAmp, sizeof(uint16_t), NULL);
 														
-							f_read(&g_FileObject, &Channeltemp, sizeof(u_int), NULL);
+							f_read(&g_FileObject, &Channeltemp, sizeof(uint32_t), NULL);
 							
 
 							f_read(&g_FileObject, g_echobuffer, sizeof(g_echobuffer), NULL); 
 							f_read(&g_FileObject, Notes.name, sizeof(Notes.name), NULL); 
 							f_read(&g_FileObject, &TimeClock, sizeof(TimeClock), NULL); 
 							
-							f_read(&g_FileObject, &power.Horiline, sizeof(u_int), NULL);
-							f_read(&g_FileObject, &power.vertline, sizeof(u_int), NULL);
-							f_read(&g_FileObject, &power.ResolvingPower, sizeof(u_int), NULL);
-							f_read(&g_FileObject, &power.Dynamic, sizeof(u_int), NULL);
-							f_read(&g_FileObject, &power.Sensitivity, sizeof(u_int), NULL);
+							f_read(&g_FileObject, &power.Horiline, sizeof(uint32_t), NULL);
+							f_read(&g_FileObject, &power.vertline, sizeof(uint32_t), NULL);
+							f_read(&g_FileObject, &power.ResolvingPower, sizeof(uint32_t), NULL);
+							f_read(&g_FileObject, &power.Dynamic, sizeof(uint32_t), NULL);
+							f_read(&g_FileObject, &power.Sensitivity, sizeof(uint32_t), NULL);
 							
 													// int i;
 						// for( i = 0; i <C_LEN_SAMP; i++ )	
@@ -2096,7 +2096,7 @@ int DataRestore(int file_no1)
     //存储波形及数据
     long int offset,fat_offset,file_offset;
 //	int data_len;
-//	u_char* sampbuff;
+//	uint8_t* sampbuff;
 //	int dataposi;
     int file_no;
     file_no=cache.cache[file_no1];       //2013/5/2
@@ -2144,7 +2144,7 @@ int DataRestore(int file_no1)
     //Write_Number(100,110,offset,4,0,0);
 
     //	MAnyKeyReturn();
-    	u_char echobuffer[C_LEN_SAMP];
+    	uint8_t echobuffer[C_LEN_SAMP];
     	MCopyProtectedMemory( echobuffer, (void*)file_offset, C_LEN_SAMP, PM_COPY_READ);	//波形参数
 
     //	MChannelRenovate();
@@ -2185,7 +2185,7 @@ int DataRestore(int file_no1)
 int DataDisplay(int file_no,int language)	//显示存储得数据
 {
     int offset;//,file_offset,fat_offset;
-    u_char echobuffer[C_LEN_SAMP];
+    uint8_t echobuffer[C_LEN_SAMP];
     int file_total = DataDelete(-1);	//参数为负或正常删除返回剩余数据总数，参数过大返回－1
 
     DataRestore(file_no);
@@ -2241,8 +2241,8 @@ int DataDisplay(int file_no,int language)	//显示存储得数据
 int DataDisplaysd(int language)	//显示存储得数据
 {	
     int offset;//,file_offset,fat_offset;
-    u_char echobuffer[C_LEN_SAMP];
-	u_char *sampbuff;
+    uint8_t echobuffer[C_LEN_SAMP];
+	uint8_t *sampbuff;
     int file_total = DataDelete(-1);	//参数为负或正常删除返回剩余数据总数，参数过大返回－1
 	int i;
 
@@ -2276,7 +2276,7 @@ int GetDataPosi(int file_no)	//得到第 x 个数据存储位置
 {
     int offset = C_OFF_FILEINFO ;
     int file_total;
-    u_int retvalue;
+    uint32_t retvalue;
 
     MCopyProtectedMemory( &file_total, (void*)offset, C_SIZE_INT, PM_COPY_READ);
     if(file_no < 0 || file_no >= file_total)	retvalue = -1;
@@ -2387,8 +2387,8 @@ int FileDelete(int file_no,unsigned int off_total, unsigned off_fat,int len_fat,
 }
 int SavePretreatment(void)	//存储预处理
 {
-    u_char* sampbuff;
-    u_char echobuffer[C_LEN_SAMP];
+    uint8_t* sampbuff;
+    uint8_t echobuffer[C_LEN_SAMP];
     int offset,i;
 
     sampbuff = GetSampleBuffer();
@@ -2451,8 +2451,8 @@ int AutoSave(int mode)
 
     if( elapsedtime >= i )//&& elapsedtime <= i+2000  )
     {
-//		u_short pzText[9];
-        u_short month,date;
+//		uint16_t pzText[9];
+        uint16_t month,date;
 
         file_total = DataDelete(-1);
         if( file_total >= C_FILE_NUMBER )
@@ -2511,7 +2511,7 @@ int AutoSavePlay(int file_no,int file_total)		//从当前数据开始播放连续存储的波形
     int keycode;
 
     int offset;
-    u_char echobuffer[C_LEN_SAMP];
+    uint8_t echobuffer[C_LEN_SAMP];
 
     if( !MGetSaveMode() || !MGetSaveStatus() )return file_no;
 
@@ -2609,7 +2609,7 @@ int SeekDate(int file_total)
     int fat_offset;
     int file_no = 0;
     TIME_CLOCK TimeClock;
-    u_int date;
+    uint32_t date;
     int retvalue = file_total;
 
     Write_Space(0,C_ECHAR_VDOT,12,0);
@@ -2636,7 +2636,7 @@ int SeekName(int file_total)
     int fat_offset;
     int file_no = 0;
     int retvalue = file_total;
-    u_short	name[9];
+    uint16_t	name[9];
     int i;
 
     MEraseWindow(0, 0, 10*C_CCHAR_HDOT, 24) ;
