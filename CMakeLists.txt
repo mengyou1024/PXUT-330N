@@ -31,4 +31,4 @@ add_custom_command(
     COMMAND ${CMAKE_OBJCOPY} -O binary ${PROJECT_NAME}.elf ${PROJECT_NAME}.bin
 )
 
-add_custom_target(flash ALL COMMAND "${CMAKE_SOURCE_DIR}/tools/M10BurnUser" "${CMAKE_BINARY_DIR}/${PROJECT_NAME}.bin" DEPENDS ${PROJECT_NAME})
+add_custom_target(flash COMMAND "${CMAKE_SOURCE_DIR}/tools/M10BurnUser" "${CMAKE_BINARY_DIR}/${PROJECT_NAME}.bin" DEPENDS ${PROJECT_NAME})
