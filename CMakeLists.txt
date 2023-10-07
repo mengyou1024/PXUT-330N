@@ -26,6 +26,8 @@ add_executable(${PROJECT_NAME}  ${PXUT_SRC})
 target_include_directories(${PROJECT_NAME}  PUBLIC ".")
 target_link_libraries(${PROJECT_NAME}  PRIVATE fatfs::fatfs m10era::m10era libgcc::c libgcc::m libgcc::gcc ) #"-T${CMAKE_SOURCE_DIR}/link/ldscript.lds"
 target_link_options(${PROJECT_NAME}  PRIVATE -T "${CMAKE_SOURCE_DIR}/link/ldscript.lds")
+target_precompile_headers(${PROJECT_NAME} PUBLIC "gch.h")
+
 
 add_custom_command(
     TARGET ${PROJECT_NAME}  POST_BUILD 
