@@ -821,7 +821,7 @@ typedef struct
     short Bevel;			//Æ«Ð±½Ç
 } PROBE_CAPACITY;
 
-u_short gaintable[121];
+u_short __attribute__((weak)) gaintable[121];
 
 
 

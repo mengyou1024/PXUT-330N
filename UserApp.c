@@ -5,7 +5,7 @@
 #include "tools.h"
 
 const int FixGain	= 245;
-unsigned short GainTable[121] =
+unsigned short __attribute__((weak)) GainTable[121] =
 {
     150,	251,	301,	352,	400,	444,	492,	541,	589,	633,	//0
     684,	733,	782,	835,	885,	932,	981,	1032,	1084,	1135,	//10

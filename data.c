@@ -5,7 +5,7 @@ extern GATE_AMPMAX stGateAmpMax;
 extern UDISK_INFO g_UDiskInfo;
 extern NOTES	Notes;
 extern CACHE	cache;
-FIL g_FileObject;
+FIL __attribute__((weak)) g_FileObject;
 u_char g_echobuffer[C_LEN_SAMP];
 // int bFirst = 0;
 int Channeltemp,Channeltemp1;

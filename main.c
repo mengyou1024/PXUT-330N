@@ -20,7 +20,7 @@ NOTES	Notes;
 CACHE	cache;
 
 FAT					fat;
-CURVE_AMEND stCurveAmend;
+CURVE_AMEND __attribute__((weak)) stCurveAmend;
 
 u_char			bCOM2PC;
 

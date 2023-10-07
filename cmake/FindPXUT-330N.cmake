@@ -27,11 +27,13 @@ set(CMAKE_EXECUTABLE_SUFFIX_ASM .elf)
 # set(CMAKE_ASM_FLAGS "-Wall -g -O2")
 # set(CMAKE_EXE_LINKER_FLAGS "-g -O2 -nostartfiles")
 
-set(CMAKE_C_FLAGS "-w -ffunction-sections -O2 -mcpu=arm926ej-s")
+set(FLAG_CPU arm926ej-s)
+set(FLAG_WARNNING -w)
+
+set(CMAKE_C_FLAGS "${FLAG_WARNNING} -ffunction-sections -O2 -mcpu=${FLAG_CPU}")
 set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS}")
-set(CMAKE_ASM_FLAGS "-w -O2")
-set(CMAKE_EXE_LINKER_FLAGS "-O2 -mcpu=arm926ej-s -nostartfiles")
+set(CMAKE_ASM_FLAGS "${FLAG_WARNNING} -O2 -mcpu=${FLAG_CPU}")
+set(CMAKE_EXE_LINKER_FLAGS "-O2 -mcpu=${FLAG_CPU} -nostartfiles")
 
 auto_add_subdirecory("${CMAKE_SOURCE_DIR}/components")
-message(STATUS ARCH:PXUT-330N)
-
+message(STATUS "SYSTEM:PXUT-330N CPU:${FLAG_CPU}")
