@@ -3,46 +3,109 @@
 
 #include <stdint.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+extern uint16_t dac_line[];
+
 typedef struct
 {
-    int speed;     // Ô¤ÖÃÉùËÙ
-    int range[2];  // µÚÒ»Éù³Ì/µÚ¶şÉù³Ì
-    int rangemode; // Éù³ÌÀàĞÍ0¾àÀë£¬1Éî¶È£¬2²»ÓÃÁ½´Î²¨µÄÇúÃæ
+    int speed;     // é¢„ç½®å£°é€Ÿ
+    int range[2];  // ç¬¬ä¸€å£°ç¨‹/ç¬¬äºŒå£°ç¨‹
+    int rangemode; // å£°ç¨‹ç±»å‹0è·ç¦»ï¼Œ1æ·±åº¦ï¼Œ2ä¸ç”¨ä¸¤æ¬¡æ³¢çš„æ›²é¢
 
-    int             offset; // Áãµã
-    unsigned short *pPmt1;  // ÌáÊ¾1
-    unsigned short *pPmt2;  // ÌáÊ¾2
+    int             offset; // é›¶ç‚¹
+    unsigned short *pPmt1;  // æç¤º1
+    unsigned short *pPmt2;  // æç¤º2
 
-    int len1; // ÌáÊ¾1µÄÃ¿ĞĞ³¤¶È
-    int row1; // ÌáÊ¾1µÄĞĞÊı
-    int len2; // ÌáÊ¾2µÄÃ¿ĞĞ³¤¶È
-    int row2; // ÌáÊ¾2µÄĞĞÊı
+    int len1; // æç¤º1çš„æ¯è¡Œé•¿åº¦
+    int row1; // æç¤º1çš„è¡Œæ•°
+    int len2; // æç¤º2çš„æ¯è¡Œé•¿åº¦
+    int row2; // æç¤º2çš„è¡Œæ•°
 
 } TEST_OFFSET;
 
 TEST_OFFSET __attribute((weak)) stTestOffset;
-int         TestMenuZero(int iBlock /*ÊÔ¿éÀàĞÍ*/, bool bBlockModify, int iProbemode /*Ì½Í·ÀàĞÍ*/, bool bProbeModify, int iSoundmode /*Éù²¨ÀàĞÍ*/, bool bSoundModify, int iRange1 /*Éù³Ì1*/, bool bRangeModify1, int iRange2 /*Éù³Ì2*/, bool bRangeModify2);
-// ²âÁãµã²Ëµ¥£¬¸÷boolÁ¿ÎªÕæ¿ÉĞŞ¸ÄÏàÓ¦Á¿
-int TestZero(int iProbemode /*Ì½Í·ÀàĞÍ*/, int iSpeed /*Ä¬ÈÏÉùËÙ*/, int iRange1 /*Éù³Ì1*/, int iRange2 /*Éù³Ì2*/, int iForward /*ÊÇ·ñ²âÇ°ÑØ*/);
 
-int TestMenuAngle(int iAngle /*±ê³ÆÕÛÉä*/, bool bAngleModify, int iDiameter /*¿×Ö±¾¶*/, bool bDiameterModify, int iDepth /*¿×Éî*/, bool bDepthModify, int iContact /*½Ó´¥Ãæ*/, bool bContact, int iOutRandius /*Íâ°ë¾¶*/);
-int TestAngle(int iAngle /*±ê³ÆÕÛÉä*/, int iDiameter /*¿×Ö±¾¶*/, int iDepth /*¿×Éî*/, int iContact /*½Ó´¥Ãæ*/, int iOutRandius, int iInnerRandius);
+typedef struct _TagPOINT {
+    long x;
+    long y;
+} POINT, *LPPOINT;
 
-int TestSensitivity(uint32_t mode, uint32_t iRange, int bParaAdjust); // µ÷ÁéÃô¶È
+int tspLine(POINT *PosIn, POINT *PosOut, int n, int ch, float tx1, float tx2, float ty1, float ty2);
+
+void HotKeySet(void);
+
+void AmplitudedBTable(void);
+
+int MenuChoice(void);
+
+int TestChoice(int Test);
+
+int TestMenu(void);
 
 int TestMenuOffset(void);
-int TestOffset(uint32_t testrang1, uint32_t testrange2, uint32_t mode);
-// µÚ1Éù³Ì£¬µÚ2Éù³Ì mode = 0¾àÀë²â£¬=1Éî¶È =2 ÇúÃæ
-// int TestMenuAngle(void);
-// int TestAngle(uint32_t diameter,uint32_t depth);//Ö±¾¶¡¢Éî¶È
+
+int TestOffset(uint32_t testrange1, uint32_t testrange2, uint32_t mode);
+
+int TestMenuAngle(void);
+
+int TestAngle(uint32_t diameter, uint32_t depth);
 
 int TestMenuDac(void);
-int TestDac(uint32_t depthmax, uint32_t diameter, uint32_t length); // ×î´óÉî¶È¡¢·´ÉäÌåÖ±¾¶¡¢³¤¶È
-int CalcuDac(void);                                                 // ¼ÆËãDAC,
-int DrawDac(int mode);                                              // »­ºÍ»ò¼ÆËãDACÇúÏß,mode=0£¬¼ÆËã=1²»
-int GetLine_TwoDot(uint16_t *line, int dist1, int dist2);
-int GetMiddleValue(int dist1, int db1, int dist2, int db2, int dist); // µÃµ½ÖĞ¼äÖµ
+
+int TestDac(uint32_t depthmax, uint32_t diameter, uint32_t length, short test_num);
 
 int TestMenuStandard(void);
+
 int TestMenuThick(void);
+
 int TestMenuSystem(void);
+
+int CalcuDac(void);
+
+// ç”»å’Œæˆ–è®¡ç®—DACæ›²çº¿,mode=0è®¡ç®—,=1ä¸
+int DrawDac2(int mode);
+
+// ç”»å’Œæˆ–è®¡ç®—DACæ›²çº¿,mode=0è®¡ç®—,=1ä¸
+int DrawDac(int mode);
+
+int GetMiddleValue(int dist1, int db1, int dist2, int db2, int dist);
+
+int GetLine_TwoDot(uint16_t line[], int dist1, int dist2);
+
+void GetCenterPoint(int dist1, int db1, int dist2, int db2);
+
+void GetDacCompensateTable(void);
+
+int TestMenuFft(void);
+
+int TestMenuSensitivity(void);
+
+/**
+ * @brief çµæ•åº¦æ ¡éªŒ
+ *
+ * @param depth åå°„ä½“æ·±åº¦
+ * @param stdamp åŸºå‡†æ³¢é«˜åº¦
+ * @param mode 0å¯è°ƒå¢ç›Šï¼Œ1ä¸å¯è°ƒ
+ * @return int
+ */
+int TestSensitivity(uint32_t depth, uint32_t stdamp, int mode);
+
+// äººå·¥æœˆæ€§èƒ½æ ¡éªŒ
+int ManualMonthTest(void);
+// æœˆæ€§èƒ½æ ¡éªŒ
+int MenuMonthTest(void);
+
+int WeldSetup(void);
+
+int ShowWeld(short lxpos, short lypos, short width, short height, short angle, int dist);
+
+int ShowWeldA(short lxpos, short lypos, short width, short height, short angle, int dist);
+
+int tspLine(POINT *PosIn, POINT *PosOut, int n, int ch, float tx1, float tx2, float ty1, float ty2);
+
+#ifdef __cplusplus
+}
+#endif

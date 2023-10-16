@@ -1,6 +1,6 @@
 //keyio.c
-#include "Fchar.h"
-#include "simkai24.h"
+#include "image_bin.h"
+
 #ifndef _KEYIO_C_
 #define _KEYIO_C_
 
@@ -1533,7 +1533,7 @@ uint32_t DrawMultiEdge(int xpos,int ypos,uint32_t edge,float angle,int len)	/*»­
     return C_TRUE;
 }
 
-int g_iNum;
+
 int DrawCurver( short * buff,int startposi,int dotnumber)
 {
     int endposi = startposi + dotnumber ;

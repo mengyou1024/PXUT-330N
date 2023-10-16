@@ -186,8 +186,8 @@ GATE_AMPMAX stGateAmpMax;
 
 unsigned char PowerAlarm;
 extern unsigned char ChannelMax;
-;
-CURVE_AMEND stCurveAmend;
+
+// static CURVE_AMEND  stCurveAmend;
 extern uint16_t dac_line[];
 extern WELD_PARA stWeldPara;
 
@@ -203,11 +203,10 @@ extern int extend ;
 //É«²Ê
 extern CHANNEL_PARAMETER	ChannelPara;		/*15*2*/
 
-extern uint8_t _infinity[C_LANGUAGE][1][6];
 extern int curr_cr;
 
 extern int GateParaMax,GateParaValue;
-uint8_t crPara[C_CR_MAX+12];
+
 const uint32_t Echo_crPara[] =
 {
 
@@ -268,7 +267,6 @@ const uint32_t c_crPara[] =
 extern const uint8_t PowerTable[] ;
 extern const uint32_t _RANGEVALUE[];
 
-extern char _ParaName[C_LANGUAGE][21][16];
 uint8_t tempvalue;
 void DisplayBMP(const uint8_t * picture,const uint32_t * Palette, int xpos, int ypos,int length,int width)
 //480*640Í¼Æ¬

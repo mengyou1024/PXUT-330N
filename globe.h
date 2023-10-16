@@ -1,13 +1,4 @@
-/**
- * @file globe.h
- * @author mengyou (1523038073@qq.com)
- * @brief 全局性的变量
- * @version 0.1
- * @date 2023-10-07
- *
- * @copyright Copyright (c) 2023
- *
- */
+/// 全局性的变量
 #pragma once
 
 #include "sysdef.h"
@@ -1053,3 +1044,52 @@ typedef struct
 0-4		主菜单位置
 1-26*4	各工艺菜单位置
 */
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// 全局变量
+
+// main.c
+extern GATE_PEAK         GatePeak;
+extern GATE_PARA         AGatePara;     /*8*/
+extern GATE_PARA         BGatePara;     /*8*/
+extern GATE_MAX          GateMax;       // 门内出现的最高波
+extern FUNCTION          Function;      // 功能
+extern SYSTEM_STATUS     SystemStatus;  /*4*/
+extern CHANNEL_STATUS    ChannelStatus; /*4*/
+extern CHANNEL_PARAMETER ChannelPara;   /*15*2*/
+extern NOTES             Notes;
+extern CACHE             cache;
+extern FAT               fat;
+extern CURVE_AMEND       stCurveAmend;
+extern uint8_t           bCOM2PC;
+extern WELD_PARA         stWeldPara;
+extern ADJUST_TIME       AdjustTime;
+extern DAC               Dac;
+extern uint8_t          *dactable;
+extern int               HoriOffsetScreen; // 所有写在屏幕上的内容，水平方向开始点
+extern int               VertOffsetScreen; // 所有写在屏幕上的内容，水平方向开始点
+extern double            dac_coe;          // 系数，与80%的差距
+extern int               SecondTime;
+
+extern char           _serial[8];
+extern unsigned short FixGain1;
+extern unsigned char  ChannelMax;
+
+// keyio.c
+extern int g_iNum;
+
+// display.c
+extern uint8_t crPara[C_CR_MAX + 12];
+
+// menu.c
+extern GATE_MAX       GateMax;  // 门内出现的最高波
+extern FUNCTION       Function; // 功能
+extern CACHE          cache;
+extern int            signFlag;
+extern int            g_iMaxAmp;
+extern int            g_iPos;
+extern uint8_t        sampbuffs[C_LEN_SAMP + 1];
+extern int            nFlag;
+extern uint8_t        crPara[];
+extern const uint32_t c_crPara[];
+extern const uint32_t Echo_crPara[];

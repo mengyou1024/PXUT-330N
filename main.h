@@ -1,5 +1,4 @@
-// main.h
-#ifndef _MAIN_H_
+#pragma once
 
 void MainInitialize(void); /*软件初始化*/
 void AppMain(void);        /*主循环*/
@@ -72,6 +71,3 @@ int AutoSave(int mode);
 int AutoSavePlay(int file_no, int file_total); // 从当前数据开始播放连续存储的波形
 int SeekDate(int file_total);
 int SeekName(int file_total);
-
-    #define _MAIN_H_
-#endif

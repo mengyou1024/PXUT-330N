@@ -1,13 +1,4 @@
-/**
- * @file sysdef.h
- * @author mengyou (1523038073@qq.com)
- * @brief 设置与系统相关重要常量
- * @version 0.1
- * @date 2023-10-07
- *
- * @copyright Copyright (c) 2023
- *
- */
+/// 全局性的变量
 #pragma once
 
 // 1=330，2＝U1,3=350+，4=320c,5=v1,6=8channel,7=jiwu,8=350c,9=360B,10=u2,11=350b,12=v2
@@ -249,6 +240,16 @@ C_DEVLIB	23	//23tft .24 EL
 #ifdef __cplusplus
 extern "C" {
 #endif
+
+extern const unsigned char  _version1[10]; // 版本号
+extern const unsigned short c_SystemPowerStd[];
+extern int                  extend;
+
+extern unsigned short FixGainPoint1;
+extern unsigned short FixGainPoint2;
+extern int            g_nDenoise, g_nAutoDenoise;
+extern int            g_nRepeat;
+extern int            g_nPulseWidth;
 
 void MSetAmplifierGain(uint16_t gain);
 /**

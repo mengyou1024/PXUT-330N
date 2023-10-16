@@ -1,5 +1,8 @@
 #include "string.h"
 #include "sdcard.h"
+#include <Media.h>
+#include <ff.h>
+#include "display.h"
 // #include "filefunc.h"
 extern GATE_AMPMAX stGateAmpMax;
 extern UDISK_INFO g_UDiskInfo;

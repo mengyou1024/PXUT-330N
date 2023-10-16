@@ -6,16 +6,16 @@
 #include "sdcard.h"
 #include <stdio.h>
 
-#include "Music_alice.c"
+#include "music_bin.h"
 
 extern int         HoriOffsetScreen; // 所有写在屏幕上的内容，水平方向开始点
 extern int         VertOffsetScreen; // 所有写在屏幕上的内容，水平方向开始点
 extern ADJUST_TIME AdjustTime;
 extern NOTES       Notes;
 // extern uint8_t crPara[];
-extern uint8_t               bCOM2PC;
-extern const uint32_t          c_crPara[];
-extern const uint32_t          Echo_crPara[];
+extern uint8_t              bCOM2PC;
+extern const uint32_t       c_crPara[];
+extern const uint32_t       Echo_crPara[];
 extern unsigned short       c_FWBaseLine; // 基线
 extern unsigned short       c_RFBaseLine; // 射频基线
 int                         extend;
@@ -274,14 +274,14 @@ const char _UserInfo[C_LANGUAGE][19][21] = {
 
 extern char _serial[];
 
-extern unsigned int         FixGain;
-unsigned short              FixGainPoint1;
-unsigned short              FixGainPoint2;
-extern const unsigned short FixGain1;
-extern const unsigned short FixGain2;
-int                         g_nDenoise, g_nAutoDenoise;
-int                         g_nRepeat;
-int                         g_nPulseWidth;
+extern unsigned int   FixGain;
+unsigned short        FixGainPoint1;
+unsigned short        FixGainPoint2;
+extern unsigned short FixGain1;
+extern unsigned short FixGain2;
+int                   g_nDenoise, g_nAutoDenoise;
+int                   g_nRepeat;
+int                   g_nPulseWidth;
 
 void MSetAmplifierGain(uint16_t gain) {
     int nDenoise;
@@ -386,7 +386,7 @@ int MainProject(void) // 主项目调用
 
     ExpendTime(2);
 
-    i                 = 0;
+    i                    = 0;
     uint32_t elapsedtime = GetElapsedTime() + 200;
 
 #if (C_WRITE_TO_UDISK == 1)
@@ -438,7 +438,7 @@ void SystemLog(void) {
 
     uint32_t xpos, ypos, para_xpos, para_ypos;
     uint32_t char_len, row_number, row_height, col_max, align; /*字符数和字符行数*/
-    int   i, j;
+    int      i, j;
 
     uint32_t retvalue;
 
@@ -486,10 +486,10 @@ void SystemLog(void) {
     EMenuOut(xpos + C_ECHAR_HDOT, ypos, _serial, 8, 1, 24);
 
     MSetAcquisition(0);
-    int   keycode;
+    int      keycode;
     uint32_t elapsedtime = GetElapsedTime() + 1000 * 10;
     uint32_t SameKeyTime;
-    int   tempi = 0;
+    int      tempi = 0;
     while (GetElapsedTime() < elapsedtime && !bCOM2PC) /*5sec 后或有按键退出*/
     {
         if (tempi < 360) {
@@ -674,8 +674,8 @@ void SystemLog(void) {
             SysPwd(0);
             int key;
 #if C_DEVLIB == 2 || C_DEVLIB == 3 || C_DEVLIB == 23
-            int   x, y, len;
-            int   color, red = 0, green = 0, blue = 0; // red < 8,green < 8,blue<4
+            int      x, y, len;
+            int      color, red = 0, green = 0, blue = 0; // red < 8,green < 8,blue<4
             uint32_t data;
             // set color for screen operation, (b0-b2): red ; (b3-b5): green ; (b6-b7): blue
             x   = 8;
@@ -1512,8 +1512,8 @@ void SystemLog(void) {
                 160-164		开始充电时间,单位分钟
             */
             MFclearScreen();
-            uint32_t  ontime;
-            uint8_t powerlevel;
+            uint32_t ontime;
+            uint8_t  powerlevel;
             offset = C_OFF_BATTERY + 0;
             MCopyProtectedMemory(&TimeClock, (void *)offset, 8, PM_COPY_READ);
             xpos = 0;
@@ -1566,7 +1566,7 @@ void SystemLog(void) {
     SysPwd(0);
 }
 extern const uint16_t _COMM_B1[];
-extern CACHE         cache;
+extern CACHE          cache;
 const uint8_t         pzText2[] = "transmit start      ";
 
 void Usb2PC(void) {
